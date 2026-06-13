@@ -1312,6 +1312,7 @@ features:
         - "scripts/sync-hub-metadata.rb"
         - "scripts/lib/hub.rb"
       data: "_data/hub.yml"
+      templates: "templates/org-site/frontmatter-schema.yml.template"
       workflow: ".github/workflows/hub-sync.yml"
       docs: "docs/systems/content-hub.md"
     features:
@@ -1319,3 +1320,4 @@ features:
       - "Auto-discovers org repositories via the gh CLI (registry: _data/hub.yml)"
       - "Metadata-only dashboard — clones nothing, copies no content"
       - "Dashboard at /hub/ shows each site's live/pending status and links"
+      - "Ships a theme-aligned content frontmatter schema so future growth + new years stay consistent"

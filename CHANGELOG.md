@@ -19,6 +19,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   dashboard page that tracks every site's live/pending status, and a daily
   `hub-sync.yml` workflow that commits only when the org changed
   (see `docs/systems/content-hub.md`)
+- **Hub content frontmatter schema**: a canonical, theme-aligned frontmatter
+  schema (`templates/org-site/frontmatter-schema.yml.template`) shipped by the
+  provisioner to every org repo at `.github/config/frontmatter-schema.yml`. It
+  mirrors the theme's `.github/config/frontmatter_schema.yml` format and field
+  names (title, description, date, lastmod, categories, tags) so future `/grow`
+  cycles and new years produce content that renders fully in the theme
 
 ## [1.16.0] - 2026-06-12
 

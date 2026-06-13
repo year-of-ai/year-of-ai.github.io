@@ -41,6 +41,7 @@ require_relative 'lib/hub'
 TEMPLATE_DIR    = File.join(Hub::ROOT, 'templates', 'org-site')
 CONFIG_TEMPLATE = File.join(TEMPLATE_DIR, '_config.yml.template')
 NAV_TEMPLATE    = File.join(TEMPLATE_DIR, 'navigation-main.yml.template')
+SCHEMA_TEMPLATE = File.join(TEMPLATE_DIR, 'frontmatter-schema.yml.template')
 SCAFFOLD_MARKER = 'zer0-mistakes org hub scaffold'
 BRANCH_NAME     = 'zer0/pages-scaffold'
 
@@ -91,8 +92,11 @@ def scaffold_files(repo, cfg, clone)
   }
 
   {
-    '_config.yml'               => render(CONFIG_TEMPLATE, vars),
-    '_data/navigation/main.yml' => render(NAV_TEMPLATE, vars)
+    '_config.yml'                          => render(CONFIG_TEMPLATE, vars),
+    '_data/navigation/main.yml'            => render(NAV_TEMPLATE, vars),
+    # Canonical year-content frontmatter schema (theme-aligned). Ships so that
+    # /grow and humans have the spec locally and it can be validated in CI.
+    '.github/config/frontmatter-schema.yml' => render(SCHEMA_TEMPLATE, vars)
   }
 end
 
@@ -183,7 +187,7 @@ end.parse!
 
 cfg    = Hub.load_registry
 errors = Hub.validate_registry(cfg)
-[CONFIG_TEMPLATE, NAV_TEMPLATE].each do |t|
+[CONFIG_TEMPLATE, NAV_TEMPLATE, SCHEMA_TEMPLATE].each do |t|
   errors << "missing template: #{t.sub("#{Hub::ROOT}/", '')}" unless File.exist?(t)
 end
 

@@ -117,6 +117,45 @@ which never triggers a version bump.
 - **First-time org rollout:** `./scripts/provision-org-sites.sh --enable-pages`,
   merge the PRs, then `./scripts/sync-hub-metadata.sh` to light up the dashboard.
 
+## Content frontmatter schema
+
+So every year site renders consistently in the theme — and future `/grow`
+cycles and new years stay aligned — the scaffold ships a canonical,
+theme-aligned frontmatter schema to each repo at
+`.github/config/frontmatter-schema.yml` (template:
+[`templates/org-site/frontmatter-schema.yml.template`](../../templates/org-site/frontmatter-schema.yml.template)).
+It mirrors the FORMAT of the theme's own
+[`.github/config/frontmatter_schema.yml`](../../.github/config/frontmatter_schema.yml)
+and reuses its field names.
+
+Required on every dedicated topic file (`<category-slug>/<topic-slug>.md`):
+
+```yaml
+---
+title: "<Topic Title>"          # ≤ 60 chars; also the body H1
+description: "<one sentence>"    # ~120–160 chars — SEO, cards, search
+date: 2005-08-29                # event/subject date (ISO 8601)
+lastmod: 2026-06-13             # last generated/edited (ISO 8601)
+categories: [society-economics] # the file's taxonomy folder slug (list)
+tags: [hurricane, new-orleans]  # 2–5 lowercase, kebab-case tags
+---
+```
+
+`layout` is supplied by the site default (`default`), so content omits it.
+`author`, `permalink`, `preview`, and `draft` are optional. Generated structure
+pages (category `index.md`, `INDEX.md`, `TIMELINE.md`) are exempt — they take
+their title from the H1 via `jekyll-titles-from-headings`.
+
+This schema is the single target the growth framework writes to:
+
+- `seed.md §1 concept.conventions.frontmatter` lists the required fields.
+- `.github/instructions/content.instructions.md` shows the template block.
+- new years inherit it via `seed-package/seed.template.md`.
+
+Note `categories` (theme grouping/facets) is independent of how
+`build-structure` groups content — that derives the category from the **folder**
+(`<category-slug>/`), so the two never conflict.
+
 ## Design constraints
 
 - Org repos must allow GitHub Pages and (for `remote_theme`) the theme repo must

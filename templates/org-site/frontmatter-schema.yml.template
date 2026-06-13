@@ -1,0 +1,71 @@
+# =============================================================================
+# Year-content frontmatter schema (zer0-mistakes org hub)
+# =============================================================================
+# Shipped into every org content repo by scripts/provision-org-sites.rb as
+# .github/config/frontmatter-schema.yml. It mirrors the FORMAT of the theme's
+# own schema (zer0-mistakes .github/config/frontmatter_schema.yml) and reuses
+# its field names, so content authored by `/grow` (and by hand) renders fully
+# in the zer0-mistakes theme: SEO tags, category/tag grouping, related items,
+# and search facets.
+#
+# This is the single source of truth the growth framework targets:
+#   - seed.md §1 `concept.conventions.frontmatter` lists these fields.
+#   - .github/instructions/content.instructions.md shows the template block.
+#   - new years inherit it via seed-package/seed.template.md.
+#
+# Validate (when the theme's validator is vendored) with:
+#   scripts/lint-pages --schema .github/config/frontmatter-schema.yml
+# =============================================================================
+
+schema_version: "1.0"
+
+# Inherited by every content file.
+global:
+  date_format: "iso8601" # YYYY-MM-DD or full RFC3339 timestamp
+  required_fields:
+    - title
+    - lastmod
+
+field_types:
+  datetime:
+    pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}(T[0-9]{2}:[0-9]{2}:[0-9]{2}(\.[0-9]{3})?Z)?$'
+  string:
+    pattern: '.+'
+  array:
+    type: "list"
+
+collections:
+  # Dedicated topic files: <category-slug>/<topic-slug>.md
+  # The taxonomy category comes from the FOLDER; `categories` mirrors it as a
+  # list so the theme can group and facet content.
+  topic:
+    path_pattern: "*/*.md"
+    required:
+      - title # "<Topic Title>"  (≤ 60 chars; also the body H1)
+      - description # 1 sentence, ~120–160 chars; used for SEO + cards + search
+      - date # event/subject date — ISO 8601 (YYYY-MM-DD)
+      - lastmod # last generated/edited — ISO 8601; drives freshness + sitemap
+      - categories # [<category-slug>] — the file's taxonomy folder slug
+      - tags # 2–5 lowercase, kebab-case topical tags
+    optional:
+      - author # defaults to the repo/org when omitted
+      - layout # the site default (`default`) is applied; override rarely
+      - permalink
+      - preview # social/preview image path
+      - draft # true to keep out of production builds
+    layout:
+      allowed:
+        - default
+
+  # Generated structure pages (category indices, INDEX, TIMELINE) are
+  # maintained by the build-structure skill and take their title from the H1
+  # (jekyll-titles-from-headings). Only a title is expected; the rest optional.
+  structure:
+    path_pattern: "**/index.md"
+    required:
+      - title
+    optional:
+      - description
+      - categories
+      - permalink
+      - lastmod
