@@ -1,0 +1,76 @@
+# =============================================================================
+# GENERATED FILE — do not edit by hand.
+# Regenerate with: ./scripts/sync-hub-metadata.sh
+# Source registry: _data/hub.yml
+# =============================================================================
+- title: Hub Dashboard
+  icon: bi-grid-1x2
+  url: "/hub/"
+- title: '1776'
+  icon: bi-journal-richtext
+  url: https://github.com/year-of-ai/1776
+  children:
+  - title: Site Home
+    url: https://github.com/year-of-ai/1776
+  - title: Timeline
+    url: https://github.com/year-of-ai/1776/blob/main/TIMELINE.md
+  - title: Arts & Culture
+    url: https://github.com/year-of-ai/1776/tree/main/arts
+  - title: Economics & Trade
+    url: https://github.com/year-of-ai/1776/tree/main/economics
+  - title: Military Events
+    url: https://github.com/year-of-ai/1776/tree/main/military
+  - title: Key Figures
+    url: https://github.com/year-of-ai/1776/tree/main/people
+  - title: Political Events
+    url: https://github.com/year-of-ai/1776/tree/main/politics
+  - title: Science & Discovery
+    url: https://github.com/year-of-ai/1776/tree/main/science
+- title: '1777'
+  icon: bi-journal-richtext
+  url: https://github.com/year-of-ai/1777
+  children:
+  - title: Site Home
+    url: https://github.com/year-of-ai/1777
+  - title: Timeline
+    url: https://github.com/year-of-ai/1777/blob/main/TIMELINE.md
+  - title: Arts & Culture — 1777
+    url: https://github.com/year-of-ai/1777/tree/main/arts
+  - title: Economics & Trade — 1777
+    url: https://github.com/year-of-ai/1777/tree/main/economics
+  - title: Military Events — 1777
+    url: https://github.com/year-of-ai/1777/tree/main/military
+  - title: Key Figures — 1777
+    url: https://github.com/year-of-ai/1777/tree/main/people
+  - title: Political Events — 1777
+    url: https://github.com/year-of-ai/1777/tree/main/politics
+  - title: Science & Discovery — 1777
+    url: https://github.com/year-of-ai/1777/tree/main/science
+- title: '1778'
+  icon: bi-journal-richtext
+  url: https://github.com/year-of-ai/1778
+  children:
+  - title: Site Home
+    url: https://github.com/year-of-ai/1778
+- title: 2005–2011 lineage
+  icon: bi-journal-richtext
+  url: https://github.com/year-of-ai/2005-2011
+  children:
+  - title: Site Home
+    url: https://github.com/year-of-ai/2005-2011
+  - title: Timeline
+    url: https://github.com/year-of-ai/2005-2011/blob/main/TIMELINE.md
+  - title: '2005'
+    url: https://github.com/year-of-ai/2005-2011/tree/main/2005
+  - title: '2006'
+    url: https://github.com/year-of-ai/2005-2011/tree/main/2006
+  - title: '2007'
+    url: https://github.com/year-of-ai/2005-2011/tree/main/2007
+  - title: '2008'
+    url: https://github.com/year-of-ai/2005-2011/tree/main/2008
+  - title: '2009'
+    url: https://github.com/year-of-ai/2005-2011/tree/main/2009
+  - title: '2010'
+    url: https://github.com/year-of-ai/2005-2011/tree/main/2010
+  - title: '2011'
+    url: https://github.com/year-of-ai/2005-2011/tree/main/2011
