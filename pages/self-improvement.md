@@ -99,7 +99,7 @@ back into the canonical framework, so the next tick across all repos improves.</
   serialized so no two agents race the same branch.</div>
 </div>
 
-## The fleet (24 agents)
+## The fleet (25 agents)
 
 Each agent is tagged by **origin** — <span class="badge text-bg-success">net-new</span>
 (build it), <span class="badge text-bg-info">rewire</span> (wire up a dormant
@@ -148,6 +148,7 @@ framework mechanism), or <span class="badge text-bg-secondary">upgrade</span>
 
 | Agent | Pri | Origin | What it does |
 |---|---|---|---|
+| `docs-warden` | P1 | net-new | **Built** — gates every PR + sweeps `main` so every change is matched by a doc update on the hub's own doc surface ([ADR-0005](https://github.com/{{ site.repository | join: '' }}/blob/main/lineage/decisions/ADR-0005-docs-warden.md)) |
 | `claude-md-canon-warden` | P1 | rewire | Re-syncs each repo's drifted (stale old-model) CLAUDE.md back to canon |
 | `adapter-canon-aligner` | P2 | rewire | The backward `.claude/`-to-canon diff — keeps the framework converging, not fragmenting |
 

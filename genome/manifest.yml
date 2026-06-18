@@ -75,6 +75,10 @@ transplant:
   - ".github/workflows/codeql.yml"          # security scanning — agnostic
   - ".github/workflows/telemetry-ledger.yml" # the evolution-ledger collector — agnostic
   - ".github/workflows/framework-pr-reviewer.yml" # self-modification safety gate — agnostic
+  - ".github/workflows/docs-warden.yml"     # doc-coverage agent — agnostic
+  - ".github/config/docs_warden.yml"        # doc-coverage map — agnostic
+  - ".github/instructions/docs-warden.instructions.md" # doc-warden contract — agnostic
+  - "scripts/docs-warden.rb"                # doc-coverage engine — agnostic
   - "telemetry/README.md"                   # ledger schema doc — agnostic
   - "404.html"
 

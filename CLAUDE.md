@@ -30,18 +30,33 @@ whitelisted plugins — there are no custom `_plugins/` here.
   `hub.yml` (registry, source of truth) and the generated `hub_index.yml` +
   `navigation/hub.yml`.
 - `scripts/` — hub tooling (`sync-hub-metadata.rb`, `provision-org-sites.rb`,
-  `lib/hub.rb`), the lineage ledger refresher (`sync-lineage-state.rb`), and the
-  PR reviewer (`content-review.rb`).
+  `lib/hub.rb`), the lineage ledger refresher (`sync-lineage-state.rb`), the
+  new-era planter (`plant-lineage.rb`), the PR reviewer (`content-review.rb`),
+  and the docs-coverage engine (`docs-warden.rb`).
 - `lineage/` — the **centralized growth source of truth** (see below):
   `seeds/<year>.md` (each year's concept + Evolution Log), `seed-package/`
-  (bootstrap kit for new eras), `policy.yml` (model tiers + cadence), and
-  `framework/` (the canonical agent toolkit staged into a year repo per tick).
+  (bootstrap kit), `repo-template/` (the year-repo skeleton the planter drops),
+  `policy.yml` (model tiers + cadence), `framework/` (the canonical agent toolkit
+  staged into a year repo per tick), and `decisions/` (ADR-0001…0005).
   Excluded from the Jekyll build.
+- `genome/` — the **abstracted org-model DNA** (ADR-0004): `genome.yml` (concept
+  manifest) + `schema.json` + `manifest.yml` (transplant inventory) + `bin/`
+  (`render.rb`/`plant.rb`/`verify.rb`) + `GENOME.md`. Replant the whole model in a
+  new org for a new concept. Excluded from the Jekyll build.
+- `telemetry/` — the hub **evolution ledger** (`evolution.jsonl`, one record per
+  grow run) + its `README.md`. Excluded from the Jekyll build.
 - `templates/org-site/` — scaffold the provisioner writes into org repos.
-- `templates/deploy/chat-proxy/` — Cloudflare Worker for the AI-chat widget.
-- `.github/workflows/` — `hub-sync.yml`, `ai-content-review.yml`,
-  `deploy-chat-proxy.yml`, and the growth engine: `orchestrate.yml` (daily
-  scheduler) + `grow-lineage.yml` (grows one year repo per dispatch).
+- `templates/deploy/chat-proxy/` — Cloudflare Worker for the AI-chat widget
+  (deploy secrets: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, `ANTHROPIC_API_KEY`).
+- `.github/workflows/` — content/site: `hub-sync.yml`, `ai-content-review.yml`,
+  `deploy-chat-proxy.yml`; the **growth engine** `orchestrate.yml` (daily
+  scheduler) + `grow-lineage.yml` (grows one year repo per dispatch); and the
+  **self-improvement fleet** (ADR-0003) `telemetry-ledger.yml` (evolution ledger),
+  `framework-pr-reviewer.yml` (gates framework PRs), `docs-warden.yml` (doc
+  coverage), `genome-sync.yml` (genome drift gate), `codeql.yml` (security scan).
+- `.github/config/` — reviewer configs: `content_review.yml`, `content_rules.yml`,
+  `frontmatter_schema.yml`, `environment.yml`, `docs_warden.yml` (doc-coverage map).
+- `_data/fleet_pause.yml` — the global growth **kill-switch** (ADR-0003).
 - `assets/data/` — site-owned data: `wiki-index.json` (Obsidian `[[wiki-links]]`
   index, a Liquid file built at render time) and notebook CSVs.
 
