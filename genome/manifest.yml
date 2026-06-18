@@ -56,6 +56,7 @@ transplant:
   - "templates/deploy/chat-proxy/dev-proxy.mjs"
   - ".github/dependabot.yml"
   - ".github/workflows/genome-sync.yml"     # the routine-sync gate — agnostic, travels with the genome
+  - ".github/workflows/codeql.yml"          # security scanning — agnostic
   - "404.html"
 
 # ---- template: tokenized via tokens[] above ---------------------------------

@@ -155,8 +155,9 @@ jobs:
             --title "chore(learn): embed telemetry learnings (safety net)" \
             --body "Auto-opened because the /learn agent left uncommitted framework edits without opening its own PR. Carries framework + learnings-ledger edits only." \
             || true
-          # Prefer repo auto-merge; fall back to an immediate squash on repos
-          # without auto-merge/branch protection (e.g. a freshly planted repo).
-          gh pr merge "$branch" --squash --auto --delete-branch \
-            || gh pr merge "$branch" --squash --delete-branch \
-            || true
+          # Enable auto-merge so the PR merges ONLY after required checks pass
+          # (e.g. the framework-pr-reviewer gate). Do NOT fall back to an immediate
+          # squash — that bypasses the required review and makes any reviewer
+          # illusory (ADR-0003 defect #3). If auto-merge isn't enabled on the repo,
+          # the PR stays open for a human/reviewer to gate.
+          gh pr merge "$branch" --squash --auto --delete-branch || true
