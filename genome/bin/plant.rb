@@ -158,6 +158,40 @@ if web == false
   end
 end
 
+# Starter homepage (the genesis gap): the narrative pages are `regenerate`, so a
+# fresh plant has no `/` and the Pages build is empty. Author a concept-agnostic
+# landing page from the manifest so every plant lands a LIVE site immediately; a
+# genesis agent can enrich it later.
+home = +<<~HOME
+  ---
+  title: #{tgt_map['SITE_TITLE']}
+  description: >-
+    #{tgt_map['SITE_TAGLINE']}
+  layout: home
+  permalink: /
+  sidebar: false
+  hide_intro: true
+  ---
+
+  <section class="text-center py-5">
+    <h1 class="display-4 fw-bold mb-3">#{tgt_map['SITE_TITLE']}</h1>
+    <p class="lead text-body-secondary mx-auto" style="max-width: 46rem;">#{tgt_map['SITE_TAGLINE']} Each #{tgt_map['UNIT_NOUN']} is its own self-growing repository, published with the shared <a href="https://github.com/#{tgt_map['THEME_REPO']}">zer0-mistakes</a> theme.</p>
+    <div class="d-flex justify-content-center gap-2 mt-4">
+      <a class="btn btn-primary btn-lg" href="https://github.com/#{org}"><i class="bi bi-github me-1"></i>Organization</a>
+    </div>
+  </section>
+
+  {% assign hub = site.data.hub_index %}
+  {% if hub and hub.repos and hub.repos.size > 0 %}
+  <div class="row row-cols-2 row-cols-md-4 g-3 mb-5">{% for repo in hub.repos %}<div class="col"><a class="card h-100 text-decoration-none text-reset shadow-sm" href="{{ repo.site_url | default: repo.url }}"><div class="card-body text-center"><div class="h5 fw-bold mb-1 text-capitalize">{{ repo.name | replace: '-', ' ' }}</div><div class="small text-body-secondary">{% if repo.page_count == 0 %}seeded{% else %}{{ repo.page_count }} pages{% endif %}</div></div></a></div>{% endfor %}</div>
+  {% else %}
+  <p class="text-center text-body-secondary">The knowledge base is being seeded — #{tgt_map['UNIT_NOUN_PLURAL']} are generated automatically, one growth tick at a time. The first is <strong>#{tgt_map['FIRST_MEMBER']}</strong>.</p>
+  {% endif %}
+HOME
+FileUtils.mkdir_p(File.join(out, 'pages'))
+File.write(File.join(out, 'pages', 'home.md'), home)
+puts '  homepage  : authored pages/home.md from the manifest (a live landing page)'
+
 # Leak report: residual SOURCE-concept literals in the assembled tree (excludes
 # the regenerate tier, which a genesis agent re-authors for the new concept). Only
 # flag a source literal the target CHANGED — a literal the target intentionally
