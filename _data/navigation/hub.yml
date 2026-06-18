@@ -9,6 +9,9 @@
 - title: Orchestration
   icon: bi-cpu
   url: "/orchestration/"
+- title: Self-Improvement
+  icon: bi-arrow-repeat
+  url: "/self-improvement/"
 - title: Lineage
   icon: bi-diagram-3
   url: "/lineage/"
@@ -180,3 +183,27 @@
   children:
   - title: Site Home
     url: https://year-of-ai.github.io/2011/
+  - title: Timeline
+    url: https://year-of-ai.github.io/2011/TIMELINE/
+  - title: Arts & Culture — 2011
+    url: https://year-of-ai.github.io/2011/arts-culture/
+  - title: History & Politics — 2011
+    url: https://year-of-ai.github.io/2011/history-politics/
+  - title: People — 2011
+    url: https://year-of-ai.github.io/2011/people/
+  - title: Science & Technology — 2011
+    url: https://year-of-ai.github.io/2011/science-technology/
+  - title: Society & Economics — 2011
+    url: https://year-of-ai.github.io/2011/society-economics/
+- title: '2012'
+  icon: bi-journal-richtext
+  url: https://year-of-ai.github.io/2012/
+  children:
+  - title: Site Home
+    url: https://year-of-ai.github.io/2012/
+  - title: Timeline
+    url: https://year-of-ai.github.io/2012/TIMELINE/
+  - title: History & Politics — 2012
+    url: https://year-of-ai.github.io/2012/history-politics/
+  - title: Science & Technology — 2012
+    url: https://year-of-ai.github.io/2012/science-technology/

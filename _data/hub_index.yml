@@ -5,8 +5,8 @@
 # =============================================================================
 org: year-of-ai
 totals:
-  repos: 10
-  pages: 127
+  repos: 11
+  pages: 144
 repos:
 - name: '1776'
   title: The Year 1776
@@ -380,7 +380,60 @@ repos:
   pages_enabled: true
   scaffolded: true
   branch: main
-  pushed_at: '2026-06-18T06:18:30Z'
-  page_count: 0
-  sections: []
-  root_pages: []
+  pushed_at: '2026-06-18T16:16:12Z'
+  page_count: 10
+  sections:
+  - name: arts-culture
+    title: Arts & Culture — 2011
+    url: https://year-of-ai.github.io/2011/arts-culture/
+    source_url: https://github.com/year-of-ai/2011/tree/main/arts-culture
+    count: 0
+  - name: history-politics
+    title: History & Politics — 2011
+    url: https://year-of-ai.github.io/2011/history-politics/
+    source_url: https://github.com/year-of-ai/2011/tree/main/history-politics
+    count: 0
+  - name: people
+    title: People — 2011
+    url: https://year-of-ai.github.io/2011/people/
+    source_url: https://github.com/year-of-ai/2011/tree/main/people
+    count: 0
+  - name: science-technology
+    title: Science & Technology — 2011
+    url: https://year-of-ai.github.io/2011/science-technology/
+    source_url: https://github.com/year-of-ai/2011/tree/main/science-technology
+    count: 2
+  - name: society-economics
+    title: Society & Economics — 2011
+    url: https://year-of-ai.github.io/2011/society-economics/
+    source_url: https://github.com/year-of-ai/2011/tree/main/society-economics
+    count: 1
+  root_pages:
+  - title: Timeline
+    url: https://year-of-ai.github.io/2011/TIMELINE/
+    source_url: https://github.com/year-of-ai/2011/blob/main/TIMELINE.md
+- name: '2012'
+  title: '2012'
+  description: self-growing knowledge base — the year 2012
+  url: https://github.com/year-of-ai/2012
+  site_url: https://year-of-ai.github.io/2012/
+  pages_enabled: true
+  scaffolded: true
+  branch: main
+  pushed_at: '2026-06-18T16:56:36Z'
+  page_count: 7
+  sections:
+  - name: history-politics
+    title: History & Politics — 2012
+    url: https://year-of-ai.github.io/2012/history-politics/
+    source_url: https://github.com/year-of-ai/2012/tree/main/history-politics
+    count: 2
+  - name: science-technology
+    title: Science & Technology — 2012
+    url: https://year-of-ai.github.io/2012/science-technology/
+    source_url: https://github.com/year-of-ai/2012/tree/main/science-technology
+    count: 1
+  root_pages:
+  - title: Timeline
+    url: https://year-of-ai.github.io/2012/TIMELINE/
+    source_url: https://github.com/year-of-ai/2012/blob/main/TIMELINE.md

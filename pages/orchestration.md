@@ -319,6 +319,11 @@ for the alternatives weighed and why this one was chosen.
   [lineage dashboard]({{ '/lineage/' | relative_url }}) shows each repo's growth
   state and tick count.
 
+> **Watching and improving itself.** Growth is only half the system. A separate
+> routine **agent fleet** reviews, fixes, aligns, learns from, and evolves the
+> hub and framework — a self-monitoring, continuously improving loop. See
+> [**Self-Improvement**]({{ '/self-improvement/' | relative_url }}).
+
 ## At a glance
 
 <div class="row g-3 my-2">
