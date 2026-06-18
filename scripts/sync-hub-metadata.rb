@@ -127,6 +127,7 @@ end
 def build_nav(repos)
   items = [
     { 'title' => 'Hub Dashboard', 'icon' => 'bi-grid-1x2', 'url' => '/hub/' },
+    { 'title' => 'Orchestration', 'icon' => 'bi-cpu', 'url' => '/orchestration/' },
     { 'title' => 'Lineage', 'icon' => 'bi-diagram-3', 'url' => '/lineage/' }
   ]
   repos.each do |repo|

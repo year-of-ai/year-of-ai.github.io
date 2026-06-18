@@ -17,6 +17,8 @@ writes its own content one daily *tick* at a time. This hub is the central
 orchestrator — it reads each repo's lifecycle state, triggers their growth, and
 presents the result. Each repo grows **perpetually** and is never retired; new
 ones are spawned tangentially from the frontier, so the lineage only ever grows.
+See [**AI Orchestration**]({{ '/orchestration/' | relative_url }}) for the full
+model, the growth process, and the strategy behind it.
 
 {% assign lin = site.data.lineage %}
 {% if lin and lin.members and lin.members.size > 0 %}

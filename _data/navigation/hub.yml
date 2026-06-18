@@ -6,6 +6,9 @@
 - title: Hub Dashboard
   icon: bi-grid-1x2
   url: "/hub/"
+- title: Orchestration
+  icon: bi-cpu
+  url: "/orchestration/"
 - title: Lineage
   icon: bi-diagram-3
   url: "/lineage/"
@@ -55,6 +58,14 @@
   children:
   - title: Site Home
     url: https://year-of-ai.github.io/1778/
+  - title: Timeline
+    url: https://year-of-ai.github.io/1778/TIMELINE/
+  - title: Military Events — 1778
+    url: https://year-of-ai.github.io/1778/military/
+  - title: Key Figures — 1778
+    url: https://year-of-ai.github.io/1778/people/
+  - title: Political Events — 1778
+    url: https://year-of-ai.github.io/1778/politics/
 - title: The Year 2005
   icon: bi-journal-richtext
   url: https://year-of-ai.github.io/2005/

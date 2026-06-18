@@ -23,6 +23,9 @@ hide_intro: true
     <a class="btn btn-primary btn-lg" href="{{ '/hub/' | relative_url }}">
       <i class="bi bi-grid-1x2 me-1"></i>Open the hub dashboard
     </a>
+    <a class="btn btn-outline-primary btn-lg" href="{{ '/orchestration/' | relative_url }}">
+      <i class="bi bi-cpu me-1"></i>How it grows
+    </a>
     <a class="btn btn-outline-secondary btn-lg" href="https://github.com/{{ site.github_user }}">
       <i class="bi bi-github me-1"></i>Organization
     </a>

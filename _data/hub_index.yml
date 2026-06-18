@@ -6,7 +6,7 @@
 org: year-of-ai
 totals:
   repos: 10
-  pages: 116
+  pages: 127
 repos:
 - name: '1776'
   title: The Year 1776
@@ -63,19 +63,19 @@ repos:
   pages_enabled: true
   scaffolded: true
   branch: main
-  pushed_at: '2026-06-18T06:18:13Z'
-  page_count: 14
+  pushed_at: '2026-06-18T16:09:41Z'
+  page_count: 17
   sections:
   - name: arts
     title: Arts & Culture — 1777
     url: https://year-of-ai.github.io/1777/arts/
     source_url: https://github.com/year-of-ai/1777/tree/main/arts
-    count: 0
+    count: 1
   - name: economics
     title: Economics & Trade — 1777
     url: https://year-of-ai.github.io/1777/economics/
     source_url: https://github.com/year-of-ai/1777/tree/main/economics
-    count: 0
+    count: 1
   - name: military
     title: Military Events — 1777
     url: https://year-of-ai.github.io/1777/military/
@@ -95,7 +95,7 @@ repos:
     title: Science & Discovery — 1777
     url: https://year-of-ai.github.io/1777/science/
     source_url: https://github.com/year-of-ai/1777/tree/main/science
-    count: 0
+    count: 1
   root_pages:
   - title: Timeline
     url: https://year-of-ai.github.io/1777/TIMELINE/
@@ -108,10 +108,28 @@ repos:
   pages_enabled: true
   scaffolded: true
   branch: main
-  pushed_at: '2026-06-18T06:18:15Z'
-  page_count: 0
-  sections: []
-  root_pages: []
+  pushed_at: '2026-06-18T15:37:34Z'
+  page_count: 8
+  sections:
+  - name: military
+    title: Military Events — 1778
+    url: https://year-of-ai.github.io/1778/military/
+    source_url: https://github.com/year-of-ai/1778/tree/main/military
+    count: 1
+  - name: people
+    title: Key Figures — 1778
+    url: https://year-of-ai.github.io/1778/people/
+    source_url: https://github.com/year-of-ai/1778/tree/main/people
+    count: 1
+  - name: politics
+    title: Political Events — 1778
+    url: https://year-of-ai.github.io/1778/politics/
+    source_url: https://github.com/year-of-ai/1778/tree/main/politics
+    count: 1
+  root_pages:
+  - title: Timeline
+    url: https://year-of-ai.github.io/1778/TIMELINE/
+    source_url: https://github.com/year-of-ai/1778/blob/main/TIMELINE.md
 - name: '2005'
   title: The Year 2005
   description: A self-growing knowledge base about the year 2005 — history, science,
