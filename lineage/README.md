@@ -15,6 +15,9 @@ hold only their *content* (plus a GitHub Pages `_config.yml`, `.claude/`, and
 - `framework/` — the **canonical agent toolkit** (`prompts/`, `skills/`,
   `agents/`, `scripts/lineage.sh`, the reference `workflows/grow.yml`) that the
   hub's central grow workflow stages into a cloned year repo to run a tick.
+- `decisions/` — **Architecture Decision Records** for the orchestration model.
+  Start with [`ADR-0001`](decisions/ADR-0001-centralized-growth-orchestration.md)
+  (why growth is centralized in the hub, and the adapter+staging mechanism).
 
 Excluded from the Jekyll build (see `_config.yml`) — this is orchestration data,
 not site content. The published lineage view is `pages/lineage.md` (`/lineage/`).
