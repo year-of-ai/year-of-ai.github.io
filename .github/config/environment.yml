@@ -2,11 +2,13 @@
 # This file defines standard environment variables and versions used across all workflows
 
 # Ruby Configuration
-ruby_version: '3.2'
+# Keep in sync with the `ruby-version` the workflows pin (ruby/setup-ruby).
+ruby_version: '3.3'
 bundler_version: '2.7.2'
 
 # Node.js Configuration
-node_version: '18'
+# Keep in sync with the `node-version` the workflows pin (actions/setup-node).
+node_version: '20'
 
 # Supported Operating Systems
 supported_os:
@@ -19,8 +21,8 @@ primary_os: ubuntu-latest
 
 # Container Images
 containers:
-  ruby: ruby:3.2-alpine
-  node: node:18-alpine
+  ruby: ruby:3.3-alpine
+  node: node:20-alpine
   alpine: alpine:latest
 
 # Workflow Settings

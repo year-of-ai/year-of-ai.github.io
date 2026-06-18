@@ -63,6 +63,9 @@ overlap the three existing reviewers.
 1. [x] Build the four files; validate the census catches real drift.
 2. [x] Document the warden itself + the accumulated drift in CLAUDE.md; register
    in `/self-improvement/`.
-3. [ ] Fix the surfaced drift (`environment.yml` 3.2→3.3; Cloudflare secrets doc).
+3. [x] Fix the surfaced drift: `environment.yml` aligned to Ruby 3.3 / Node 20
+   (was 3.2 / 18, stale vs the workflows). The Cloudflare deploy secrets were
+   already documented in the chat-proxy README + the deploy workflow header + (now)
+   CLAUDE.md.
 4. [ ] Flip `enforcement` to `soft-gate` and add the gate to required checks once
    the map is tuned.
