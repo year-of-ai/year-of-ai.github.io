@@ -573,6 +573,10 @@ exclude:
   # year repos; the published view is pages/lineage.md.
   - lineage/
 
+  # genome/ is the abstracted org-model DNA (manifest, transplant inventory,
+  # verify gate) — replant tooling, not site content.
+  - genome/
+
   # ── Jekyll cache ─────────────────────────────────────────────────────────
   - .sass-cache/
   - .jekyll-cache/

@@ -1,0 +1,136 @@
+# =============================================================================
+# genome/manifest.yml — the machine-readable transplant inventory.
+# =============================================================================
+# The authoritative classification of EVERY concept-bearing asset of the org
+# model, and the literal→token map that abstracts the concept-specific ones.
+# Consumed by genome/bin/verify.rb (the routine-sync gate) and, later, by the
+# render/plant engines. Keeping this in sync with the live repo IS the genome's
+# "routinely updated" guarantee: bin/verify.rb --check fails CI if a
+# concept-bearing file exists in the repo that is not classified here.
+#
+# Tiers:
+#   transplant  — concept-AGNOSTIC, copied byte-for-byte; must contain NO concept literal.
+#   template    — carries concept literals; tokenized via `tokens:` (literal→{{TOKEN}}) at plant time.
+#   override    — a templated copy that overlays an otherwise-agnostic path.
+#   regenerate  — concept-specific NARRATIVE; re-authored for the new concept by a genesis agent (not gsub'd).
+#   ignore      — never travels in the genome (instance content, generated data, build output, binaries).
+# =============================================================================
+
+genome_version: "0.1.0"
+
+# ---- literal → token map (the concept-delta the manifest fills) -------------
+# Order matters at render time: longer/more-specific literals first. The verify
+# gate uses these literals to leak-scan transplant files and to confirm template
+# files still contain what they should.
+tokens:
+  - { token: HUB_REPO,        literal: "year-of-ai.github.io",                example: "world-atlas.github.io",        from: "_config.yml github_repository; grow-lineage.yml clone/dispatch target" }
+  - { token: ORG,             literal: "year-of-ai",                          example: "world-atlas",                  from: "_config.yml github_user; orchestrate.yml:113; grow-lineage.yml:38" }
+  - { token: SITE_TITLE,      literal: "Year of AI",                          example: "World Atlas",                  from: "_config.yml title; home H1" }
+  - { token: THEME_REPO,      literal: "bamr87/zer0-mistakes",                example: "bamr87/zer0-mistakes",         from: "_config.yml remote_theme; _data/hub.yml pages.theme_repo" }
+  - { token: FOUNDER_NAME,    literal: "Amr Abdel-Motaleb",                   example: "Jane Cartographer",            from: "_config.yml founder/&name" }
+  - { token: FOUNDER_EMAIL,   literal: "amr.abdel@gmail.com",                 example: "jane@world-atlas.org",         from: "_config.yml email" }
+  - { token: GIT_AUTHOR_EMAIL, literal: "noreply@anthropic.com",             example: "bot@world-atlas.org",          from: "grow-lineage.yml publish author; plant-lineage.rb:109" }
+  # Lexicon (the most pervasive PROSE token — only applied where phrase-safe; narrative pages are `regenerate`, not gsub'd).
+  - { token: UNIT_NOUN,        literal: "year",                               example: "country",                      from: "lexicon; repo-template prose; site narrative" }
+  - { token: UNIT_NOUN_PLURAL, literal: "years",                             example: "countries",                    from: "lexicon" }
+
+# ---- transplant: agnostic, byte-for-byte (verify leak-scans these) ----------
+transplant:
+  - "lineage/framework/**"                 # the concept-agnostic agent toolkit (skills/prompts/agents/instructions/scripts/workflows)
+  - "scripts/lib/hub.rb"                    # org read from cfg['org'] — agnostic
+  - "scripts/content-review.rb"
+  - "scripts/sync-hub-metadata.rb"
+  - "scripts/sync-lineage-state.rb"
+  - "lineage/repo-template/.claude/**"      # thin adapters — agnostic
+  - "lineage/repo-template/.gitignore"
+  - "lineage/repo-template/telemetry/.gitkeep"
+  - "pages/contact.md"
+  - "pages/privacy-policy.md"
+  - "pages/terms-of-service.md"
+  - "_data/theme_skins.yml"
+  - "_data/theme_backgrounds.yml"
+  - "_data/ui-text.yml"
+  - "_data/landing.yml"                     # 3 cards describe the THEME, not the concept (verified) — agnostic
+  - "templates/deploy/chat-proxy/worker.js"
+  - "templates/deploy/chat-proxy/page-store.mjs"
+  - "templates/deploy/chat-proxy/dev-proxy.mjs"
+  - ".github/dependabot.yml"
+  - ".github/workflows/genome-sync.yml"     # the routine-sync gate — agnostic, travels with the genome
+  - "404.html"
+
+# ---- template: tokenized via tokens[] above ---------------------------------
+template:
+  - "_config.yml"
+  - "_config_dev.yml"
+  - "_data/hub.yml"
+  - "_data/authors.yml"
+  - "_data/navigation/main.yml"
+  - "lineage/policy.yml"
+  - ".github/workflows/orchestrate.yml"
+  - ".github/workflows/grow-lineage.yml"
+  - ".github/workflows/hub-sync.yml"
+  - ".github/workflows/ai-content-review.yml"
+  - ".github/workflows/deploy-chat-proxy.yml"
+  - "scripts/provision-org-sites.rb"
+  - "scripts/plant-lineage.rb"
+  - "templates/org-site/_config.yml.template"
+  - "templates/org-site/navigation-main.yml.template"
+  - "templates/deploy/chat-proxy/wrangler.toml.template"
+  - "Gemfile"                                # carries a year-of-ai reference
+  - "docker-compose.yml"                     # carries a year-of-ai reference
+
+# ---- override: templated copy of an otherwise-agnostic skeleton file --------
+override:
+  - "lineage/repo-template/CLAUDE.md"       # org links + 'year repo' → {{ORG}}/{{HUB_DOMAIN}}/{{UNIT_NOUN}}
+  - "lineage/repo-template/README.md"       # org + hub URLs + 'every year'; KEEPS __SUBJECT__ for plant-lineage
+  - "lineage/seed-package/seed.template.md"  # {{SUBJECT}}/{{Items}} placeholders + 'the year' comment examples
+  - "lineage/seed-package/lifecycle.template.yml"
+  - "lineage/seed-package/MANIFEST.md"
+  - "lineage/seed-package/README.md"
+  # Framework files that are otherwise agnostic but carry the bot email or hub name
+  # (verify flagged these as leaks in the transplant tier — they overlay framework/**):
+  - "lineage/framework/workflows/grow.yml"        # header comment names the hub → {{ORG}}/{{HUB_REPO}}
+  - "lineage/framework/workflows/learn.yml"        # git author noreply@anthropic.com → {{GIT_AUTHOR_EMAIL}}
+  - "lineage/framework/workflows/telemetry.yml"    # git author → {{GIT_AUTHOR_EMAIL}}
+  - "lineage/framework/scripts/lineage.sh"         # git author → {{GIT_AUTHOR_EMAIL}}
+
+# ---- regenerate: concept narrative, re-authored by a genesis agent ----------
+# (a global gsub would mangle SVG ARIA labels, taxonomy prose, the "2005-2011
+# lineage" framing, etc. — these are authored fresh from the manifest + model spec.)
+regenerate:
+  - "pages/home.md"
+  - "pages/hub.md"
+  - "pages/orchestration.md"
+  - "pages/self-improvement.md"
+  - "pages/lineage.md"
+  - "lineage/seeds/*.md"                     # per-member concept DNA; the first is written by plant from the manifest
+
+# ---- defaulted: not in the manifest, owned elsewhere, transplant with a default
+defaulted:
+  - { what: "model-tier IDs", where: "lineage/policy.yml models block", owner: "policy.yml + ADR-0003 model-id-drift-checker" }
+  - { what: "claude-code-action ref", where: "grow-lineage.yml / ai-content-review.yml", default: "anthropics/claude-code-action@v1" }
+  - { what: "auth secret names", where: "all workflows", default: "CLAUDE_CODE_OAUTH_TOKEN / ANTHROPIC_API_KEY / LIFECYCLE_PAT" }
+
+# ---- ignore: never travels in the genome (verify skips these) ---------------
+ignore:
+  - "_site/**"
+  - ".git/**"
+  - ".jekyll-*/**"
+  - "vendor/**"
+  - "node_modules/**"
+  - ".claude/**"
+  - "genome/**"                              # the genome doesn't transplant itself
+  - "_data/hub_index.yml"                    # generated
+  - "_data/lineage.yml"                      # generated
+  - "_data/navigation/hub.yml"               # generated
+  - "lineage/decisions/**"                   # universal ADRs; worked-example prose is whitelisted, not transplanted as concept
+  - "assets/**"                              # images/binaries + site-owned data
+  - "README.md"                              # repo readme, not site content
+  - "CLAUDE.md"                              # hub's own dev guide (regenerated narrative; not member-facing)
+  - "CHANGELOG.md"                           # hub's own changelog (instance history)
+  - "lineage/README.md"                      # lineage-dir dev doc (regenerated narrative)
+  - "Gemfile.lock"
+  - "**/*.png"
+  - "**/*.jpg"
+  - "**/*.ico"
+  - "**/*.csv"

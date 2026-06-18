@@ -99,6 +99,8 @@ exclude:
   - README.md
   # Orchestration source data (centralized seeds + bootstrap kit), not site content.
   - lineage/
+  # Abstracted org-model DNA / replant tooling, not site content.
+  - genome/
 
   # ── Jekyll cache ─────────────────────────────────────────────────────────
   - .sass-cache/
