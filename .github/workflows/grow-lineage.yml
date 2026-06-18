@@ -254,7 +254,16 @@ jobs:
               git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/year-of-ai/year-of-ai.github.io.git"
               git add "lineage/seeds/${{ inputs.repo }}.md"
               git commit -q -m "chore(lineage): grow ${{ inputs.repo }} — update seed Evolution Log"
-              git push origin HEAD:main || echo "::warning::could not push seed log update"
+              # The hub's main advances often (other ticks, the daily orchestrate,
+              # manual pushes). A single non-rebasing push loses this seed update to
+              # a non-fast-forward rejection — exactly how 2012's first tick clock was
+              # lost. Retry with rebase, matching the content-publish step.
+              pushed=""
+              for _ in 1 2 3 4 5; do
+                if git push origin HEAD:main; then pushed=1; break; fi
+                git pull --rebase origin main || true
+              done
+              [ -n "$pushed" ] || echo "::warning::could not push seed log update after retries"
             fi
           )
 
