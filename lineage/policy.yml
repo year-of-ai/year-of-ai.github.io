@@ -1,0 +1,39 @@
+# =============================================================================
+# Canonical growth policy for the year-of-ai lineage.
+# =============================================================================
+# The hub (year-of-ai/year-of-ai.github.io) orchestrates growth CENTRALLY: it
+# pulls each year's seed from lineage/seeds/<year>.md, clones the year repo,
+# runs the 3-tier content escalation, and pushes the new content back. The year
+# repos hold only content + a GitHub Pages _config.yml + .claude/ + telemetry/.
+#
+# Read by: scripts/lib/hub.rb / the hub grow workflow (.github/workflows/grow.yml).
+
+# 3-tier content escalation — the model used for each pass of a growth tick.
+models:
+  generate: "claude-haiku-4-5"    # tier 1: plan + research + draft new topic files
+  expand:   "claude-sonnet-4-6"   # tier 2: deepen each draft (detail, sources, links)
+  enhance:  "claude-opus-4-8"     # tier 3: polish, build indices, sync seed, publish
+  distill:  "claude-opus-4-8"     # rare: lineage meta-review on the frontier model
+
+# Perpetual growth — every repo grows forever and is never consolidated,
+# archived, or deleted. New eras spawn tangentially from the frontier; the hub
+# decides when and what.
+lifecycle:
+  perpetual: true
+  consolidate: false
+  archive: false
+  delete: false
+
+# Cadence (UTC). The hub's orchestrate workflow runs daily and grows the repos.
+cadence:
+  cron: "30 5 * * *"
+  ticks_per_run: 1
+
+# Auth (org secrets the hub grow workflow needs):
+#   CLAUDE_CODE_OAUTH_TOKEN  — primary auth for every model pass (subscription)
+#   ANTHROPIC_API_KEY        — fallback auth
+#   LIFECYCLE_PAT            — push content/telemetry back into each year repo
+auth:
+  primary: CLAUDE_CODE_OAUTH_TOKEN
+  fallback: ANTHROPIC_API_KEY
+  cross_repo: LIFECYCLE_PAT
