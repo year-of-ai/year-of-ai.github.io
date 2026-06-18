@@ -69,8 +69,11 @@ env:
          encyclopedic neutral tone and correct front matter on every new file.
       2. build-structure — refresh indices, TIMELINE, INDEX, cross-refs.
       3. sync-seed — regenerate seed.md sections 1-7.
-      4. encode-seed — append a seed.md section 8 Evolution Log entry titled
-         "Tick N:" naming what was added.
+      4. encode-seed — append ONE new entry under "## Section 8 — Evolution Log",
+         at the SAME heading level as the existing entries (h3 "### …", NOT h2),
+         in the exact format
+         "### G<gen>-T<seq> — <YYYY-MM-DD> — Tick N: <short summary>"
+         naming what was added. Leave all existing §8 entries intact.
     Then STOP. Do not run publish-session, do not commit, do not push.
   # ---- API-key fallback: one complete pass (no publish) ------------------
   FALLBACK_PROMPT: |

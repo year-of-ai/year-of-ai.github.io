@@ -69,7 +69,7 @@ end
 # In the perpetual-growth model the log is never reset — it's a cumulative
 # record of every content tick the repo has published.
 # ---------------------------------------------------------------------------
-ENTRY_RE = /^###\s+(.+?)\s*$/
+ENTRY_RE = /^\#{2,3}\s+(.+?)\s*$/          # h2 or h3 — tolerate level drift in agent-written §8 entries
 DATE_RE  = /(\d{4}-\d{2}-\d{2})/
 TICK_RE  = /\bTick\s+\d+\s*:/i              # a real content tick ("… — Tick 3: …")
 GEN_RE   = /\b(Genesis|Replant)\b/i         # generation boundaries
