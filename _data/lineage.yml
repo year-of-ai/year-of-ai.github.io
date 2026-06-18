@@ -1,0 +1,139 @@
+# =============================================================================
+# GENERATED FILE — do not edit by hand.
+# Regenerate with: ./scripts/sync-lineage-state.rb
+# Source registry: _data/hub.yml
+# =============================================================================
+org: year-of-ai
+totals:
+  repos: 4
+  ticks: 7
+members:
+- name: '1776'
+  repo: year-of-ai/1776
+  url: https://github.com/year-of-ai/1776
+  site_url: https://year-of-ai.github.io/1776/
+  subject: the year 1776
+  status: mature
+  granularity: year
+  origin: year-of-ai/2005-2011
+  spawned_from: year-of-ai/2005-2011
+  spawned_lineage: ''
+  consolidated_from: []
+  ticks_yaml: 5
+  ticks_logged: 3
+  log_entries: 8
+  generations: 2
+  last_activity: '2026-06-15'
+  last_entry: Distillation — 2026-06-15
+  policy:
+    replant_after_ticks: 3
+    consolidate_at_members: 7
+    distill_at_members: 3
+  lineage_size: 3
+  lineage:
+  - subject: the year 1776
+    repo: year-of-ai/1776
+    status: mature
+  - subject: the year 1777
+    repo: year-of-ai/1777
+    status: mature
+  - subject: the year 1778
+    repo: year-of-ai/1778
+    status: growing
+- name: '1777'
+  repo: year-of-ai/1777
+  url: https://github.com/year-of-ai/1777
+  site_url: https://year-of-ai.github.io/1777/
+  subject: the year 1777
+  status: mature
+  granularity: year
+  origin: year-of-ai/2005-2011
+  spawned_from: year-of-ai/1776
+  spawned_lineage: ''
+  consolidated_from: []
+  ticks_yaml: 4
+  ticks_logged: 4
+  log_entries: 7
+  generations: 2
+  last_activity: '2026-06-15'
+  last_entry: Distillation — 2026-06-15
+  policy:
+    replant_after_ticks: 3
+    consolidate_at_members: 7
+    distill_at_members: 3
+  lineage_size: 3
+  lineage:
+  - subject: the year 1776
+    repo: year-of-ai/1776
+    status: mature
+  - subject: the year 1777
+    repo: year-of-ai/1777
+    status: mature
+  - subject: the year 1778
+    repo: year-of-ai/1778
+    status: growing
+- name: '1778'
+  repo: year-of-ai/1778
+  url: https://github.com/year-of-ai/1778
+  site_url: https://year-of-ai.github.io/1778/
+  subject: the year 1778
+  status: growing
+  granularity: year
+  origin: year-of-ai/2005-2011
+  spawned_from: year-of-ai/1777
+  spawned_lineage: ''
+  consolidated_from: []
+  ticks_yaml: 0
+  ticks_logged: 0
+  log_entries: 2
+  generations: 1
+  last_activity: '2026-06-15'
+  last_entry: Distillation — 2026-06-15
+  policy:
+    replant_after_ticks: 3
+    consolidate_at_members: 7
+    distill_at_members: 3
+  lineage_size: 3
+  lineage:
+  - subject: the year 1776
+    repo: year-of-ai/1776
+    status: mature
+  - subject: the year 1777
+    repo: year-of-ai/1777
+    status: mature
+  - subject: the year 1778
+    repo: year-of-ai/1778
+    status: growing
+- name: 2005-2011
+  repo: year-of-ai/2005-2011
+  url: https://github.com/year-of-ai/2005-2011
+  site_url: https://year-of-ai.github.io/2005-2011/
+  subject: the years 2005-2011
+  status: consolidated
+  granularity: month
+  origin: bamr87/1987
+  spawned_from: ''
+  spawned_lineage: ''
+  consolidated_from:
+  - year-of-ai/2005
+  - year-of-ai/2006
+  - year-of-ai/2007
+  - year-of-ai/2008
+  - year-of-ai/2009
+  - year-of-ai/2010
+  - year-of-ai/2011
+  ticks_yaml: 1
+  ticks_logged: 0
+  log_entries: 3
+  generations: 0
+  last_activity: '2026-06-13'
+  last_entry: Expand (Part B — deepen, tick 1) — 2026-06-13
+  policy:
+    replant_after_ticks: 3
+    consolidate_at_members: 7
+    distill_at_members: 3
+  lineage_size: 1
+  lineage:
+  - subject: the years 2005-2011
+    repo: year-of-ai/2005-2011
+    status: consolidated

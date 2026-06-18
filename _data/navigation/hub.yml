@@ -6,6 +6,9 @@
 - title: Hub Dashboard
   icon: bi-grid-1x2
   url: "/hub/"
+- title: Lineage
+  icon: bi-diagram-3
+  url: "/lineage/"
 - title: '1776'
   icon: bi-journal-richtext
   url: https://github.com/year-of-ai/1776

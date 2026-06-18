@@ -1,0 +1,117 @@
+---
+name: Lineage Orchestrator
+
+# The hub is the central scheduler for the org's self-growing knowledge bases.
+# Once a day it:
+#   1. READS each repo's lifecycle state (lifecycle.yml + seed.md Evolution Log)
+#      into _data/lineage.yml via sync-lineage-state.rb, and commits any change
+#      (which rebuilds the /lineage/ + /hub/ dashboards).
+#   2. TRIGGERS one growth tick in every living knowledge-base repo by dispatching
+#      its grow.yml — so the hub, not each repo's own cron, drives growth.
+#
+# Each repo grows perpetually and is never consolidated, archived, or deleted;
+# this workflow only reads state and fans out growth triggers.
+#
+# Secrets (org- or repo-level):
+#   LIFECYCLE_PAT  — a PAT with `actions: write` on the year repos, used to
+#                    dispatch grow.yml across repos (the default GITHUB_TOKEN
+#                    cannot trigger workflows in OTHER repos). If unset, the
+#                    workflow still refreshes the ledger (tracking-only).
+#
+# Deterministic: when no repo's state changed, the ledger is unchanged and no
+# commit is made.
+
+permissions:
+  contents: write
+
+on:
+  schedule:
+    - cron: '30 5 * * *' # daily, ahead of any residual per-repo automation
+  workflow_dispatch:
+    inputs:
+      trigger_growth:
+        description: 'Dispatch a grow tick to every repo (needs LIFECYCLE_PAT)'
+        type: boolean
+        default: true
+      targets:
+        description: 'Optional space-separated repo list (owner/name); blank = all in the ledger'
+        required: false
+        default: ''
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/sync-lineage-state.rb'
+      - 'scripts/lib/hub.rb'
+      - '.github/workflows/orchestrate.yml'
+  pull_request:
+    paths:
+      - 'scripts/sync-lineage-state.rb'
+      - '.github/workflows/orchestrate.yml'
+
+concurrency:
+  group: lineage-orchestrate
+  cancel-in-progress: false
+
+jobs:
+  orchestrate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+
+      - name: Validate ledger (PRs)
+        if: github.event_name == 'pull_request'
+        run: ruby scripts/sync-lineage-state.rb --check
+
+      - name: Refresh lineage ledger
+        if: github.event_name != 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: ruby scripts/sync-lineage-state.rb
+
+      - name: Commit refreshed ledger
+        if: github.event_name != 'pull_request'
+        run: |
+          if [ -z "$(git status --porcelain -- _data/lineage.yml)" ]; then
+            echo "Lineage state unchanged — nothing to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add _data/lineage.yml
+          git commit -m "chore(lineage): refresh state ledger"
+          git push
+
+      - name: Trigger growth ticks
+        # Schedule and manual dispatch (when trigger_growth is true) fan out a
+        # grow tick to every repo in the ledger. Skipped gracefully if the PAT
+        # is absent — the ledger refresh above still ran (tracking-only).
+        if: >-
+          github.event_name == 'schedule' ||
+          (github.event_name == 'workflow_dispatch' && inputs.trigger_growth)
+        env:
+          GH_TOKEN: ${{ secrets.LIFECYCLE_PAT }}
+          TARGETS: ${{ inputs.targets }}
+        run: |
+          if [ -z "$GH_TOKEN" ]; then
+            echo "::notice::LIFECYCLE_PAT not set — refreshed the ledger but did not trigger growth (tracking-only)."
+            exit 0
+          fi
+          if [ -n "$TARGETS" ]; then
+            repos="$TARGETS"
+          else
+            repos="$(ruby -ryaml -e "puts (YAML.load_file('_data/lineage.yml')['members'] || []).map { |m| m['repo'] }.join(' ')")"
+          fi
+          echo "Dispatching grow ticks to: $repos"
+          for r in $repos; do
+            if gh workflow run grow.yml -R "$r" >/dev/null 2>&1; then
+              echo "  ✓ $r"
+            else
+              echo "  ✗ $r (grow.yml missing, or LIFECYCLE_PAT lacks actions:write on it)"
+            fi
+          done

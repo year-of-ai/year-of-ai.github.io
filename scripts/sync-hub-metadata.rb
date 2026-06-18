@@ -125,7 +125,10 @@ def build_index(cfg, repos)
 end
 
 def build_nav(repos)
-  items = [{ 'title' => 'Hub Dashboard', 'icon' => 'bi-grid-1x2', 'url' => '/hub/' }]
+  items = [
+    { 'title' => 'Hub Dashboard', 'icon' => 'bi-grid-1x2', 'url' => '/hub/' },
+    { 'title' => 'Lineage', 'icon' => 'bi-diagram-3', 'url' => '/lineage/' }
+  ]
   repos.each do |repo|
     # Until a repo's Pages site is live, point the sidebar at the GitHub source
     # (which renders the same markdown) so the tree has no dead links. The next

@@ -12,6 +12,10 @@
   icon: bi-collection
   url: /hub/
 
+- title: Lineage
+  icon: bi-diagram-3
+  url: /lineage/
+
 - title: Contact
   icon: bi-envelope
   url: /contact/
