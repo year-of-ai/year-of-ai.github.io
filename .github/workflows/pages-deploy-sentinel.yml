@@ -1,0 +1,92 @@
+name: Pages Deploy Sentinel
+
+# Read-only post-publish liveness detector (ADR-0003 pages-deploy-sentinel, a P0
+# monitor). The grow tick pushes content; this verifies the DOWNSTREAM result —
+# that each member repo's GitHub Pages build succeeded AND its live site responds.
+# It is the sole liveness signal a future rollback agent keys off. Read-only: it
+# only edits ONE sticky tracking issue, never auto-remediates.
+
+on:
+  schedule:
+    - cron: "13 * * * *" # hourly (off the :00 mark), decoupled from the growth cron
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: pages-deploy-sentinel
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Kill-switch
+        id: pause
+        run: |
+          if ruby -ryaml -e 'exit(YAML.load_file("_data/fleet_pause.yml")["paused"] == true ? 0 : 1)' 2>/dev/null; then
+            echo "::notice::Fleet paused — skipping pages-deploy-sentinel."; echo "skip=true" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Check each member's Pages build + live site
+        id: scan
+        if: steps.pause.outputs.skip != 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -uo pipefail
+          # repo<TAB>site_url for every member in the lineage ledger.
+          members="$(ruby -ryaml -e '
+            d = YAML.load_file("_data/lineage.yml")
+            org = d["org"]
+            (d["members"] || []).each do |m|
+              repo = m["repo"] || "#{org}/#{m["name"]}"
+              site = m["site_url"] || "https://#{org.split("/").first}.github.io/#{m["name"]}/"
+              puts "#{repo}\t#{site}"
+            end' 2>/dev/null)"
+          fails=""
+          total=0; bad=0
+          while IFS=$'\t' read -r repo site; do
+            [ -n "$repo" ] || continue
+            total=$((total+1))
+            st="$(gh api "repos/${repo}/pages/builds/latest" --jq '.status' 2>/dev/null || echo 'no-pages')"
+            code="$(curl -s -o /dev/null -w '%{http_code}' -L --max-time 25 "$site" 2>/dev/null || echo '000')"
+            if [ "$st" = "errored" ] || { [ "$code" != "200" ] && [ "$code" != "304" ]; }; then
+              bad=$((bad+1))
+              fails="${fails}| \`${repo##*/}\` | ${st} | ${code} | ${site} |"$'\n'
+            fi
+          done <<< "$members"
+          echo "checked ${total} member(s), ${bad} unhealthy."
+          {
+            echo "## 🌐 Pages Deploy Sentinel"
+            echo
+            echo "_$(date -u '+%Y-%m-%d %H:%M UTC') · checked ${total} member site(s)._"
+            echo
+            if [ "$bad" -eq 0 ]; then
+              echo "✅ All member Pages sites are built and live."
+            else
+              echo "**${bad} unhealthy site(s):**"
+              echo
+              echo "| Repo | Pages build | HTTP | URL |"
+              echo "|---|---|---|---|"
+              printf '%s' "$fails"
+            fi
+          } > /tmp/sentinel.md
+          cat /tmp/sentinel.md
+          echo "bad=${bad}" >> "$GITHUB_OUTPUT"
+      - name: File / update the liveness issue (only when unhealthy)
+        if: steps.pause.outputs.skip != 'true' && steps.scan.outputs.bad != '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          title="Pages Deploy Sentinel — unhealthy member site(s)"
+          body="$(cat /tmp/sentinel.md)"
+          num="$(gh issue list --search "$title in:title" --state open --json number --jq '.[0].number' 2>/dev/null)"
+          if [ -n "$num" ]; then
+            gh issue edit "$num" --body "$body"
+          else
+            gh issue create --title "$title" --body "$body" --label monitoring 2>/dev/null \
+              || gh issue create --title "$title" --body "$body"
+          fi

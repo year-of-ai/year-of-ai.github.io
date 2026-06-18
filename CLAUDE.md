@@ -53,7 +53,8 @@ whitelisted plugins — there are no custom `_plugins/` here.
   scheduler) + `grow-lineage.yml` (grows one year repo per dispatch); and the
   **self-improvement fleet** (ADR-0003) `telemetry-ledger.yml` (evolution ledger),
   `framework-pr-reviewer.yml` (gates framework PRs), `docs-warden.yml` (doc
-  coverage), `genome-sync.yml` (genome drift gate), `codeql.yml` (security scan).
+  coverage), `pages-deploy-sentinel.yml` (member site liveness), `genome-sync.yml`
+  (genome drift gate), `codeql.yml` (security scan).
 - `.github/config/` — reviewer configs: `content_review.yml`, `content_rules.yml`,
   `frontmatter_schema.yml`, `environment.yml`, `docs_warden.yml` (doc-coverage map).
 - `_data/fleet_pause.yml` — the global growth **kill-switch** (ADR-0003).

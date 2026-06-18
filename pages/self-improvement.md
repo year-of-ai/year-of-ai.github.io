@@ -112,7 +112,7 @@ framework mechanism), or <span class="badge text-bg-secondary">upgrade</span>
 |---|---|---|---|
 | `telemetry-ledger-collector` | P0 | upgrade | The P0 keystone every learn/cost/monitor agent depends on |
 | `fleet-pause-killswitch` | P0 | net-new | The single global halt the doctrine is missing |
-| `pages-deploy-sentinel` | P0 | net-new | The post-publish liveness detector; verifies each year repo's Pages deploy actually succeeded |
+| `pages-deploy-sentinel` | P0 | net-new | **Built** — hourly read-only check that each member repo's Pages build succeeded + the live site responds; files one sticky issue. The sole liveness signal a rollback agent keys off |
 | `secret-expiry-watch` | P0 | net-new | Sole owner of the auth/credential-degradation signal (catches a dead OAuth token before ticks burn) |
 | `fleet-health-watch` | P1 | net-new | One daily watcher over the ledger + Actions API: anomalies, stalls, cost trend |
 | `fleet-cost-governor` | P2 | net-new | Cost rail on the orchestrator — pre-flight ceiling + budget writer |
