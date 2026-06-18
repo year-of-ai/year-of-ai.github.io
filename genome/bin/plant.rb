@@ -244,6 +244,11 @@ puts "    · lexicon residue ('#{lexicon_src.join("'/'")}', case-insensitive, mo
 puts "      (narrative pages are in the regenerate tier; remaining hits are config/workflow prose — refine via curated phrase tokens.)"
 
 unless opts[:apply]
+  fm_preview = tgt_map['FIRST_MEMBER']
+  puts "\n  --apply would (after the two-key --confirm #{org} + membership guard):"
+  puts "      1. author lineage/seeds/#{fm_preview}.md (member #1's DNA from the manifest)" if fm_preview && !fm_preview.empty?
+  puts "      2. gh repo create #{org}/#{tgt_map['HUB_REPO']} (the hub), push this tree, enable Pages"
+  puts "      3. create member #1's repo #{org}/#{fm_preview} via the planted plant-lineage.rb, enable its Pages" if fm_preview && !fm_preview.empty?
   puts "\n  DRY RUN — nothing external created. Review #{out.sub("#{ROOT}/", '')}/ then proceed per GENOME.md §3."
   exit 0
 end
