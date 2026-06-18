@@ -66,6 +66,7 @@ transplant:
   - "_data/theme_backgrounds.yml"
   - "_data/ui-text.yml"
   - "_data/landing.yml"                     # 3 cards describe the THEME, not the concept (verified) — agnostic
+  - "_data/fleet_pause.yml"                 # global growth kill-switch — agnostic infra
   - "templates/deploy/chat-proxy/worker.js"
   - "templates/deploy/chat-proxy/page-store.mjs"
   - "templates/deploy/chat-proxy/dev-proxy.mjs"

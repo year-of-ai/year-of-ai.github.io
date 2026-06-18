@@ -98,6 +98,12 @@ jobs:
           GH_TOKEN: ${{ secrets.LIFECYCLE_PAT }}
           TARGETS: ${{ inputs.targets }}
         run: |
+          # Global kill-switch (ADR-0003): halt all growth dispatch when paused.
+          if ruby -ryaml -e 'exit(YAML.load_file("_data/fleet_pause.yml")["paused"] == true ? 0 : 1)' 2>/dev/null; then
+            reason="$(ruby -ryaml -e 'puts YAML.load_file("_data/fleet_pause.yml")["reason"].to_s' 2>/dev/null)"
+            echo "::notice::Fleet is PAUSED via _data/fleet_pause.yml — skipping all growth dispatch. ${reason:+Reason: $reason}"
+            exit 0
+          fi
           if [ -z "$GH_TOKEN" ]; then
             echo "::notice::LIFECYCLE_PAT not set — refreshed the ledger but did not trigger growth (tracking-only)."
             exit 0
