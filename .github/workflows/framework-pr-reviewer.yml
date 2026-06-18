@@ -75,7 +75,7 @@ jobs:
           fi
       - name: Post guard result
         if: github.event_name == 'pull_request'
-        uses: marocchino/sticky-pull-request-comment@v2
+        uses: marocchino/sticky-pull-request-comment@v3
         with:
           header: framework-guard
           path: /tmp/guard.md
@@ -152,7 +152,7 @@ jobs:
           fi
       - name: Post review
         if: always()
-        uses: marocchino/sticky-pull-request-comment@v2
+        uses: marocchino/sticky-pull-request-comment@v3
         with:
           header: framework-review
           path: /tmp/review-final.md
