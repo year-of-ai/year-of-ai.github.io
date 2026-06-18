@@ -77,7 +77,7 @@ jobs:
 
       - name: Post / update PR comment
         if: github.event_name == 'pull_request'
-        uses: marocchino/sticky-pull-request-comment@v2
+        uses: marocchino/sticky-pull-request-comment@v3
         with:
           header: ai-content-review
           path: /tmp/content-review.md
@@ -189,7 +189,7 @@ jobs:
 
       - name: Post agent review
         if: always()
-        uses: marocchino/sticky-pull-request-comment@v2
+        uses: marocchino/sticky-pull-request-comment@v3
         with:
           header: ai-content-review-agent
           path: /tmp/agent-review-final.md

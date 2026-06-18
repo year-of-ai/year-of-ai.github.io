@@ -81,7 +81,7 @@ jobs:
           cat /tmp/docs-warden.md
       - name: Post / update PR comment
         if: github.event_name == 'pull_request' && steps.pause.outputs.skip != 'true'
-        uses: marocchino/sticky-pull-request-comment@v2
+        uses: marocchino/sticky-pull-request-comment@v3
         with:
           header: docs-warden
           path: /tmp/docs-warden.md
