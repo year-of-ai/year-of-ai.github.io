@@ -69,6 +69,23 @@ env:
       4. encode-seed — append a seed.md section 8 Evolution Log entry titled
          "Tick N:" naming what was added.
     Then STOP. Do not run publish-session, do not commit, do not push.
+  # ---- API-key fallback: one complete pass (no publish) ------------------
+  FALLBACK_PROMPT: |
+    The 3-tier OAuth growth passes produced no publishable content (the
+    subscription token may have failed). Run ONE complete growth tick now on the
+    API key. seed.md holds the concept; the canonical skills are under
+    .github/skills.
+      1. plan-roadmap to select 1-3 topics NOT already covered (read README.md and
+         the existing category files first; never re-add an existing topic).
+      2. add-topic / deep-dive to RESEARCH and WRITE each new file under the
+         correct taxonomy directory — detail, specific dates/figures, at least two
+         sourced facts, and cross-links to sibling topics.
+      3. build-structure — refresh indices, TIMELINE, INDEX, cross-refs.
+      4. sync-seed — regenerate seed.md sections 1-7.
+      5. encode-seed — append a seed.md section 8 Evolution Log entry titled
+         "Tick N:" naming what was added.
+    Do NOT run publish-session, commit, or push — the workflow publishes. Stop
+    once the new content + the seed §8 entry exist uncommitted.
 
 jobs:
   grow:
@@ -140,6 +157,41 @@ jobs:
           claude_args: >-
             --model ${{ steps.model.outputs.enhance }}
             --max-turns 120
+            --allowedTools "Bash,Edit,Write,Read,Glob,Grep,WebFetch,WebSearch,TodoWrite,Task,Skill"
+          show_full_output: true
+
+      # API-key fallback. Unlike the per-repo grow.yml (where the enhance pass
+      # commits, so a dirty tree means "unfinished"), the tiers here deliberately
+      # leave content UNcommitted for the publish step — so a dirty tree means the
+      # tick SUCCEEDED and a clean tree means it produced nothing. Fire the fallback
+      # when the tree is empty (no drafts) OR the OAuth passes errored (is_error).
+      - name: Detect a failed/empty tick
+        if: always()
+        id: check
+        run: |
+          empty=true
+          [ -n "$(git status --porcelain)" ] && empty=false
+          # claude-code-action exits 0 even when the agent result is an error (e.g.
+          # an expired OAuth token): the final result element carries is_error:true.
+          failed=false
+          out=/home/runner/work/_temp/claude-execution-output.json
+          if [ -f "$out" ] && jq -e '[.[] | select(.type=="result")] | last | .is_error == true' "$out" >/dev/null 2>&1; then
+            failed=true
+          fi
+          echo "empty=$empty" >> "$GITHUB_OUTPUT"
+          echo "failed=$failed" >> "$GITHUB_OUTPUT"
+          echo "empty=$empty failed=$failed"
+
+      - name: Fallback — generate the tick on the API key
+        if: steps.check.outputs.empty == 'true' || steps.check.outputs.failed == 'true'
+        continue-on-error: true
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: ${{ env.FALLBACK_PROMPT }}
+          claude_args: >-
+            --model ${{ steps.model.outputs.enhance }}
+            --max-turns 150
             --allowedTools "Bash,Edit,Write,Read,Glob,Grep,WebFetch,WebSearch,TodoWrite,Task,Skill"
           show_full_output: true
 
