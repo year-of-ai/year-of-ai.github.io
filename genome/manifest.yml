@@ -77,6 +77,7 @@ transplant:
   - ".github/workflows/framework-pr-reviewer.yml" # self-modification safety gate — agnostic
   - ".github/workflows/docs-warden.yml"     # doc-coverage agent — agnostic
   - ".github/workflows/pages-deploy-sentinel.yml" # member-site liveness monitor — agnostic
+  - ".github/workflows/secret-expiry-watch.yml" # auth-credential probe — agnostic
   - ".github/config/docs_warden.yml"        # doc-coverage map — agnostic
   - ".github/instructions/docs-warden.instructions.md" # doc-warden contract — agnostic
   - "scripts/docs-warden.rb"                # doc-coverage engine — agnostic
