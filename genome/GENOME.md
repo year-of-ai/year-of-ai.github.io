@@ -28,6 +28,7 @@ instance.
 | `taxonomy` | strategy (`temporal`/`enumerable`/`hierarchical`) + the 4–8 default categories |
 | `lifecycle` | the first member, the slug rule, the succession rule, consolidation naming |
 | `cadence` | growth cron + replant/consolidate thresholds |
+| `growth` | `web_sources: false` → the org generates from the model's **own knowledge**, no web (plant strips `WebFetch`/`WebSearch` + flags the prompt) — e.g. `ai-world-view` (the AI's *own* world view) |
 | `analytics`/`social`/`comments` | owner-specific ids — **default empty; never inherited** |
 
 ## 2 · What the genome contains — the 4-tier transplant map

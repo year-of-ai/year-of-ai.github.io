@@ -61,3 +61,9 @@ cadence:
   cron: "30 5 * * *"
   replant_after_ticks: 3
   consolidate_at_members: 7
+
+growth:
+  # This is the AI's OWN world view: generate every fact from the model's own
+  # knowledge, NO web. plant.rb strips WebFetch/WebSearch from grow-lineage and
+  # flags the prompt — the hard guarantee, reproducible from this flag.
+  web_sources: false

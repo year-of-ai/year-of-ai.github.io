@@ -142,6 +142,22 @@ end
   end
 end
 
+# growth.web_sources: false — make the planted org generate from the model's OWN
+# knowledge (no web). Strip the web tools from grow-lineage (the hard guarantee)
+# and flag the generate prompt. Reproducible from the manifest, not a manual edit.
+web = target.dig('growth', 'web_sources')
+if web == false
+  gl = File.join(out, '.github', 'workflows', 'grow-lineage.yml')
+  if File.file?(gl)
+    b = File.read(gl, encoding: 'utf-8')
+    b = b.gsub(',WebFetch,WebSearch', '')
+    b = b.sub('content growth tick for this knowledge base.',
+              'content growth tick for this knowledge base. NO WEB - generate every fact from your OWN knowledge; the web is unavailable (no fetch/search tools).')
+    File.write(gl, b)
+    puts '  no-web    : stripped WebFetch/WebSearch from grow-lineage + flagged the prompt (growth.web_sources: false)'
+  end
+end
+
 # Leak report: residual SOURCE-concept literals in the assembled tree (excludes
 # the regenerate tier, which a genesis agent re-authors for the new concept). Only
 # flag a source literal the target CHANGED — a literal the target intentionally

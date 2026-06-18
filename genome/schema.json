@@ -68,6 +68,12 @@
         "replant_after_ticks": { "type": "integer" },
         "consolidate_at_members": { "type": "integer" }
       }
+    },
+    "growth": {
+      "type": "object",
+      "properties": {
+        "web_sources": { "type": "boolean", "description": "false = generate from the model's own knowledge, no WebFetch/WebSearch (plant.rb strips them)" }
+      }
     }
   }
 }
