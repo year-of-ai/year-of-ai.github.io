@@ -195,6 +195,18 @@ jobs:
             --allowedTools "Bash,Edit,Write,Read,Glob,Grep,WebFetch,WebSearch,TodoWrite,Task,Skill"
           show_full_output: true
 
+      # Run-scoped agent telemetry. Each claude-code-action pass overwrites this
+      # file, so the artifact holds the LAST pass (the fallback if it ran, else
+      # the enhance pass) — enough to post-mortem the is_error fallback gate.
+      - name: Upload agent telemetry artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: grow-lineage-telemetry-${{ inputs.repo }}-${{ github.run_id }}
+          path: /home/runner/work/_temp/claude-execution-output.json
+          if-no-files-found: ignore
+          retention-days: 14
+
       - name: Persist the seed Evolution Log back to the hub
         if: always()
         env:
