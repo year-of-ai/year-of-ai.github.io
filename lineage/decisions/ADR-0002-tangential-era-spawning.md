@@ -1,9 +1,16 @@
 # ADR-0002: Tangential new-era spawning
 
-**Status:** Proposed
+**Status:** Accepted
 **Date:** 2026-06-18
 **Deciders:** Repo owner (@bamr87)
 **Depends on:** [ADR-0001](ADR-0001-centralized-growth-orchestration.md)
+
+> **Update (2026-06-18):** approved and implemented. `lineage/repo-template/` +
+> `scripts/plant-lineage.rb` shipped; the first tangential era, `year-of-ai/2012`,
+> was spawned for real and is growing. The remaining piece is the optional
+> `plant-lineage.yml` workflow (automated decide → gated plant); the manual
+> path (human/frontier-model authors the seed, then `plant-lineage.rb --apply`)
+> is proven.
 
 ## Context
 
@@ -159,9 +166,9 @@ newest repo passing a tick/coverage threshold).
    flip this ADR to **Accepted**.
 
 ## Action Items
-1. [ ] Owner approves this design (and the dry-run-first / two-key gating).
-2. [ ] Build `lineage/repo-template/` (skeleton + adapters).
-3. [ ] Build `scripts/plant-lineage.rb` (dry-run first).
-4. [ ] Build `.github/workflows/plant-lineage.yml` (decide → gated plant).
-5. [ ] Dry-run end-to-end; then one real spawn behind the two-key confirm.
-6. [ ] Document on the site; mark this ADR Accepted.
+1. [x] Owner approves this design (and the dry-run-first / two-key gating).
+2. [x] Build `lineage/repo-template/` (skeleton + adapters).
+3. [x] Build `scripts/plant-lineage.rb` (dry-run first).
+4. [ ] Build `.github/workflows/plant-lineage.yml` (decide → gated plant) — optional automation.
+5. [x] Dry-run end-to-end; then one real spawn behind the two-key confirm (`2012`).
+6. [x] Document on the site (`/orchestration/` §5); mark this ADR Accepted.

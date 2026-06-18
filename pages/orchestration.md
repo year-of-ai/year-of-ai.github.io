@@ -298,8 +298,10 @@ for the alternatives weighed and why this one was chosen.
   frontier model is reserved for the judgment-heavy finish.
 - **New eras spawn tangentially.** As the frontier matures, the hub plants a
   fresh repo whose subject is chosen to be *tangential* to the newest one — so the
-  lineage branches outward into related territory rather than looping. *(This is
-  the next capability being built.)*
+  lineage branches outward into related territory rather than looping. *(Now live:
+  `2012` was the first tangentially-spawned era, extending the modern arc one year
+  past the 2005–2011 frontier — see
+  [ADR-0002](https://github.com/{{ site.repository | join: '' }}/blob/main/lineage/decisions/ADR-0002-tangential-era-spawning.md).)*
 - **Self-referential.** Repos cross-link their own topics and, increasingly, each
   other — a knowledge base that builds on and refers back to itself.
 
