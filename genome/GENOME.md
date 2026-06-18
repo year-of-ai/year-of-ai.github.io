@@ -113,13 +113,18 @@ copied, template/override transformed via `render.rb`'s token map) into
 `./_planted/<org>/`, with a leak report. Verified for *countries*: `_config.yml`,
 `_data/hub.yml`, and the growth workflows all correctly become `world-atlas` /
 `World Atlas` / `bot@world-atlas.org` — **zero residual structural source
-literals**; the only residue is ~15 lexicon ("year") mentions in workflow
-comments/descriptions (the narrative pages are in the `regenerate` tier). Running
-plant from the canonical hub means **no duplicate payload is committed** — the
-live repo is the source, so the genome can't drift from a stale copy.
+literals**. Bare unit-noun substitution is deliberately avoided (it would corrupt
+Jekyll date config like `:year` / `year-month-day`); the unit-noun is handled via
+curated exact phrases, the instance member list is pruned (members self-register),
+and Jekyll date placeholders are preserved. The only remaining residue is ~22
+**cosmetic** `year` mentions in workflow *comments* and doc placeholders (e.g.
+`lineage/seeds/<year>.md`) — no config value or behavior; the narrative pages are
+in the `regenerate` tier. Running plant from the canonical hub means **no
+duplicate payload is committed** — the live repo is the source, so the genome
+can't drift from a stale copy.
 
-**Staged (next):** curated phrase-tokens for the lexicon residue; the genesis
-branch that gives a freshly-planted first member its seed §2–7; and `plant.rb
---apply` (the gh org/repo creation). The actual plant of a new org creates public
-infrastructure, so — like spawning (ADR-0002) — it runs only on an explicit
-owner go (two-key confirm + the human org-creation/secret steps in §3).
+**Staged (next):** the genesis branch that gives a freshly-planted first member
+its seed §2–7; and `plant.rb --apply` (the gh org/repo creation). The actual plant
+of a new org creates public infrastructure, so — like spawning (ADR-0002) — it
+runs only on an explicit owner go (two-key confirm + the human org-creation/secret
+steps in §3).

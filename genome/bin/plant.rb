@@ -51,15 +51,58 @@ tgt_map  = Genome.token_map(target)
 org      = tgt_map['ORG'] or abort 'target manifest has no identity.org'
 out      = opts[:out] || File.join(ROOT, '_planted', org)
 
-# source-literal → target-value pairs (skip blank source literals so we never
-# gsub ""), longest source first so specific literals win over their substrings.
-pairs = Genome::FIELD_TOKENS.values.uniq.map do |tok|
+# Distinctive structural literals — SAFE for bare gsub. Deliberately EXCLUDES
+# prose/instance/date tokens: a bare UNIT_NOUN ("year") would corrupt Jekyll date
+# config (:year, year-month-day); FIRST_MEMBER ("1776") would mangle ids;
+# COPYRIGHT_YEAR/CRON/SUBJECT_SINGULAR/KNOWLEDGE_TABLE_HEADING/TAXONOMY_STRATEGY
+# are instance/prose. The unit-noun is handled ONLY via curated phrases below.
+SAFE_TOKENS = %w[
+  ORG HUB_REPO HUB_DOMAIN GIT_AUTHOR_EMAIL THEME_REPO SITE_TITLE SITE_TAGLINE
+  FOUNDER_NAME FOUNDER_EMAIL AUTHOR_BIO AUTHOR_LOCATION PREVIEW_IMAGE_STYLE
+  PREVIEW_PROVIDER PREVIEW_MODEL CHAT_ASSISTANT_NAME CHAT_SYSTEM_PROMPT
+  GOOGLE_ANALYTICS POSTHOG_API_KEY POSTHOG_HOST TWITTER INSTAGRAM YOUTUBE_URL
+  GISCUS_REPO_ID GISCUS_CATEGORY_ID UNIT_ICON
+].freeze
+
+def cap_first(s)
+  s.empty? ? s : s[0].upcase + s[1..-1]
+end
+
+# structural pairs (skip blank source literals so we never gsub "")
+struct_pairs = SAFE_TOKENS.map do |tok|
   s = src_map[tok]
   (s.nil? || s.empty?) ? nil : [s, (tgt_map[tok] || '').to_s]
-end.compact.sort_by { |s, _| -s.length }
+end.compact
+
+# curated unit-prose phrases: instantiate {unit}/{units} for source + target,
+# add a Title-first variant, EXACT strings only (never bare "year").
+su  = src_map['UNIT_NOUN']; sus = src_map['UNIT_NOUN_PLURAL'] || (su && "#{su}s")
+tu  = tgt_map['UNIT_NOUN']; tus = tgt_map['UNIT_NOUN_PLURAL'] || (tu && "#{tu}s")
+phrase_pairs = (man['phrase_tokens'] || []).flat_map do |tmpl|
+  next [] unless su && tu
+
+  s = tmpl.gsub('{units}', sus.to_s).gsub('{unit}', su)
+  t = tmpl.gsub('{units}', tus.to_s).gsub('{unit}', tu)
+  [[s, t], [cap_first(s), cap_first(t)]]
+end
+
+# longest source first so specific literals win over their substrings.
+pairs = (struct_pairs + phrase_pairs).sort_by { |s, _| -s.length }
 
 def transform(text, pairs)
   pairs.reduce(text) { |acc, (s, t)| acc.gsub(s, t) }
+end
+
+# Drop a manual `repos:` override block (instance member data) — a planted org
+# self-registers its members via auto_discover. Backs up over the block's comment.
+def prune_repos(body)
+  lines = body.lines
+  i = lines.index { |l| l.start_with?('repos:') }
+  return body unless i
+
+  j = i
+  j -= 1 while j.positive? && lines[j - 1].lstrip.start_with?('#')
+  lines[0...j].join.rstrip + "\n\n# Members self-register via auto_discover; no manual repos list is transplanted.\n"
 end
 
 def expand(root, entry)
@@ -89,7 +132,9 @@ end
     dst = File.join(out, rel)
     FileUtils.mkdir_p(File.dirname(dst))
     body = File.read(src, encoding: 'utf-8', invalid: :replace, undef: :replace)
-    File.write(dst, transform(body, pairs))
+    body = transform(body, pairs)
+    body = prune_repos(body) if rel == '_data/hub.yml'
+    File.write(dst, body)
     rendered += 1
   end
 end
@@ -103,7 +148,10 @@ lexicon_hits = 0
 Dir.glob(File.join(out, '**', '*'), File::FNM_DOTMATCH).select { |f| File.file?(f) }.each do |f|
   body = File.read(f, encoding: 'utf-8', invalid: :replace, undef: :replace) rescue next
   STRONG.each { |lit| strong_hits[lit] += body.scan(lit).size }
-  lexicon_src.each { |w| lexicon_hits += body.scan(/\b#{Regexp.escape(w)}\b/i).size }
+  # Exclude legitimately-preserved Jekyll date placeholders (:year, year-month-day)
+  # so the count reflects real concept-prose residue, not correct date config.
+  prose = body.gsub('year-month-day', '').gsub(/:year\b/, '')
+  lexicon_src.each { |w| lexicon_hits += prose.scan(/\b#{Regexp.escape(w)}\b/i).size }
 end
 
 puts '── plant (dry-run) ──────────────────────────────────────────'
