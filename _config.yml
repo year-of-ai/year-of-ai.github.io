@@ -577,6 +577,9 @@ exclude:
   # verify gate) — replant tooling, not site content.
   - genome/
 
+  # telemetry/ is the hub evolution ledger (growth run records), not site content.
+  - telemetry/
+
   # ── Jekyll cache ─────────────────────────────────────────────────────────
   - .sass-cache/
   - .jekyll-cache/

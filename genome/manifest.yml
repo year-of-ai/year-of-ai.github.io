@@ -73,6 +73,8 @@ transplant:
   - ".github/dependabot.yml"
   - ".github/workflows/genome-sync.yml"     # the routine-sync gate — agnostic, travels with the genome
   - ".github/workflows/codeql.yml"          # security scanning — agnostic
+  - ".github/workflows/telemetry-ledger.yml" # the evolution-ledger collector — agnostic
+  - "telemetry/README.md"                   # ledger schema doc — agnostic
   - "404.html"
 
 # ---- template: tokenized via tokens[] above ---------------------------------
@@ -139,6 +141,7 @@ ignore:
   - "genome/**"                              # the genome doesn't transplant itself
   - "_data/hub_index.yml"                    # generated
   - "_data/lineage.yml"                      # generated
+  - "telemetry/*.jsonl"                      # the evolution ledger — instance growth data
   - "_data/navigation/hub.yml"               # generated
   - "lineage/decisions/**"                   # universal ADRs; worked-example prose is whitelisted, not transplanted as concept
   - "assets/**"                              # images/binaries + site-owned data

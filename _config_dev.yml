@@ -101,6 +101,8 @@ exclude:
   - lineage/
   # Abstracted org-model DNA / replant tooling, not site content.
   - genome/
+  # Hub evolution ledger (growth run records), not site content.
+  - telemetry/
 
   # ── Jekyll cache ─────────────────────────────────────────────────────────
   - .sass-cache/
