@@ -1,22 +1,22 @@
 ---
 name: Lineage Orchestrator
 
-# The hub is the central scheduler for the org's self-growing knowledge bases.
+# The hub is the central orchestrator for the org's self-growing knowledge bases.
 # Once a day it:
-#   1. READS each repo's lifecycle state (lifecycle.yml + seed.md Evolution Log)
-#      into _data/lineage.yml via sync-lineage-state.rb, and commits any change
+#   1. READS each year's centralized seed (lineage/seeds/<year>.md) into
+#      _data/lineage.yml via sync-lineage-state.rb, and commits any change
 #      (which rebuilds the /lineage/ + /hub/ dashboards).
-#   2. TRIGGERS one growth tick in every living knowledge-base repo by dispatching
-#      its grow.yml — so the hub, not each repo's own cron, drives growth.
+#   2. TRIGGERS one central growth tick per year repo by dispatching the hub's
+#      grow-lineage.yml (-f repo=<year>) — which stages the framework + seed and
+#      runs the 3-tier Haiku->Sonnet->Opus escalation against that repo.
 #
-# Each repo grows perpetually and is never consolidated, archived, or deleted;
-# this workflow only reads state and fans out growth triggers.
+# Each repo grows perpetually and is never consolidated, archived, or deleted.
 #
 # Secrets (org- or repo-level):
-#   LIFECYCLE_PAT  — a PAT with `actions: write` on the year repos, used to
-#                    dispatch grow.yml across repos (the default GITHUB_TOKEN
-#                    cannot trigger workflows in OTHER repos). If unset, the
-#                    workflow still refreshes the ledger (tracking-only).
+#   LIFECYCLE_PAT  — a PAT with `actions: write` on this hub, used to dispatch
+#                    grow-lineage.yml. grow-lineage itself uses it to push content
+#                    into each year repo. If unset, the ledger still refreshes
+#                    (tracking-only).
 #
 # Deterministic: when no repo's state changed, the ledger is unchanged and no
 # commit is made.
@@ -107,11 +107,12 @@ jobs:
           else
             repos="$(ruby -ryaml -e "puts (YAML.load_file('_data/lineage.yml')['members'] || []).map { |m| m['repo'] }.join(' ')")"
           fi
-          echo "Dispatching grow ticks to: $repos"
+          echo "Dispatching central grow ticks (grow-lineage.yml) for: $repos"
           for r in $repos; do
-            if gh workflow run grow.yml -R "$r" >/dev/null 2>&1; then
-              echo "  ✓ $r"
+            name="${r##*/}"   # year-of-ai/1776 -> 1776
+            if gh workflow run grow-lineage.yml -R year-of-ai/year-of-ai.github.io -f repo="$name" >/dev/null 2>&1; then
+              echo "  ✓ $name"
             else
-              echo "  ✗ $r (grow.yml missing, or LIFECYCLE_PAT lacks actions:write on it)"
+              echo "  ✗ $name (could not dispatch grow-lineage.yml; PAT needs actions:write on the hub)"
             fi
           done
