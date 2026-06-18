@@ -38,9 +38,10 @@ until ARGV.empty?
   when '--target'  then opts[:target] = ARGV.shift
   when '--source'  then opts[:source] = ARGV.shift
   when '--out'     then opts[:out] = ARGV.shift
-  when '--apply'   then opts[:apply] = true
-  when '--confirm' then opts[:confirm] = ARGV.shift
-  when '--dry-run' then opts[:apply] = false
+  when '--apply'      then opts[:apply] = true
+  when '--confirm'    then opts[:confirm] = ARGV.shift
+  when '--dry-run'    then opts[:apply] = false
+  when '--with-fleet' then opts[:with_fleet] = true
   else abort "unknown arg #{a.inspect}"
   end
 end
@@ -117,12 +118,19 @@ def expand(root, entry)
   end
 end
 
+# A fresh plant excludes the mature fleet/hub-tooling workflows (they fail without
+# the org's context); `--with-fleet` includes them once the org has matured.
+fleet_excl = (man['default_plant_exclude'] || [])
+skip_fleet = ->(rel) { !opts[:with_fleet] && fleet_excl.include?(rel) }
+excluded = 0
+
 FileUtils.rm_rf(out)
 copied = 0
 rendered = 0
 (man['transplant'] || []).each do |e|
   expand(ROOT, e).each do |src|
     rel = src.sub("#{ROOT}/", '')
+    if skip_fleet.call(rel) then excluded += 1; next end
     dst = File.join(out, rel)
     FileUtils.mkdir_p(File.dirname(dst))
     FileUtils.cp(src, dst)
@@ -132,6 +140,7 @@ end
 ((man['template'] || []) + (man['override'] || [])).each do |e|
   expand(ROOT, e).each do |src|
     rel = src.sub("#{ROOT}/", '')
+    if skip_fleet.call(rel) then excluded += 1; next end
     dst = File.join(out, rel)
     FileUtils.mkdir_p(File.dirname(dst))
     body = File.read(src, encoding: 'utf-8', invalid: :replace, undef: :replace)
@@ -214,7 +223,7 @@ end
 puts '── plant (dry-run) ──────────────────────────────────────────'
 puts "  source concept : #{src_map['SITE_TITLE']}  (org #{src_map['ORG']})"
 puts "  target concept : #{tgt_map['SITE_TITLE']}  (org #{org})"
-puts "  assembled tree : #{out.sub("#{ROOT}/", '')}/   (#{copied} transplanted, #{rendered} rendered)"
+puts "  assembled tree : #{out.sub("#{ROOT}/", '')}/   (#{copied} transplanted, #{rendered} rendered, #{excluded} fleet excluded#{opts[:with_fleet] ? ' [--with-fleet]' : ''})"
 regen = (man['regenerate'] || [])
 puts "  regenerate     : #{regen.size} narrative path(s) a genesis agent authors for the new concept:"
 regen.each { |r| puts "      - #{r}" }

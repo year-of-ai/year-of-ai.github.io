@@ -54,6 +54,15 @@ Every concept-bearing asset of the model is classified in
 Anything not in a tier is `ignore`d (instance content, generated data, build
 output, binaries).
 
+A **default plant lands a clean, minimal growing org** — only the growth engine
+(`orchestrate` + `grow-lineage` + `hub-sync`) and the site. The mature
+self-improvement fleet (monitors, reviewers, `genome-sync`, …) is listed in
+`manifest.yml`'s `default_plant_exclude` and added with `plant.rb --with-fleet`
+once the org has the context those workflows need (a populated ledger, members,
+PRs). plant.rb also **authors a starter `pages/home.md`** from the manifest so
+every plant has a live homepage, and honors `growth.web_sources: false` for a
+no-web org.
+
 ## 3 · Plant runbook — standing up a new org
 
 The two **irreducibly human** steps are one-time: **(a)** create the GitHub org

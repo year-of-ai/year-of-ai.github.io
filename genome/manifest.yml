@@ -138,6 +138,26 @@ defaulted:
   - { what: "claude-code-action ref", where: "grow-lineage.yml / ai-content-review.yml", default: "anthropics/claude-code-action@v1" }
   - { what: "auth secret names", where: "all workflows", default: "CLAUDE_CODE_OAUTH_TOKEN / ANTHROPIC_API_KEY / LIFECYCLE_PAT" }
 
+# ---- default_plant_exclude: classified, but NOT planted into a fresh org ------
+# These are the mature self-improvement / hub-tooling workflows. They are real
+# genome assets (classified above so genome-sync gates them), but a FRESH plant
+# excludes them — they depend on context a new org lacks (genome-sync needs
+# genome/; the monitors need a populated ledger + members; the reviewers need PRs;
+# the chat-proxy needs its secrets). A default plant lands a clean, growing org
+# (orchestrate + grow-lineage + hub-sync); `plant.rb --with-fleet` adds these once
+# the org has matured. (Lesson from the ai-world-view plant, which had to prune them.)
+default_plant_exclude:
+  - ".github/workflows/genome-sync.yml"
+  - ".github/workflows/codeql.yml"
+  - ".github/workflows/telemetry-ledger.yml"
+  - ".github/workflows/framework-pr-reviewer.yml"
+  - ".github/workflows/docs-warden.yml"
+  - ".github/workflows/pages-deploy-sentinel.yml"
+  - ".github/workflows/secret-expiry-watch.yml"
+  - ".github/workflows/fleet-health-watch.yml"
+  - ".github/workflows/ai-content-review.yml"
+  - ".github/workflows/deploy-chat-proxy.yml"
+
 # ---- ignore: never travels in the genome (verify skips these) ---------------
 ignore:
   - "_site/**"
