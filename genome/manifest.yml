@@ -74,6 +74,7 @@ transplant:
   - ".github/workflows/genome-sync.yml"     # the routine-sync gate — agnostic, travels with the genome
   - ".github/workflows/codeql.yml"          # security scanning — agnostic
   - ".github/workflows/telemetry-ledger.yml" # the evolution-ledger collector — agnostic
+  - ".github/workflows/framework-pr-reviewer.yml" # self-modification safety gate — agnostic
   - "telemetry/README.md"                   # ledger schema doc — agnostic
   - "404.html"
 
