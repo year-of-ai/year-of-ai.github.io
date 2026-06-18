@@ -89,3 +89,6 @@ chrome-debug-profile/
 
 # Consumer site: Gemfile.lock is regenerated locally, not committed
 Gemfile.lock
+
+# genome planter dry-run build output (never committed)
+_planted/

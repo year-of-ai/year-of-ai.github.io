@@ -107,9 +107,19 @@ token-substitution engine — derives the full `{{TOKEN}}` map from `genome.yml`
 raises on any unresolved token; `--selftest` renders one template to both the
 `year-of-ai` and `countries` values, proving the abstraction).
 
-**Staged (the rest of the planter, next):** `bin/extract.rb` (build/refresh the
-`transplant/`+`template/` payload from the live repo — also the deterministic
-re-sync), `bin/plant.rb` (the one-command germination, dry-run-first + two-key
-confirm like ADR-0002), and the genesis branch that gives a freshly-planted first
-member its seed §2–7. The actual plant of a new org creates public
-infrastructure, so — like spawning (ADR-0002) — it runs only on an explicit go.
+[`bin/plant.rb`](bin/plant.rb) **(dry-run)** assembles a complete, rendered hub
+tree for any concept by reading the live repo per `manifest.yml` (transplant
+copied, template/override transformed via `render.rb`'s token map) into
+`./_planted/<org>/`, with a leak report. Verified for *countries*: `_config.yml`,
+`_data/hub.yml`, and the growth workflows all correctly become `world-atlas` /
+`World Atlas` / `bot@world-atlas.org` — **zero residual structural source
+literals**; the only residue is ~15 lexicon ("year") mentions in workflow
+comments/descriptions (the narrative pages are in the `regenerate` tier). Running
+plant from the canonical hub means **no duplicate payload is committed** — the
+live repo is the source, so the genome can't drift from a stale copy.
+
+**Staged (next):** curated phrase-tokens for the lexicon residue; the genesis
+branch that gives a freshly-planted first member its seed §2–7; and `plant.rb
+--apply` (the gh org/repo creation). The actual plant of a new org creates public
+infrastructure, so — like spawning (ADR-0002) — it runs only on an explicit
+owner go (two-key confirm + the human org-creation/secret steps in §3).
