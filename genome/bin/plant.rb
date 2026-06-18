@@ -327,7 +327,35 @@ system("gh api -X POST repos/#{repo}/pages -f 'source[branch]=main' -f 'source[p
   system("gh api -X PUT repos/#{repo}/pages -f 'source[branch]=main' -f 'source[path]=/' >/dev/null 2>&1") ||
   warn('    ::note:: enable Pages manually if it did not auto-enable (Settings → Pages → main /).')
 
-puts "\n  ✓ Planted #{repo}  →  https://#{tgt_map['HUB_DOMAIN']}/"
-puts '  Remaining (the two human steps):'
-puts "    1. Set the 3 org secrets on #{org}: CLAUDE_CODE_OAUTH_TOKEN, ANTHROPIC_API_KEY, LIFECYCLE_PAT."
-puts "    2. The hub's orchestrate.yml grows member #1 (#{fm}) on its daily cron — or dispatch it now."
+puts "\n  ✓ Planted hub #{repo}  →  https://#{tgt_map['HUB_DOMAIN']}/"
+
+# Member #1: create the first member's REPO so the org has something to grow on
+# tick 1 (orchestrate dispatches grow-lineage per MEMBER repo, never the hub). The
+# planted tree carries its own plant-lineage.rb + provision-org-sites.rb (both
+# rendered to #{org}) + the seed authored above, so we drive the org's OWN planter
+# from inside the tree — same path that proved out for ai-world-view/japan. The hub
+# is already pushed; a member-creation hiccup must NOT roll it back, so this is
+# best-effort (warn, never abort).
+member_created = false
+if fm && !fm.empty?
+  puts "\n  Creating member #1 (#{fm}) via the planted org's own plant-lineage.rb …"
+  Dir.chdir(out) do
+    member_created = system(
+      "ruby scripts/plant-lineage.rb --id #{Shellwords.escape(fm)} " \
+      "--apply --confirm #{Shellwords.escape(fm)}"
+    )
+  end
+  if member_created
+    puts "  ✓ member #1 repo  →  https://github.com/#{org}/#{fm}"
+  else
+    warn "    ::note:: member-#1 creation did not complete. Finish it manually:\n" \
+         "        cd #{out.sub("#{ROOT}/", '')} && ruby scripts/plant-lineage.rb --id #{fm} --apply --confirm #{fm}"
+  end
+end
+
+puts "\n  ✓ Planted #{tgt_map['SITE_TITLE']}  →  https://#{tgt_map['HUB_DOMAIN']}/"
+puts "    hub:      #{repo}"
+puts "    member 1: #{org}/#{fm}#{member_created ? '' : '  (pending — see note above)'}" if fm && !fm.empty?
+puts '  Remaining (the one human step):'
+puts "    • Set the 3 org secrets on #{org}: CLAUDE_CODE_OAUTH_TOKEN, ANTHROPIC_API_KEY, LIFECYCLE_PAT."
+puts "      Then the hub's orchestrate.yml grows member #1 (#{fm}) on its daily cron — or dispatch grow-lineage now."

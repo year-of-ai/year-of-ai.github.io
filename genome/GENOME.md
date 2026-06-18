@@ -133,12 +133,19 @@ in the `regenerate` tier. Running plant from the canonical hub means **no
 duplicate payload is committed** — the live repo is the source, so the genome
 can't drift from a stale copy.
 
-`plant.rb --apply --confirm <org>` is **built**: with the two-key confirm + a
-membership guard (refuses any account you can't create repos in), it authors
-member #1's seed from the manifest, `gh repo create`s the hub, pushes the
-assembled tree, and enables Pages. The **two irreducibly-human steps remain**:
-creating the GitHub org (no API exists) and minting + setting the three secrets.
-Once those are done, one `--apply` stands up the live, growing new-concept org.
+`plant.rb --apply --confirm <org>` is **built and end-to-end**: with the two-key
+confirm + a membership guard (refuses any account you can't create repos in), it
+(1) authors member #1's seed from the manifest, (2) `gh repo create`s the hub,
+pushes the assembled tree, and enables Pages, then (3) **creates member #1's repo**
+by driving the planted tree's own `plant-lineage.rb` (the org's planter, rendered
+to the new org) — so the org has something to grow on tick 1 (`orchestrate`
+dispatches per *member* repo, never the hub). The hub push is committed before the
+member step, so a member-creation hiccup warns but never rolls back the hub, and
+re-runs are idempotent (`plant-lineage.rb` refuses an existing member). The **two
+irreducibly-human steps remain**: creating the GitHub org (no API exists) and
+minting + setting the three secrets. Once those are done, one `--apply` stands up
+the live, growing new-concept org — hub **and** member #1.
 
 **Staged (next):** the genesis branch that gives member #1 its seed §2–7 from a
-first grow tick.
+first grow tick (its repo exists; its content fills on the first tick once secrets
+are set).
