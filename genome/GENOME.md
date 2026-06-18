@@ -123,8 +123,12 @@ in the `regenerate` tier. Running plant from the canonical hub means **no
 duplicate payload is committed** — the live repo is the source, so the genome
 can't drift from a stale copy.
 
-**Staged (next):** the genesis branch that gives a freshly-planted first member
-its seed §2–7; and `plant.rb --apply` (the gh org/repo creation). The actual plant
-of a new org creates public infrastructure, so — like spawning (ADR-0002) — it
-runs only on an explicit owner go (two-key confirm + the human org-creation/secret
-steps in §3).
+`plant.rb --apply --confirm <org>` is **built**: with the two-key confirm + a
+membership guard (refuses any account you can't create repos in), it authors
+member #1's seed from the manifest, `gh repo create`s the hub, pushes the
+assembled tree, and enables Pages. The **two irreducibly-human steps remain**:
+creating the GitHub org (no API exists) and minting + setting the three secrets.
+Once those are done, one `--apply` stands up the live, growing new-concept org.
+
+**Staged (next):** the genesis branch that gives member #1 its seed §2–7 from a
+first grow tick.
