@@ -114,7 +114,7 @@ framework mechanism), or <span class="badge text-bg-secondary">upgrade</span>
 | `fleet-pause-killswitch` | P0 | net-new | The single global halt the doctrine is missing |
 | `pages-deploy-sentinel` | P0 | net-new | **Built** — hourly read-only check that each member repo's Pages build succeeded + the live site responds; files one sticky issue. The sole liveness signal a rollback agent keys off |
 | `secret-expiry-watch` | P0 | net-new | **Built** — daily single-attempt probe of `CLAUDE_CODE_OAUTH_TOKEN` + `LIFECYCLE_PAT` ahead of the growth window; files/auto-closes one issue (catches a dead token before ticks burn) |
-| `fleet-health-watch` | P1 | net-new | One daily watcher over the ledger + Actions API: anomalies, stalls, cost trend |
+| `fleet-health-watch` | P1 | net-new | **Built** — daily read-only digest over the evolution ledger: error rate, cost trend, per-member last-grow, stalls; one auto-closing issue (the DETECT half of the loop) |
 | `fleet-cost-governor` | P2 | net-new | Cost rail on the orchestrator — pre-flight ceiling + budget writer |
 | `lineage-state-report` | P2 | net-new | Single human pane of glass; a pure aggregator over the other signals |
 

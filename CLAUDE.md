@@ -32,7 +32,8 @@ whitelisted plugins — there are no custom `_plugins/` here.
 - `scripts/` — hub tooling (`sync-hub-metadata.rb`, `provision-org-sites.rb`,
   `lib/hub.rb`), the lineage ledger refresher (`sync-lineage-state.rb`), the
   new-era planter (`plant-lineage.rb`), the PR reviewer (`content-review.rb`),
-  and the docs-coverage engine (`docs-warden.rb`).
+  the docs-coverage engine (`docs-warden.rb`), and the fleet-health digest
+  (`fleet-health.rb`).
 - `lineage/` — the **centralized growth source of truth** (see below):
   `seeds/<year>.md` (each year's concept + Evolution Log), `seed-package/`
   (bootstrap kit), `repo-template/` (the year-repo skeleton the planter drops),
@@ -54,8 +55,9 @@ whitelisted plugins — there are no custom `_plugins/` here.
   **self-improvement fleet** (ADR-0003) `telemetry-ledger.yml` (evolution ledger),
   `framework-pr-reviewer.yml` (gates framework PRs), `docs-warden.yml` (doc
   coverage), `pages-deploy-sentinel.yml` (member site liveness),
-  `secret-expiry-watch.yml` (daily auth-credential probe), `genome-sync.yml`
-  (genome drift gate), `codeql.yml` (security scan).
+  `secret-expiry-watch.yml` (daily auth-credential probe), `fleet-health-watch.yml`
+  (daily ledger health digest), `genome-sync.yml` (genome drift gate),
+  `codeql.yml` (security scan).
 - `.github/config/` — reviewer configs: `content_review.yml`, `content_rules.yml`,
   `frontmatter_schema.yml`, `environment.yml`, `docs_warden.yml` (doc-coverage map).
 - `_data/fleet_pause.yml` — the global growth **kill-switch** (ADR-0003).
