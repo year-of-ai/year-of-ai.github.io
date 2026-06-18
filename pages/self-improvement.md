@@ -132,7 +132,7 @@ framework mechanism), or <span class="badge text-bg-secondary">upgrade</span>
 
 | Agent | Pri | Origin | What it does |
 |---|---|---|---|
-| `repo-write-serializer` | P0 | rewire | Closes the race on each year repo's main — one writer per branch, one PR per surface |
+| `repo-write-serializer` | P0 | rewire | **Built (convention)** — the `repo-write-<repo>` concurrency lock `grow-lineage` holds + the documented framework/policy single-PR groups; future writers join them so no two race a branch |
 | `repo-hygiene-warden` | P1 | net-new | Enforces the invariant that a year repo holds only content + config + .claude + telemetry |
 | `model-id-drift-checker` | P1 | upgrade | Keeps the hardcoded model IDs in policy.yml from going stale or deprecated |
 | `supply-chain-security-warden` | P1 | net-new | Adds the missing Dependabot / CodeQL / action-pinning audit on secret-bearing workflows |

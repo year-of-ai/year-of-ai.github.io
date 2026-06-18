@@ -146,3 +146,10 @@ ruby scripts/content-review.rb --help        # the PR content reviewer
    Keep them from colliding at `/`.
 6. **Validate before declaring done.** Run a Jekyll build for any content/config
    change; run `scripts/sync-hub-metadata.rb --check` for hub changes.
+7. **Serialize writers (ADR-0003 repo-write-serializer).** Any new workflow/agent
+   that writes a **year repo's `main`** must use `concurrency.group:
+   repo-write-<repo>` (the group `grow-lineage.yml` holds), so two writers never
+   race the branch. Framework-mutating PRs use group `framework-mutation`, policy
+   edits use `policy-mutation` — at most one open PR per protected surface. Every
+   dispatching/mutating workflow reads `_data/fleet_pause.yml` first (the
+   kill-switch).

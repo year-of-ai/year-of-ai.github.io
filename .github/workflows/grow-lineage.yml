@@ -28,7 +28,11 @@ on:
         default: ""
 
 concurrency:
-  group: grow-${{ inputs.repo }}
+  # Shared year-repo write-lock (ADR-0003 repo-write-serializer). Every agent that
+  # writes this repo's main — the publish step here, and future rollback / hygiene /
+  # aligner PRs — MUST join this same `repo-write-<repo>` group so two writers can
+  # never race the branch.
+  group: repo-write-${{ inputs.repo }}
   cancel-in-progress: false
 
 permissions:
