@@ -100,6 +100,21 @@ jobs:
     permissions:
       id-token: write # claude-code-action exchanges an OIDC token
     steps:
+      # The `args` dispatch input is interpolated into GENERATE_PROMPT. Even though
+      # only owners can dispatch this workflow, harden the surface: pass it via env
+      # (never into a run: script) and reject injection metacharacters before any
+      # model/publish step runs. Normal topic text (letters, digits, spaces, commas,
+      # periods, hyphens, slashes, quotes) passes; shell/expression metacharacters do not.
+      - name: Validate the args input (reject injection metacharacters)
+        env:
+          ARGS: ${{ inputs.args }}
+        run: |
+          if printf '%s' "$ARGS" | LC_ALL=C grep -qE '[`$<>|;&{}]'; then
+            echo "::error::inputs.args contains disallowed characters (possible injection); refusing to run."
+            exit 1
+          fi
+          echo "args input OK"
+
       - name: Checkout the target year repo (primary)
         uses: actions/checkout@v4
         with:
