@@ -102,12 +102,14 @@ opens a PR.
 **Built now:** the abstraction contract — `genome.yml` + `schema.json` +
 `genome.example.countries.yml` (the *countries* proof) + `manifest.yml` (the
 4-tier inventory) + `bin/verify.rb` (the routine-sync gate, green against the live
-repo) + the `genome-sync` CI workflow.
+repo) + the `genome-sync` CI workflow + [`bin/render.rb`](bin/render.rb) (the
+token-substitution engine — derives the full `{{TOKEN}}` map from `genome.yml`,
+raises on any unresolved token; `--selftest` renders one template to both the
+`year-of-ai` and `countries` values, proving the abstraction).
 
-**Staged (the executable planter, next):** `bin/render.rb` (token engine),
-`bin/extract.rb` (build/refresh the `transplant/`+`template/` payload from the
-live repo — also the deterministic re-sync), `bin/plant.rb` (the one-command
-germination, dry-run-first + two-key confirm like ADR-0002), and the genesis
-branch that gives a freshly-planted first member its seed §2–7. The actual plant
-of a new org creates public infrastructure, so — like spawning (ADR-0002) — it
-runs only on an explicit go.
+**Staged (the rest of the planter, next):** `bin/extract.rb` (build/refresh the
+`transplant/`+`template/` payload from the live repo — also the deterministic
+re-sync), `bin/plant.rb` (the one-command germination, dry-run-first + two-key
+confirm like ADR-0002), and the genesis branch that gives a freshly-planted first
+member its seed §2–7. The actual plant of a new org creates public
+infrastructure, so — like spawning (ADR-0002) — it runs only on an explicit go.
