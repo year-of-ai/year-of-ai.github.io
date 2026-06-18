@@ -1,0 +1,193 @@
+---
+name: Grow Lineage
+
+# Central growth engine. The hub grows ONE year repo per run: it checks out the
+# target repo (which holds only content + _config.yml + .claude + telemetry),
+# stages the centralized framework + that year's seed from lineage/, runs the
+# 3-tier content escalation (Haiku draft -> Sonnet expand -> Opus enhance), then
+# pushes back ONLY the new content + telemetry — the staged framework/seed are
+# stripped so the year repo stays clean. The year's Evolution Log (seed §8) is
+# persisted back to the hub's lineage/seeds/<repo>.md.
+#
+# Dispatched per repo by orchestrate.yml, or manually. Model tiers come from
+# lineage/policy.yml. Perpetual growth: every tick is a grow tick (no lifecycle
+# gate, no replant/consolidate).
+#
+# Secrets: CLAUDE_CODE_OAUTH_TOKEN (primary), ANTHROPIC_API_KEY (fallback),
+# LIFECYCLE_PAT (push to the target year repo + the hub's seed log).
+
+on:
+  workflow_dispatch:
+    inputs:
+      repo:
+        description: "Year repo to grow (e.g. 1776)"
+        required: true
+      args:
+        description: "Optional topic count / targets for the generate pass"
+        required: false
+        default: ""
+
+concurrency:
+  group: grow-${{ inputs.repo }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  TARGET: "year-of-ai/${{ inputs.repo }}"
+  # ---- Tier 1: generate (drafts only, no publish) ------------------------
+  GENERATE_PROMPT: |
+    You are the GENERATE pass (tier 1 of 3: generate -> expand -> enhance) of a
+    content growth tick for this knowledge base. seed.md holds the concept
+    (subject, taxonomy, sources, conventions); the canonical skills are under
+    .github/skills. Produce DRAFTS only — do NOT build indices, run sync-seed /
+    encode-seed, commit, or push (later passes + the workflow do that).
+
+    Run plan-roadmap to select 1-3 topics NOT already covered (read README.md and
+    the existing category files first; never re-add an existing topic), then use
+    add-topic / deep-dive to RESEARCH and WRITE a first draft of each selected
+    file under the correct taxonomy directory. ${{ inputs.args }}
+    A pass that writes no new draft content has FAILED — planning alone is not
+    progress. Leave the drafts uncommitted and stop.
+  # ---- Tier 2: expand ----------------------------------------------------
+  EXPAND_PROMPT: |
+    You are the EXPAND pass (tier 2 of 3) of an in-progress growth tick. The
+    generate pass left uncommitted draft files (run `git status` to find them).
+    DEEPEN and EXPAND every new or modified draft: add detail and sub-sections,
+    specific dates and figures, at least two sourced facts, and cross-links to
+    sibling topics. Do NOT build indices, run sync-seed / encode-seed, commit, or
+    push. If nothing is uncommitted, stop.
+  # ---- Tier 3: enhance (no publish — the workflow commits) ----------------
+  ENHANCE_PROMPT: |
+    You are the ENHANCE pass (tier 3 of 3) of an in-progress growth tick. Finish
+    the content (do NOT commit or push — the workflow publishes):
+      1. Polish prose, verify facts/sources, fix cross-references, ensure an
+         encyclopedic neutral tone and correct front matter on every new file.
+      2. build-structure — refresh indices, TIMELINE, INDEX, cross-refs.
+      3. sync-seed — regenerate seed.md sections 1-7.
+      4. encode-seed — append a seed.md section 8 Evolution Log entry titled
+         "Tick N:" naming what was added.
+    Then STOP. Do not run publish-session, do not commit, do not push.
+
+jobs:
+  grow:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write # claude-code-action exchanges an OIDC token
+    steps:
+      - name: Checkout the target year repo (primary)
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ env.TARGET }}
+          token: ${{ secrets.LIFECYCLE_PAT }}
+          fetch-depth: 0
+
+      - name: Stage framework + seed from the hub
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          git clone --depth 1 https://github.com/year-of-ai/year-of-ai.github.io /tmp/hub
+          # canonical agent toolkit (skills/prompts/agents/scripts)
+          mkdir -p .github
+          cp -r /tmp/hub/lineage/framework/* .github/
+          # this year's concept seed (carries §1 concept + §8 Evolution Log)
+          cp "/tmp/hub/lineage/seeds/${{ inputs.repo }}.md" seed.md
+          echo "Staged framework ($(find .github -type f | wc -l) files) + seed.md for ${{ inputs.repo }}"
+
+      - name: Resolve the 3-tier models from lineage/policy.yml
+        id: model
+        run: |
+          m() { grep -E "^[[:space:]]*$1:" /tmp/hub/lineage/policy.yml | head -1 | sed -E "s/.*$1:[[:space:]]*\"?([^\"#]+)\"?.*/\1/" | xargs; }
+          {
+            echo "generate=$(m generate)"
+            echo "expand=$(m expand)"
+            echo "enhance=$(m enhance)"
+          } >> "$GITHUB_OUTPUT"
+          echo "models: generate=$(m generate) expand=$(m expand) enhance=$(m enhance)"
+
+      - name: Tier 1 — generate drafts (Haiku)
+        continue-on-error: true
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: ${{ env.GENERATE_PROMPT }}
+          claude_args: >-
+            --model ${{ steps.model.outputs.generate }}
+            --max-turns 80
+            --allowedTools "Bash,Edit,Write,Read,Glob,Grep,WebFetch,WebSearch,TodoWrite,Task,Skill"
+          show_full_output: true
+
+      - name: Tier 2 — expand drafts (Sonnet)
+        continue-on-error: true
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: ${{ env.EXPAND_PROMPT }}
+          claude_args: >-
+            --model ${{ steps.model.outputs.expand }}
+            --max-turns 80
+            --allowedTools "Bash,Edit,Write,Read,Glob,Grep,WebFetch,WebSearch,TodoWrite,Task,Skill"
+          show_full_output: true
+
+      - name: Tier 3 — enhance (Opus)
+        continue-on-error: true
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: ${{ env.ENHANCE_PROMPT }}
+          claude_args: >-
+            --model ${{ steps.model.outputs.enhance }}
+            --max-turns 120
+            --allowedTools "Bash,Edit,Write,Read,Glob,Grep,WebFetch,WebSearch,TodoWrite,Task,Skill"
+          show_full_output: true
+
+      - name: Persist the seed Evolution Log back to the hub
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.LIFECYCLE_PAT }}
+        run: |
+          set -uo pipefail
+          # The enhance pass appended a §8 entry to the staged seed.md. Copy the
+          # updated seed back into the hub so the centralized tick clock advances.
+          if [ -f seed.md ]; then
+            cp seed.md "/tmp/hub/lineage/seeds/${{ inputs.repo }}.md"
+            ( cd /tmp/hub
+              if [ -n "$(git status --porcelain -- lineage/seeds/${{ inputs.repo }}.md)" ]; then
+                git config user.name "github-actions[bot]"
+                git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+                git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/year-of-ai/year-of-ai.github.io.git"
+                git add "lineage/seeds/${{ inputs.repo }}.md"
+                git commit -q -m "chore(lineage): grow ${{ inputs.repo }} — update seed Evolution Log"
+                git push origin HEAD:main || echo "::warning::could not push seed log update"
+              fi
+            )
+          fi
+
+      - name: Strip the staged framework/seed and publish content + telemetry
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.LIFECYCLE_PAT }}
+        run: |
+          set -uo pipefail
+          # Remove everything that belongs to the hub, leaving only the year repo's
+          # own content + telemetry. claude-code-action staged these; never push them.
+          rm -rf .github seed.md lifecycle.yml seed-package
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "No new content this tick — nothing to publish."
+            exit 0
+          fi
+          git config user.name "claude-grow"
+          git config user.email "noreply@anthropic.com"
+          # claude-code-action leaves a stale http.extraheader that overrides auth.
+          { git config --local --get-regexp 'http\..*\.extraheader' 2>/dev/null || true; } \
+            | awk '{print $1}' | while read -r k; do git config --local --unset-all "$k" || true; done
+          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${TARGET}.git"
+          git add -A
+          git commit -q -m "content: growth tick (Haiku -> Sonnet -> Opus)"
+          for _ in 1 2 3; do
+            git push origin HEAD:main && exit 0
+            git pull --rebase origin main || true
+          done
+          git push origin HEAD:main
