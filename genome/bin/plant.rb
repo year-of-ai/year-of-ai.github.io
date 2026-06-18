@@ -110,8 +110,13 @@ def prune_repos(body)
 end
 
 def expand(root, entry)
-  if entry.include?('*')
-    Dir.glob(File.join(root, entry), File::FNM_PATHNAME).select { |f| File.file?(f) }
+  if entry.end_with?('/**')
+    # Recurse, INCLUDING dotfiles/dotdirs (e.g. .claude/**). A bare trailing `**`
+    # in Ruby's Dir.glob does NOT recurse and skips dotfiles — the bug that shipped
+    # incomplete framework + .claude trees into planted hubs.
+    Dir.glob(File.join(root, entry[0..-4], '**', '*'), File::FNM_DOTMATCH).select { |f| File.file?(f) }
+  elsif entry.include?('*')
+    Dir.glob(File.join(root, entry), File::FNM_PATHNAME | File::FNM_DOTMATCH).select { |f| File.file?(f) }
   else
     p = File.join(root, entry)
     File.file?(p) ? [p] : []
