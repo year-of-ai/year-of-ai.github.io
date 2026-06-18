@@ -568,6 +568,11 @@ exclude:
   # has no front matter, so keep it listed here (don't rely on published:false).
   - README.md
 
+  # ── Orchestration source data (not site content) ─────────────────────────
+  # lineage/ holds the centralized seeds + bootstrap kit for the self-growing
+  # year repos; the published view is pages/lineage.md.
+  - lineage/
+
   # ── Jekyll cache ─────────────────────────────────────────────────────────
   - .sass-cache/
   - .jekyll-cache/

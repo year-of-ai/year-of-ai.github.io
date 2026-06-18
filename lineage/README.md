@@ -1,0 +1,15 @@
+# lineage/ — the canonical seeds & framework kit
+
+This directory is the **source of truth** for the self-growing knowledge-base
+lineage. It was centralized here from the individual year repos so those repos
+hold only their *content* (plus a GitHub Pages `_config.yml`, `.claude/`, and
+`telemetry/`); the hub owns the seed and orchestrates their growth.
+
+- `seeds/<year>.md` — each year's **concept definition** (the `seed.md` that was
+  in `year-of-ai/<year>`): subject, taxonomy, source strategy, conventions, and
+  its Evolution Log. The orchestrator reads these to grow each repo.
+- `seed-package/` — the **portable bootstrap kit** planted into a new repo when a
+  lineage spawns: `seed.template.md`, `lifecycle.template.yml`, `MANIFEST.md`.
+
+Excluded from the Jekyll build (see `_config.yml`) — this is orchestration data,
+not site content. The published lineage view is `pages/lineage.md` (`/lineage/`).
