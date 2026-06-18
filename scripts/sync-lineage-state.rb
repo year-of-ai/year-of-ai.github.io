@@ -92,48 +92,36 @@ def parse_evolution_log(seed_text)
   }
 end
 
-# Read one repo's lifecycle.yml + seed.md and distill the state the hub needs.
+SUBJECT_RE = /^\s*subject:\s*["']?(.+?)["']?\s*$/
+
+# The centralized seed for a year, or nil if there isn't one.
+def read_seed(name)
+  path = File.join(Hub::ROOT, 'lineage', 'seeds', "#{name}.md")
+  File.exist?(path) ? File.read(path, encoding: 'utf-8') : nil
+end
+
+# Distill the lineage state the hub needs for one year. The seed now lives in
+# the hub (lineage/seeds/<name>.md) rather than in the year repo; it carries the
+# concept (§1) and the Evolution Log (§8 — the tick clock).
 def inspect_lineage(org, name)
-  raw = gh_file(org, name, 'lifecycle.yml')
-  return nil unless raw # not a lifecycle repo
+  seed = read_seed(name)
+  return nil unless seed # not a lineage member
 
-  doc  = parse_yaml(raw)
-  lc   = doc['lifecycle'] || {}
-  pol  = lc['policy'] || {}
-  st   = lc['state'] || {}
-
-  seed = gh_file(org, name, 'seed.md')
-  log  = parse_evolution_log(seed)
-
-  members = (st['lineage'] || [])
-  # This repo's OWN entry in the carried-forward registry (not the newest one).
-  mine = members.find { |m| m['repo'].to_s == "#{org}/#{name}" } || members.last || {}
+  subject = (seed[SUBJECT_RE, 1] || Hub.humanize(name)).strip
+  log     = parse_evolution_log(seed)
 
   {
-    'name'              => name,
-    'repo'              => "#{org}/#{name}",
-    'url'               => "https://github.com/#{org}/#{name}",
-    'site_url'          => "https://#{org}.github.io/#{name}/",
-    'subject'           => mine['subject'] || Hub.humanize(name),
-    'status'            => st['status'].to_s,
-    'granularity'       => st['granularity'].to_s,
-    'origin'            => st['origin'].to_s,
-    'spawned_from'      => mine['spawned_from'].to_s,
-    'spawned_lineage'   => st['spawned_lineage'].to_s,
-    'consolidated_from' => (mine['consolidated_from'] || []),
-    'ticks_yaml'        => st['generation_ticks'],
-    'ticks_logged'      => log[:ticks_logged],
-    'log_entries'       => log[:total_entries],
-    'generations'       => log[:generations],
-    'last_activity'     => log[:last_date].to_s,
-    'last_entry'        => log[:last_entry].to_s,
-    'policy'            => {
-      'replant_after_ticks'    => pol['replant_after_ticks'],
-      'consolidate_at_members' => pol['consolidate_at_members'],
-      'distill_at_members'     => pol['distill_at_members']
-    },
-    'lineage_size'      => members.size,
-    'lineage'           => members.map { |m| { 'subject' => m['subject'].to_s, 'repo' => m['repo'].to_s, 'status' => m['status'].to_s } }
+    'name'          => name,
+    'repo'          => "#{org}/#{name}",
+    'url'           => "https://github.com/#{org}/#{name}",
+    'site_url'      => "https://#{org}.github.io/#{name}/",
+    'subject'       => subject,
+    'status'        => (log[:ticks_logged].to_i.positive? ? 'growing' : 'seeded'),
+    'ticks_logged'  => log[:ticks_logged],
+    'log_entries'   => log[:total_entries],
+    'generations'   => log[:generations],
+    'last_activity' => log[:last_date].to_s,
+    'last_entry'    => log[:last_entry].to_s
   }
 end
 

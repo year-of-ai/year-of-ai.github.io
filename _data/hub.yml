@@ -57,19 +57,21 @@ defaults:
     - ".github/**"
     - ".claude/**"
 
-# Optional per-repo overrides, merged onto discovered repos by `name`. Only
-# non-archived org repos are auto-discovered, so the individual 2005–2011 year
-# repos (now archived) are not listed here — they live on inside the
-# consolidated `2005-2011` knowledge base below.
+# Optional per-repo overrides, merged onto discovered repos by `name`. Every
+# non-archived org repo is auto-discovered; these just set display titles. The
+# year repos are thin remote_theme consumers (content + _config.yml + .claude +
+# telemetry); their seeds live in this hub under lineage/seeds/.
 #
 # Supported keys: name (required), title, description, branch. An empty/omitted
 # value falls back to what GitHub reports for the repo.
 repos:
-  - name: "1776"
-    title: "1776"
-  - name: "1777"
-    title: "1777"
-  - name: "1778"
-    title: "1778"
-  - name: "2005-2011"
-    title: "2005–2011 lineage"
+  - { name: "1776", title: "The Year 1776" }
+  - { name: "1777", title: "The Year 1777" }
+  - { name: "1778", title: "The Year 1778" }
+  - { name: "2005", title: "The Year 2005" }
+  - { name: "2006", title: "The Year 2006" }
+  - { name: "2007", title: "The Year 2007" }
+  - { name: "2008", title: "The Year 2008" }
+  - { name: "2009", title: "The Year 2009" }
+  - { name: "2010", title: "The Year 2010" }
+  - { name: "2011", title: "The Year 2011" }

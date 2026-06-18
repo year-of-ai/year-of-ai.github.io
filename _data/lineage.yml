@@ -5,135 +5,116 @@
 # =============================================================================
 org: year-of-ai
 totals:
-  repos: 4
-  ticks: 7
+  repos: 10
+  ticks: 23
 members:
 - name: '1776'
   repo: year-of-ai/1776
   url: https://github.com/year-of-ai/1776
   site_url: https://year-of-ai.github.io/1776/
   subject: the year 1776
-  status: mature
-  granularity: year
-  origin: year-of-ai/2005-2011
-  spawned_from: year-of-ai/2005-2011
-  spawned_lineage: ''
-  consolidated_from: []
-  ticks_yaml: 5
+  status: growing
   ticks_logged: 3
   log_entries: 8
   generations: 2
   last_activity: '2026-06-15'
   last_entry: Distillation — 2026-06-15
-  policy:
-    replant_after_ticks: 999999
-    consolidate_at_members: 999999
-    distill_at_members: 3
-  lineage_size: 3
-  lineage:
-  - subject: the year 1776
-    repo: year-of-ai/1776
-    status: mature
-  - subject: the year 1777
-    repo: year-of-ai/1777
-    status: mature
-  - subject: the year 1778
-    repo: year-of-ai/1778
-    status: growing
 - name: '1777'
   repo: year-of-ai/1777
   url: https://github.com/year-of-ai/1777
   site_url: https://year-of-ai.github.io/1777/
   subject: the year 1777
-  status: mature
-  granularity: year
-  origin: year-of-ai/2005-2011
-  spawned_from: year-of-ai/1776
-  spawned_lineage: ''
-  consolidated_from: []
-  ticks_yaml: 4
+  status: growing
   ticks_logged: 4
   log_entries: 7
   generations: 2
   last_activity: '2026-06-15'
   last_entry: Distillation — 2026-06-15
-  policy:
-    replant_after_ticks: 999999
-    consolidate_at_members: 999999
-    distill_at_members: 3
-  lineage_size: 3
-  lineage:
-  - subject: the year 1776
-    repo: year-of-ai/1776
-    status: mature
-  - subject: the year 1777
-    repo: year-of-ai/1777
-    status: mature
-  - subject: the year 1778
-    repo: year-of-ai/1778
-    status: growing
 - name: '1778'
   repo: year-of-ai/1778
   url: https://github.com/year-of-ai/1778
   site_url: https://year-of-ai.github.io/1778/
   subject: the year 1778
-  status: growing
-  granularity: year
-  origin: year-of-ai/2005-2011
-  spawned_from: year-of-ai/1777
-  spawned_lineage: ''
-  consolidated_from: []
-  ticks_yaml: 0
+  status: seeded
   ticks_logged: 0
   log_entries: 2
   generations: 1
   last_activity: '2026-06-15'
   last_entry: Distillation — 2026-06-15
-  policy:
-    replant_after_ticks: 999999
-    consolidate_at_members: 999999
-    distill_at_members: 3
-  lineage_size: 3
-  lineage:
-  - subject: the year 1776
-    repo: year-of-ai/1776
-    status: mature
-  - subject: the year 1777
-    repo: year-of-ai/1777
-    status: mature
-  - subject: the year 1778
-    repo: year-of-ai/1778
-    status: growing
-- name: 2005-2011
-  repo: year-of-ai/2005-2011
-  url: https://github.com/year-of-ai/2005-2011
-  site_url: https://year-of-ai.github.io/2005-2011/
-  subject: the years 2005-2011
-  status: consolidated
-  granularity: month
-  origin: bamr87/1987
-  spawned_from: ''
-  spawned_lineage: ''
-  consolidated_from:
-  - year-of-ai/2005
-  - year-of-ai/2006
-  - year-of-ai/2007
-  - year-of-ai/2008
-  - year-of-ai/2009
-  - year-of-ai/2010
-  - year-of-ai/2011
-  ticks_yaml: 1
-  ticks_logged: 0
-  log_entries: 3
-  generations: 0
+- name: '2005'
+  repo: year-of-ai/2005
+  url: https://github.com/year-of-ai/2005
+  site_url: https://year-of-ai.github.io/2005/
+  subject: the year 2005
+  status: growing
+  ticks_logged: 3
+  log_entries: 6
+  generations: 2
+  last_activity: '2026-06-12'
+  last_entry: Distillation — 2026-06-12
+- name: '2006'
+  repo: year-of-ai/2006
+  url: https://github.com/year-of-ai/2006
+  site_url: https://year-of-ai.github.io/2006/
+  subject: the year 2006
+  status: growing
+  ticks_logged: 3
+  log_entries: 5
+  generations: 2
+  last_activity: '2026-06-12'
+  last_entry: Replant — 2026-06-12
+- name: '2007'
+  repo: year-of-ai/2007
+  url: https://github.com/year-of-ai/2007
+  site_url: https://year-of-ai.github.io/2007/
+  subject: the year 2007
+  status: growing
+  ticks_logged: 3
+  log_entries: 5
+  generations: 2
+  last_activity: '2026-06-12'
+  last_entry: Replant — 2026-06-12
+- name: '2008'
+  repo: year-of-ai/2008
+  url: https://github.com/year-of-ai/2008
+  site_url: https://year-of-ai.github.io/2008/
+  subject: the year 2008
+  status: growing
+  ticks_logged: 3
+  log_entries: 5
+  generations: 2
   last_activity: '2026-06-13'
-  last_entry: Expand (Part B — deepen, tick 1) — 2026-06-13
-  policy:
-    replant_after_ticks: 3
-    consolidate_at_members: 7
-    distill_at_members: 3
-  lineage_size: 1
-  lineage:
-  - subject: the years 2005-2011
-    repo: year-of-ai/2005-2011
-    status: consolidated
+  last_entry: Replant — 2026-06-13
+- name: '2009'
+  repo: year-of-ai/2009
+  url: https://github.com/year-of-ai/2009
+  site_url: https://year-of-ai.github.io/2009/
+  subject: the year 2009
+  status: growing
+  ticks_logged: 1
+  log_entries: 4
+  generations: 2
+  last_activity: '2026-06-13'
+  last_entry: Replant — 2026-06-13
+- name: '2010'
+  repo: year-of-ai/2010
+  url: https://github.com/year-of-ai/2010
+  site_url: https://year-of-ai.github.io/2010/
+  subject: the year 2010
+  status: growing
+  ticks_logged: 3
+  log_entries: 5
+  generations: 2
+  last_activity: '2026-06-13'
+  last_entry: Replant — 2026-06-13
+- name: '2011'
+  repo: year-of-ai/2011
+  url: https://github.com/year-of-ai/2011
+  site_url: https://year-of-ai.github.io/2011/
+  subject: the year 2011
+  status: seeded
+  ticks_logged: 0
+  log_entries: 1
+  generations: 1
+  last_activity: '2026-06-13'
+  last_entry: Genesis — 2026-06-13

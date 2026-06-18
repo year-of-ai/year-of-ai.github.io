@@ -88,13 +88,14 @@ ones are spawned tangentially from the frontier, so the lineage only ever grows.
   {% endfor %}
 </div>
 
-> **How it grows:** the hub's
-> [`orchestrate`](https://github.com/{{ site.repository | join: '' }}/blob/main/.github/workflows/orchestrate.yml)
-> workflow runs daily, refreshes this ledger with `sync-lineage-state.rb`, and
-> triggers each repo's `grow.yml`. A repo's tick researches new topics, writes
-> them, refreshes its indices, and appends to its Evolution Log — then the hub
-> re-reads and re-presents. See the [content hub]({{ '/hub/' | relative_url }})
-> for published-page counts and live/pending status.
+> **How it grows:** each year repo holds only its content + a GitHub Pages
+> `_config.yml` + `.claude/` + `telemetry/`. The **seed** for every year lives
+> here in the hub under
+> [`lineage/seeds/`](https://github.com/{{ site.repository | join: '' }}/tree/main/lineage/seeds),
+> and the hub is the central orchestrator: it researches and writes each year's
+> content through a Haiku → Sonnet → Opus escalation, then publishes to the
+> year's own Pages site. See the [content hub]({{ '/hub/' | relative_url }}) for
+> published-page counts per year.
 
 {% else %}
 

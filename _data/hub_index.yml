@@ -5,19 +5,19 @@
 # =============================================================================
 org: year-of-ai
 totals:
-  repos: 4
-  pages: 136
+  repos: 10
+  pages: 116
 repos:
 - name: '1776'
-  title: '1776'
+  title: The Year 1776
   description: A self-growing knowledge base about the year 1776. Next era of the
     year-of-ai lineage, spawned from 2005-2011.
   url: https://github.com/year-of-ai/1776
   site_url: https://year-of-ai.github.io/1776/
-  pages_enabled: false
-  scaffolded: false
+  pages_enabled: true
+  scaffolded: true
   branch: main
-  pushed_at: '2026-06-17T11:10:23Z'
+  pushed_at: '2026-06-18T06:18:10Z'
   page_count: 17
   sections:
   - name: arts
@@ -55,15 +55,15 @@ repos:
     url: https://year-of-ai.github.io/1776/TIMELINE/
     source_url: https://github.com/year-of-ai/1776/blob/main/TIMELINE.md
 - name: '1777'
-  title: '1777'
+  title: The Year 1777
   description: A self-growing encyclopedic knowledge base covering the events, people,
     works, and discoveries of 1777.
   url: https://github.com/year-of-ai/1777
   site_url: https://year-of-ai.github.io/1777/
-  pages_enabled: false
-  scaffolded: false
+  pages_enabled: true
+  scaffolded: true
   branch: main
-  pushed_at: '2026-06-17T11:11:36Z'
+  pushed_at: '2026-06-18T06:18:13Z'
   page_count: 14
   sections:
   - name: arts
@@ -101,65 +101,268 @@ repos:
     url: https://year-of-ai.github.io/1777/TIMELINE/
     source_url: https://github.com/year-of-ai/1777/blob/main/TIMELINE.md
 - name: '1778'
-  title: '1778'
+  title: The Year 1778
   description: 'Self-growing knowledge base: the year 1778'
   url: https://github.com/year-of-ai/1778
   site_url: https://year-of-ai.github.io/1778/
-  pages_enabled: false
-  scaffolded: false
+  pages_enabled: true
+  scaffolded: true
   branch: main
-  pushed_at: '2026-06-17T10:55:16Z'
+  pushed_at: '2026-06-18T06:18:15Z'
   page_count: 0
   sections: []
   root_pages: []
-- name: 2005-2011
-  title: 2005–2011 lineage
-  description: A consolidated knowledge base spanning the years 2005–2011, merging
-    the year-of-ai lineage.
-  url: https://github.com/year-of-ai/2005-2011
-  site_url: https://year-of-ai.github.io/2005-2011/
-  pages_enabled: false
-  scaffolded: false
+- name: '2005'
+  title: The Year 2005
+  description: A self-growing knowledge base about the year 2005 — history, science,
+    arts, society, and people.
+  url: https://github.com/year-of-ai/2005
+  site_url: https://year-of-ai.github.io/2005/
+  pages_enabled: true
+  scaffolded: true
   branch: main
-  pushed_at: '2026-06-14T01:18:32Z'
-  page_count: 105
+  pushed_at: '2026-06-18T06:18:17Z'
+  page_count: 12
   sections:
-  - name: '2005'
-    title: '2005'
-    url: https://year-of-ai.github.io/2005-2011/2005/
-    source_url: https://github.com/year-of-ai/2005-2011/tree/main/2005
-    count: 7
-  - name: '2006'
-    title: '2006'
-    url: https://year-of-ai.github.io/2005-2011/2006/
-    source_url: https://github.com/year-of-ai/2005-2011/tree/main/2006
-    count: 10
-  - name: '2007'
-    title: '2007'
-    url: https://year-of-ai.github.io/2005-2011/2007/
-    source_url: https://github.com/year-of-ai/2005-2011/tree/main/2007
-    count: 10
-  - name: '2008'
-    title: '2008'
-    url: https://year-of-ai.github.io/2005-2011/2008/
-    source_url: https://github.com/year-of-ai/2005-2011/tree/main/2008
-    count: 9
-  - name: '2009'
-    title: '2009'
-    url: https://year-of-ai.github.io/2005-2011/2009/
-    source_url: https://github.com/year-of-ai/2005-2011/tree/main/2009
-    count: 10
-  - name: '2010'
-    title: '2010'
-    url: https://year-of-ai.github.io/2005-2011/2010/
-    source_url: https://github.com/year-of-ai/2005-2011/tree/main/2010
-    count: 9
-  - name: '2011'
-    title: '2011'
-    url: https://year-of-ai.github.io/2005-2011/2011/
-    source_url: https://github.com/year-of-ai/2005-2011/tree/main/2011
-    count: 12
+  - name: arts-culture
+    title: Arts & Culture
+    url: https://year-of-ai.github.io/2005/arts-culture/
+    source_url: https://github.com/year-of-ai/2005/tree/main/arts-culture
+    count: 0
+  - name: history-politics
+    title: History & Politics
+    url: https://year-of-ai.github.io/2005/history-politics/
+    source_url: https://github.com/year-of-ai/2005/tree/main/history-politics
+    count: 3
+  - name: people
+    title: People
+    url: https://year-of-ai.github.io/2005/people/
+    source_url: https://github.com/year-of-ai/2005/tree/main/people
+    count: 0
+  - name: science-technology
+    title: Science & Technology
+    url: https://year-of-ai.github.io/2005/science-technology/
+    source_url: https://github.com/year-of-ai/2005/tree/main/science-technology
+    count: 1
+  - name: society-economics
+    title: Society & Economics
+    url: https://year-of-ai.github.io/2005/society-economics/
+    source_url: https://github.com/year-of-ai/2005/tree/main/society-economics
+    count: 1
   root_pages:
   - title: Timeline
-    url: https://year-of-ai.github.io/2005-2011/TIMELINE/
-    source_url: https://github.com/year-of-ai/2005-2011/blob/main/TIMELINE.md
+    url: https://year-of-ai.github.io/2005/TIMELINE/
+    source_url: https://github.com/year-of-ai/2005/blob/main/TIMELINE.md
+- name: '2006'
+  title: The Year 2006
+  description: A self-growing knowledge base about the year 2006. Successor in the
+    year-of-ai lineage (2005 → 2006).
+  url: https://github.com/year-of-ai/2006
+  site_url: https://year-of-ai.github.io/2006/
+  pages_enabled: true
+  scaffolded: true
+  branch: main
+  pushed_at: '2026-06-18T06:18:20Z'
+  page_count: 15
+  sections:
+  - name: arts-culture
+    title: Arts & Culture
+    url: https://year-of-ai.github.io/2006/arts-culture/
+    source_url: https://github.com/year-of-ai/2006/tree/main/arts-culture
+    count: 2
+  - name: history-politics
+    title: History & Politics
+    url: https://year-of-ai.github.io/2006/history-politics/
+    source_url: https://github.com/year-of-ai/2006/tree/main/history-politics
+    count: 2
+  - name: people
+    title: People
+    url: https://year-of-ai.github.io/2006/people/
+    source_url: https://github.com/year-of-ai/2006/tree/main/people
+    count: 0
+  - name: science-technology
+    title: Science & Technology
+    url: https://year-of-ai.github.io/2006/science-technology/
+    source_url: https://github.com/year-of-ai/2006/tree/main/science-technology
+    count: 3
+  - name: society-economics
+    title: Society & Economics
+    url: https://year-of-ai.github.io/2006/society-economics/
+    source_url: https://github.com/year-of-ai/2006/tree/main/society-economics
+    count: 1
+  root_pages:
+  - title: Timeline
+    url: https://year-of-ai.github.io/2006/TIMELINE/
+    source_url: https://github.com/year-of-ai/2006/blob/main/TIMELINE.md
+- name: '2007'
+  title: The Year 2007
+  description: ''
+  url: https://github.com/year-of-ai/2007
+  site_url: https://year-of-ai.github.io/2007/
+  pages_enabled: true
+  scaffolded: true
+  branch: main
+  pushed_at: '2026-06-18T06:18:22Z'
+  page_count: 15
+  sections:
+  - name: arts-culture
+    title: Arts & Culture
+    url: https://year-of-ai.github.io/2007/arts-culture/
+    source_url: https://github.com/year-of-ai/2007/tree/main/arts-culture
+    count: 2
+  - name: history-politics
+    title: History & Politics
+    url: https://year-of-ai.github.io/2007/history-politics/
+    source_url: https://github.com/year-of-ai/2007/tree/main/history-politics
+    count: 3
+  - name: people
+    title: People
+    url: https://year-of-ai.github.io/2007/people/
+    source_url: https://github.com/year-of-ai/2007/tree/main/people
+    count: 0
+  - name: science-technology
+    title: Science & Technology
+    url: https://year-of-ai.github.io/2007/science-technology/
+    source_url: https://github.com/year-of-ai/2007/tree/main/science-technology
+    count: 2
+  - name: society-economics
+    title: Society & Economics
+    url: https://year-of-ai.github.io/2007/society-economics/
+    source_url: https://github.com/year-of-ai/2007/tree/main/society-economics
+    count: 1
+  root_pages:
+  - title: Timeline
+    url: https://year-of-ai.github.io/2007/TIMELINE/
+    source_url: https://github.com/year-of-ai/2007/blob/main/TIMELINE.md
+- name: '2008'
+  title: The Year 2008
+  description: A self-growing knowledge base about the year 2008
+  url: https://github.com/year-of-ai/2008
+  site_url: https://year-of-ai.github.io/2008/
+  pages_enabled: true
+  scaffolded: true
+  branch: main
+  pushed_at: '2026-06-18T06:18:24Z'
+  page_count: 14
+  sections:
+  - name: arts-culture
+    title: Arts & Culture — 2008
+    url: https://year-of-ai.github.io/2008/arts-culture/
+    source_url: https://github.com/year-of-ai/2008/tree/main/arts-culture
+    count: 0
+  - name: history-politics
+    title: History & Politics — 2008
+    url: https://year-of-ai.github.io/2008/history-politics/
+    source_url: https://github.com/year-of-ai/2008/tree/main/history-politics
+    count: 3
+  - name: people
+    title: People — 2008
+    url: https://year-of-ai.github.io/2008/people/
+    source_url: https://github.com/year-of-ai/2008/tree/main/people
+    count: 0
+  - name: science-technology
+    title: Science & Technology — 2008
+    url: https://year-of-ai.github.io/2008/science-technology/
+    source_url: https://github.com/year-of-ai/2008/tree/main/science-technology
+    count: 2
+  - name: society-economics
+    title: Society & Economics — 2008
+    url: https://year-of-ai.github.io/2008/society-economics/
+    source_url: https://github.com/year-of-ai/2008/tree/main/society-economics
+    count: 2
+  root_pages:
+  - title: Timeline
+    url: https://year-of-ai.github.io/2008/TIMELINE/
+    source_url: https://github.com/year-of-ai/2008/blob/main/TIMELINE.md
+- name: '2009'
+  title: The Year 2009
+  description: A self-growing knowledge base about the year 2009
+  url: https://github.com/year-of-ai/2009
+  site_url: https://year-of-ai.github.io/2009/
+  pages_enabled: true
+  scaffolded: true
+  branch: main
+  pushed_at: '2026-06-18T06:18:26Z'
+  page_count: 15
+  sections:
+  - name: arts-culture
+    title: Arts & Culture — The Year 2009
+    url: https://year-of-ai.github.io/2009/arts-culture/
+    source_url: https://github.com/year-of-ai/2009/tree/main/arts-culture
+    count: 2
+  - name: history-politics
+    title: History & Politics — The Year 2009
+    url: https://year-of-ai.github.io/2009/history-politics/
+    source_url: https://github.com/year-of-ai/2009/tree/main/history-politics
+    count: 5
+  - name: people
+    title: People — The Year 2009
+    url: https://year-of-ai.github.io/2009/people/
+    source_url: https://github.com/year-of-ai/2009/tree/main/people
+    count: 0
+  - name: science-technology
+    title: Science & Technology — The Year 2009
+    url: https://year-of-ai.github.io/2009/science-technology/
+    source_url: https://github.com/year-of-ai/2009/tree/main/science-technology
+    count: 1
+  - name: society-economics
+    title: Society & Economics — The Year 2009
+    url: https://year-of-ai.github.io/2009/society-economics/
+    source_url: https://github.com/year-of-ai/2009/tree/main/society-economics
+    count: 0
+  root_pages:
+  - title: Timeline
+    url: https://year-of-ai.github.io/2009/TIMELINE/
+    source_url: https://github.com/year-of-ai/2009/blob/main/TIMELINE.md
+- name: '2010'
+  title: The Year 2010
+  description: ''
+  url: https://github.com/year-of-ai/2010
+  site_url: https://year-of-ai.github.io/2010/
+  pages_enabled: true
+  scaffolded: true
+  branch: main
+  pushed_at: '2026-06-18T06:18:28Z'
+  page_count: 14
+  sections:
+  - name: arts-culture
+    title: Arts & Culture
+    url: https://year-of-ai.github.io/2010/arts-culture/
+    source_url: https://github.com/year-of-ai/2010/tree/main/arts-culture
+    count: 1
+  - name: history-politics
+    title: History & Politics
+    url: https://year-of-ai.github.io/2010/history-politics/
+    source_url: https://github.com/year-of-ai/2010/tree/main/history-politics
+    count: 4
+  - name: people
+    title: People
+    url: https://year-of-ai.github.io/2010/people/
+    source_url: https://github.com/year-of-ai/2010/tree/main/people
+    count: 0
+  - name: science-technology
+    title: Science & Technology
+    url: https://year-of-ai.github.io/2010/science-technology/
+    source_url: https://github.com/year-of-ai/2010/tree/main/science-technology
+    count: 1
+  - name: society-economics
+    title: Society & Economics
+    url: https://year-of-ai.github.io/2010/society-economics/
+    source_url: https://github.com/year-of-ai/2010/tree/main/society-economics
+    count: 1
+  root_pages:
+  - title: Timeline
+    url: https://year-of-ai.github.io/2010/TIMELINE/
+    source_url: https://github.com/year-of-ai/2010/blob/main/TIMELINE.md
+- name: '2011'
+  title: The Year 2011
+  description: A self-growing knowledge base about the year 2011
+  url: https://github.com/year-of-ai/2011
+  site_url: https://year-of-ai.github.io/2011/
+  pages_enabled: true
+  scaffolded: true
+  branch: main
+  pushed_at: '2026-06-18T06:18:30Z'
+  page_count: 0
+  sections: []
+  root_pages: []
