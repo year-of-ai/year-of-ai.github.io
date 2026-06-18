@@ -143,14 +143,18 @@ end
 end
 
 # Leak report: residual SOURCE-concept literals in the assembled tree (excludes
-# the regenerate tier, which a genesis agent re-authors for the new concept).
+# the regenerate tier, which a genesis agent re-authors for the new concept). Only
+# flag a source literal the target CHANGED — a literal the target intentionally
+# REUSES (e.g. the same founder owns both orgs) is correctly kept, not a leak.
 STRONG = ['year-of-ai', 'Year of AI', 'Amr Abdel-Motaleb', 'amr.abdel@gmail.com'].freeze
+tgt_values = tgt_map.values.map(&:to_s)
+should_be_gone = STRONG.reject { |lit| tgt_values.include?(lit) }
 lexicon_src = [src_map['UNIT_NOUN'], src_map['UNIT_NOUN_PLURAL']].compact.reject(&:empty?)
 strong_hits = Hash.new(0)
 lexicon_hits = 0
 Dir.glob(File.join(out, '**', '*'), File::FNM_DOTMATCH).select { |f| File.file?(f) }.each do |f|
   body = File.read(f, encoding: 'utf-8', invalid: :replace, undef: :replace) rescue next
-  STRONG.each { |lit| strong_hits[lit] += body.scan(lit).size }
+  should_be_gone.each { |lit| strong_hits[lit] += body.scan(lit).size }
   # Exclude legitimately-preserved Jekyll date placeholders (:year, year-month-day)
   # so the count reflects real concept-prose residue, not correct date config.
   prose = body.gsub('year-month-day', '').gsub(/:year\b/, '')
