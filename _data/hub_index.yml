@@ -6,7 +6,7 @@
 org: year-of-ai
 totals:
   repos: 11
-  pages: 144
+  pages: 147
 repos:
 - name: '1776'
   title: The Year 1776
@@ -17,8 +17,8 @@ repos:
   pages_enabled: true
   scaffolded: true
   branch: main
-  pushed_at: '2026-06-18T06:18:10Z'
-  page_count: 17
+  pushed_at: '2026-06-18T20:03:10Z'
+  page_count: 20
   sections:
   - name: arts
     title: Arts & Culture
@@ -39,17 +39,17 @@ repos:
     title: Key Figures
     url: https://year-of-ai.github.io/1776/people/
     source_url: https://github.com/year-of-ai/1776/tree/main/people
-    count: 1
+    count: 2
   - name: politics
     title: Political Events
     url: https://year-of-ai.github.io/1776/politics/
     source_url: https://github.com/year-of-ai/1776/tree/main/politics
-    count: 2
+    count: 3
   - name: science
     title: Science & Discovery
     url: https://year-of-ai.github.io/1776/science/
     source_url: https://github.com/year-of-ai/1776/tree/main/science
-    count: 1
+    count: 2
   root_pages:
   - title: Timeline
     url: https://year-of-ai.github.io/1776/TIMELINE/
