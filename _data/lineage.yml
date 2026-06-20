@@ -6,7 +6,7 @@
 org: year-of-ai
 totals:
   repos: 11
-  ticks: 28
+  ticks: 36
 members:
 - name: '1776'
   repo: year-of-ai/1776
@@ -14,36 +14,35 @@ members:
   site_url: https://year-of-ai.github.io/1776/
   subject: the year 1776
   status: growing
-  ticks_logged: 4
-  log_entries: 10
+  ticks_logged: 5
+  log_entries: 11
   generations: 2
-  last_activity: '2026-06-18'
-  last_entry: 'G1-T6 — 2026-06-18 — Tick 4: John Adams, British Empire, Buffon''s
-    Natural History'
+  last_activity: '2026-06-19'
+  last_entry: 'G1-T7 — 2026-06-19 — Tick 5: Benjamin Franklin, Continental Congress
+    Finance, Battle of Long Island deep-dive'
 - name: '1777'
   repo: year-of-ai/1777
   url: https://github.com/year-of-ai/1777
   site_url: https://year-of-ai.github.io/1777/
   subject: the year 1777
   status: growing
-  ticks_logged: 5
-  log_entries: 9
+  ticks_logged: 6
+  log_entries: 10
   generations: 2
-  last_activity: '2026-06-18'
-  last_entry: 'G1-T5 — 2026-06-18 — Tick 5: Mozart''s 1777 tour, James Watt''s steam
-    engine, Lavoisier''s oxygen theory'
+  last_activity: '2026-06-19'
+  last_entry: 'G1-T6 — 2026-06-19 — Tick 6: Battle of Brandywine, British Occupation
+    of Philadelphia'
 - name: '1778'
   repo: year-of-ai/1778
   url: https://github.com/year-of-ai/1778
   site_url: https://year-of-ai.github.io/1778/
   subject: the year 1778
   status: growing
-  ticks_logged: 1
-  log_entries: 4
+  ticks_logged: 2
+  log_entries: 5
   generations: 1
-  last_activity: '2026-06-18'
-  last_entry: 'G1-T1 — 2026-06-18 — Tick 1: First content — Franco-American Alliance,
-    Battle of Monmouth, Voltaire'
+  last_activity: '2026-06-19'
+  last_entry: 'G1-T2 — 2026-06-19 — Tick 2: La Scala, Jean-Jacques Rousseau'
 - name: '2005'
   repo: year-of-ai/2005
   url: https://github.com/year-of-ai/2005
@@ -72,11 +71,12 @@ members:
   site_url: https://year-of-ai.github.io/2007/
   subject: the year 2007
   status: growing
-  ticks_logged: 3
-  log_entries: 13
+  ticks_logged: 4
+  log_entries: 14
   generations: 2
-  last_activity: '2026-06-12'
-  last_entry: Replant — 2026-06-12
+  last_activity: '2026-06-19'
+  last_entry: 'G3-T4 — 2026-06-19 — Tick 4: Enhance/QA pass — corrected iPhone release
+    date and normalized generated markers'
 - name: '2008'
   repo: year-of-ai/2008
   url: https://github.com/year-of-ai/2008
@@ -94,43 +94,44 @@ members:
   site_url: https://year-of-ai.github.io/2009/
   subject: the year 2009
   status: growing
-  ticks_logged: 1
-  log_entries: 13
+  ticks_logged: 2
+  log_entries: 14
   generations: 2
-  last_activity: '2026-06-13'
-  last_entry: Replant — 2026-06-13
+  last_activity: '2026-06-19'
+  last_entry: 'G1-T4 — 2026-06-19 — Tick 4: Cross-reference enhancement pass'
 - name: '2010'
   repo: year-of-ai/2010
   url: https://github.com/year-of-ai/2010
   site_url: https://year-of-ai.github.io/2010/
   subject: the year 2010
   status: growing
-  ticks_logged: 3
-  log_entries: 13
+  ticks_logged: 4
+  log_entries: 14
   generations: 2
-  last_activity: '2026-06-13'
-  last_entry: Replant — 2026-06-13
+  last_activity: '2026-06-19'
+  last_entry: 'G1-T4 — 2026-06-19 — Tick 4: Content (Pakistan floods, WikiLeaks cables,
+    Instagram launch) + cross-reference and structure refresh'
 - name: '2011'
   repo: year-of-ai/2011
   url: https://github.com/year-of-ai/2011
   site_url: https://year-of-ai.github.io/2011/
   subject: the year 2011
   status: growing
-  ticks_logged: 1
-  log_entries: 10
+  ticks_logged: 2
+  log_entries: 11
   generations: 1
-  last_activity: '2026-06-18'
-  last_entry: 'G1-T1 — 2026-06-18 — Tick 1: Space Shuttle''s final mission, the rise
-    of Android, the Eurozone debt crisis'
+  last_activity: '2026-06-19'
+  last_entry: 'G1-T2 — 2026-06-19 — Tick 2: Arab Spring, the Fukushima Daiichi disaster,
+    and the death of Steve Jobs'
 - name: '2012'
   repo: year-of-ai/2012
   url: https://github.com/year-of-ai/2012
   site_url: https://year-of-ai.github.io/2012/
   subject: the year 2012
   status: growing
-  ticks_logged: 1
-  log_entries: 4
+  ticks_logged: 2
+  log_entries: 11
   generations: 1
-  last_activity: '2026-06-18'
-  last_entry: 'G1-T1 — 2026-06-18 — Tick 1: 2012 US presidential election, London
-    2012 Olympics, Curiosity''s Mars landing'
+  last_activity: '2026-06-19'
+  last_entry: 'G1-T2 — 2026-06-19 — Tick 2: Higgs boson discovery, European debt crisis,
+    Syrian Civil War escalation'
