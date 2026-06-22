@@ -6,7 +6,7 @@
 org: year-of-ai
 totals:
   repos: 11
-  pages: 190
+  pages: 222
 repos:
 - name: '1776'
   title: The Year 1776
@@ -17,8 +17,8 @@ repos:
   pages_enabled: true
   scaffolded: true
   branch: main
-  pushed_at: '2026-06-20T08:45:25Z'
-  page_count: 26
+  pushed_at: '2026-06-21T09:20:49Z'
+  page_count: 29
   sections:
   - name: arts
     title: Arts & Culture
@@ -34,17 +34,17 @@ repos:
     title: Military Events
     url: https://year-of-ai.github.io/1776/military/
     source_url: https://github.com/year-of-ai/1776/tree/main/military
-    count: 3
+    count: 4
   - name: people
     title: Key Figures
     url: https://year-of-ai.github.io/1776/people/
     source_url: https://github.com/year-of-ai/1776/tree/main/people
-    count: 3
+    count: 4
   - name: politics
     title: Political Events
     url: https://year-of-ai.github.io/1776/politics/
     source_url: https://github.com/year-of-ai/1776/tree/main/politics
-    count: 3
+    count: 4
   - name: science
     title: Science & Discovery
     url: https://year-of-ai.github.io/1776/science/
@@ -63,8 +63,8 @@ repos:
   pages_enabled: true
   scaffolded: true
   branch: main
-  pushed_at: '2026-06-20T08:45:22Z'
-  page_count: 23
+  pushed_at: '2026-06-21T09:20:02Z'
+  page_count: 26
   sections:
   - name: arts
     title: Arts & Culture — 1777
@@ -85,7 +85,7 @@ repos:
     title: Key Figures — 1777
     url: https://year-of-ai.github.io/1777/people/
     source_url: https://github.com/year-of-ai/1777/tree/main/people
-    count: 4
+    count: 7
   - name: politics
     title: Political Events — 1777
     url: https://year-of-ai.github.io/1777/politics/
@@ -108,19 +108,24 @@ repos:
   pages_enabled: true
   scaffolded: true
   branch: main
-  pushed_at: '2026-06-20T08:40:59Z'
-  page_count: 14
+  pushed_at: '2026-06-21T09:16:52Z'
+  page_count: 17
   sections:
   - name: arts
     title: Arts & Culture — 1778
     url: https://year-of-ai.github.io/1778/arts/
     source_url: https://github.com/year-of-ai/1778/tree/main/arts
     count: 1
+  - name: economics
+    title: Economics & Trade — 1778
+    url: https://year-of-ai.github.io/1778/economics/
+    source_url: https://github.com/year-of-ai/1778/tree/main/economics
+    count: 1
   - name: military
     title: Military Events — 1778
     url: https://year-of-ai.github.io/1778/military/
     source_url: https://github.com/year-of-ai/1778/tree/main/military
-    count: 1
+    count: 2
   - name: people
     title: Key Figures — 1778
     url: https://year-of-ai.github.io/1778/people/
@@ -149,19 +154,19 @@ repos:
   pages_enabled: true
   scaffolded: true
   branch: main
-  pushed_at: '2026-06-20T08:43:27Z'
-  page_count: 15
+  pushed_at: '2026-06-21T09:22:11Z'
+  page_count: 18
   sections:
   - name: arts-culture
     title: Arts & Culture
     url: https://year-of-ai.github.io/2005/arts-culture/
     source_url: https://github.com/year-of-ai/2005/tree/main/arts-culture
-    count: 0
+    count: 1
   - name: history-politics
     title: History & Politics
     url: https://year-of-ai.github.io/2005/history-politics/
     source_url: https://github.com/year-of-ai/2005/tree/main/history-politics
-    count: 3
+    count: 4
   - name: people
     title: People
     url: https://year-of-ai.github.io/2005/people/
@@ -176,7 +181,7 @@ repos:
     title: Society & Economics
     url: https://year-of-ai.github.io/2005/society-economics/
     source_url: https://github.com/year-of-ai/2005/tree/main/society-economics
-    count: 1
+    count: 2
   root_pages:
   - title: Timeline
     url: https://year-of-ai.github.io/2005/TIMELINE/
@@ -190,8 +195,8 @@ repos:
   pages_enabled: true
   scaffolded: true
   branch: main
-  pushed_at: '2026-06-18T06:18:20Z'
-  page_count: 15
+  pushed_at: '2026-06-21T09:21:50Z'
+  page_count: 18
   sections:
   - name: arts-culture
     title: Arts & Culture
@@ -202,12 +207,12 @@ repos:
     title: History & Politics
     url: https://year-of-ai.github.io/2006/history-politics/
     source_url: https://github.com/year-of-ai/2006/tree/main/history-politics
-    count: 2
+    count: 3
   - name: people
     title: People
     url: https://year-of-ai.github.io/2006/people/
     source_url: https://github.com/year-of-ai/2006/tree/main/people
-    count: 0
+    count: 2
   - name: science-technology
     title: Science & Technology
     url: https://year-of-ai.github.io/2006/science-technology/
@@ -230,14 +235,14 @@ repos:
   pages_enabled: true
   scaffolded: true
   branch: main
-  pushed_at: '2026-06-20T08:39:47Z'
-  page_count: 15
+  pushed_at: '2026-06-21T09:21:15Z'
+  page_count: 18
   sections:
   - name: arts-culture
     title: Arts & Culture
     url: https://year-of-ai.github.io/2007/arts-culture/
     source_url: https://github.com/year-of-ai/2007/tree/main/arts-culture
-    count: 2
+    count: 3
   - name: history-politics
     title: History & Politics
     url: https://year-of-ai.github.io/2007/history-politics/
@@ -247,12 +252,12 @@ repos:
     title: People
     url: https://year-of-ai.github.io/2007/people/
     source_url: https://github.com/year-of-ai/2007/tree/main/people
-    count: 0
+    count: 1
   - name: science-technology
     title: Science & Technology
     url: https://year-of-ai.github.io/2007/science-technology/
     source_url: https://github.com/year-of-ai/2007/tree/main/science-technology
-    count: 2
+    count: 3
   - name: society-economics
     title: Society & Economics
     url: https://year-of-ai.github.io/2007/society-economics/
@@ -270,14 +275,14 @@ repos:
   pages_enabled: true
   scaffolded: true
   branch: main
-  pushed_at: '2026-06-18T06:18:24Z'
-  page_count: 14
+  pushed_at: '2026-06-21T09:17:49Z'
+  page_count: 17
   sections:
   - name: arts-culture
     title: Arts & Culture — 2008
     url: https://year-of-ai.github.io/2008/arts-culture/
     source_url: https://github.com/year-of-ai/2008/tree/main/arts-culture
-    count: 0
+    count: 1
   - name: history-politics
     title: History & Politics — 2008
     url: https://year-of-ai.github.io/2008/history-politics/
@@ -287,7 +292,7 @@ repos:
     title: People — 2008
     url: https://year-of-ai.github.io/2008/people/
     source_url: https://github.com/year-of-ai/2008/tree/main/people
-    count: 0
+    count: 1
   - name: science-technology
     title: Science & Technology — 2008
     url: https://year-of-ai.github.io/2008/science-technology/
@@ -297,7 +302,7 @@ repos:
     title: Society & Economics — 2008
     url: https://year-of-ai.github.io/2008/society-economics/
     source_url: https://github.com/year-of-ai/2008/tree/main/society-economics
-    count: 2
+    count: 3
   root_pages:
   - title: Timeline
     url: https://year-of-ai.github.io/2008/TIMELINE/
@@ -310,8 +315,8 @@ repos:
   pages_enabled: true
   scaffolded: true
   branch: main
-  pushed_at: '2026-06-20T08:42:27Z'
-  page_count: 18
+  pushed_at: '2026-06-21T09:18:54Z'
+  page_count: 20
   sections:
   - name: arts-culture
     title: Arts & Culture — The Year 2009
@@ -322,7 +327,7 @@ repos:
     title: History & Politics — The Year 2009
     url: https://year-of-ai.github.io/2009/history-politics/
     source_url: https://github.com/year-of-ai/2009/tree/main/history-politics
-    count: 5
+    count: 6
   - name: people
     title: People — The Year 2009
     url: https://year-of-ai.github.io/2009/people/
@@ -337,7 +342,7 @@ repos:
     title: Society & Economics — The Year 2009
     url: https://year-of-ai.github.io/2009/society-economics/
     source_url: https://github.com/year-of-ai/2009/tree/main/society-economics
-    count: 1
+    count: 2
   root_pages:
   - title: Timeline
     url: https://year-of-ai.github.io/2009/TIMELINE/
@@ -350,8 +355,8 @@ repos:
   pages_enabled: true
   scaffolded: true
   branch: main
-  pushed_at: '2026-06-20T08:42:44Z'
-  page_count: 20
+  pushed_at: '2026-06-21T09:21:37Z'
+  page_count: 23
   sections:
   - name: arts-culture
     title: Arts & Culture
@@ -367,7 +372,7 @@ repos:
     title: People
     url: https://year-of-ai.github.io/2010/people/
     source_url: https://github.com/year-of-ai/2010/tree/main/people
-    count: 0
+    count: 3
   - name: science-technology
     title: Science & Technology
     url: https://year-of-ai.github.io/2010/science-technology/
@@ -390,19 +395,19 @@ repos:
   pages_enabled: true
   scaffolded: true
   branch: main
-  pushed_at: '2026-06-20T08:41:04Z'
-  page_count: 16
+  pushed_at: '2026-06-21T09:16:19Z'
+  page_count: 18
   sections:
   - name: arts-culture
     title: Arts & Culture — 2011
     url: https://year-of-ai.github.io/2011/arts-culture/
     source_url: https://github.com/year-of-ai/2011/tree/main/arts-culture
-    count: 1
+    count: 2
   - name: history-politics
     title: History & Politics — 2011
     url: https://year-of-ai.github.io/2011/history-politics/
     source_url: https://github.com/year-of-ai/2011/tree/main/history-politics
-    count: 2
+    count: 3
   - name: people
     title: People — 2011
     url: https://year-of-ai.github.io/2011/people/
@@ -430,8 +435,8 @@ repos:
   pages_enabled: true
   scaffolded: true
   branch: main
-  pushed_at: '2026-06-20T08:40:44Z'
-  page_count: 14
+  pushed_at: '2026-06-21T09:17:39Z'
+  page_count: 18
   sections:
   - name: arts-culture
     title: Arts & Culture — 2012
@@ -442,6 +447,11 @@ repos:
     title: History & Politics — 2012
     url: https://year-of-ai.github.io/2012/history-politics/
     source_url: https://github.com/year-of-ai/2012/tree/main/history-politics
+    count: 3
+  - name: people
+    title: People — 2012
+    url: https://year-of-ai.github.io/2012/people/
+    source_url: https://github.com/year-of-ai/2012/tree/main/people
     count: 3
   - name: science-technology
     title: Science & Technology — 2012
