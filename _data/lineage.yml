@@ -6,7 +6,7 @@
 org: year-of-ai
 totals:
   repos: 11
-  ticks: 57
+  ticks: 68
 members:
 - name: '1776'
   repo: year-of-ai/1776
@@ -14,130 +14,127 @@ members:
   site_url: https://year-of-ai.github.io/1776/
   subject: the year 1776
   status: growing
-  ticks_logged: 7
-  log_entries: 13
+  ticks_logged: 8
+  log_entries: 14
   generations: 2
-  last_activity: '2026-06-21'
-  last_entry: 'G1-T9 — 2026-06-21 — Tick 7: Thomas Jefferson, Battle of Sullivan''s
-    Island, Lee Resolution'
+  last_activity: '2026-06-22'
+  last_entry: 'G1-T10 — 2026-06-22 — Tick 8: Scottish Enlightenment, British naval
+    operations, Joseph Brant'
 - name: '1777'
   repo: year-of-ai/1777
   url: https://github.com/year-of-ai/1777
   site_url: https://year-of-ai.github.io/1777/
   subject: the year 1777
   status: growing
-  ticks_logged: 8
-  log_entries: 12
+  ticks_logged: 9
+  log_entries: 13
   generations: 2
-  last_activity: '2026-06-21'
-  last_entry: 'G1-T8 — 2026-06-21 — Tick 8: the human architects of 1777 (Washington,
-    Lafayette, Franklin)'
+  last_activity: '2026-06-22'
+  last_entry: 'G1-T9 — 2026-06-22 — Tick 9: verification and consistency pass (no
+    new content)'
 - name: '1778'
   repo: year-of-ai/1778
   url: https://github.com/year-of-ai/1778
   site_url: https://year-of-ai.github.io/1778/
   subject: the year 1778
   status: growing
-  ticks_logged: 4
-  log_entries: 7
+  ticks_logged: 5
+  log_entries: 8
   generations: 1
-  last_activity: '2026-06-21'
-  last_entry: 'G1-T4 — 2026-06-21 — Tick 4: Wartime Trade & Commerce, Valley Forge
-    Encampment Ends'
+  last_activity: '2026-06-22'
+  last_entry: 'G1-T5 — 2026-06-22 — Tick 5: War of the Bavarian Succession, Benjamin
+    Franklin'
 - name: '2005'
   repo: year-of-ai/2005
   url: https://github.com/year-of-ai/2005
   site_url: https://year-of-ai.github.io/2005/
   subject: the year 2005
   status: growing
-  ticks_logged: 5
-  log_entries: 16
+  ticks_logged: 6
+  log_entries: 17
   generations: 2
-  last_activity: '2026-06-21'
-  last_entry: 'G1-T5 — 2026-06-21 — Tick 5: Three deep-dives (Merkel, Brokeback Mountain,
-    iTunes) + structure reconciliation'
+  last_activity: '2026-06-22'
+  last_entry: 'G1-T6 — 2026-06-22 — Tick 6: Two deep-dives (Huygens Titan landing,
+    *Star Wars* Episode III) + fact-corrected enhance pass'
 - name: '2006'
   repo: year-of-ai/2006
   url: https://github.com/year-of-ai/2006
   site_url: https://year-of-ai.github.io/2006/
   subject: the year 2006
   status: growing
-  ticks_logged: 5
-  log_entries: 15
+  ticks_logged: 6
+  log_entries: 16
   generations: 2
-  last_activity: '2026-06-21'
-  last_entry: 'G2-T2 — 2026-06-21 — Tick 2: Three deep-dives (Montenegro independence,
-    Steve Irwin, Gerald Ford) + structure refresh'
+  last_activity: '2026-06-22'
+  last_entry: 'G2-T3 — 2026-06-22 — Tick 3: U.S. midterm elections deep-dive (final
+    unlinked row) + History & Politics expansions'
 - name: '2007'
   repo: year-of-ai/2007
   url: https://github.com/year-of-ai/2007
   site_url: https://year-of-ai.github.io/2007/
   subject: the year 2007
   status: growing
-  ticks_logged: 6
-  log_entries: 16
+  ticks_logged: 7
+  log_entries: 17
   generations: 2
-  last_activity: '2026-06-21'
-  last_entry: 'G3-T6 — 2026-06-21 — Tick 6: No Country for Old Men, Facebook Platform,
-    and Luciano Pavarotti'
+  last_activity: '2026-06-22'
+  last_entry: 'G3-T7 — 2026-06-22 — Tick 7: I-35W bridge collapse and Boris Yeltsin'
 - name: '2008'
   repo: year-of-ai/2008
   url: https://github.com/year-of-ai/2008
   site_url: https://year-of-ai.github.io/2008/
   subject: the year 2008
   status: growing
-  ticks_logged: 4
-  log_entries: 14
+  ticks_logged: 5
+  log_entries: 15
   generations: 2
-  last_activity: '2026-06-21'
-  last_entry: 'G1-T4 — 2026-06-21 — Tick 4: Dark Knight + Usain Bolt + Bernie Madoff
-    Deep-Dives'
+  last_activity: '2026-06-22'
+  last_entry: 'G1-T5 — 2026-06-22 — Tick 5: Russo-Georgian War + Twilight Deep-Dives'
 - name: '2009'
   repo: year-of-ai/2009
   url: https://github.com/year-of-ai/2009
   site_url: https://year-of-ai.github.io/2009/
   subject: the year 2009
   status: growing
-  ticks_logged: 4
-  log_entries: 16
+  ticks_logged: 5
+  log_entries: 17
   generations: 2
-  last_activity: '2026-06-21'
-  last_entry: 'G1-T6 — 2026-06-21 — Tick 6: Final two dedicated topics (Fort Hood
-    shooting, American Recovery Act)'
+  last_activity: '2026-06-22'
+  last_entry: 'G1-T7 — 2026-06-22 — Tick 7: Master-index consistency + People cross-listing
+    pass'
 - name: '2010'
   repo: year-of-ai/2010
   url: https://github.com/year-of-ai/2010
   site_url: https://year-of-ai.github.io/2010/
   subject: the year 2010
   status: growing
-  ticks_logged: 6
-  log_entries: 16
+  ticks_logged: 7
+  log_entries: 17
   generations: 2
-  last_activity: '2026-06-21'
-  last_entry: 'G1-T6 — 2026-06-21 — Tick 6: Content (Aung San Suu Kyi, Corazon Aquino,
-    Mohamed Bouazizi) + People-category structure refresh'
+  last_activity: '2026-06-22'
+  last_entry: 'G1-T7 — 2026-06-22 — Tick 7: Content (Eyjafjallajökull eruption, 2010
+    Thai political crisis, *Inception*) + structure refresh'
 - name: '2011'
   repo: year-of-ai/2011
   url: https://github.com/year-of-ai/2011
   site_url: https://year-of-ai.github.io/2011/
   subject: the year 2011
   status: growing
-  ticks_logged: 4
-  log_entries: 13
+  ticks_logged: 5
+  log_entries: 14
   generations: 1
-  last_activity: '2026-06-21'
-  last_entry: 'G1-T4 — 2026-06-21 — Tick 4: South Sudan independence and music in
-    2011'
+  last_activity: '2026-06-22'
+  last_entry: 'G1-T5 — 2026-06-22 — Tick 5: the Royal Wedding, world population reaching
+    seven billion, Amy Winehouse, the Curiosity launch, and the Hugo & Nebula Awards'
 - name: '2012'
   repo: year-of-ai/2012
   url: https://github.com/year-of-ai/2012
   site_url: https://year-of-ai.github.io/2012/
   subject: the year 2012
   status: growing
-  ticks_logged: 4
-  log_entries: 13
+  ticks_logged: 5
+  log_entries: 14
   generations: 1
-  last_activity: '2026-06-21'
-  last_entry: 'G1-T4 — 2026-06-21 — Tick 4: Opened the People category — Vladimir
-    Putin''s return to the presidency, Barack Obama''s re-election, Juan Manuel Santos''s
-    Colombian peace process'
+  last_activity: '2026-06-22'
+  last_entry: 'G1-T5 — 2026-06-22 — Tick 5: Occupy Wall Street''s 2012 momentum, Pro
+    Evolution Soccer 2013'
