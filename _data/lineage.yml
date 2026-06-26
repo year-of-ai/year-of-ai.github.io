@@ -6,7 +6,7 @@
 org: year-of-ai
 totals:
   repos: 11
-  ticks: 88
+  ticks: 99
 members:
 - name: '1776'
   repo: year-of-ai/1776
@@ -14,128 +14,129 @@ members:
   site_url: https://year-of-ai.github.io/1776/
   subject: the year 1776
   status: growing
-  ticks_logged: 9
-  log_entries: 15
+  ticks_logged: 10
+  log_entries: 16
   generations: 2
-  last_activity: '2026-06-23'
-  last_entry: 'G1-T11 — 2026-06-23 — Tick 9: Public Proclamation of the Declaration,
-    Great Fire of New York, Lord George Germain'
+  last_activity: '2026-06-25'
+  last_entry: 'G1-T12 — 2026-06-25 — Tick 10: Alessandro Volta''s methane, Phillis
+    Wheatley, the Prohibitory Act'
 - name: '1777'
   repo: year-of-ai/1777
   url: https://github.com/year-of-ai/1777
   site_url: https://year-of-ai.github.io/1777/
   subject: the year 1777
   status: growing
-  ticks_logged: 11
-  log_entries: 15
+  ticks_logged: 12
+  log_entries: 16
   generations: 2
-  last_activity: '2026-06-24'
-  last_entry: 'G1-T11 — 2026-06-24 — Tick 11: Sheridan''s School for Scandal, Coulomb''s
-    torsion balance, and American privateering'
+  last_activity: '2026-06-25'
+  last_entry: 'G1-T12 — 2026-06-25 — Tick 12: the Battle of Germantown — closing the
+    Philadelphia-campaign gap'
 - name: '1778'
   repo: year-of-ai/1778
   url: https://github.com/year-of-ai/1778
   site_url: https://year-of-ai.github.io/1778/
   subject: the year 1778
   status: growing
-  ticks_logged: 7
-  log_entries: 10
+  ticks_logged: 8
+  log_entries: 11
   generations: 1
-  last_activity: '2026-06-24'
-  last_entry: 'G1-T7 — 2026-06-24 — Tick 7: Death of Carl Linnaeus, Total Solar Eclipse
-    of June 24 1778, Continental Dollar Crisis'
+  last_activity: '2026-06-25'
+  last_entry: 'G1-T8 — 2026-06-25 — Tick 8: George Washington, Baron von Steuben,
+    Comte d''Estaing'
 - name: '2005'
   repo: year-of-ai/2005
   url: https://github.com/year-of-ai/2005
   site_url: https://year-of-ai.github.io/2005/
   subject: the year 2005
   status: growing
-  ticks_logged: 8
-  log_entries: 19
+  ticks_logged: 9
+  log_entries: 20
   generations: 2
-  last_activity: '2026-06-24'
-  last_entry: 'G1-T8 — 2026-06-24 — Tick 8: Deep-dive on the discovery of Eris + structure
-    refresh'
+  last_activity: '2026-06-25'
+  last_entry: 'G1-T9 — 2026-06-25 — Tick 9: Deep-dive on the Hariri assassination
+    & Cedar Revolution + structure refresh'
 - name: '2006'
   repo: year-of-ai/2006
   url: https://github.com/year-of-ai/2006
   site_url: https://year-of-ai.github.io/2006/
   subject: the year 2006
   status: growing
-  ticks_logged: 7
-  log_entries: 17
+  ticks_logged: 8
+  log_entries: 18
   generations: 2
-  last_activity: '2026-06-24'
-  last_entry: 'G2-T4 — 2026-06-24 — Tick 4: Society & Economics + Arts & Culture expansion
-    (crude oil record + *An Inconvenient Truth*)'
+  last_activity: '2026-06-25'
+  last_entry: 'G2-T5 — 2026-06-25 — Tick 5: Science & Technology expansion (PlayStation
+    3 / Nintendo Wii launches + Windows Vista) + structure refresh'
 - name: '2007'
   repo: year-of-ai/2007
   url: https://github.com/year-of-ai/2007
   site_url: https://year-of-ai.github.io/2007/
   subject: the year 2007
   status: growing
-  ticks_logged: 9
-  log_entries: 19
+  ticks_logged: 10
+  log_entries: 20
   generations: 2
-  last_activity: '2026-06-24'
-  last_entry: 'G3-T9 — 2026-06-24 — Tick 9: Iraq War troop surge, Arctic sea-ice record
-    low, and induced pluripotent stem cells'
+  last_activity: '2026-06-25'
+  last_entry: 'G3-T10 — 2026-06-25 — Tick 10: Britney Spears head-shaving, Imus cancellation,
+    and Live Earth 2007'
 - name: '2008'
   repo: year-of-ai/2008
   url: https://github.com/year-of-ai/2008
   site_url: https://year-of-ai.github.io/2008/
   subject: the year 2008
   status: growing
-  ticks_logged: 7
-  log_entries: 17
+  ticks_logged: 8
+  log_entries: 18
   generations: 2
-  last_activity: '2026-06-24'
-  last_entry: 'G1-T7 — 2026-06-24 — Tick 7: 2008 Sichuan Earthquake Deep-Dive'
+  last_activity: '2026-06-25'
+  last_entry: 'G1-T8 — 2026-06-25 — Tick 8: 2008 Kosovo Declaration of Independence
+    Deep-Dive'
 - name: '2009'
   repo: year-of-ai/2009
   url: https://github.com/year-of-ai/2009
   site_url: https://year-of-ai.github.io/2009/
   subject: the year 2009
   status: growing
-  ticks_logged: 7
-  log_entries: 19
+  ticks_logged: 8
+  log_entries: 20
   generations: 2
-  last_activity: '2026-06-24'
-  last_entry: 'G1-T9 — 2026-06-24 — Tick 9: Three new dedicated topics (Kepler, Up,
-    SpaceX Falcon 9)'
+  last_activity: '2026-06-25'
+  last_entry: 'G1-T10 — 2026-06-25 — Tick 10: Three new dedicated topics (General
+    Motors bankruptcy, Slumdog Millionaire at the Oscars, Ardi)'
 - name: '2010'
   repo: year-of-ai/2010
   url: https://github.com/year-of-ai/2010
   site_url: https://year-of-ai.github.io/2010/
   subject: the year 2010
   status: growing
-  ticks_logged: 9
-  log_entries: 19
+  ticks_logged: 10
+  log_entries: 20
   generations: 2
-  last_activity: '2026-06-24'
-  last_entry: 'G1-T9 — 2026-06-24 — Tick 9: Content (Deepwater Horizon Macondo well
-    capped, Kepler-9 multi-planet system) + structure refresh'
+  last_activity: '2026-06-25'
+  last_entry: 'G1-T10 — 2026-06-25 — Tick 10: Content (Stuxnet, 2010 Chile earthquake)
+    + structure refresh'
 - name: '2011'
   repo: year-of-ai/2011
   url: https://github.com/year-of-ai/2011
   site_url: https://year-of-ai.github.io/2011/
   subject: the year 2011
   status: growing
-  ticks_logged: 7
-  log_entries: 16
+  ticks_logged: 8
+  log_entries: 17
   generations: 1
-  last_activity: '2026-06-24'
-  last_entry: 'G1-T7 — 2026-06-24 — Tick 7: the Tunisian Revolution, the 2011 England
-    riots, and the death of Kim Jong Il'
+  last_activity: '2026-06-25'
+  last_entry: 'G1-T8 — 2026-06-25 — Tick 8: WikiLeaks & Bradley Manning, the death
+    of Václav Havel, and the 2011 Nobel Prizes'
 - name: '2012'
   repo: year-of-ai/2012
   url: https://github.com/year-of-ai/2012
   site_url: https://year-of-ai.github.io/2012/
   subject: the year 2012
   status: growing
-  ticks_logged: 7
-  log_entries: 16
+  ticks_logged: 8
+  log_entries: 17
   generations: 1
-  last_activity: '2026-06-24'
-  last_entry: 'G1-T7 — 2026-06-24 — Tick 7: 2012 London Summer Paralympics, Hurricane
-    Sandy'
+  last_activity: '2026-06-25'
+  last_entry: 'G1-T8 — 2026-06-25 — Tick 8: Queen Elizabeth II Diamond Jubilee, The
+    Avengers (2012 film), UEFA Euro 2012'
