@@ -6,7 +6,7 @@
 org: year-of-ai
 totals:
   repos: 11
-  ticks: 99
+  ticks: 110
 members:
 - name: '1776'
   repo: year-of-ai/1776
@@ -14,129 +14,129 @@ members:
   site_url: https://year-of-ai.github.io/1776/
   subject: the year 1776
   status: growing
-  ticks_logged: 10
-  log_entries: 16
+  ticks_logged: 11
+  log_entries: 17
   generations: 2
-  last_activity: '2026-06-25'
-  last_entry: 'G1-T12 — 2026-06-25 — Tick 10: Alessandro Volta''s methane, Phillis
-    Wheatley, the Prohibitory Act'
+  last_activity: '2026-06-26'
+  last_entry: 'G1-T13 — 2026-06-26 — Tick 11: Hessian troops & foreign mercenaries,
+    the French Alliance'
 - name: '1777'
   repo: year-of-ai/1777
   url: https://github.com/year-of-ai/1777
   site_url: https://year-of-ai.github.io/1777/
   subject: the year 1777
   status: growing
-  ticks_logged: 12
-  log_entries: 16
+  ticks_logged: 13
+  log_entries: 17
   generations: 2
-  last_activity: '2026-06-25'
-  last_entry: 'G1-T12 — 2026-06-25 — Tick 12: the Battle of Germantown — closing the
-    Philadelphia-campaign gap'
+  last_activity: '2026-06-26'
+  last_entry: 'G1-T13 — 2026-06-26 — Tick 13: verification and consistency pass (no
+    new content)'
 - name: '1778'
   repo: year-of-ai/1778
   url: https://github.com/year-of-ai/1778
   site_url: https://year-of-ai.github.io/1778/
   subject: the year 1778
   status: growing
-  ticks_logged: 8
-  log_entries: 11
+  ticks_logged: 9
+  log_entries: 12
   generations: 1
-  last_activity: '2026-06-25'
-  last_entry: 'G1-T8 — 2026-06-25 — Tick 8: George Washington, Baron von Steuben,
-    Comte d''Estaing'
+  last_activity: '2026-06-26'
+  last_entry: 'G1-T9 — 2026-06-26 — Tick 9: William Pitt (Earl of Chatham), Carlisle
+    Peace Commission, George Rogers Clark''s Illinois Campaign'
 - name: '2005'
   repo: year-of-ai/2005
   url: https://github.com/year-of-ai/2005
   site_url: https://year-of-ai.github.io/2005/
   subject: the year 2005
   status: growing
-  ticks_logged: 9
-  log_entries: 20
+  ticks_logged: 10
+  log_entries: 21
   generations: 2
-  last_activity: '2026-06-25'
-  last_entry: 'G1-T9 — 2026-06-25 — Tick 9: Deep-dive on the Hariri assassination
-    & Cedar Revolution + structure refresh'
+  last_activity: '2026-06-26'
+  last_entry: 'G1-T10 — 2026-06-26 — Tick 10: Three deep-dives (Condoleezza Rice,
+    Lance Armstrong, *The Lion, the Witch and the Wardrobe*) + structure refresh'
 - name: '2006'
   repo: year-of-ai/2006
   url: https://github.com/year-of-ai/2006
   site_url: https://year-of-ai.github.io/2006/
   subject: the year 2006
   status: growing
-  ticks_logged: 8
-  log_entries: 18
+  ticks_logged: 9
+  log_entries: 19
   generations: 2
-  last_activity: '2026-06-25'
-  last_entry: 'G2-T5 — 2026-06-25 — Tick 5: Science & Technology expansion (PlayStation
-    3 / Nintendo Wii launches + Windows Vista) + structure refresh'
+  last_activity: '2026-06-26'
+  last_entry: 'G2-T6 — 2026-06-26 — Tick 6: 2006 Lebanon War deep-dive (referenced-but-missing
+    topic) + structure refresh'
 - name: '2007'
   repo: year-of-ai/2007
   url: https://github.com/year-of-ai/2007
   site_url: https://year-of-ai.github.io/2007/
   subject: the year 2007
   status: growing
-  ticks_logged: 10
-  log_entries: 20
+  ticks_logged: 11
+  log_entries: 21
   generations: 2
-  last_activity: '2026-06-25'
-  last_entry: 'G3-T10 — 2026-06-25 — Tick 10: Britney Spears head-shaving, Imus cancellation,
-    and Live Earth 2007'
+  last_activity: '2026-06-26'
+  last_entry: 'G3-T11 — 2026-06-26 — Tick 11: Enhance/QA pass — normalized frontmatter
+    date quoting and completed TIMELINE iPhone cross-link'
 - name: '2008'
   repo: year-of-ai/2008
   url: https://github.com/year-of-ai/2008
   site_url: https://year-of-ai.github.io/2008/
   subject: the year 2008
   status: growing
-  ticks_logged: 8
-  log_entries: 18
+  ticks_logged: 9
+  log_entries: 19
   generations: 2
-  last_activity: '2026-06-25'
-  last_entry: 'G1-T8 — 2026-06-25 — Tick 8: 2008 Kosovo Declaration of Independence
-    Deep-Dive'
+  last_activity: '2026-06-26'
+  last_entry: 'G1-T9 — 2026-06-26 — Tick 9: Bitcoin Whitepaper Deep-Dive'
 - name: '2009'
   repo: year-of-ai/2009
   url: https://github.com/year-of-ai/2009
   site_url: https://year-of-ai.github.io/2009/
   subject: the year 2009
   status: growing
-  ticks_logged: 8
-  log_entries: 20
+  ticks_logged: 9
+  log_entries: 21
   generations: 2
-  last_activity: '2026-06-25'
-  last_entry: 'G1-T10 — 2026-06-25 — Tick 10: Three new dedicated topics (General
-    Motors bankruptcy, Slumdog Millionaire at the Oscars, Ardi)'
+  last_activity: '2026-06-26'
+  last_entry: 'G1-T11 — 2026-06-26 — Tick 11: Three new dedicated topics (Sri Lankan
+    Civil War''s end, Bernie Madoff sentencing, Usain Bolt''s world records) — first
+    People-category article'
 - name: '2010'
   repo: year-of-ai/2010
   url: https://github.com/year-of-ai/2010
   site_url: https://year-of-ai.github.io/2010/
   subject: the year 2010
   status: growing
-  ticks_logged: 10
-  log_entries: 20
+  ticks_logged: 11
+  log_entries: 21
   generations: 2
-  last_activity: '2026-06-25'
-  last_entry: 'G1-T10 — 2026-06-25 — Tick 10: Content (Stuxnet, 2010 Chile earthquake)
-    + structure refresh'
+  last_activity: '2026-06-26'
+  last_entry: 'G1-T11 — 2026-06-26 — Tick 11: Content (Burj Khalifa opening, European
+    sovereign debt crisis) + structure refresh'
 - name: '2011'
   repo: year-of-ai/2011
   url: https://github.com/year-of-ai/2011
   site_url: https://year-of-ai.github.io/2011/
   subject: the year 2011
   status: growing
-  ticks_logged: 8
-  log_entries: 17
+  ticks_logged: 9
+  log_entries: 18
   generations: 1
-  last_activity: '2026-06-25'
-  last_entry: 'G1-T8 — 2026-06-25 — Tick 8: WikiLeaks & Bradley Manning, the death
-    of Václav Havel, and the 2011 Nobel Prizes'
+  last_activity: '2026-06-26'
+  last_entry: 'G1-T9 — 2026-06-26 — Tick 9: the 2011 Pulitzer Prizes, the death of
+    Elizabeth Taylor, and the Christchurch earthquake'
 - name: '2012'
   repo: year-of-ai/2012
   url: https://github.com/year-of-ai/2012
   site_url: https://year-of-ai.github.io/2012/
   subject: the year 2012
   status: growing
-  ticks_logged: 8
-  log_entries: 17
+  ticks_logged: 9
+  log_entries: 18
   generations: 1
-  last_activity: '2026-06-25'
-  last_entry: 'G1-T8 — 2026-06-25 — Tick 8: Queen Elizabeth II Diamond Jubilee, The
-    Avengers (2012 film), UEFA Euro 2012'
+  last_activity: '2026-06-26'
+  last_entry: 'G1-T9 — 2026-06-26 — Tick 9: Gangnam Style viral phenomenon, Apple
+    iPhone 5 launch, 2012 Arctic sea ice minimum'
