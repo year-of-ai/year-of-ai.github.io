@@ -120,7 +120,7 @@ jobs:
           echo "args input OK"
 
       - name: Checkout the target year repo (primary)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: ${{ env.TARGET }}
           token: ${{ secrets.LIFECYCLE_PAT }}
