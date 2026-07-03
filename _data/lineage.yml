@@ -6,7 +6,7 @@
 org: year-of-ai
 totals:
   repos: 11
-  ticks: 165
+  ticks: 176
 members:
 - name: '1776'
   repo: year-of-ai/1776
@@ -14,129 +14,129 @@ members:
   site_url: https://year-of-ai.github.io/1776/
   subject: the year 1776
   status: growing
-  ticks_logged: 16
-  log_entries: 22
+  ticks_logged: 17
+  log_entries: 23
   generations: 2
-  last_activity: '2026-07-01'
-  last_entry: 'G1-T18 — 2026-07-01 — Tick 16: The Model Treaty (Plan of 1776) and
-    the Battle of Valcour Island'
+  last_activity: '2026-07-02'
+  last_entry: 'G1-T19 — 2026-07-02 — Tick 17: George Washington in 1776 and Roderigue
+    Hortalez et Cie'
 - name: '1777'
   repo: year-of-ai/1777
   url: https://github.com/year-of-ai/1777
   site_url: https://year-of-ai.github.io/1777/
   subject: the year 1777
   status: growing
-  ticks_logged: 18
-  log_entries: 22
+  ticks_logged: 19
+  log_entries: 23
   generations: 2
-  last_activity: '2026-07-01'
-  last_entry: 'G1-T18 — 2026-07-01 — Tick 18: verification and consistency pass (no
-    new content)'
+  last_activity: '2026-07-02'
+  last_entry: 'G1-T19 — 2026-07-02 — Tick 19: the Battle of Bennington — closing the
+    Saratoga-campaign precursor gap'
 - name: '1778'
   repo: year-of-ai/1778
   url: https://github.com/year-of-ai/1778
   site_url: https://year-of-ai.github.io/1778/
   subject: the year 1778
   status: growing
-  ticks_logged: 14
-  log_entries: 17
+  ticks_logged: 15
+  log_entries: 18
   generations: 1
-  last_activity: '2026-07-01'
-  last_entry: 'G1-T14 — 2026-07-01 — Tick 14: Synthesis articles — Franco-American
-    Alliance Nexus, The Enlightenment Transition of 1778'
+  last_activity: '2026-07-02'
+  last_entry: 'G1-T15 — 2026-07-02 — Tick 15: Articles of Confederation Ratification,
+    Joseph Banks, Battle of St. Lucia'
 - name: '2005'
   repo: year-of-ai/2005
   url: https://github.com/year-of-ai/2005
   site_url: https://year-of-ai.github.io/2005/
   subject: the year 2005
   status: growing
-  ticks_logged: 15
-  log_entries: 26
+  ticks_logged: 16
+  log_entries: 27
   generations: 2
-  last_activity: '2026-07-01'
-  last_entry: 'G1-T15 — 2026-07-01 — Tick 15: Deep-dive on the 2005 legalization of
-    same-sex marriage in Spain and Canada + structure refresh'
+  last_activity: '2026-07-02'
+  last_entry: 'G1-T16 — 2026-07-02 — Tick 16: Two deep-dives (George W. Bush''s 2005
+    second-term agenda, Pope Benedict XVI''s election) + fact-corrected enhance pass'
 - name: '2006'
   repo: year-of-ai/2006
   url: https://github.com/year-of-ai/2006
   site_url: https://year-of-ai.github.io/2006/
   subject: the year 2006
   status: growing
-  ticks_logged: 14
-  log_entries: 24
+  ticks_logged: 15
+  log_entries: 25
   generations: 2
-  last_activity: '2026-07-01'
-  last_entry: 'G2-T11 — 2026-07-01 — Tick 11: Three deep-dives (Shakira''s "Hips Don''t
-    Lie" breakthrough, *The Devil Wears Prada*, James Brown''s death) + structure
-    refresh'
+  last_activity: '2026-07-02'
+  last_entry: 'G2-T12 — 2026-07-02 — Tick 12: Three deep-dives (Enron verdict, 2006
+    Thai coup, Yunus/Grameen Nobel Peace Prize) + structure refresh'
 - name: '2007'
   repo: year-of-ai/2007
   url: https://github.com/year-of-ai/2007
   site_url: https://year-of-ai.github.io/2007/
   subject: the year 2007
   status: growing
-  ticks_logged: 16
-  log_entries: 26
+  ticks_logged: 17
+  log_entries: 27
   generations: 2
-  last_activity: '2026-07-01'
-  last_entry: 'G3-T16 — 2026-07-01 — Tick 16: Enhance/QA pass — brought the remaining
-    twelve knowledge-table rows within the ≤25-word ceiling'
+  last_activity: '2026-07-02'
+  last_entry: 'G3-T17 — 2026-07-02 — Tick 17: Enhance/QA pass — neutralized three
+    editorial phrasings in the I-35W and Vonnegut articles'
 - name: '2008'
   repo: year-of-ai/2008
   url: https://github.com/year-of-ai/2008
   site_url: https://year-of-ai.github.io/2008/
   subject: the year 2008
   status: growing
-  ticks_logged: 14
-  log_entries: 24
+  ticks_logged: 15
+  log_entries: 25
   generations: 2
-  last_activity: '2026-07-01'
-  last_entry: 'G1-T14 — 2026-07-01 — Tick 14: Rafael Nadal 2008 Season Deep-Dive'
+  last_activity: '2026-07-02'
+  last_entry: 'G1-T15 — 2026-07-02 — Tick 15: Coldplay *Viva la Vida* + *The Hunger
+    Games* Novel Deep-Dives'
 - name: '2009'
   repo: year-of-ai/2009
   url: https://github.com/year-of-ai/2009
   site_url: https://year-of-ai.github.io/2009/
   subject: the year 2009
   status: growing
-  ticks_logged: 14
-  log_entries: 26
+  ticks_logged: 15
+  log_entries: 27
   generations: 2
-  last_activity: '2026-07-01'
-  last_entry: 'G1-T16 — 2026-07-01 — Tick 16: Two new dedicated topics (India''s 2009
-    General Election, Serena Williams'' Wimbledon championship)'
+  last_activity: '2026-07-02'
+  last_entry: 'G1-T17 — 2026-07-02 — Tick 17: Three new dedicated topics (Wolfram
+    Alpha launch, G20 Pittsburgh Summit, death of Patrick Swayze)'
 - name: '2010'
   repo: year-of-ai/2010
   url: https://github.com/year-of-ai/2010
   site_url: https://year-of-ai.github.io/2010/
   subject: the year 2010
   status: growing
-  ticks_logged: 16
-  log_entries: 26
+  ticks_logged: 17
+  log_entries: 27
   generations: 2
-  last_activity: '2026-07-01'
-  last_entry: 'G1-T16 — 2026-07-01 — Tick 16: Content (Microsoft Kinect launch, LeBron
-    James'' "The Decision") + structure refresh'
+  last_activity: '2026-07-02'
+  last_entry: 'G1-T17 — 2026-07-02 — Tick 17: Content (*Toy Story 3*, 2010 US midterm
+    elections) + structure refresh'
 - name: '2011'
   repo: year-of-ai/2011
   url: https://github.com/year-of-ai/2011
   site_url: https://year-of-ai.github.io/2011/
   subject: the year 2011
   status: growing
-  ticks_logged: 14
-  log_entries: 23
+  ticks_logged: 15
+  log_entries: 24
   generations: 1
-  last_activity: '2026-07-01'
-  last_entry: 'G1-T14 — 2026-07-01 — Tick 14: the Yemeni Revolution and the 2011 Rugby
-    World Cup'
+  last_activity: '2026-07-02'
+  last_entry: 'G1-T15 — 2026-07-02 — Tick 15: Dennis Ritchie, the 83rd Academy Awards,
+    and MESSENGER''s Mercury orbit'
 - name: '2012'
   repo: year-of-ai/2012
   url: https://github.com/year-of-ai/2012
   site_url: https://year-of-ai.github.io/2012/
   subject: the year 2012
   status: growing
-  ticks_logged: 14
-  log_entries: 23
+  ticks_logged: 15
+  log_entries: 24
   generations: 1
-  last_activity: '2026-07-01'
-  last_entry: 'G1-T14 — 2026-07-01 — Tick 14: Usain Bolt''s 100m Olympic gold and
-    world-record context, the Tebowing cultural phenomenon'
+  last_activity: '2026-07-02'
+  last_entry: 'G1-T15 — 2026-07-02 — Tick 15: The Dark Knight Rises, the London 2012
+    closing ceremony'
