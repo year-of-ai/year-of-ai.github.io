@@ -6,7 +6,7 @@
 org: year-of-ai
 totals:
   repos: 11
-  ticks: 208
+  ticks: 217
 members:
 - name: '1776'
   repo: year-of-ai/1776
@@ -14,48 +14,49 @@ members:
   site_url: https://year-of-ai.github.io/1776/
   subject: the year 1776
   status: growing
-  ticks_logged: 20
-  log_entries: 26
+  ticks_logged: 21
+  log_entries: 27
   generations: 2
-  last_activity: '2026-07-05'
-  last_entry: 'G1-T22 — 2026-07-05 — Tick 20: The Cherokee War of 1776, the Halifax
-    Resolves, and Abigail Adams''s "Remember the Ladies" letter'
+  last_activity: '2026-07-06'
+  last_entry: 'G1-T23 — 2026-07-06 — Tick 21: The Staten Island Peace Conference and
+    the Battle of Kip''s Bay'
 - name: '1777'
   repo: year-of-ai/1777
   url: https://github.com/year-of-ai/1777
   site_url: https://year-of-ai.github.io/1777/
   subject: the year 1777
   status: growing
-  ticks_logged: 22
-  log_entries: 26
+  ticks_logged: 23
+  log_entries: 27
   generations: 2
-  last_activity: '2026-07-05'
-  last_entry: 'G1-T22 — 2026-07-05 — Tick 22: Baron von Steuben and Benedict Arnold
-    — the Continental Army''s drillmaster and Saratoga''s field commander'
+  last_activity: '2026-07-06'
+  last_entry: 'G1-T23 — 2026-07-06 — Tick 23: verification and consistency pass (no
+    new content)'
 - name: '1778'
   repo: year-of-ai/1778
   url: https://github.com/year-of-ai/1778
   site_url: https://year-of-ai.github.io/1778/
   subject: the year 1778
   status: growing
-  ticks_logged: 18
-  log_entries: 21
+  ticks_logged: 19
+  log_entries: 22
   generations: 1
-  last_activity: '2026-07-05'
-  last_entry: 'G1-T18 — 2026-07-05 — Tick 18: Revolutionary War Financing, Treaty
-    of Paris (1778 Roots), Women of 1778 — Abigail Adams & Mercy Otis Warren'
+  last_activity: '2026-07-06'
+  last_entry: 'G1-T19 — 2026-07-06 — Tick 19: Quality ENHANCE — deduplicated the David
+    Rittenhouse coverage in the 1778 solar-eclipse article (no new content — generation
+    complete)'
 - name: '2005'
   repo: year-of-ai/2005
   url: https://github.com/year-of-ai/2005
   site_url: https://year-of-ai.github.io/2005/
   subject: the year 2005
   status: growing
-  ticks_logged: 19
-  log_entries: 30
+  ticks_logged: 20
+  log_entries: 31
   generations: 2
-  last_activity: '2026-07-05'
-  last_entry: 'G1-T19 — 2026-07-05 — Tick 19: Deep-dive on London winning the 2012
-    Olympic bid + structure refresh'
+  last_activity: '2026-07-06'
+  last_entry: 'G1-T20 — 2026-07-06 — Tick 20: Deep-dive on the Provisional IRA ending
+    its armed campaign + structure refresh'
 - name: '2006'
   repo: year-of-ai/2006
   url: https://github.com/year-of-ai/2006
@@ -86,58 +87,57 @@ members:
   site_url: https://year-of-ai.github.io/2008/
   subject: the year 2008
   status: growing
-  ticks_logged: 17
-  log_entries: 27
+  ticks_logged: 18
+  log_entries: 28
   generations: 2
-  last_activity: '2026-07-05'
-  last_entry: 'G1-T17 — 2026-07-05 — Tick 17: Slumdog Millionaire + 2008 US Presidential
-    Debates + 2008 Global Financial Crisis Deep-Dives'
+  last_activity: '2026-07-06'
+  last_entry: 'G1-T18 — 2026-07-06 — Tick 18: Nastia Liukin + Google Chrome + Netflix
+    Streaming Deep-Dives'
 - name: '2009'
   repo: year-of-ai/2009
   url: https://github.com/year-of-ai/2009
   site_url: https://year-of-ai.github.io/2009/
   subject: the year 2009
   status: growing
-  ticks_logged: 18
-  log_entries: 30
+  ticks_logged: 19
+  log_entries: 31
   generations: 2
-  last_activity: '2026-07-05'
-  last_entry: 'G1-T20 — 2026-07-05 — Tick 20: Three new dedicated topics (Amazon Kindle
-    e-reader expansion, *Watchmen* film adaptation, Google Chrome''s 2009 rise)'
+  last_activity: '2026-07-06'
+  last_entry: 'G1-T21 — 2026-07-06 — Tick 21: Three new dedicated topics (Microsoft
+    Bing launch, The Beatles 09/09/09 remasters, *The Twilight Saga: New Moon*)'
 - name: '2010'
   repo: year-of-ai/2010
   url: https://github.com/year-of-ai/2010
   site_url: https://year-of-ai.github.io/2010/
   subject: the year 2010
   status: growing
-  ticks_logged: 20
-  log_entries: 30
+  ticks_logged: 21
+  log_entries: 31
   generations: 2
-  last_activity: '2026-07-05'
-  last_entry: 'G1-T20 — 2026-07-05 — Tick 20: Content (*Biutiful*, J. Craig Venter
-    and synthetic biology, Julian Assange and WikiLeaks) + structure refresh'
+  last_activity: '2026-07-06'
+  last_entry: 'G1-T21 — 2026-07-06 — Tick 21: Content (Mavi Marmara flotilla raid,
+    2010 Russian heat wave and wildfires, Liu Xiaobo) + structure refresh'
 - name: '2011'
   repo: year-of-ai/2011
   url: https://github.com/year-of-ai/2011
   site_url: https://year-of-ai.github.io/2011/
   subject: the year 2011
   status: growing
-  ticks_logged: 18
-  log_entries: 27
+  ticks_logged: 19
+  log_entries: 28
   generations: 1
-  last_activity: '2026-07-05'
-  last_entry: 'G1-T18 — 2026-07-05 — Tick 18: Mohamed Bouazizi, The Elder Scrolls
-    V: Skyrim, and the OPERA faster-than-light neutrino anomaly'
+  last_activity: '2026-07-06'
+  last_entry: 'G1-T19 — 2026-07-06 — Tick 19: Television in 2011, the year''s literary
+    and intellectual figures, and business and entrepreneurship'
 - name: '2012'
   repo: year-of-ai/2012
   url: https://github.com/year-of-ai/2012
   site_url: https://year-of-ai.github.io/2012/
   subject: the year 2012
   status: growing
-  ticks_logged: 18
-  log_entries: 27
+  ticks_logged: 19
+  log_entries: 28
   generations: 1
-  last_activity: '2026-07-05'
-  last_entry: 'G1-T18 — 2026-07-05 — Tick 18: Michael Phelps''s 2012 Olympic swimming,
-    Kim Jong-un''s 2012 leadership consolidation, the 2012 Olympic men''s basketball
-    tournament'
+  last_activity: '2026-07-06'
+  last_entry: 'G1-T19 — 2026-07-06 — Tick 19: 2012 London Olympics equestrian events,
+    SOPA/PIPA internet activism, Xi Jinping''s elevation to General Secretary'
