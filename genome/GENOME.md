@@ -129,9 +129,20 @@ copied, template/override transformed via `render.rb`'s token map) into
 `World Atlas` / `bot@world-atlas.org` — **zero residual structural source
 literals**. Bare unit-noun substitution is deliberately avoided (it would corrupt
 Jekyll date config like `:year` / `year-month-day`); the unit-noun is handled via
-curated exact phrases, the instance member list is pruned (members self-register),
-and Jekyll date placeholders are preserved. The only remaining residue is ~22
-**cosmetic** `year` mentions in workflow *comments* and doc placeholders (e.g.
+curated exact phrases (`manifest.yml`'s `phrase_tokens:` — now also covering
+`every {unit}`, `{unit}'s`, `{unit}-repo`, and the `<{unit}>` bracket-placeholder
+form found by the `ai-world-view` plant), the instance member list is pruned
+(members self-register), and Jekyll date placeholders are preserved. `cr_year`
+(`_config.yml`) and the `LICENSE` copyright line are handled by their own
+exact-scoped substitution pairs (a bare 4-digit `gsub` would corrupt unrelated
+numbers) — both are now classified in `manifest.yml` (`LICENSE` as `override`,
+`.gitignore`/`search.json` as `transplant`) so a plant carries them automatically
+instead of silently dropping them. `CHAT_ASSISTANT_NAME` is substitution-guarded
+against colliding with the `zer0-mistakes` theme's own brand name (a bare
+`"Zer0"` is a substring of `"Zer0-Mistakes"`; an unguarded gsub renamed the
+theme itself in `_data/authors.yml` and the chat-proxy wrangler template on the
+first real plant). The only remaining residue is a handful of **cosmetic**
+`year` mentions in workflow *comments* and doc placeholders (e.g.
 `lineage/seeds/<year>.md`) — no config value or behavior; the narrative pages are
 in the `regenerate` tier. Running plant from the canonical hub means **no
 duplicate payload is committed** — the live repo is the source, so the genome
