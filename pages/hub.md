@@ -1,13 +1,20 @@
 ---
-title: Content Hub
+title: Content Hub — Year of AI Site Dashboard
 description: >-
-  Browse, monitor, and maintain every content site in the organization. Each
-  repository publishes its own GitHub Pages site with the zer0-mistakes theme;
-  this dashboard tracks them all in one place.
+  Browse and monitor every content site in the year-of-ai org. Each repo
+  publishes its own GitHub Pages site; this dashboard tracks them all in
+  one place.
+keywords:
+  - year of ai hub
+  - content dashboard
+  - github pages fleet
+  - self-growing knowledge bases
+  - org site directory
 layout: default
 permalink: /hub/
 sidebar:
   nav: hub
+lastmod: 2026-07-08
 ---
 
 # Content Hub

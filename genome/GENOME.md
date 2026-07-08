@@ -38,9 +38,11 @@ Every concept-bearing asset of the model is classified in
 
 - **`transplant`** — concept-**agnostic**, copied byte-for-byte. The whole agent
   framework (`lineage/framework/**` skills/prompts/agents), the hub scripts
-  (`lib/hub.rb`, `sync-*`, `content-review`), the `.claude` adapter set, the
-  theme-data files, the chat-proxy worker, the legal pages. *Must contain no
-  concept literal* (the verify gate enforces this).
+  (`lib/hub.rb`, `sync-*`, `content-review`, `docs-warden`, and the fleet's
+  `normalize-front-matter-dates` publish-gate/repair tool and
+  `sync-member-metadata` registry→GitHub-metadata sync), the `.claude` adapter
+  set, the theme-data files, the chat-proxy worker, the legal pages. *Must
+  contain no concept literal* (the verify gate enforces this).
 - **`template`** — carries concept literals, tokenized via the `tokens:`
   literal→`{{TOKEN}}` map at plant time: `_config.yml`, `_data/hub.yml`,
   `policy.yml`, the orchestration/grow workflows, the provisioner + planter.
@@ -48,11 +50,13 @@ Every concept-bearing asset of the model is classified in
   (e.g. the repo-template `CLAUDE.md`, and the four framework files that carry the
   bot email or hub name).
 - **`regenerate`** — concept *narrative* re-authored for the new concept by a
-  genesis agent, not gsub'd (the hub's `pages/*.md` and per-member seeds — a blind
-  find/replace would mangle SVG labels and prose).
+  genesis agent, not gsub'd (the hub's `pages/*.md`, the org profile README at
+  `templates/org-profile/`, and per-member seeds — a blind find/replace would
+  mangle SVG labels and prose).
 
 Anything not in a tier is `ignore`d (instance content, generated data, build
-output, binaries).
+output, binaries — including this repo's own top-level docs: `README.md`,
+`CLAUDE.md`, `ARCHITECTURE.md`, `CHANGELOG.md`).
 
 A **default plant lands a clean, minimal growing org** — only the growth engine
 (`orchestrate` + `grow-lineage` + `hub-sync`) and the site. The mature
