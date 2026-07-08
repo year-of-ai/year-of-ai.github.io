@@ -97,6 +97,10 @@ exclude:
   # pages/home.md). It has no front matter, so this exclude is what keeps it
   # from rendering and colliding with home.md at "/" (dev sets unpublished:true).
   - README.md
+  # Maintainer/agent docs read on GitHub, not published as site pages.
+  - ARCHITECTURE.md
+  - CLAUDE.md
+  - CHANGELOG.md
   # Orchestration source data (centralized seeds + bootstrap kit), not site content.
   - lineage/
   # Abstracted org-model DNA / replant tooling, not site content.

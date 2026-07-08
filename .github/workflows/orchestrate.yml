@@ -6,9 +6,11 @@ name: Lineage Orchestrator
 #   1. READS each year's centralized seed (lineage/seeds/<year>.md) into
 #      _data/lineage.yml via sync-lineage-state.rb, and commits any change
 #      (which rebuilds the /lineage/ + /hub/ dashboards).
-#   2. TRIGGERS one central growth tick per year repo by dispatching the hub's
-#      grow-lineage.yml (-f repo=<year>) — which stages the framework + seed and
-#      runs the 3-tier Haiku->Sonnet->Opus escalation against that repo.
+#   2. SELECTS which members to grow this run from lineage/policy.yml
+#      (cadence.repos_per_run, stalest-first rotation; 0/absent = everyone),
+#      then TRIGGERS one central growth tick per selected repo by dispatching
+#      the hub's grow-lineage.yml (-f repo=<year>) — which stages the framework
+#      + seed and runs the 3-tier Haiku->Sonnet->Opus escalation.
 #
 # Each repo grows perpetually and is never consolidated, archived, or deleted.
 #
@@ -85,6 +87,12 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add _data/lineage.yml
           git commit -m "chore(lineage): refresh state ledger"
+          # Hub main advances often (seed persists, telemetry ledger). Retry
+          # with rebase so this commit is never lost to a non-fast-forward.
+          for _ in 1 2 3; do
+            git push && exit 0
+            git pull --rebase origin main || true
+          done
           git push
 
       - name: Trigger growth ticks
@@ -111,7 +119,17 @@ jobs:
           if [ -n "$TARGETS" ]; then
             repos="$TARGETS"
           else
-            repos="$(ruby -ryaml -e "puts (YAML.load_file('_data/lineage.yml')['members'] || []).map { |m| m['repo'] }.join(' ')")"
+            # Cadence (lineage/policy.yml): grow only cadence.repos_per_run
+            # members per run, picking the stalest first (never-grown members
+            # sort to the front). 0 or absent = grow every member every run.
+            repos="$(ruby -ryaml -e '
+              policy = YAML.load_file("lineage/policy.yml") rescue {}
+              per = (policy.dig("cadence", "repos_per_run") || 0).to_i
+              members = (YAML.load_file("_data/lineage.yml")["members"] || [])
+              members = members.sort_by { |m| m["last_activity"].to_s }
+              members = members.first(per) if per.positive? && per < members.size
+              puts members.map { |m| m["repo"] }.join(" ")
+            ')"
           fi
           echo "Dispatching central grow ticks (grow-lineage.yml) for: $repos"
           for r in $repos; do

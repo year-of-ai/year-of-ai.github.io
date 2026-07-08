@@ -34,9 +34,12 @@ exclude_repos:
 pages:
   # Value for `remote_theme:` in the generated _config.yml of each org repo.
   # Every org site — including this root site — consumes the shared zer0-mistakes
-  # theme directly from upstream; no repo vendors theme files. Pin a version with
-  # "bamr87/zer0-mistakes@vX.Y.Z" if you want reproducible builds.
-  theme_repo: bamr87/zer0-mistakes
+  # theme directly from upstream; no repo vendors theme files. PINNED to a tagged
+  # release: 12 sites build against this theme, so a floating HEAD lets any
+  # upstream push change/break them all at once. Bump the tag here and in the
+  # hub's _config.yml together, then re-roll member configs with
+  # scripts/provision-org-sites.rb.
+  theme_repo: bamr87/zer0-mistakes@v1.26.0
   # Git ref to scaffold against / publish from. Empty = repo default branch.
   branch: ""
 
@@ -75,3 +78,4 @@ repos:
   - { name: "2009", title: "The Year 2009" }
   - { name: "2010", title: "The Year 2010" }
   - { name: "2011", title: "The Year 2011" }
+  - { name: "2012", title: "The Year 2012" }

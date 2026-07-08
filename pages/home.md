@@ -15,7 +15,7 @@ hide_intro: true
   <p class="lead text-body-secondary mx-auto" style="max-width: 46rem;">
     A federated network of self-growing knowledge bases — one repository per
     year, each publishing its own site and rendered with the shared
-    <a href="https://github.com/{{ site.repository | join: '' }}">zer0-mistakes</a>
+    <a href="https://github.com/{{ site.data.hub.pages.theme_repo | split: '@' | first }}">zer0-mistakes</a>
     theme. Pick a year to explore, or open the hub dashboard to see everything
     at once.
   </p>
