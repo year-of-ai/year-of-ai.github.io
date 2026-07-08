@@ -13,7 +13,7 @@ Each line:
 {
   "schema": "evolution-telemetry/v1",
   "run_id": "27770493316",        // the Grow Lineage run
-  "repo": "1778",                  // year repo grown
+  "repo": "<member-id>",            // the member repo grown this tick
   "conclusion": "success",         // workflow_run conclusion
   "is_error": false,               // agent result error flag (claude-execution-output.json)
   "num_turns": 42,

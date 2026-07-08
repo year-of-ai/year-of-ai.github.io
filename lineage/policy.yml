@@ -3,8 +3,9 @@
 # =============================================================================
 # The hub (year-of-ai/year-of-ai.github.io) orchestrates growth CENTRALLY: it
 # pulls each year's seed from lineage/seeds/<year>.md, clones the year repo,
-# runs the 3-tier content escalation, and pushes the new content back. The year
-# repos hold only content + a GitHub Pages _config.yml + .claude/ + telemetry/.
+# runs the 3-tier content escalation, and pushes the new content back. Each
+# year repo holds only content + a GitHub Pages _config.yml + .claude/ +
+# telemetry/.
 #
 # Read by: .github/workflows/orchestrate.yml (cadence) and
 # .github/workflows/grow-lineage.yml (model tiers).
