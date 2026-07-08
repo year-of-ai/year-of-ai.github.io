@@ -45,8 +45,12 @@ phrase_tokens:
   - "{unit} repositories"
   - "{unit} site"          # "year site(s)"
   - "each {unit}"          # "each year('s)"
+  - "every {unit}"         # "every year" (repo-template README: "every year in the network")
   - "per {unit}"
   - "{unit}-by-{unit}"     # "year-by-year"
+  - "{unit}-repo"          # "year-repo" (hyphenated, e.g. the concurrency-group comment)
+  - "{unit}'s"             # bare possessive, e.g. "the year's Evolution Log"
+  - "<{unit}>"             # bracket placeholder in comments/paths, e.g. "<year>.md", "repo=<year>"
   - "{units} of the org"   # "the org's year sites" phrasing safety
 
 # ---- transplant: agnostic, byte-for-byte (verify leak-scans these) ----------
@@ -86,6 +90,8 @@ transplant:
   - "scripts/sync-member-metadata.rb"       # registry→GitHub metadata sync — agnostic (org from cfg)
   - "telemetry/README.md"                   # ledger schema doc — agnostic
   - "404.html"
+  - "search.json"                           # Jekyll search-index page config — agnostic
+  - ".gitignore"                            # repo hygiene — agnostic
 
 # ---- template: tokenized via tokens[] above ---------------------------------
 template:
@@ -110,6 +116,7 @@ template:
 
 # ---- override: templated copy of an otherwise-agnostic skeleton file --------
 override:
+  - "LICENSE"                                # same MIT terms/holder; only the copyright year differs per org
   - "lineage/repo-template/CLAUDE.md"       # org links + 'year repo' → {{ORG}}/{{HUB_DOMAIN}}/{{UNIT_NOUN}}
   - "lineage/repo-template/README.md"       # org + hub URLs + 'every year'; KEEPS __SUBJECT__ for plant-lineage
   - "lineage/seed-package/seed.template.md"  # {{SUBJECT}}/{{Items}} placeholders + 'the year' comment examples

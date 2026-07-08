@@ -82,15 +82,15 @@ end
 
 SUBJECT_RE = /^\s*subject:\s*["']?(.+?)["']?\s*$/
 
-# The centralized seed for a year, or nil if there isn't one.
+# The centralized seed for a member, or nil if there isn't one.
 def read_seed(name)
   path = File.join(Hub::ROOT, 'lineage', 'seeds', "#{name}.md")
   File.exist?(path) ? File.read(path, encoding: 'utf-8') : nil
 end
 
-# Distill the lineage state the hub needs for one year. The seed now lives in
-# the hub (lineage/seeds/<name>.md) rather than in the year repo; it carries the
-# concept (§1) and the Evolution Log (§8 — the tick clock).
+# Distill the lineage state the hub needs for one member. The seed now lives in
+# the hub (lineage/seeds/<name>.md) rather than in the member repo; it carries
+# the concept (§1) and the Evolution Log (§8 — the tick clock).
 def inspect_lineage(org, name)
   seed = read_seed(name)
   return nil unless seed # not a lineage member

@@ -75,7 +75,15 @@ end
 # structural pairs (skip blank source literals so we never gsub "")
 struct_pairs = SAFE_TOKENS.map do |tok|
   s = src_map[tok]
-  (s.nil? || s.empty?) ? nil : [s, (tgt_map[tok] || '').to_s]
+  next nil if s.nil? || s.empty?
+
+  t = (tgt_map[tok] || '').to_s
+  # CHAT_ASSISTANT_NAME can collide with the theme's OWN "<Name>-Mistakes" brand
+  # (e.g. source "Zer0" is a substring of "Zer0-Mistakes", the Jekyll theme name,
+  # which must NEVER be renamed just because a target's assistant is called
+  # something else) — guard that one case with a negative lookahead.
+  pat = tok == 'CHAT_ASSISTANT_NAME' ? /#{Regexp.escape(s)}(?!-[Mm]istakes)/ : s
+  [pat, t]
 end.compact
 
 # curated unit-prose phrases: instantiate {unit}/{units} for source + target,
@@ -90,8 +98,25 @@ phrase_pairs = (man['phrase_tokens'] || []).flat_map do |tmpl|
   [[s, t], [cap_first(s), cap_first(t)]]
 end
 
-# longest source first so specific literals win over their substrings.
-pairs = (struct_pairs + phrase_pairs).sort_by { |s, _| -s.length }
+# Copyright year: NOT in SAFE_TOKENS (a bare 4-digit gsub would corrupt any other
+# unrelated number in _config.yml), so it's scoped to the exact `cr_year: NNNN`
+# line instead — the one place the value actually appears.
+copyright_pair = if src_map['COPYRIGHT_YEAR'] && tgt_map['COPYRIGHT_YEAR']
+                   ["cr_year: #{src_map['COPYRIGHT_YEAR']}", "cr_year: #{tgt_map['COPYRIGHT_YEAR']}"]
+                 end
+
+# LICENSE copyright line: same reasoning as cr_year above — the source's year
+# RANGE (accumulated since year-of-ai's founding) doesn't transplant; a fresh
+# org's LICENSE should read just its own genesis year.
+license_pair = if tgt_map['COPYRIGHT_YEAR']
+                 [/Copyright \(c\) [\d-]+ Amr Abdel\b/, "Copyright (c) #{tgt_map['COPYRIGHT_YEAR']} Amr Abdel"]
+               end
+
+# longest source first so specific literals win over their substrings. (`s` may
+# be a Regexp for the guarded CHAT_ASSISTANT_NAME/license pairs — sort by its
+# source text in that case.)
+pairs = (struct_pairs + phrase_pairs + [copyright_pair, license_pair].compact)
+        .sort_by { |s, _| -(s.is_a?(Regexp) ? s.source : s).length }
 
 def transform(text, pairs)
   pairs.reduce(text) { |acc, (s, t)| acc.gsub(s, t) }
