@@ -13,6 +13,10 @@ name: Grow Lineage
 # lineage/policy.yml. Perpetual growth: every tick is a grow tick (no lifecycle
 # gate, no replant/consolidate).
 #
+# A `gate` job runs first: it honors the fleet kill-switch (_data/fleet_pause.yml)
+# and validates both dispatch inputs, so a paused fleet or a malformed input can
+# never reach the model passes or the publish steps.
+#
 # Secrets: CLAUDE_CODE_OAUTH_TOKEN (primary), ANTHROPIC_API_KEY (fallback),
 # LIFECYCLE_PAT (push to the target year repo + the hub's seed log).
 
@@ -39,6 +43,7 @@ permissions:
   contents: read
 
 env:
+  REPO: ${{ inputs.repo }}
   TARGET: "year-of-ai/${{ inputs.repo }}"
   # ---- Tier 1: generate (drafts only, no publish) ------------------------
   GENERATE_PROMPT: |
@@ -71,6 +76,8 @@ env:
     the content (do NOT commit or push — the workflow publishes):
       1. Polish prose, verify facts/sources, fix cross-references, ensure an
          encyclopedic neutral tone and correct front matter on every new file.
+         Every front-matter `date:` MUST be a single plain ISO date
+         (YYYY-MM-DD) — never a range, a bare year, or prose.
       2. build-structure — refresh indices, TIMELINE, INDEX, cross-refs.
       3. sync-seed — regenerate seed.md sections 1-7.
       4. encode-seed — append ONE new entry under "## Section 8 — Evolution Log",
@@ -99,32 +106,56 @@ env:
     once the new content + the seed §8 entry exist uncommitted.
 
 jobs:
-  grow:
+  # Kill-switch + input validation. A separate job so that when it fails or the
+  # fleet is paused, NONE of the grow job's steps run — including its
+  # `if: always()` persist/publish steps, which would otherwise still fire.
+  gate:
     runs-on: ubuntu-latest
-    permissions:
-      id-token: write # claude-code-action exchanges an OIDC token
     steps:
-      # The `args` dispatch input is interpolated into GENERATE_PROMPT. Even though
-      # only owners can dispatch this workflow, harden the surface: pass it via env
-      # (never into a run: script) and reject injection metacharacters before any
-      # model/publish step runs. Normal topic text (letters, digits, spaces, commas,
-      # periods, hyphens, slashes, quotes) passes; shell/expression metacharacters do not.
-      - name: Validate the args input (reject injection metacharacters)
+      - name: Honor the fleet kill-switch (_data/fleet_pause.yml)
+        run: |
+          set -euo pipefail
+          curl -fsSL --max-time 20 \
+            "https://raw.githubusercontent.com/year-of-ai/year-of-ai.github.io/main/_data/fleet_pause.yml" \
+            -o /tmp/fleet_pause.yml || { echo "::warning::could not fetch fleet_pause.yml — proceeding"; exit 0; }
+          if ruby -ryaml -e 'exit(YAML.load_file("/tmp/fleet_pause.yml")["paused"] == true ? 0 : 1)' 2>/dev/null; then
+            reason="$(ruby -ryaml -e 'puts YAML.load_file("/tmp/fleet_pause.yml")["reason"].to_s' 2>/dev/null)"
+            echo "::error::Fleet is PAUSED via _data/fleet_pause.yml — refusing to grow. ${reason:+Reason: $reason}"
+            exit 1
+          fi
+
+      # Both dispatch inputs are validated before any step interpolates them.
+      # `repo` must be a bare repo name (it is spliced into paths and git URLs);
+      # `args` may be topic prose but never shell/expression metacharacters.
+      - name: Validate the repo and args inputs
         env:
           ARGS: ${{ inputs.args }}
         run: |
+          if ! printf '%s' "$REPO" | LC_ALL=C grep -qE '^[A-Za-z0-9][A-Za-z0-9._-]*$'; then
+            echo "::error::inputs.repo is not a plain repo name; refusing to run."
+            exit 1
+          fi
           if printf '%s' "$ARGS" | LC_ALL=C grep -qE '[`$<>|;&{}]'; then
             echo "::error::inputs.args contains disallowed characters (possible injection); refusing to run."
             exit 1
           fi
-          echo "args input OK"
+          echo "inputs OK: repo=$REPO"
 
+  grow:
+    needs: gate
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write # claude-code-action exchanges an OIDC token
+    steps:
       - name: Checkout the target year repo (primary)
         uses: actions/checkout@v4
         with:
           repository: ${{ env.TARGET }}
           token: ${{ secrets.LIFECYCLE_PAT }}
           fetch-depth: 0
+          # Never leave the org-wide PAT in .git/config while the model passes
+          # run with Bash + network tools — pushes re-authenticate explicitly.
+          persist-credentials: false
 
       - name: Stage framework + seed from the hub
         env:
@@ -132,22 +163,38 @@ jobs:
         run: |
           set -euo pipefail
           git clone --depth 1 https://github.com/year-of-ai/year-of-ai.github.io /tmp/hub
-          # canonical agent toolkit (skills/prompts/agents/scripts)
+          # Canonical agent toolkit (skills/prompts/agents/instructions). The
+          # old peer-to-peer surfaces are NOT staged: framework/workflows/ and
+          # framework/scripts/ are dead under the central model, and the
+          # consolidate/replant/genesis prompts + the check-lifecycle skill
+          # contradict lineage/policy.yml (perpetual growth, no lifecycle gate).
+          # Keeping them out of .github/ saves staged bytes and model context
+          # on every pass and removes contradictory instructions.
           mkdir -p .github
-          cp -r /tmp/hub/lineage/framework/* .github/
+          rsync -a \
+            --exclude='workflows/' \
+            --exclude='scripts/' \
+            --exclude='prompts/consolidate.prompt.md' \
+            --exclude='prompts/replant.prompt.md' \
+            --exclude='prompts/genesis.prompt.md' \
+            --exclude='skills/check-lifecycle/' \
+            /tmp/hub/lineage/framework/ .github/
           # this year's concept seed (carries §1 concept + §8 Evolution Log)
-          cp "/tmp/hub/lineage/seeds/${{ inputs.repo }}.md" seed.md
-          echo "Staged framework ($(find .github -type f | wc -l) files) + seed.md for ${{ inputs.repo }}"
+          cp "/tmp/hub/lineage/seeds/${REPO}.md" seed.md
+          echo "Staged framework ($(find .github -type f | wc -l) files) + seed.md for ${REPO}"
 
       - name: Resolve the 3-tier models from lineage/policy.yml
         id: model
         run: |
+          set -euo pipefail
           m() { grep -E "^[[:space:]]*$1:" /tmp/hub/lineage/policy.yml | head -1 | sed -E "s/.*$1:[[:space:]]*\"?([^\"#]+)\"?.*/\1/" | xargs; }
-          {
-            echo "generate=$(m generate)"
-            echo "expand=$(m expand)"
-            echo "enhance=$(m enhance)"
-          } >> "$GITHUB_OUTPUT"
+          for k in generate expand enhance; do
+            v="$(m "$k")"
+            case "$v" in
+              claude-*) echo "$k=$v" >> "$GITHUB_OUTPUT" ;;
+              *) echo "::error::could not resolve models.$k from lineage/policy.yml (got '$v')"; exit 1 ;;
+            esac
+          done
           echo "models: generate=$(m generate) expand=$(m expand) enhance=$(m enhance)"
 
       - name: Tier 1 — generate drafts (Haiku)
@@ -162,6 +209,10 @@ jobs:
             --allowedTools "Bash,Edit,Write,Read,Glob,Grep,WebFetch,WebSearch,TodoWrite,Task,Skill"
           show_full_output: true
 
+      - name: Snapshot tier 1 output
+        if: always()
+        run: cp /home/runner/work/_temp/claude-execution-output.json /tmp/grow-tier1.json 2>/dev/null || true
+
       - name: Tier 2 — expand drafts (Sonnet)
         continue-on-error: true
         uses: anthropics/claude-code-action@v1
@@ -173,6 +224,10 @@ jobs:
             --max-turns 80
             --allowedTools "Bash,Edit,Write,Read,Glob,Grep,WebFetch,WebSearch,TodoWrite,Task,Skill"
           show_full_output: true
+
+      - name: Snapshot tier 2 output
+        if: always()
+        run: cp /home/runner/work/_temp/claude-execution-output.json /tmp/grow-tier2.json 2>/dev/null || true
 
       - name: Tier 3 — enhance (Opus)
         continue-on-error: true
@@ -186,27 +241,37 @@ jobs:
             --allowedTools "Bash,Edit,Write,Read,Glob,Grep,WebFetch,WebSearch,TodoWrite,Task,Skill"
           show_full_output: true
 
-      # API-key fallback. Unlike the per-repo grow.yml (where the enhance pass
-      # commits, so a dirty tree means "unfinished"), the tiers here deliberately
-      # leave content UNcommitted for the publish step — so a dirty tree means the
-      # tick SUCCEEDED and a clean tree means it produced nothing. Fire the fallback
-      # when the tree is empty (no drafts) OR the OAuth passes errored (is_error).
+      - name: Snapshot tier 3 output
+        if: always()
+        run: cp /home/runner/work/_temp/claude-execution-output.json /tmp/grow-tier3.json 2>/dev/null || true
+
+      # API-key fallback. The tiers deliberately leave content UNcommitted for
+      # the publish step — so "the tick produced nothing" means: no changes
+      # OTHER than the staged hub files (.github/, seed.md, …), which are always
+      # present and must be ignored here exactly as the persist/publish steps
+      # ignore them. Fire the fallback when no real content exists OR any OAuth
+      # pass reported is_error.
       - name: Detect a failed/empty tick
         if: always()
         id: check
         run: |
+          content=$(git status --porcelain \
+            | grep -vE ' (\.github/|seed\.md|lifecycle\.yml|seed-package/|ROADMAP\.md|LIFECYCLE\.md)' \
+            | grep -c . || true)
           empty=true
-          [ -n "$(git status --porcelain)" ] && empty=false
-          # claude-code-action exits 0 even when the agent result is an error (e.g.
-          # an expired OAuth token): the final result element carries is_error:true.
+          [ "${content:-0}" -gt 0 ] && empty=false
+          # claude-code-action exits 0 even when the agent result is an error
+          # (e.g. an expired OAuth token): the final result element carries
+          # is_error:true. Check every tier's snapshot, not just the last pass.
           failed=false
-          out=/home/runner/work/_temp/claude-execution-output.json
-          if [ -f "$out" ] && jq -e '[.[] | select(.type=="result")] | last | .is_error == true' "$out" >/dev/null 2>&1; then
-            failed=true
-          fi
+          for out in /tmp/grow-tier1.json /tmp/grow-tier2.json /tmp/grow-tier3.json; do
+            if [ -f "$out" ] && jq -e '[.[] | select(.type=="result")] | last | .is_error == true' "$out" >/dev/null 2>&1; then
+              failed=true
+            fi
+          done
           echo "empty=$empty" >> "$GITHUB_OUTPUT"
           echo "failed=$failed" >> "$GITHUB_OUTPUT"
-          echo "empty=$empty failed=$failed"
+          echo "content_changes=$content empty=$empty failed=$failed"
 
       - name: Fallback — generate the tick on the API key
         if: steps.check.outputs.empty == 'true' || steps.check.outputs.failed == 'true'
@@ -240,7 +305,7 @@ jobs:
         run: |
           set -uo pipefail
           [ -f seed.md ] || exit 0
-          ORIG="/tmp/hub/lineage/seeds/${{ inputs.repo }}.md"
+          ORIG="/tmp/hub/lineage/seeds/${REPO}.md"
           # Did this tick publish new content? (ignore the staged hub-owned files)
           content_changed=$(git status --porcelain \
             | grep -vE ' (\.github/|seed\.md|lifecycle\.yml|seed-package/|ROADMAP\.md|LIFECYCLE\.md)' \
@@ -262,17 +327,17 @@ jobs:
             fi
             printf '\n### G%s-T%s — %s — Tick %s: growth tick (Haiku -> Sonnet -> Opus)\n**Action**: Content published by the 3-tier escalation; this §8 entry was recorded deterministically by the workflow because the enhance pass did not run encode-seed.\n' \
               "$gen" "$((seq + 1))" "$(date -u +%F)" "$((orig + 1))" >> seed.md
-            echo "::notice::tick clock advanced by safety net — Tick $((orig + 1)) for ${{ inputs.repo }}"
+            echo "::notice::tick clock advanced by safety net — Tick $((orig + 1)) for ${REPO}"
           fi
           # Persist the (now guaranteed-advanced) Evolution Log back to the hub.
           cp seed.md "$ORIG"
           ( cd /tmp/hub
-            if [ -n "$(git status --porcelain -- lineage/seeds/${{ inputs.repo }}.md)" ]; then
+            if [ -n "$(git status --porcelain -- "lineage/seeds/${REPO}.md")" ]; then
               git config user.name "github-actions[bot]"
               git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
               git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/year-of-ai/year-of-ai.github.io.git"
-              git add "lineage/seeds/${{ inputs.repo }}.md"
-              git commit -q -m "chore(lineage): grow ${{ inputs.repo }} — update seed Evolution Log"
+              git add "lineage/seeds/${REPO}.md"
+              git commit -q -m "chore(lineage): grow ${REPO} — update seed Evolution Log"
               # The hub's main advances often (other ticks, the daily orchestrate,
               # manual pushes). A single non-rebasing push loses this seed update to
               # a non-fast-forward rejection — exactly how 2012's first tick clock was
@@ -301,6 +366,14 @@ jobs:
           if [ -z "$(git status --porcelain)" ]; then
             echo "No new content this tick — nothing to publish."
             exit 0
+          fi
+          # Front-matter gate (the 1777 outage class): a single unparseable
+          # `date:` fails the member's whole Pages build. Deterministically
+          # normalize ranges / bare years / prose dates to ISO, and refuse to
+          # publish anything that still cannot be parsed.
+          if ! ruby /tmp/hub/scripts/normalize-front-matter-dates.rb --fix .; then
+            echo "::error::unparseable front-matter date(s) remain after normalization — refusing to publish a broken build."
+            exit 1
           fi
           git config user.name "claude-grow"
           git config user.email "noreply@anthropic.com"

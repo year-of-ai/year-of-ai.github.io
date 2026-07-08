@@ -32,7 +32,12 @@ founder                  : "Amr Abdel-Motaleb"
 # renders via the shared zer0-mistakes theme pulled over `remote_theme` — no
 # theme files are vendored here. The org's year sites consume the same theme the
 # same way. To pin a version use "bamr87/zer0-mistakes@vX.Y.Z".
-remote_theme             : "bamr87/zer0-mistakes"
+# Pinned to a tagged theme release: all 12 org sites build against this theme,
+# and an unpinned HEAD means any upstream push can change/break every site at
+# once (the theme ships multiple releases a week). Bump deliberately: update
+# the tag here AND in _data/hub.yml pages.theme_repo, then roll member configs
+# with scripts/provision-org-sites.rb.
+remote_theme             : "bamr87/zer0-mistakes@v1.26.0"
 
 ## Github Information
 github_user              : &github_user "year-of-ai"
@@ -206,7 +211,11 @@ nanobar:
 # server-side proxy to avoid exposing the API key in client-side code.
 
 ai_chat:
-  enabled                : true
+  # Disabled until the chat proxy is actually deployed for this site: with
+  # proxy_ready: false the widget renders but every production send fails.
+  # To enable: deploy templates/deploy/chat-proxy/ (see deploy-chat-proxy.yml),
+  # then set enabled: true AND proxy_ready: true.
+  enabled                : false
   provider               : 'anthropic'        # AI provider (Claude Messages API)
   auth_mode              : 'proxy'            # 'proxy' (recommended) or 'direct'
   proxy_ready            : false              # Set true only when your proxy endpoint is deployed
@@ -222,11 +231,11 @@ ai_chat:
   strict_context         : true               # Ground answers to current page context only
   out_of_scope_message   : "I can only answer from the content on this page."
   system_prompt          : >-
-    You are a helpful assistant for the Zer0-Mistakes website,
-    a Jekyll theme and developer blog. Answer questions about the
-    current page content and help users navigate the site.
-    Be concise and friendly.
-  welcome_message        : "Hi! I'm the Zer0 assistant. Ask about this page, report a problem, or suggest an improvement."
+    You are a helpful assistant for Year of AI, the hub site of a federated
+    network of self-growing, year-by-year knowledge bases. Answer questions
+    about the current page content and help users navigate to the year sites
+    and the hub dashboard. Be concise and friendly.
+  welcome_message        : "Hi! I'm the Year of AI assistant. Ask about this page, report a problem, or suggest an improvement."
   placeholder            : "Ask about this page..."
   context_max_length     : 2000               # Max chars of page content sent as context
   icon                   : 'bi-robot'         # Bootstrap icon for chat button
@@ -567,6 +576,10 @@ exclude:
   # pages/home.md). This exclude IS the guard against a "/" collision — README
   # has no front matter, so keep it listed here (don't rely on published:false).
   - README.md
+  # Maintainer/agent docs read on GitHub, not published as site pages.
+  - ARCHITECTURE.md
+  - CLAUDE.md
+  - CHANGELOG.md
 
   # ── Orchestration source data (not site content) ─────────────────────────
   # lineage/ holds the centralized seeds + bootstrap kit for the self-growing

@@ -1,23 +1,32 @@
 ---
-title: Content Hub
+title: Content Hub — Year of AI Site Dashboard
 description: >-
-  Browse, monitor, and maintain every content site in the organization. Each
-  repository publishes its own GitHub Pages site with the zer0-mistakes theme;
-  this dashboard tracks them all in one place.
+  Browse and monitor every content site in the year-of-ai org. Each repo
+  publishes its own GitHub Pages site; this dashboard tracks them all in
+  one place.
+keywords:
+  - year of ai hub
+  - content dashboard
+  - github pages fleet
+  - self-growing knowledge bases
+  - org site directory
 layout: default
 permalink: /hub/
 sidebar:
   nav: hub
+lastmod: 2026-07-08
 ---
 
 # Content Hub
 
+{% assign theme_repo = site.data.hub.pages.theme_repo | split: '@' | first %}
+{% assign hub_repo = site.data.hub.org | append: '/' | append: site.data.hub.org | append: '.github.io' %}
 Every repository in the organization publishes **its own** GitHub Pages site —
 content stays in each repo and renders with the shared
-[zer0-mistakes]({{ site.repository | prepend: "https://github.com/" }}) theme
+[zer0-mistakes](https://github.com/{{ theme_repo }}) theme
 via `remote_theme`. This page is the dashboard that tracks them all; the data
 below is refreshed automatically by the
-[hub metadata sync]({{ site.repository | prepend: "https://github.com/" }}/blob/main/scripts/sync-hub-metadata.rb).
+[hub metadata sync](https://github.com/{{ hub_repo }}/blob/main/scripts/sync-hub-metadata.rb).
 
 {% assign hub = site.data.hub_index %}
 {% if hub and hub.repos and hub.repos.size > 0 %}

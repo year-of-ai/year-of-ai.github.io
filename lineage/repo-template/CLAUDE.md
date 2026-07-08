@@ -22,6 +22,10 @@ repo. See the hub's [orchestration model](https://year-of-ai.github.io/orchestra
   repo's seed; each topic is one Markdown file with `title` / `date` / `category`
   front matter, written in a factual, neutral, encyclopedic, third-person tone,
   with every fact verified against ≥2 sources.
+- **`date:` must be a single plain ISO date** (`YYYY-MM-DD`) — never a range
+  (`"1777–1778"`), a bare year, or prose. One unparseable date fails this
+  site's **whole** Pages build; use the start date for ranges and
+  `YYYY-01-01` when only the year is known.
 - **`.claude/` is adapters only.** The skills (`.claude/skills/`) and commands
   (`.claude/commands/`) are thin pointers; their canonical procedures are staged
   from the hub under `.github/` at tick time. `seed.md` is likewise present only

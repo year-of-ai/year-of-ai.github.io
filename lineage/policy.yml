@@ -6,7 +6,8 @@
 # runs the 3-tier content escalation, and pushes the new content back. The year
 # repos hold only content + a GitHub Pages _config.yml + .claude/ + telemetry/.
 #
-# Read by: scripts/lib/hub.rb / the hub grow workflow (.github/workflows/grow.yml).
+# Read by: .github/workflows/orchestrate.yml (cadence) and
+# .github/workflows/grow-lineage.yml (model tiers).
 
 # 3-tier content escalation — the model used for each pass of a growth tick.
 models:
@@ -24,10 +25,17 @@ lifecycle:
   archive: false
   delete: false
 
-# Cadence (UTC). The hub's orchestrate workflow runs daily and grows the repos.
+# Cadence (UTC). The hub's orchestrate workflow runs daily; repos_per_run
+# bounds how many members it grows per run (stalest-first rotation, so every
+# member still grows perpetually — just not all 11 every day). Telemetry showed
+# ~$3.4–4.8 recorded per tick's final pass alone; at repos_per_run: 4 each
+# member grows roughly every 3 days at ~1/3 of the daily cost. Set 0 to grow
+# every member every run (the pre-2026-07 behavior).
 cadence:
   cron: "30 5 * * *"
   ticks_per_run: 1
+  repos_per_run: 4
+  selection: stalest-first
 
 # Auth (org secrets the hub grow workflow needs):
 #   CLAUDE_CODE_OAUTH_TOKEN  — primary auth for every model pass (subscription)

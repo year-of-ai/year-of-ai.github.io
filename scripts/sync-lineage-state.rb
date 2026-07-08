@@ -5,21 +5,19 @@
 # sync-lineage-state.rb
 # =============================================================================
 #
-# Reads the LIFECYCLE state of every self-growing knowledge-base repo in the org
-# and writes the hub's lineage ledger:
+# Reads every member's CENTRALIZED seed (lineage/seeds/<name>.md — §8 is the
+# Evolution Log, the authoritative tick clock) and writes the hub's lineage
+# ledger:
 #
-#   _data/lineage.yml   — per-repo lifecycle state for the /lineage/ dashboard
+#   _data/lineage.yml   — per-repo growth state for the /lineage/ dashboard
 #                         and the orchestrator (status, tick clock, edges).
 #
-# This is the hub's eyes. Content stays in each repo; this script gathers only
-# METADATA about each repo's growth state via the GitHub API:
-#   - lifecycle.yml   (policy + state machine: status, generation_ticks, edges)
-#   - seed.md §8      (the Evolution Log — the authoritative tick clock)
-#
-# It is read-only with respect to the source repos and deterministic for
-# unchanged sources, so the scheduled orchestrate workflow only commits real
-# changes. Companion to sync-hub-metadata.rb (which counts published content);
-# this one tracks the lineage/lifecycle that drives growth.
+# This is the hub's eyes. Under the centralized model (ADR-0001) the seeds live
+# in this repo, so the ledger refresh is hub-local; the GitHub API is used only
+# to discover org members. It is deterministic for unchanged sources, so the
+# scheduled orchestrate workflow only commits real changes. Companion to
+# sync-hub-metadata.rb (which counts published content); this one tracks the
+# lineage state that drives growth.
 #
 # Usage:
 #   ruby scripts/sync-lineage-state.rb            # refresh _data/lineage.yml
@@ -47,16 +45,6 @@ rescue StandardError
   {}
 end
 
-# Fetch a repo file's decoded text, or nil if absent (404).
-def gh_file(org, repo, path, ref = nil)
-  q = ref ? "?ref=#{ref}" : ''
-  doc = Hub.gh_api("repos/#{org}/#{repo}/contents/#{path}#{q}")
-  return nil unless doc && doc['content']
-
-  Base64.decode64(doc['content']).force_encoding('utf-8')
-rescue StandardError
-  nil
-end
 
 # ---------------------------------------------------------------------------
 # seed.md §8 (Evolution Log) — the authoritative tick clock.
@@ -184,7 +172,8 @@ end
 
 cfg  = Hub.load_registry
 org  = cfg['org']
-excl = (cfg['exclude_repos'] || []) + [cfg.dig('pages', 'theme_repo').to_s.split('/').last].compact
+excl = (cfg['exclude_repos'] || []) +
+       [cfg.dig('pages', 'theme_repo').to_s.split('@').first.to_s.split('/').last].compact
 
 repos = Hub.discover_repos(cfg).map { |r| r['name'] }.reject { |n| excl.include?(n) }
 Hub.log_info "Reading lifecycle state for #{repos.size} repo(s) in #{org}: #{repos.join(', ')}"

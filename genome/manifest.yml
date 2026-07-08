@@ -82,6 +82,8 @@ transplant:
   - ".github/config/docs_warden.yml"        # doc-coverage map — agnostic
   - ".github/instructions/docs-warden.instructions.md" # doc-warden contract — agnostic
   - "scripts/docs-warden.rb"                # doc-coverage engine — agnostic
+  - "scripts/normalize-front-matter-dates.rb" # grow publish gate + member repair tool — agnostic
+  - "scripts/sync-member-metadata.rb"       # registry→GitHub metadata sync — agnostic (org from cfg)
   - "telemetry/README.md"                   # ledger schema doc — agnostic
   - "404.html"
 
@@ -131,6 +133,7 @@ regenerate:
   - "pages/self-improvement.md"
   - "pages/lineage.md"
   - "lineage/seeds/*.md"                     # per-member concept DNA; the first is written by plant from the manifest
+  - "templates/org-profile/README.md"        # org profile narrative — re-authored per concept
 
 # ---- defaulted: not in the manifest, owned elsewhere, transplant with a default
 defaulted:
@@ -175,6 +178,7 @@ ignore:
   - "assets/**"                              # images/binaries + site-owned data
   - "README.md"                              # repo readme, not site content
   - "CLAUDE.md"                              # hub's own dev guide (regenerated narrative; not member-facing)
+  - "ARCHITECTURE.md"                        # hub's own architecture reference (regenerated narrative)
   - "CHANGELOG.md"                           # hub's own changelog (instance history)
   - "lineage/README.md"                      # lineage-dir dev doc (regenerated narrative)
   - "Gemfile.lock"

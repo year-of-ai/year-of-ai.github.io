@@ -1,13 +1,20 @@
 ---
-title: Year of AI
+title: Year of AI — Self-Growing Knowledge Base Network
 description: >-
   The organization hub for a federated network of self-growing, year-by-year
-  knowledge bases — each published as its own site, all rendered with the
-  shared zer0-mistakes theme.
+  knowledge bases, each published as its own site with the shared
+  zer0-mistakes theme.
+keywords:
+  - year of ai
+  - self-growing knowledge base
+  - federated knowledge network
+  - AI-generated encyclopedia
+  - year-by-year history
 layout: home
 permalink: /
 sidebar: false
 hide_intro: true
+lastmod: 2026-07-08
 ---
 
 <section class="text-center py-5">
@@ -15,7 +22,7 @@ hide_intro: true
   <p class="lead text-body-secondary mx-auto" style="max-width: 46rem;">
     A federated network of self-growing knowledge bases — one repository per
     year, each publishing its own site and rendered with the shared
-    <a href="https://github.com/{{ site.repository | join: '' }}">zer0-mistakes</a>
+    <a href="https://github.com/{{ site.data.hub.pages.theme_repo | split: '@' | first }}">zer0-mistakes</a>
     theme. Pick a year to explore, or open the hub dashboard to see everything
     at once.
   </p>
