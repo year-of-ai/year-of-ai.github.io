@@ -6,7 +6,7 @@
 org: year-of-ai
 totals:
   repos: 11
-  pages: 559
+  pages: 562
 repos:
 - name: '1776'
   title: The Year 1776
@@ -17,8 +17,8 @@ repos:
   pages_enabled: true
   scaffolded: true
   branch: main
-  pushed_at: '2026-07-07T09:04:58Z'
-  page_count: 63
+  pushed_at: '2026-07-08T08:03:29Z'
+  page_count: 64
   sections:
   - name: arts
     title: Arts & Culture
@@ -44,7 +44,7 @@ repos:
     title: Political Events
     url: https://year-of-ai.github.io/1776/politics/
     source_url: https://github.com/year-of-ai/1776/tree/main/politics
-    count: 10
+    count: 11
   - name: science
     title: Science & Discovery
     url: https://year-of-ai.github.io/1776/science/
@@ -63,7 +63,7 @@ repos:
   pages_enabled: true
   scaffolded: true
   branch: main
-  pushed_at: '2026-07-05T08:38:08Z'
+  pushed_at: '2026-07-08T08:02:24Z'
   page_count: 46
   sections:
   - name: arts
@@ -108,8 +108,8 @@ repos:
   pages_enabled: true
   scaffolded: true
   branch: main
-  pushed_at: '2026-07-07T09:03:43Z'
-  page_count: 45
+  pushed_at: '2026-07-08T08:03:32Z'
+  page_count: 46
   sections:
   - name: arts
     title: Arts & Culture — 1778
@@ -135,7 +135,7 @@ repos:
     title: Political Events — 1778
     url: https://year-of-ai.github.io/1778/politics/
     source_url: https://github.com/year-of-ai/1778/tree/main/politics
-    count: 6
+    count: 7
   - name: science
     title: Science & Discovery — 1778
     url: https://year-of-ai.github.io/1778/science/
@@ -154,8 +154,8 @@ repos:
   pages_enabled: true
   scaffolded: true
   branch: main
-  pushed_at: '2026-07-07T09:00:39Z'
-  page_count: 42
+  pushed_at: '2026-07-08T08:03:11Z'
+  page_count: 43
   sections:
   - name: arts-culture
     title: Arts & Culture
@@ -166,7 +166,7 @@ repos:
     title: History & Politics
     url: https://year-of-ai.github.io/2005/history-politics/
     source_url: https://github.com/year-of-ai/2005/tree/main/history-politics
-    count: 9
+    count: 10
   - name: people
     title: People
     url: https://year-of-ai.github.io/2005/people/
