@@ -6,7 +6,7 @@
 org: year-of-ai
 totals:
   repos: 11
-  ticks: 232
+  ticks: 236
 members:
 - name: '1776'
   repo: year-of-ai/1776
@@ -61,48 +61,48 @@ members:
   site_url: https://year-of-ai.github.io/2006/
   subject: the year 2006
   status: growing
-  ticks_logged: 19
-  log_entries: 29
+  ticks_logged: 20
+  log_entries: 30
   generations: 2
-  last_activity: '2026-07-07'
-  last_entry: 'G2-T16 — 2026-07-07 — Tick 16: The poisoning of Alexander Litvinenko
-    (polonium-210, London) deep-dive + structure refresh'
+  last_activity: '2026-07-09'
+  last_entry: 'G2-T17 — 2026-07-09 — Tick 17: Front-matter date normalization (Borat,
+    energy/climate, housing) + verification pass'
 - name: '2007'
   repo: year-of-ai/2007
   url: https://github.com/year-of-ai/2007
   site_url: https://year-of-ai.github.io/2007/
   subject: the year 2007
   status: growing
-  ticks_logged: 21
-  log_entries: 31
+  ticks_logged: 22
+  log_entries: 32
   generations: 2
-  last_activity: '2026-07-07'
-  last_entry: 'G3-T21 — 2026-07-07 — Tick 21: Google Street View launch, the Blu-ray
-    vs. HD-DVD format war, and Singularity University''s founding'
+  last_activity: '2026-07-09'
+  last_entry: 'G3-T22 — 2026-07-09 — Tick 22: Steve Jobs''s 2007 health scrutiny and
+    the nuclear-power renaissance'
 - name: '2008'
   repo: year-of-ai/2008
   url: https://github.com/year-of-ai/2008
   site_url: https://year-of-ai.github.io/2008/
   subject: the year 2008
   status: growing
-  ticks_logged: 19
-  log_entries: 29
+  ticks_logged: 20
+  log_entries: 30
   generations: 2
-  last_activity: '2026-07-07'
-  last_entry: 'G1-T19 — 2026-07-07 — Tick 19: Fact-verification pass — Liukin all-around
-    precedence corrected'
+  last_activity: '2026-07-09'
+  last_entry: 'G1-T20 — 2026-07-09 — Tick 20: Writers Guild of America Strike + California
+    Proposition 8 Deep-Dives'
 - name: '2009'
   repo: year-of-ai/2009
   url: https://github.com/year-of-ai/2009
   site_url: https://year-of-ai.github.io/2009/
   subject: the year 2009
   status: growing
-  ticks_logged: 20
-  log_entries: 32
+  ticks_logged: 21
+  log_entries: 33
   generations: 2
-  last_activity: '2026-07-07'
-  last_entry: 'G1-T22 — 2026-07-07 — Tick 22: Three new dedicated topics (Gaza War,
-    Mumbai attacks aftermath, Cyclone Nargis aftermath)'
+  last_activity: '2026-07-09'
+  last_entry: 'G1-T23 — 2026-07-09 — Tick 23: Two new dedicated topics (2009 Honduran
+    coup d''état, 2009 L''Aquila earthquake)'
 - name: '2010'
   repo: year-of-ai/2010
   url: https://github.com/year-of-ai/2010
