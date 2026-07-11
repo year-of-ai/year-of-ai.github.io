@@ -6,7 +6,7 @@
 org: year-of-ai
 totals:
   repos: 11
-  ticks: 236
+  ticks: 240
 members:
 - name: '1776'
   repo: year-of-ai/1776
@@ -14,11 +14,12 @@ members:
   site_url: https://year-of-ai.github.io/1776/
   subject: the year 1776
   status: growing
-  ticks_logged: 23
-  log_entries: 29
+  ticks_logged: 24
+  log_entries: 30
   generations: 2
-  last_activity: '2026-07-08'
-  last_entry: 'G1-T25 — 2026-07-08 — Tick 23: The New Hampshire Constitution of 1776'
+  last_activity: '2026-07-10'
+  last_entry: 'G1-T26 — 2026-07-10 — Tick 24: General William Howe, Samuel Adams,
+    and the Articles of Confederation'
 - name: '1777'
   repo: year-of-ai/1777
   url: https://github.com/year-of-ai/1777
@@ -109,33 +110,33 @@ members:
   site_url: https://year-of-ai.github.io/2010/
   subject: the year 2010
   status: growing
-  ticks_logged: 22
-  log_entries: 32
+  ticks_logged: 23
+  log_entries: 33
   generations: 2
-  last_activity: '2026-07-07'
-  last_entry: 'G1-T22 — 2026-07-07 — Tick 22: Content (Conan O''Brien Tonight Show
-    transition, 2010 UK general election, 2010 US Census) + structure refresh'
+  last_activity: '2026-07-10'
+  last_entry: 'G1-T23 — 2026-07-10 — Tick 23: Content (graphene Nobel Prize in Physics,
+    ROKS Cheonan sinking, J. D. Salinger) + front-matter normalization + structure
+    refresh'
 - name: '2011'
   repo: year-of-ai/2011
   url: https://github.com/year-of-ai/2011
   site_url: https://year-of-ai.github.io/2011/
   subject: the year 2011
   status: growing
-  ticks_logged: 20
-  log_entries: 29
+  ticks_logged: 21
+  log_entries: 30
   generations: 1
-  last_activity: '2026-07-07'
-  last_entry: 'G1-T20 — 2026-07-07 — Tick 20: the 2011 Wimbledon Championships, the
-    death of Clarence Clemons, and the Phobos-Grunt Mars mission'
+  last_activity: '2026-07-10'
+  last_entry: 'G1-T21 — 2026-07-10 — Tick 21: deepening the Television, Nobel Prizes,
+    and Cricket World Cup surveys'
 - name: '2012'
   repo: year-of-ai/2012
   url: https://github.com/year-of-ai/2012
   site_url: https://year-of-ai.github.io/2012/
   subject: the year 2012
   status: growing
-  ticks_logged: 20
-  log_entries: 29
+  ticks_logged: 21
+  log_entries: 30
   generations: 1
-  last_activity: '2026-07-07'
-  last_entry: 'G1-T20 — 2026-07-07 — Tick 20: The Newsroom (HBO 2012 premiere), Clint
-    Eastwood''s RNC empty-chair speech'
+  last_activity: '2026-07-10'
+  last_entry: 'G1-T21 — 2026-07-10 — Tick 21: growth tick (Haiku -> Sonnet -> Opus)'
