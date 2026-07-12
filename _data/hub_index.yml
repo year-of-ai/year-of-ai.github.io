@@ -6,7 +6,7 @@
 org: year-of-ai
 totals:
   repos: 11
-  pages: 577
+  pages: 582
 repos:
 - name: '1776'
   title: The Year 1776
@@ -108,14 +108,14 @@ repos:
   pages_enabled: true
   scaffolded: true
   branch: main
-  pushed_at: '2026-07-08T08:03:32Z'
-  page_count: 46
+  pushed_at: '2026-07-11T07:32:37Z'
+  page_count: 48
   sections:
   - name: arts
     title: Arts & Culture — 1778
     url: https://year-of-ai.github.io/1778/arts/
     source_url: https://github.com/year-of-ai/1778/tree/main/arts
-    count: 5
+    count: 7
   - name: economics
     title: Economics & Trade — 1778
     url: https://year-of-ai.github.io/1778/economics/
@@ -154,8 +154,8 @@ repos:
   pages_enabled: true
   scaffolded: true
   branch: main
-  pushed_at: '2026-07-08T08:03:11Z'
-  page_count: 43
+  pushed_at: '2026-07-11T07:31:19Z'
+  page_count: 44
   sections:
   - name: arts-culture
     title: Arts & Culture
@@ -166,7 +166,7 @@ repos:
     title: History & Politics
     url: https://year-of-ai.github.io/2005/history-politics/
     source_url: https://github.com/year-of-ai/2005/tree/main/history-politics
-    count: 10
+    count: 11
   - name: people
     title: People
     url: https://year-of-ai.github.io/2005/people/
@@ -195,8 +195,8 @@ repos:
   pages_enabled: true
   scaffolded: true
   branch: main
-  pushed_at: '2026-07-09T09:02:34Z'
-  page_count: 43
+  pushed_at: '2026-07-11T07:34:53Z'
+  page_count: 45
   sections:
   - name: arts-culture
     title: Arts & Culture
@@ -217,12 +217,12 @@ repos:
     title: Science & Technology
     url: https://year-of-ai.github.io/2006/science-technology/
     source_url: https://github.com/year-of-ai/2006/tree/main/science-technology
-    count: 8
+    count: 9
   - name: society-economics
     title: Society & Economics
     url: https://year-of-ai.github.io/2006/society-economics/
     source_url: https://github.com/year-of-ai/2006/tree/main/society-economics
-    count: 6
+    count: 7
   root_pages:
   - title: Timeline
     url: https://year-of-ai.github.io/2006/TIMELINE/
