@@ -6,7 +6,7 @@
 org: year-of-ai
 totals:
   repos: 11
-  pages: 582
+  pages: 586
 repos:
 - name: '1776'
   title: The Year 1776
@@ -17,14 +17,14 @@ repos:
   pages_enabled: true
   scaffolded: true
   branch: main
-  pushed_at: '2026-07-10T09:04:46Z'
-  page_count: 67
+  pushed_at: '2026-07-12T07:50:45Z'
+  page_count: 69
   sections:
   - name: arts
     title: Arts & Culture
     url: https://year-of-ai.github.io/1776/arts/
     source_url: https://github.com/year-of-ai/1776/tree/main/arts
-    count: 6
+    count: 7
   - name: economics
     title: Economics & Trade
     url: https://year-of-ai.github.io/1776/economics/
@@ -34,7 +34,7 @@ repos:
     title: Military Events
     url: https://year-of-ai.github.io/1776/military/
     source_url: https://github.com/year-of-ai/1776/tree/main/military
-    count: 15
+    count: 16
   - name: people
     title: Key Figures
     url: https://year-of-ai.github.io/1776/people/
@@ -235,8 +235,8 @@ repos:
   pages_enabled: true
   scaffolded: true
   branch: main
-  pushed_at: '2026-07-09T09:09:03Z'
-  page_count: 47
+  pushed_at: '2026-07-12T07:50:52Z'
+  page_count: 49
   sections:
   - name: arts-culture
     title: Arts & Culture
@@ -252,7 +252,7 @@ repos:
     title: People
     url: https://year-of-ai.github.io/2007/people/
     source_url: https://github.com/year-of-ai/2007/tree/main/people
-    count: 7
+    count: 8
   - name: science-technology
     title: Science & Technology
     url: https://year-of-ai.github.io/2007/science-technology/
@@ -262,7 +262,7 @@ repos:
     title: Society & Economics
     url: https://year-of-ai.github.io/2007/society-economics/
     source_url: https://github.com/year-of-ai/2007/tree/main/society-economics
-    count: 6
+    count: 7
   root_pages:
   - title: Timeline
     url: https://year-of-ai.github.io/2007/TIMELINE/
@@ -275,7 +275,7 @@ repos:
   pages_enabled: true
   scaffolded: true
   branch: main
-  pushed_at: '2026-07-09T09:08:13Z'
+  pushed_at: '2026-07-12T07:49:07Z'
   page_count: 38
   sections:
   - name: arts-culture
@@ -315,7 +315,7 @@ repos:
   pages_enabled: true
   scaffolded: true
   branch: main
-  pushed_at: '2026-07-09T09:09:55Z'
+  pushed_at: '2026-07-12T07:47:15Z'
   page_count: 60
   sections:
   - name: arts-culture
