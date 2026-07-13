@@ -6,7 +6,7 @@
 org: year-of-ai
 totals:
   repos: 11
-  ticks: 244
+  ticks: 248
 members:
 - name: '1776'
   repo: year-of-ai/1776
@@ -14,12 +14,12 @@ members:
   site_url: https://year-of-ai.github.io/1776/
   subject: the year 1776
   status: growing
-  ticks_logged: 24
-  log_entries: 30
+  ticks_logged: 25
+  log_entries: 31
   generations: 2
-  last_activity: '2026-07-10'
-  last_entry: 'G1-T26 — 2026-07-10 — Tick 24: General William Howe, Samuel Adams,
-    and the Articles of Confederation'
+  last_activity: '2026-07-12'
+  last_entry: 'G1-T27 — 2026-07-12 — Tick 25: The Fortification of Dorchester Heights
+    and the founding of the Bolshoi Theatre'
 - name: '1777'
   repo: year-of-ai/1777
   url: https://github.com/year-of-ai/1777
@@ -74,36 +74,36 @@ members:
   site_url: https://year-of-ai.github.io/2007/
   subject: the year 2007
   status: growing
-  ticks_logged: 22
-  log_entries: 32
+  ticks_logged: 23
+  log_entries: 33
   generations: 2
-  last_activity: '2026-07-09'
-  last_entry: 'G3-T22 — 2026-07-09 — Tick 22: Steve Jobs''s 2007 health scrutiny and
-    the nuclear-power renaissance'
+  last_activity: '2026-07-12'
+  last_entry: 'G3-T23 — 2026-07-12 — Tick 23: Barry Bonds''s home-run record and China''s
+    renewable-energy rise'
 - name: '2008'
   repo: year-of-ai/2008
   url: https://github.com/year-of-ai/2008
   site_url: https://year-of-ai.github.io/2008/
   subject: the year 2008
   status: growing
-  ticks_logged: 20
-  log_entries: 30
+  ticks_logged: 21
+  log_entries: 31
   generations: 2
-  last_activity: '2026-07-09'
-  last_entry: 'G1-T20 — 2026-07-09 — Tick 20: Writers Guild of America Strike + California
-    Proposition 8 Deep-Dives'
+  last_activity: '2026-07-12'
+  last_entry: 'G1-T21 — 2026-07-12 — Tick 21: Source-linking and fact-verification
+    pass on the two Tick-20 deep-dives'
 - name: '2009'
   repo: year-of-ai/2009
   url: https://github.com/year-of-ai/2009
   site_url: https://year-of-ai.github.io/2009/
   subject: the year 2009
   status: growing
-  ticks_logged: 21
-  log_entries: 33
+  ticks_logged: 22
+  log_entries: 34
   generations: 2
-  last_activity: '2026-07-09'
-  last_entry: 'G1-T23 — 2026-07-09 — Tick 23: Two new dedicated topics (2009 Honduran
-    coup d''état, 2009 L''Aquila earthquake)'
+  last_activity: '2026-07-12'
+  last_entry: 'G1-T24 — 2026-07-12 — Tick 24: Deepened two existing dedicated topics
+    (2009 Honduran coup d''état, 2009 L''Aquila earthquake)'
 - name: '2010'
   repo: year-of-ai/2010
   url: https://github.com/year-of-ai/2010
