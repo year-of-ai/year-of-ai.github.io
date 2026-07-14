@@ -6,7 +6,7 @@
 org: year-of-ai
 totals:
   repos: 11
-  ticks: 248
+  ticks: 252
 members:
 - name: '1776'
   repo: year-of-ai/1776
@@ -26,12 +26,12 @@ members:
   site_url: https://year-of-ai.github.io/1777/
   subject: the year 1777
   status: growing
-  ticks_logged: 26
-  log_entries: 30
+  ticks_logged: 27
+  log_entries: 31
   generations: 2
-  last_activity: '2026-07-11'
-  last_entry: 'G1-T26 — 2026-07-11 — Tick 26: verification and consistency pass (no
-    new content)'
+  last_activity: '2026-07-13'
+  last_entry: 'G1-T27 — 2026-07-13 — Tick 27: Adam Smith''s Wealth of Nations, Leonhard
+    Euler, and Tipu Sultan — the intellectual and global reach of 1777'
 - name: '1778'
   repo: year-of-ai/1778
   url: https://github.com/year-of-ai/1778
@@ -110,12 +110,12 @@ members:
   site_url: https://year-of-ai.github.io/2010/
   subject: the year 2010
   status: growing
-  ticks_logged: 23
-  log_entries: 33
+  ticks_logged: 24
+  log_entries: 34
   generations: 2
-  last_activity: '2026-07-10'
-  last_entry: 'G1-T23 — 2026-07-10 — Tick 23: Content (graphene Nobel Prize in Physics,
-    ROKS Cheonan sinking, J. D. Salinger) + front-matter normalization + structure
+  last_activity: '2026-07-13'
+  last_entry: 'G1-T24 — 2026-07-13 — Tick 24: Content (Lionel Messi''s 2010 Ballon
+    d''Or, Nelson Mandela''s 92nd birthday, Twitter and social-media growth) + structure
     refresh'
 - name: '2011'
   repo: year-of-ai/2011
@@ -123,20 +123,20 @@ members:
   site_url: https://year-of-ai.github.io/2011/
   subject: the year 2011
   status: growing
-  ticks_logged: 21
-  log_entries: 30
+  ticks_logged: 22
+  log_entries: 31
   generations: 1
-  last_activity: '2026-07-10'
-  last_entry: 'G1-T21 — 2026-07-10 — Tick 21: deepening the Television, Nobel Prizes,
-    and Cricket World Cup surveys'
+  last_activity: '2026-07-13'
+  last_entry: 'G1-T22 — 2026-07-13 — Tick 22: The Book of Mormon musical, the death
+    of Joe Frazier, and Kepler-22b'
 - name: '2012'
   repo: year-of-ai/2012
   url: https://github.com/year-of-ai/2012
   site_url: https://year-of-ai.github.io/2012/
   subject: the year 2012
   status: growing
-  ticks_logged: 21
-  log_entries: 30
+  ticks_logged: 22
+  log_entries: 31
   generations: 1
-  last_activity: '2026-07-10'
-  last_entry: 'G1-T21 — 2026-07-10 — Tick 21: growth tick (Haiku -> Sonnet -> Opus)'
+  last_activity: '2026-07-13'
+  last_entry: 'G1-T22 — 2026-07-13 — Tick 22: growth tick (Haiku -> Sonnet -> Opus)'
