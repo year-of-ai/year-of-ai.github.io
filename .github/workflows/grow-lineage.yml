@@ -148,7 +148,7 @@ jobs:
       id-token: write # claude-code-action exchanges an OIDC token
     steps:
       - name: Checkout the target year repo (primary)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: ${{ env.TARGET }}
           token: ${{ secrets.LIFECYCLE_PAT }}
