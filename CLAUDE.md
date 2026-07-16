@@ -42,9 +42,13 @@ read the architecture doc and fix the drift.
   `lib/hub.rb`), the lineage ledger refresher (`sync-lineage-state.rb`), the
   new-era planter (`plant-lineage.rb`), the PR reviewer (`content-review.rb`),
   the docs-coverage engine (`docs-warden.rb`), the fleet-health digest
-  (`fleet-health.rb`), and the front-matter date normalizer
+  (`fleet-health.rb`), the front-matter date normalizer
   (`normalize-front-matter-dates.rb` — the grow tick's publish gate and the
-  fleet repair tool).
+  fleet repair tool), and the **news-layout migrator**
+  (`migrate-to-news-structure.rb` — one-time conversion of a flat year repo to
+  the theme's `news`/`section`/`article` layout: taxonomy categories become
+  `/news/<slug>/` sections, topic files become posts, and post `tags` become
+  each section's sub-topics; see `--help`).
 - `lineage/` — the **centralized growth source of truth** (see below):
   `seeds/<year>.md` (each year's concept + Evolution Log), `seed-package/`
   (bootstrap kit), `repo-template/` (the year-repo skeleton the planter drops),
@@ -143,6 +147,12 @@ ruby scripts/provision-org-sites.rb          # scaffold/enable Pages on org repo
 # Lineage growth engine
 ruby scripts/sync-lineage-state.rb           # refresh _data/lineage.yml from lineage/seeds/*
 ruby scripts/sync-lineage-state.rb --check   # CI gate (no writes)
+
+# News-layout migration (one-time, per year repo — pilot: 2005). The enrichment
+# YAML (per-section icon/description/featured + per-article tags) lives in
+# lineage/news-migration/<year>.yml; author one per member before migrating.
+ruby scripts/migrate-to-news-structure.rb --repo <year-repo> --enrichment lineage/news-migration/2005.yml --year 2005 --dry-run
+ruby scripts/migrate-to-news-structure.rb --repo <year-repo> --enrichment lineage/news-migration/2005.yml --year 2005
 
 # Fleet repair / metadata
 ruby scripts/normalize-front-matter-dates.rb --check <dir>  # find unparseable/bad front-matter dates

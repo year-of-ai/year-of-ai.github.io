@@ -18,10 +18,14 @@ repo. See the hub's [orchestration model](https://year-of-ai.github.io/orchestra
 
 ## Conventions
 
-- **Content** lives under the taxonomy category directories defined by this
-  repo's seed; each topic is one Markdown file with `title` / `date` / `category`
-  front matter, written in a factual, neutral, encyclopedic, third-person tone,
-  with every fact verified against ≥2 sources.
+- **Content** is presented in the theme's **news layout**. Each taxonomy
+  category from the seed is a news **section** published at `/news/<slug>/`; each
+  article is a **post** at `_posts/<slug>/<YYYY-MM-DD>-<topic>.md` with
+  `title` / `date` / `categories` / `tags` / `excerpt` front matter. A post's
+  **`tags` are its section's sub-topics** (the theme's sidebar + filter pills).
+  Write in a factual, neutral, encyclopedic, third-person tone, with every fact
+  verified against ≥2 sources. (Legacy flat repos are converted once with the
+  hub's `scripts/migrate-to-news-structure.rb`.)
 - **`date:` must be a single plain ISO date** (`YYYY-MM-DD`) — never a range
   (`"1777–1778"`), a bare year, or prose. One unparseable date fails this
   site's **whole** Pages build; use the start date for ranges and
