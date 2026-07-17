@@ -15,10 +15,11 @@ Summary — regenerate structural artifacts **from existing content**, idempoten
 <!-- END GENERATED: <artifact> -->
 ```
 
-Artifacts:
-1. **Category index pages** `<category-slug>/index.md` — list every topic file in that folder (link + one-line description).
-2. **Timeline** `TIMELINE.md` — only if the `subject` is time-oriented; dated items sorted chronologically.
-3. **Master index** `INDEX.md` — all content grouped by `concept.taxonomy`, plus pointers to category indices and the timeline.
-4. **Cross-references** — a `## Related` block (2–4 links) inside each dedicated topic file.
+Artifacts (theme news layout):
+1. **Section index pages** `_posts/<section-slug>/<year>-01-01-index.md` (`layout: section`, `permalink: /news/<slug>/`) — one per taxonomy category; the `section` layout auto-lists that section's posts and builds the topic (tag) sidebar/filters.
+2. **/news/ landing** `news.md` (`layout: news`) + the homepage `index.html` (the magazine).
+3. **Navigation data** `_data/navigation/posts.yml` (the sections) + `main.yml` (the navbar with a News dropdown).
+4. **Preview placeholders** `assets/images/previews/<section-slug>.svg` + `default.svg` (XML-escape `&` in section names).
+5. **Timeline** `TIMELINE.md` — only if the `subject` is time-oriented; dated posts sorted chronologically, linked by permalink.
 
-Never alter hand-written content outside the markers, and never touch `seed.md` sections 1–7 (that's `sync-seed`'s job). Keep output deterministic (stable ordering) so reruns are diff-free. Report created / updated / unchanged.
+A post's **tags** are its section's sub-topics — the `section` layout renders them; do not invent other grouping files. For a one-time conversion of a legacy flat repo, use the hub's `scripts/migrate-to-news-structure.rb`. Never alter hand-written post bodies or `seed.md` sections 1–7 (that's `sync-seed`'s job). Keep output deterministic (stable ordering) so reruns are diff-free. Report created / updated / unchanged.
