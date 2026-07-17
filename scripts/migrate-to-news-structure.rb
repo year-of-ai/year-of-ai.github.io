@@ -217,11 +217,18 @@ end
 # ---- SVG preview placeholders ----------------------------------------------
 
 SECTION_COLORS = {
+  # 2000s taxonomy
   "history-politics"   => %w[#7c3aed #4c1d95],
   "science-technology" => %w[#0ea5e9 #075985],
   "arts-culture"       => %w[#ec4899 #9d174d],
   "society-economics"  => %w[#f59e0b #92400e],
   "people"             => %w[#10b981 #065f46],
+  # 18th-century taxonomy (1776–1778)
+  "politics"           => %w[#7c3aed #4c1d95],
+  "military"           => %w[#dc2626 #7f1d1d],
+  "science"            => %w[#0ea5e9 #075985],
+  "arts"               => %w[#ec4899 #9d174d],
+  "economics"          => %w[#f59e0b #92400e],
   "default"            => %w[#334155 #0f172a],
 }
 
