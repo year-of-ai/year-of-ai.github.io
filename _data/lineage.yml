@@ -6,7 +6,7 @@
 org: year-of-ai
 totals:
   repos: 11
-  ticks: 264
+  ticks: 268
 members:
 - name: '1776'
   repo: year-of-ai/1776
@@ -26,48 +26,49 @@ members:
   site_url: https://year-of-ai.github.io/1777/
   subject: the year 1777
   status: growing
-  ticks_logged: 28
-  log_entries: 32
+  ticks_logged: 29
+  log_entries: 33
   generations: 2
-  last_activity: '2026-07-15'
-  last_entry: 'G1-T28 — 2026-07-15 — Tick 28: Spanish Bourbon Reforms, the Bavarian
-    Succession Crisis (Treaty of Teschen), and Laplace''s nebular hypothesis'
+  last_activity: '2026-07-17'
+  last_entry: 'G1-T29 — 2026-07-17 — Tick 29: verification and consistency pass (no
+    new content)'
 - name: '1778'
   repo: year-of-ai/1778
   url: https://github.com/year-of-ai/1778
   site_url: https://year-of-ai.github.io/1778/
   subject: the year 1778
   status: growing
-  ticks_logged: 23
-  log_entries: 26
+  ticks_logged: 24
+  log_entries: 27
   generations: 1
-  last_activity: '2026-07-14'
-  last_entry: 'G1-T23 — 2026-07-14 — Tick 23: Sophie Arnould, prima donna of the Gluck–Piccinni
-    Querelle'
+  last_activity: '2026-07-17'
+  last_entry: 'G1-T24 — 2026-07-17 — Tick 24: Sartine''s Naval Reforms, European Agriculture
+    in 1778, Robert Morris'
 - name: '2005'
   repo: year-of-ai/2005
   url: https://github.com/year-of-ai/2005
   site_url: https://year-of-ai.github.io/2005/
   subject: the year 2005
   status: growing
-  ticks_logged: 24
-  log_entries: 35
+  ticks_logged: 25
+  log_entries: 36
   generations: 2
-  last_activity: '2026-07-14'
-  last_entry: 'G1-T24 — 2026-07-14 — Tick 24: Deep-dive on the Airbus A380''s first
-    flight + structure refresh'
+  last_activity: '2026-07-17'
+  last_entry: 'G1-T25 — 2026-07-17 — Tick 25: Deep-dive on John Roberts''s confirmation
+    as Chief Justice + fact-corrected enhance pass'
 - name: '2006'
   repo: year-of-ai/2006
   url: https://github.com/year-of-ai/2006
   site_url: https://year-of-ai.github.io/2006/
   subject: the year 2006
   status: growing
-  ticks_logged: 22
-  log_entries: 32
+  ticks_logged: 23
+  log_entries: 33
   generations: 2
-  last_activity: '2026-07-14'
-  last_entry: 'G2-T19 — 2026-07-14 — Tick 19: Depth-expansion pass on 11 existing
-    topic files (Web 2.0 thread + 2006 sporting/cultural/political landmarks) + verification'
+  last_activity: '2026-07-17'
+  last_entry: 'G2-T20 — 2026-07-17 — Tick 20: Three deep-dives (Ariel Sharon''s stroke,
+    Coretta Scott King, *Pirates of the Caribbean: Dead Man''s Chest*) + structure
+    refresh'
 - name: '2007'
   repo: year-of-ai/2007
   url: https://github.com/year-of-ai/2007
