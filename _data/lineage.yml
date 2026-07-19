@@ -6,7 +6,7 @@
 org: year-of-ai
 totals:
   repos: 11
-  ticks: 268
+  ticks: 272
 members:
 - name: '1776'
   repo: year-of-ai/1776
@@ -14,12 +14,12 @@ members:
   site_url: https://year-of-ai.github.io/1776/
   subject: the year 1776
   status: growing
-  ticks_logged: 27
-  log_entries: 33
+  ticks_logged: 28
+  log_entries: 34
   generations: 2
-  last_activity: '2026-07-16'
-  last_entry: 'G1-T29 — 2026-07-16 — Tick 27: Thomas Paine''s *The American Crisis*
-    and "the times that try men''s souls"'
+  last_activity: '2026-07-18'
+  last_entry: 'G1-T30 — 2026-07-18 — Tick 28: David Rittenhouse, astronomer of the
+    Revolution'
 - name: '1777'
   repo: year-of-ai/1777
   url: https://github.com/year-of-ai/1777
@@ -75,36 +75,37 @@ members:
   site_url: https://year-of-ai.github.io/2007/
   subject: the year 2007
   status: growing
-  ticks_logged: 24
-  log_entries: 34
+  ticks_logged: 25
+  log_entries: 35
   generations: 2
-  last_activity: '2026-07-15'
-  last_entry: 'G3-T24 — 2026-07-15 — Tick 24: Enhance/QA pass — neutralized four editorializing
-    phrasings across four articles'
+  last_activity: '2026-07-18'
+  last_entry: 'G3-T25 — 2026-07-18 — Tick 25: Enhance/QA pass — neutralized five editorializing
+    phrasings, fixed the YouTube acquisition date, and synced seed §4–5 to the news
+    layout'
 - name: '2008'
   repo: year-of-ai/2008
   url: https://github.com/year-of-ai/2008
   site_url: https://year-of-ai.github.io/2008/
   subject: the year 2008
   status: growing
-  ticks_logged: 22
-  log_entries: 32
+  ticks_logged: 23
+  log_entries: 33
   generations: 2
-  last_activity: '2026-07-15'
-  last_entry: 'G1-T22 — 2026-07-15 — Tick 22: Fact-verification + cross-ref marker
-    normalization + Architecture-inventory resync'
+  last_activity: '2026-07-18'
+  last_entry: 'G1-T23 — 2026-07-18 — Tick 23: Iron Man + Beijing Olympics Opening
+    Ceremony + AIG Bailout Deep-Dives'
 - name: '2009'
   repo: year-of-ai/2009
   url: https://github.com/year-of-ai/2009
   site_url: https://year-of-ai.github.io/2009/
   subject: the year 2009
   status: growing
-  ticks_logged: 23
-  log_entries: 35
+  ticks_logged: 24
+  log_entries: 36
   generations: 2
-  last_activity: '2026-07-15'
-  last_entry: 'G1-T25 — 2026-07-15 — Tick 25: Verification + Significance-section
-    compliance pass (no new topics)'
+  last_activity: '2026-07-18'
+  last_entry: 'G1-T26 — 2026-07-18 — Tick 26: Verification + DNA reconciliation to
+    the news layout (no new topics)'
 - name: '2010'
   repo: year-of-ai/2010
   url: https://github.com/year-of-ai/2010
