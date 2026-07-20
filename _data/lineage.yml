@@ -6,7 +6,7 @@
 org: year-of-ai
 totals:
   repos: 11
-  ticks: 272
+  ticks: 276
 members:
 - name: '1776'
   repo: year-of-ai/1776
@@ -26,12 +26,12 @@ members:
   site_url: https://year-of-ai.github.io/1777/
   subject: the year 1777
   status: growing
-  ticks_logged: 29
-  log_entries: 33
+  ticks_logged: 30
+  log_entries: 34
   generations: 2
-  last_activity: '2026-07-17'
-  last_entry: 'G1-T29 — 2026-07-17 — Tick 29: verification and consistency pass (no
-    new content)'
+  last_activity: '2026-07-19'
+  last_entry: 'G1-T30 — 2026-07-19 — Tick 30: verification pass + seed DNA reconciled
+    to the theme''s news layout (no new content)'
 - name: '1778'
   repo: year-of-ai/1778
   url: https://github.com/year-of-ai/1778
@@ -112,33 +112,33 @@ members:
   site_url: https://year-of-ai.github.io/2010/
   subject: the year 2010
   status: growing
-  ticks_logged: 25
-  log_entries: 35
+  ticks_logged: 26
+  log_entries: 36
   generations: 2
-  last_activity: '2026-07-16'
-  last_entry: 'G1-T25 — 2026-07-16 — Tick 25: Content (Large Hadron Collider first
-    7 TeV collisions) + structure refresh'
+  last_activity: '2026-07-19'
+  last_entry: 'G1-T26 — 2026-07-19 — Tick 26: Content (Citizens United v. FEC, Flash
+    Crash, SpaceX Falcon 9/Dragon COTS Demo 1) + structure refresh'
 - name: '2011'
   repo: year-of-ai/2011
   url: https://github.com/year-of-ai/2011
   site_url: https://year-of-ai.github.io/2011/
   subject: the year 2011
   status: growing
-  ticks_logged: 23
-  log_entries: 32
+  ticks_logged: 24
+  log_entries: 33
   generations: 1
-  last_activity: '2026-07-16'
-  last_entry: 'G1-T23 — 2026-07-16 — Tick 23: front-matter ISO-date normalization,
-    cross-reference completion, and DNA reconciliation to the true 60-topic state'
+  last_activity: '2026-07-19'
+  last_entry: 'G1-T24 — 2026-07-19 — Tick 24: the 2011 UEFA Champions League Final
+    and the 2011 NBA Finals'
 - name: '2012'
   repo: year-of-ai/2012
   url: https://github.com/year-of-ai/2012
   site_url: https://year-of-ai.github.io/2012/
   subject: the year 2012
   status: growing
-  ticks_logged: 23
-  log_entries: 32
+  ticks_logged: 24
+  log_entries: 33
   generations: 1
-  last_activity: '2026-07-16'
-  last_entry: 'G1-T23 — 2026-07-16 — Tick 23: 2012 Senkaku/Diaoyu Islands dispute,
-    2012 Amazon Basin record flood'
+  last_activity: '2026-07-19'
+  last_entry: 'G1-T24 — 2026-07-19 — Tick 24: Voyager 1''s heliosphere crossing, NFIB
+    v. Sebelius (Affordable Care Act ruling)'
