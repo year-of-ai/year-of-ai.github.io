@@ -6,7 +6,7 @@
 org: year-of-ai
 totals:
   repos: 11
-  ticks: 276
+  ticks: 280
 members:
 - name: '1776'
   repo: year-of-ai/1776
@@ -14,12 +14,12 @@ members:
   site_url: https://year-of-ai.github.io/1776/
   subject: the year 1776
   status: growing
-  ticks_logged: 28
-  log_entries: 34
+  ticks_logged: 29
+  log_entries: 35
   generations: 2
-  last_activity: '2026-07-18'
-  last_entry: 'G1-T30 — 2026-07-18 — Tick 28: David Rittenhouse, astronomer of the
-    Revolution'
+  last_activity: '2026-07-20'
+  last_entry: 'G1-T31 — 2026-07-20 — Tick 29: Henry Knox and Button Gwinnett, two
+    lives of the Revolution'
 - name: '1777'
   repo: year-of-ai/1777
   url: https://github.com/year-of-ai/1777
@@ -38,37 +38,36 @@ members:
   site_url: https://year-of-ai.github.io/1778/
   subject: the year 1778
   status: growing
-  ticks_logged: 24
-  log_entries: 27
+  ticks_logged: 25
+  log_entries: 28
   generations: 1
-  last_activity: '2026-07-17'
-  last_entry: 'G1-T24 — 2026-07-17 — Tick 24: Sartine''s Naval Reforms, European Agriculture
-    in 1778, Robert Morris'
+  last_activity: '2026-07-20'
+  last_entry: 'G1-T25 — 2026-07-20 — Tick 25: Two cross-cutting synthesis essays —
+    The Global Crisis of 1778 and 1778: Military Turning Point'
 - name: '2005'
   repo: year-of-ai/2005
   url: https://github.com/year-of-ai/2005
   site_url: https://year-of-ai.github.io/2005/
   subject: the year 2005
   status: growing
-  ticks_logged: 25
-  log_entries: 36
+  ticks_logged: 26
+  log_entries: 37
   generations: 2
-  last_activity: '2026-07-17'
-  last_entry: 'G1-T25 — 2026-07-17 — Tick 25: Deep-dive on John Roberts''s confirmation
-    as Chief Justice + fact-corrected enhance pass'
+  last_activity: '2026-07-20'
+  last_entry: 'G1-T26 — 2026-07-20 — Tick 26: Deep-dive on Space Shuttle Discovery''s
+    Return to Flight (STS-114) + structure refresh'
 - name: '2006'
   repo: year-of-ai/2006
   url: https://github.com/year-of-ai/2006
   site_url: https://year-of-ai.github.io/2006/
   subject: the year 2006
   status: growing
-  ticks_logged: 23
-  log_entries: 33
+  ticks_logged: 24
+  log_entries: 34
   generations: 2
-  last_activity: '2026-07-17'
-  last_entry: 'G2-T20 — 2026-07-17 — Tick 20: Three deep-dives (Ariel Sharon''s stroke,
-    Coretta Scott King, *Pirates of the Caribbean: Dead Man''s Chest*) + structure
-    refresh'
+  last_activity: '2026-07-20'
+  last_entry: 'G2-T21 — 2026-07-20 — Tick 21: Consolidated the duplicate 2006 energy/climate
+    synthesis articles + verification and structure refresh'
 - name: '2007'
   repo: year-of-ai/2007
   url: https://github.com/year-of-ai/2007
