@@ -6,7 +6,7 @@
 org: year-of-ai
 totals:
   repos: 11
-  ticks: 288
+  ticks: 292
 members:
 - name: '1776'
   repo: year-of-ai/1776
@@ -26,48 +26,48 @@ members:
   site_url: https://year-of-ai.github.io/1777/
   subject: the year 1777
   status: growing
-  ticks_logged: 31
-  log_entries: 35
+  ticks_logged: 32
+  log_entries: 36
   generations: 2
-  last_activity: '2026-07-21'
-  last_entry: 'G1-T31 — 2026-07-21 — Tick 31: verification pass + seed §4/§5 drift
-    cleanup (no new content)'
+  last_activity: '2026-07-23'
+  last_entry: 'G1-T32 — 2026-07-23 — Tick 32: verification pass + README category-nav
+    cross-reference repair (no new content)'
 - name: '1778'
   repo: year-of-ai/1778
   url: https://github.com/year-of-ai/1778
   site_url: https://year-of-ai.github.io/1778/
   subject: the year 1778
   status: growing
-  ticks_logged: 25
-  log_entries: 28
+  ticks_logged: 26
+  log_entries: 29
   generations: 1
-  last_activity: '2026-07-20'
-  last_entry: 'G1-T25 — 2026-07-20 — Tick 25: Two cross-cutting synthesis essays —
-    The Global Crisis of 1778 and 1778: Military Turning Point'
+  last_activity: '2026-07-23'
+  last_entry: 'G1-T26 — 2026-07-23 — Tick 26: Verification & DNA-sync pass — corpus
+    stable at 46 articles, seed §3–5 realigned to the news layout'
 - name: '2005'
   repo: year-of-ai/2005
   url: https://github.com/year-of-ai/2005
   site_url: https://year-of-ai.github.io/2005/
   subject: the year 2005
   status: growing
-  ticks_logged: 26
-  log_entries: 37
+  ticks_logged: 27
+  log_entries: 38
   generations: 2
-  last_activity: '2026-07-20'
-  last_entry: 'G1-T26 — 2026-07-20 — Tick 26: Deep-dive on Space Shuttle Discovery''s
-    Return to Flight (STS-114) + structure refresh'
+  last_activity: '2026-07-23'
+  last_entry: 'G1-T27 — 2026-07-23 — Tick 27: Two Arts & Culture articles (L''Enfant
+    Palme d''Or, Coldplay X&Y) + fact-corrected enhance pass'
 - name: '2006'
   repo: year-of-ai/2006
   url: https://github.com/year-of-ai/2006
   site_url: https://year-of-ai.github.io/2006/
   subject: the year 2006
   status: growing
-  ticks_logged: 24
-  log_entries: 34
+  ticks_logged: 25
+  log_entries: 35
   generations: 2
-  last_activity: '2026-07-20'
-  last_entry: 'G2-T21 — 2026-07-20 — Tick 21: Consolidated the duplicate 2006 energy/climate
-    synthesis articles + verification and structure refresh'
+  last_activity: '2026-07-23'
+  last_entry: 'G2-T22 — 2026-07-23 — Tick 22: Three deep-dives (*Brokeback Mountain*,
+    Darfur genocide crisis, Stern Review) + structure refresh'
 - name: '2007'
   repo: year-of-ai/2007
   url: https://github.com/year-of-ai/2007
