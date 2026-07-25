@@ -6,7 +6,7 @@
 org: year-of-ai
 totals:
   repos: 11
-  pages: 645
+  pages: 652
 repos:
 - name: '1776'
   title: The Year 1776
@@ -17,14 +17,14 @@ repos:
   pages_enabled: true
   scaffolded: true
   branch: main
-  pushed_at: '2026-07-22T08:06:23Z'
-  page_count: 76
+  pushed_at: '2026-07-24T08:07:06Z'
+  page_count: 77
   sections:
   - name: _posts
     title: Posts
     url: https://year-of-ai.github.io/1776/_posts/
     source_url: https://github.com/year-of-ai/1776/tree/main/_posts
-    count: 74
+    count: 75
   root_pages:
   - title: Timeline
     url: https://year-of-ai.github.io/1776/TIMELINE/
@@ -135,7 +135,7 @@ repos:
   pages_enabled: true
   scaffolded: true
   branch: main
-  pushed_at: '2026-07-21T08:02:17Z'
+  pushed_at: '2026-07-24T08:02:46Z'
   page_count: 49
   sections:
   - name: _posts
@@ -158,14 +158,14 @@ repos:
   pages_enabled: true
   scaffolded: true
   branch: main
-  pushed_at: '2026-07-21T08:07:04Z'
-  page_count: 44
+  pushed_at: '2026-07-24T08:08:19Z'
+  page_count: 47
   sections:
   - name: _posts
     title: Posts
     url: https://year-of-ai.github.io/2008/_posts/
     source_url: https://github.com/year-of-ai/2008/tree/main/_posts
-    count: 42
+    count: 45
   root_pages:
   - title: Timeline
     url: https://year-of-ai.github.io/2008/TIMELINE/
@@ -181,14 +181,14 @@ repos:
   pages_enabled: true
   scaffolded: true
   branch: main
-  pushed_at: '2026-07-21T08:05:19Z'
-  page_count: 60
+  pushed_at: '2026-07-24T08:07:48Z'
+  page_count: 63
   sections:
   - name: _posts
     title: Posts
     url: https://year-of-ai.github.io/2009/_posts/
     source_url: https://github.com/year-of-ai/2009/tree/main/_posts
-    count: 58
+    count: 61
   root_pages:
   - title: Timeline
     url: https://year-of-ai.github.io/2009/TIMELINE/
