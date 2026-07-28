@@ -305,7 +305,7 @@ for the alternatives weighed and why this one was chosen.
 - **Self-referential.** Repos cross-link their own topics and, increasingly, each
   other — a knowledge base that builds on and refers back to itself.
 
-## 6 · Guardrails &amp; trust
+## 6 · Guardrails & trust
 
 - **Authentication.** Model passes use a Claude subscription token
   (`CLAUDE_CODE_OAUTH_TOKEN`), with an `ANTHROPIC_API_KEY` fallback; cross-repo
