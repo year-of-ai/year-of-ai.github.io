@@ -1,13 +1,19 @@
 ---
-title: AI Orchestration
+title: AI Orchestration — how the network grows itself
 description: >-
   How the year-of-ai hub orchestrates a federated network of self-growing
-  knowledge bases — the architecture model, the growth process, and the strategy
-  behind a knowledge base that researches and writes itself.
+  knowledge bases that research and write themselves, one tick at a time.
+keywords:
+  - ai orchestration
+  - self-growing knowledge bases
+  - growth engine
+  - model escalation
+  - year of ai network
 layout: default
 permalink: /orchestration/
 sidebar:
   nav: hub
+lastmod: 2026-07-28
 ---
 
 # AI Orchestration
