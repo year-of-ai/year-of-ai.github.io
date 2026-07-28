@@ -8,7 +8,30 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Added
+- **Illustrated growth — Claude-authored SVG preview banners** (fleet
+  alignment with lifehacker.dev and the ai-world-view hub). The grow tick
+  gained a deterministic **Illustrate** step (`grow-lineage.yml`): every
+  new/changed article is bannered with a content-aware vector drawing that
+  Claude authors via the new `scripts/claude_svg_banner.py` — a companion
+  that imports the `zer0-image-generator` gem engine as a library and reuses
+  its credential chain, SVG sanitizer, and front-matter writers. Art
+  direction + authoring model live in `lineage/policy.yml` `preview:`
+  (policy-over-workflow, like the model tiers); keyless runs degrade to the
+  engine's deterministic `local` SVG; failures never block a publish. The
+  hub's own pages get the same treatment via the new fleet-standard wrapper
+  `scripts/generate-preview-images.sh` (resolves the `provider: auto`
+  capability ladder the published engine doesn't know yet) and the
+  `zer0-image-generator` gem in the `Gemfile`; `_config.yml preview_images:`
+  now pins `rasterizer: none` (SVG-only) + `provider: auto`.
+
 ### Changed
+- **`grow-lineage.yml` hardening back-ported from the ai-world-view hub**:
+  the hub-owned-path exclusion is factored into one `HUB_OWNED_EXCLUDE_RE`
+  env (was inlined twice), and a loud-failure gate now fails the run when a
+  tick publishes nothing — distinguishing an auth/setup failure (all OAuth
+  passes errored) from stalled growth — instead of reporting an empty tick
+  GREEN.
 - **Converted from a theme fork to a `remote_theme` consumer.** The repo no
   longer vendors the zer0-mistakes theme; it renders via
   `remote_theme: "bamr87/zer0-mistakes"` on the existing native GitHub Pages

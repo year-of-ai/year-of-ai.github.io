@@ -38,6 +38,20 @@ cadence:
   repos_per_run: 4
   selection: stalest-first
 
+# Preview banners — the grow tick's "Illustrate" step (grow-lineage.yml) runs
+# scripts/claude_svg_banner.py over each tick's new content: Claude AUTHORS a
+# content-aware SVG banner per article (~12 KB vector, no rasterizer), stamped
+# into `preview:` front matter so member pages ship cover art + og:images.
+# Falls back to the zer0-image-generator engine's deterministic `local` SVG
+# when no Claude credential is available. Org-wide art direction lives HERE
+# (not in the workflow) — same policy-over-workflow rule as the model tiers.
+preview:
+  enabled: true
+  model: "claude-sonnet-4-6"      # authoring model for the SVG banner
+  style: "retro pixel art, 8-bit video game aesthetic, vibrant colors, nostalgic, clean pixel graphics"
+  style_modifiers: "pixelated, retro gaming style, CRT screen glow effect, limited color palette"
+  output_dir: "assets/images/previews"
+
 # Auth (org secrets the hub grow workflow needs):
 #   CLAUDE_CODE_OAUTH_TOKEN  — primary auth for every model pass (subscription)
 #   ANTHROPIC_API_KEY        — fallback auth
