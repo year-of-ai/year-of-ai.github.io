@@ -6,7 +6,7 @@
 org: year-of-ai
 totals:
   repos: 11
-  ticks: 300
+  ticks: 304
 members:
 - name: '1776'
   repo: year-of-ai/1776
@@ -14,11 +14,12 @@ members:
   site_url: https://year-of-ai.github.io/1776/
   subject: the year 1776
   status: growing
-  ticks_logged: 31
-  log_entries: 37
+  ticks_logged: 32
+  log_entries: 38
   generations: 2
-  last_activity: '2026-07-24'
-  last_entry: 'G1-T33 — 2026-07-24 — Tick 31: The Founding of Phi Beta Kappa'
+  last_activity: '2026-07-27'
+  last_entry: 'G1-T34 — 2026-07-27 — Tick 32: Lavoisier''s combustion experiments,
+    the East India Company, and Spallanzani''s naturalist work'
 - name: '1777'
   repo: year-of-ai/1777
   url: https://github.com/year-of-ai/1777
@@ -37,36 +38,36 @@ members:
   site_url: https://year-of-ai.github.io/1778/
   subject: the year 1778
   status: growing
-  ticks_logged: 26
-  log_entries: 29
+  ticks_logged: 27
+  log_entries: 30
   generations: 1
-  last_activity: '2026-07-23'
-  last_entry: 'G1-T26 — 2026-07-23 — Tick 26: Verification & DNA-sync pass — corpus
-    stable at 46 articles, seed §3–5 realigned to the news layout'
+  last_activity: '2026-07-27'
+  last_entry: 'G1-T27 — 2026-07-27 — Tick 27: Three architects of the alliance — Comte
+    de Vergennes, Marquis de Lafayette, Henry Laurens'
 - name: '2005'
   repo: year-of-ai/2005
   url: https://github.com/year-of-ai/2005
   site_url: https://year-of-ai.github.io/2005/
   subject: the year 2005
   status: growing
-  ticks_logged: 27
-  log_entries: 38
+  ticks_logged: 28
+  log_entries: 39
   generations: 2
-  last_activity: '2026-07-23'
-  last_entry: 'G1-T27 — 2026-07-23 — Tick 27: Two Arts & Culture articles (L''Enfant
-    Palme d''Or, Coldplay X&Y) + fact-corrected enhance pass'
+  last_activity: '2026-07-27'
+  last_entry: 'G1-T28 — 2026-07-27 — Tick 28: Deep-dive on the 31st G8 summit at Gleneagles
+    + structure refresh'
 - name: '2006'
   repo: year-of-ai/2006
   url: https://github.com/year-of-ai/2006
   site_url: https://year-of-ai.github.io/2006/
   subject: the year 2006
   status: growing
-  ticks_logged: 25
-  log_entries: 35
+  ticks_logged: 26
+  log_entries: 36
   generations: 2
-  last_activity: '2026-07-23'
-  last_entry: 'G2-T22 — 2026-07-23 — Tick 22: Three deep-dives (*Brokeback Mountain*,
-    Darfur genocide crisis, Stern Review) + structure refresh'
+  last_activity: '2026-07-27'
+  last_entry: 'G2-T23 — 2026-07-27 — Tick 23: Three deep-dives (Zidane''s final season,
+    2006 AI & robotics, the 2006 Web 2.0 investment wave) + structure refresh'
 - name: '2007'
   repo: year-of-ai/2007
   url: https://github.com/year-of-ai/2007
