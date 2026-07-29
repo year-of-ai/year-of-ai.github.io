@@ -54,7 +54,10 @@ end
 
 fixed = []
 unfixable = []
-Dir.glob(File.join(root, "**", "*.md")).sort.each do |f|
+# Jekyll builds both extensions (markdown_ext default), so the publish gate
+# must cover both — a bad date in a .markdown file fails a Pages build just
+# as hard as one in a .md file.
+Dir.glob(File.join(root, "**", "*.{md,markdown}")).sort.each do |f|
   next if f.match?(SKIP) || File.basename(f) == "seed.md"
 
   text = File.read(f, encoding: "utf-8")

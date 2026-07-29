@@ -87,6 +87,8 @@ transplant:
   - ".github/instructions/docs-warden.instructions.md" # doc-warden contract — agnostic
   - "scripts/docs-warden.rb"                # doc-coverage engine — agnostic
   - "scripts/normalize-front-matter-dates.rb" # grow publish gate + member repair tool — agnostic
+  - "scripts/claude_svg_banner.py"          # Claude-authored SVG banner companion (grow tick Illustrate step) — agnostic
+  - "scripts/generate-preview-images.sh"    # preview-engine wrapper resolving the provider capability ladder — agnostic
   - "scripts/sync-member-metadata.rb"       # registry→GitHub metadata sync — agnostic (org from cfg)
   - "scripts/migrate-to-news-structure.rb"  # one-time flat→news-layout converter — agnostic
   - "telemetry/README.md"                   # ledger schema doc — agnostic

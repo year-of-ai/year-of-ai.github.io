@@ -1,13 +1,19 @@
 ---
-title: Lineage
+title: Lineage — the living year knowledge-base family
 description: >-
-  The living lineage of the year-of-ai knowledge base — every self-growing repo,
-  its growth state, and how each was spawned from the last. The hub orchestrates
-  their growth centrally; each repo grows perpetually and references the others.
+  Every self-growing year repo in the year-of-ai lineage, its growth state,
+  and how each was spawned — orchestrated centrally by the hub.
+keywords:
+  - year of ai lineage
+  - self-growing knowledge base
+  - year repos
+  - growth ticks
+  - central orchestration
 layout: default
 permalink: /lineage/
 sidebar:
   nav: hub
+lastmod: 2026-07-29
 ---
 
 # Lineage
@@ -81,7 +87,9 @@ model, the growth process, and the strategy behind it.
         <a class="btn btn-sm btn-outline-secondary" href="{{ m.url }}" target="_blank" rel="noopener">
           <i class="bi bi-github me-1"></i>Source
         </a>
-        <a class="btn btn-sm btn-outline-secondary" href="{{ m.url }}/actions/workflows/grow.yml" target="_blank" rel="noopener" title="Growth heartbeat">
+        {% comment %} Member repos carry no workflows under the central model —
+           the growth heartbeat lives in the hub's grow-lineage engine. {% endcomment %}
+        <a class="btn btn-sm btn-outline-secondary" href="https://github.com/{{ lin.org }}/{{ lin.org }}.github.io/actions/workflows/grow-lineage.yml" target="_blank" rel="noopener" title="Growth heartbeat (hub engine)">
           <i class="bi bi-activity me-1"></i>Ticks
         </a>
       </div>

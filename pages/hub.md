@@ -123,7 +123,7 @@ below is refreshed automatically by the
 
 > No hub data yet. Run `./scripts/sync-hub-metadata.sh` to populate the
 > dashboard from the repositories registered in
-> [`_data/hub.yml`]({{ site.repository | prepend: "https://github.com/" }}/blob/main/_data/hub.yml),
+> [`_data/hub.yml`]({{ site.repository | join: '' | prepend: "https://github.com/" }}/blob/main/_data/hub.yml),
 > or wait for the scheduled **Hub Metadata Sync** workflow.
 
 {% endif %}

@@ -44,11 +44,17 @@ read the architecture doc and fix the drift.
   the docs-coverage engine (`docs-warden.rb`), the fleet-health digest
   (`fleet-health.rb`), the front-matter date normalizer
   (`normalize-front-matter-dates.rb` — the grow tick's publish gate and the
-  fleet repair tool), and the **news-layout migrator**
+  fleet repair tool), the **news-layout migrator**
   (`migrate-to-news-structure.rb` — one-time conversion of a flat year repo to
   the theme's `news`/`section`/`article` layout: taxonomy categories become
   `/news/<slug>/` sections, topic files become posts, and post `tags` become
-  each section's sub-topics; see `--help`).
+  each section's sub-topics; see `--help`), and the **preview-banner pair**
+  (`claude_svg_banner.py` — Claude authors a content-aware SVG banner per
+  article, reusing the `zer0-image-generator` engine's sanitizer/writers; and
+  `generate-preview-images.sh` — the fleet-standard wrapper that resolves the
+  `preview_images.provider: auto` capability ladder. Both are vendored
+  identically in lifehacker.dev and the ai-world-view hub — keep the copies
+  in sync).
 - `lineage/` — the **centralized growth source of truth** (see below):
   `seeds/<year>.md` (each year's concept + Evolution Log), `seed-package/`
   (bootstrap kit), `repo-template/` (the year-repo skeleton the planter drops),
@@ -114,11 +120,16 @@ How a tick runs:
    (`claude-haiku-4-5` draft → `claude-sonnet-4-6` expand →
    `claude-opus-4-8` enhance). An **API-key fallback** pass fires if the OAuth
    passes produce no content changes or report `is_error`.
-3. The updated seed §8 is persisted back to `lineage/seeds/<repo>.md`; the staged
+3. The **Illustrate** step banners each new article with a Claude-authored
+   SVG preview (`scripts/claude_svg_banner.py`; art direction + model from
+   `lineage/policy.yml` `preview:`; degrades to the engine's deterministic
+   `local` SVG without a credential, never blocks a publish). The updated
+   seed §8 is persisted back to `lineage/seeds/<repo>.md`; the staged
    framework/seed are stripped, front-matter dates are normalized to ISO
    (`scripts/normalize-front-matter-dates.rb` — an unparseable `date:` fails a
    member's whole Pages build), and **only** new content + telemetry are pushed
-   to the year repo.
+   to the year repo. A tick that publishes nothing fails loudly
+   (auth/setup failure vs stalled growth).
 
 **Auth (org secrets):** `CLAUDE_CODE_OAUTH_TOKEN` (primary model auth),
 `ANTHROPIC_API_KEY` (fallback), `LIFECYCLE_PAT` (cross-repo push + workflow

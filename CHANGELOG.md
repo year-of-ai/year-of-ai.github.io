@@ -8,7 +8,57 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Fixed
+- **Adversarial-review fixes for illustrated growth** (confirmed with executed
+  reproductions): `claude_svg_banner.py` now re-illustrates a NEW article whose
+  stamp is the shared section placeholder (previously the placeholder's
+  existence skipped exactly the articles the Illustrate step exists for),
+  skips no-front-matter files (README/TIMELINE/INDEX) before spending a model
+  call, discovers articles inside brand-new directories (`--porcelain -uall`),
+  survives non-ASCII filenames, and detects `role=` accessibly-quoted;
+  `generate-preview-images.sh` refuses to route `--enhance` to the local
+  provider's fake-success no-op and forwards style/output flags to the claude
+  rung; `grow-lineage.yml`'s loud-failure gate now consults the `is_error`
+  signal (an expired OAuth token was misdiagnosed as "growth stalled"), and
+  its local-SVG fallback honours the policy output dir; the date gate covers
+  `.markdown` files; the lineage dashboard's Ticks button points at the hub's
+  grow-lineage runs (member repos carry no workflows under the central
+  model); dangling theme-repo references removed from
+  `content_review.yml`/`content-reviewer.md`.
+
+### Changed (comment noise)
+- **PR review comments only speak when they have something to say**: the
+  docs-warden and deterministic content-review stickies are no longer created
+  on clean runs (they still flip an existing sticky to ✅ so a reported
+  problem visibly resolves); the Claude content-reviewer runs **delta
+  reviews** against its previous sticky (new/unresolved findings only, a
+  one-line "no new findings" update otherwise) and never posts raw API/billing
+  errors to the PR.
+
+### Added
+- **Illustrated growth — Claude-authored SVG preview banners** (fleet
+  alignment with lifehacker.dev and the ai-world-view hub). The grow tick
+  gained a deterministic **Illustrate** step (`grow-lineage.yml`): every
+  new/changed article is bannered with a content-aware vector drawing that
+  Claude authors via the new `scripts/claude_svg_banner.py` — a companion
+  that imports the `zer0-image-generator` gem engine as a library and reuses
+  its credential chain, SVG sanitizer, and front-matter writers. Art
+  direction + authoring model live in `lineage/policy.yml` `preview:`
+  (policy-over-workflow, like the model tiers); keyless runs degrade to the
+  engine's deterministic `local` SVG; failures never block a publish. The
+  hub's own pages get the same treatment via the new fleet-standard wrapper
+  `scripts/generate-preview-images.sh` (resolves the `provider: auto`
+  capability ladder the published engine doesn't know yet) and the
+  `zer0-image-generator` gem in the `Gemfile`; `_config.yml preview_images:`
+  now pins `rasterizer: none` (SVG-only) + `provider: auto`.
+
 ### Changed
+- **`grow-lineage.yml` hardening back-ported from the ai-world-view hub**:
+  the hub-owned-path exclusion is factored into one `HUB_OWNED_EXCLUDE_RE`
+  env (was inlined twice), and a loud-failure gate now fails the run when a
+  tick publishes nothing — distinguishing an auth/setup failure (all OAuth
+  passes errored) from stalled growth — instead of reporting an empty tick
+  GREEN.
 - **Converted from a theme fork to a `remote_theme` consumer.** The repo no
   longer vendors the zer0-mistakes theme; it renders via
   `remote_theme: "bamr87/zer0-mistakes"` on the existing native GitHub Pages

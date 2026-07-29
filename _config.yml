@@ -106,18 +106,34 @@ favicon:
 # Settings for automatic preview image generation using AI
 # Used by: scripts/generate-preview-images.sh
 
+# Fleet-aligned preview contract (same shape as lifehacker.dev and the
+# ai-world-view hub). `auto` is a capability ladder resolved by
+# scripts/generate-preview-images.sh — the published engine (<= 0.6.x)
+# doesn't know it, so always go through the wrapper:
+#   raster image API key wired   — that renderer (Claude writes the art brief);
+#   Claude credential alone      — Claude authors the banner as SVG
+#                                  (scripts/claude_svg_banner.py);
+#   nothing wired                — deterministic local SVG.
+# MEMBER repos are illustrated by the grow tick itself (grow-lineage.yml
+# "Illustrate" step, art direction from lineage/policy.yml `preview:`) —
+# this block only covers the hub site's own pages.
 preview_images:
   enabled                : true
-  provider               : 'openai'           # openai, stability, local
-  model                  : 'gpt-image-2'      # gpt-image-2, dall-e-3, dall-e-2, stable-diffusion
-  size                   : '1536x1024'        # Landscape for GPT Image banners; DALL-E 3 also supports 1792x1024
-  quality                : 'auto'             # auto for GPT Image models; standard/hd for DALL-E 3
+  provider               : 'auto'             # auto | local | claude | openai | xai | stability | gemini
+  model                  : ''                 # empty → the active renderer's default
+  size                   : '1536x1024'        # landscape banner
+  quality                : 'auto'
   style                  : 'retro pixel art, 8-bit video game aesthetic, vibrant colors, nostalgic, clean pixel graphics'
   output_dir             : 'assets/images/previews'
   # Path normalization: allows omitting /assets/ prefix in frontmatter
   # e.g., preview: /images/previews/my-image.png becomes /assets/images/previews/my-image.png
   assets_prefix          : '/assets'          # Prefix to prepend to relative preview paths
   auto_prefix            : true               # Auto-add assets_prefix if path doesn't start with it
+  # SVG-only: the vector banner IS the committed preview (~12 KB, diffs as
+  # text, crisp at any size, no rasterizer toolchain on any agent or runner).
+  rasterizer             : 'none'             # auto|rsvg|inkscape|magick|playwright|none
+  prompt_engine          : 'claude'           # claude writes the art brief (template = built-in prompt)
+  review_engine          : 'claude'           # claude vision-reviews raster renders (none = skip)
   # Additional style modifiers applied to all prompts
   style_modifiers        : 'pixelated, retro gaming style, CRT screen glow effect, limited color palette'
 

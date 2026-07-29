@@ -45,6 +45,11 @@ permissions:
 env:
   REPO: ${{ inputs.repo }}
   TARGET: "year-of-ai/${{ inputs.repo }}"
+  # Hub-owned paths staged into the year-repo checkout for the tick — every
+  # step that asks "did this tick produce content?" (empty-tick check, seed-log
+  # persist, illustrate) must ignore them with this ONE regex. Keep in sync
+  # with the `rm -rf` list in the strip/publish step.
+  HUB_OWNED_EXCLUDE_RE: ' (\.github/|seed\.md|lifecycle\.yml|seed-package/|ROADMAP\.md|LIFECYCLE\.md)'
   # ---- Tier 1: generate (drafts only, no publish) ------------------------
   GENERATE_PROMPT: |
     You are the GENERATE pass (tier 1 of 3: generate -> expand -> enhance) of a
@@ -198,6 +203,7 @@ jobs:
           echo "models: generate=$(m generate) expand=$(m expand) enhance=$(m enhance)"
 
       - name: Tier 1 — generate drafts (Haiku)
+        id: tier1
         continue-on-error: true
         uses: anthropics/claude-code-action@v1
         with:
@@ -214,6 +220,7 @@ jobs:
         run: cp /home/runner/work/_temp/claude-execution-output.json /tmp/grow-tier1.json 2>/dev/null || true
 
       - name: Tier 2 — expand drafts (Sonnet)
+        id: tier2
         continue-on-error: true
         uses: anthropics/claude-code-action@v1
         with:
@@ -230,6 +237,7 @@ jobs:
         run: cp /home/runner/work/_temp/claude-execution-output.json /tmp/grow-tier2.json 2>/dev/null || true
 
       - name: Tier 3 — enhance (Opus)
+        id: tier3
         continue-on-error: true
         uses: anthropics/claude-code-action@v1
         with:
@@ -256,7 +264,7 @@ jobs:
         id: check
         run: |
           content=$(git status --porcelain \
-            | grep -vE ' (\.github/|seed\.md|lifecycle\.yml|seed-package/|ROADMAP\.md|LIFECYCLE\.md)' \
+            | grep -vE "${HUB_OWNED_EXCLUDE_RE}" \
             | grep -c . || true)
           empty=true
           [ "${content:-0}" -gt 0 ] && empty=false
@@ -274,6 +282,7 @@ jobs:
           echo "content_changes=$content empty=$empty failed=$failed"
 
       - name: Fallback — generate the tick on the API key
+        id: fallback
         if: steps.check.outputs.empty == 'true' || steps.check.outputs.failed == 'true'
         continue-on-error: true
         uses: anthropics/claude-code-action@v1
@@ -298,6 +307,74 @@ jobs:
           if-no-files-found: ignore
           retention-days: 14
 
+      # ---- Illustrate: Claude-authored SVG banners for the tick's content ----
+      # Deterministic step, not a model pass: every new/changed markdown file
+      # this tick gets a content-aware SVG preview banner (cover art + og:image
+      # on the member site). Claude AUTHORS the vector via the hub's
+      # scripts/claude_svg_banner.py (art direction + model from
+      # lineage/policy.yml `preview:`); with no Claude credential it falls back
+      # to the zer0-image-generator engine's deterministic `local` SVG. A
+      # banner failure never blocks the tick's publish.
+      - name: Illustrate — SVG preview banners for new content
+        if: always()
+        continue-on-error: true
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          set -uo pipefail
+          # Art direction + on/off come from policy, not the workflow.
+          readarray -t P < <(ruby -ryaml -e '
+            p = (YAML.load_file("/tmp/hub/lineage/policy.yml")["preview"] rescue nil) || {}
+            puts p.fetch("enabled", false) ? "true" : "false"
+            puts (p["model"] || "").to_s.tr("\n", " ")
+            puts (p["style"] || "").to_s.tr("\n", " ")
+            puts (p["style_modifiers"] || "").to_s.tr("\n", " ")
+            puts (p["output_dir"] || "assets/images/previews").to_s
+          ')
+          ENABLED="${P[0]:-false}"; MODEL="${P[1]:-}"; STYLE="${P[2]:-}"
+          MODIFIERS="${P[3]:-}"; OUT_DIR="${P[4]:-assets/images/previews}"
+          if [ "$ENABLED" != "true" ]; then
+            echo "preview.enabled is false in lineage/policy.yml — skipping banners."
+            exit 0
+          fi
+          # -uall: without it a brand-new directory collapses to one `?? dir/`
+          # line and every article inside it is invisible to this gate.
+          if ! git status --porcelain -uall | grep -vE "${HUB_OWNED_EXCLUDE_RE}" \
+               | grep -qE '\.(md|markdown)$'; then
+            echo "No new content this tick — nothing to illustrate."
+            exit 0
+          fi
+          # The engine ships inside the zer0-image-generator gem (a single
+          # python file); the companion imports it as a library.
+          gem install --user-install --no-document zer0-image-generator >/dev/null 2>&1 || true
+          ENGINE="$(gem contents zer0-image-generator 2>/dev/null | grep -m1 'preview_generator\.py$' || true)"
+          if [ -z "$ENGINE" ]; then
+            echo "::warning::zer0-image-generator engine unavailable — skipping banners this tick."
+            exit 0
+          fi
+          python3 -c 'import yaml' 2>/dev/null || pip3 install --quiet PyYAML || true
+          status=0
+          python3 /tmp/hub/scripts/claude_svg_banner.py --engine "$ENGINE" --changed \
+            ${MODEL:+--model "$MODEL"} \
+            ${STYLE:+--style "$STYLE"} \
+            ${MODIFIERS:+--style-modifiers "$MODIFIERS"} \
+            --output-dir "$OUT_DIR" || status=$?
+          if [ "$status" = "3" ]; then
+            echo "No Claude credential — deterministic local SVG banners instead."
+            git status --porcelain -uall | grep -vE "${HUB_OWNED_EXCLUDE_RE}" \
+              | grep -E '\.(md|markdown)$' | sed -E 's/^.{3}//; s/^"(.*)"$/\1/' \
+              | while IFS= read -r f; do
+                  [ -f "$f" ] && python3 "$ENGINE" -f "$f" -p local --rasterizer none \
+                    --output-dir "$OUT_DIR" ${STYLE:+--style "$STYLE"} || true
+                done
+          elif [ "$status" != "0" ]; then
+            echo "::warning::banner generation reported failures (exit $status) — the tick publishes regardless."
+          fi
+          # A failed front-matter stamp can leave a .bak next to the article;
+          # never let one ride into the publish commit.
+          find . -name '*.md.bak' -not -path './.git/*' -delete 2>/dev/null || true
+
       - name: Persist the seed Evolution Log back to the hub
         if: always()
         env:
@@ -308,7 +385,7 @@ jobs:
           ORIG="/tmp/hub/lineage/seeds/${REPO}.md"
           # Did this tick publish new content? (ignore the staged hub-owned files)
           content_changed=$(git status --porcelain \
-            | grep -vE ' (\.github/|seed\.md|lifecycle\.yml|seed-package/|ROADMAP\.md|LIFECYCLE\.md)' \
+            | grep -vE "${HUB_OWNED_EXCLUDE_RE}" \
             | grep -c . || true)
           # Count §8 tick entries leniently — h2 or h3, any "Tick N:" header.
           count_ticks() { grep -cE '^#{2,3} .*Tick [0-9]+ *:' "$1" 2>/dev/null || echo 0; }
@@ -352,11 +429,13 @@ jobs:
           )
 
       - name: Strip the staged framework/seed and publish content + telemetry
+        id: publish
         if: always()
         env:
           GH_TOKEN: ${{ secrets.LIFECYCLE_PAT }}
         run: |
           set -uo pipefail
+          echo "published=false" >> "$GITHUB_OUTPUT"
           # Remove everything that belongs to the hub, leaving only the year repo's
           # own content + telemetry. claude-code-action staged .github + seed.md;
           # plan-roadmap may regenerate ROADMAP.md (process scaffolding, not content).
@@ -384,7 +463,44 @@ jobs:
           git add -A
           git commit -q -m "content: growth tick (Haiku -> Sonnet -> Opus)"
           for _ in 1 2 3; do
-            git push origin HEAD:main && exit 0
+            if git push origin HEAD:main; then
+              echo "published=true" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
             git pull --rebase origin main || true
           done
-          git push origin HEAD:main
+          git push origin HEAD:main && echo "published=true" >> "$GITHUB_OUTPUT"
+
+      # Loud failure gate (aligned with the ai-world-view hub). The three tiers
+      # + fallback are continue-on-error, so a tick where EVERY model pass died
+      # at startup (e.g. an invalid OAuth token) used to reach the empty-tree
+      # publish and report the whole run GREEN. Surface that instead: if
+      # nothing was published, fail the job and say whether the cause was an
+      # auth/setup error or a genuine no-op tick.
+      - name: Fail loudly if the growth tick produced no content
+        if: always()
+        env:
+          PUBLISHED: ${{ steps.publish.outputs.published }}
+          GEN_OUTCOME: ${{ steps.tier1.outcome }}
+          EXP_OUTCOME: ${{ steps.tier2.outcome }}
+          ENH_OUTCOME: ${{ steps.tier3.outcome }}
+          FB_OUTCOME: ${{ steps.fallback.outcome }}
+          # claude-code-action exits 0 even when the agent result is an error
+          # (is_error:true — e.g. an expired OAuth token), so tier OUTCOMES are
+          # 'success' in the primary auth-failure mode. steps.check already
+          # parsed every tier's is_error; it is the authoritative auth signal.
+          CHECK_FAILED: ${{ steps.check.outputs.failed }}
+        run: |
+          set -uo pipefail
+          if [ "$PUBLISHED" = "true" ]; then
+            echo "Growth tick published content for ${REPO} — OK."
+            exit 0
+          fi
+          echo "::error::Growth tick produced NO content for ${REPO} (nothing was published)."
+          echo "pass outcomes: generate=$GEN_OUTCOME expand=$EXP_OUTCOME enhance=$ENH_OUTCOME fallback=$FB_OUTCOME is_error_seen=$CHECK_FAILED"
+          if [ "$CHECK_FAILED" = "true" ] || { [ "$GEN_OUTCOME" = "failure" ] && [ "$EXP_OUTCOME" = "failure" ] && [ "$ENH_OUTCOME" = "failure" ]; }; then
+            echo "::error::Model passes reported errors (is_error/outcome) — this is an auth/setup failure (expired or invalid CLAUDE_CODE_OAUTH_TOKEN, or claude-code-action could not authenticate). Re-mint the token; do not chase a content problem."
+          else
+            echo "::error::Model passes ran without error but wrote no new content — growth stalled (every topic may already be covered, or the prompt selected nothing)."
+          fi
+          exit 1

@@ -38,11 +38,14 @@ Every concept-bearing asset of the model is classified in
 
 - **`transplant`** — concept-**agnostic**, copied byte-for-byte. The whole agent
   framework (`lineage/framework/**` skills/prompts/agents), the hub scripts
-  (`lib/hub.rb`, `sync-*`, `content-review`, `docs-warden`, and the fleet's
-  `normalize-front-matter-dates` publish-gate/repair tool and
-  `sync-member-metadata` registry→GitHub-metadata sync), the `.claude` adapter
-  set, the theme-data files, the chat-proxy worker, the legal pages. *Must
-  contain no concept literal* (the verify gate enforces this).
+  (`lib/hub.rb`, `sync-*`, `content-review`, `docs-warden`, the fleet's
+  `normalize-front-matter-dates` publish-gate/repair tool,
+  `sync-member-metadata` registry→GitHub-metadata sync, and the preview-banner
+  pair `claude_svg_banner.py` + `generate-preview-images.sh` — the grow tick's
+  Illustrate step and the `preview_images.provider: auto` ladder wrapper), the
+  `.claude` adapter set, the theme-data files, the chat-proxy worker, the
+  legal pages. *Must contain no concept literal* (the verify gate enforces
+  this).
 - **`template`** — carries concept literals, tokenized via the `tokens:`
   literal→`{{TOKEN}}` map at plant time: `_config.yml`, `_data/hub.yml`,
   `policy.yml`, the orchestration/grow workflows, the provisioner + planter.

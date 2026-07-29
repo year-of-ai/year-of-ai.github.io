@@ -73,17 +73,30 @@ jobs:
         with:
           ruby-version: "3.3"
       - name: Run coverage gate
+        id: gate
         if: steps.pause.outputs.skip != 'true'
         run: |
           base="${{ github.event.inputs.base || format('origin/{0}', github.base_ref) }}"
           ruby scripts/docs-warden.rb --base "$base" \
             --summary /tmp/docs-warden.md --json /tmp/docs-warden.json --check || echo "::warning::docs-warden gate reported gaps (see comment)."
           cat /tmp/docs-warden.md
-      - name: Post / update PR comment
-        if: github.event_name == 'pull_request' && steps.pause.outputs.skip != 'true'
+          count=$(ruby -rjson -e 'puts (JSON.parse(File.read("/tmp/docs-warden.json"))["findings"] || []).length' 2>/dev/null || echo 0)
+          echo "findings=${count:-0}" >> "$GITHUB_OUTPUT"
+      # Comment noise policy: a clean run never CREATES a comment (the green
+      # check is the signal) — it only flips an EXISTING sticky to ✅ so a
+      # previously-reported gap shows as resolved.
+      - name: Post / update PR comment (findings)
+        if: github.event_name == 'pull_request' && steps.pause.outputs.skip != 'true' && steps.gate.outputs.findings != '0'
         uses: marocchino/sticky-pull-request-comment@v2
         with:
           header: docs-warden
+          path: /tmp/docs-warden.md
+      - name: Resolve the sticky comment (clean run)
+        if: github.event_name == 'pull_request' && steps.pause.outputs.skip != 'true' && steps.gate.outputs.findings == '0'
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: docs-warden
+          only_update: true
           path: /tmp/docs-warden.md
 
   sweep:

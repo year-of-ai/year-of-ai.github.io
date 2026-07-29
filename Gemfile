@@ -21,6 +21,14 @@ gem "jekyll-include-cache"
 # Required to run `jekyll serve` on Ruby 3.x (webrick left the stdlib).
 gem "webrick"
 
+# `jekyll preview-images` — the fleet's AI preview-banner engine (same pin as
+# lifehacker.dev and the ai-world-view hub). Build-time only: GitHub Pages
+# ignores it (safe mode) and serves the committed images. The grow tick
+# (grow-lineage.yml "Illustrate" step) installs it on the runner to banner the
+# member repos; scripts/generate-preview-images.sh resolves the engine from
+# this gem for the hub's own pages.
+gem "zer0-image-generator", "~> 0.4", group: :jekyll_plugins
+
 platforms :windows, :jruby do
   gem "tzinfo"
   gem "tzinfo-data"
