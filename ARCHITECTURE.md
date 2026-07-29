@@ -413,12 +413,29 @@ true usage.
 New members spawn **tangentially from the frontier** (e.g. `2012` from the
 2005–2011 era, the 1776 era from 2005–2011's precedent), never by replacing or
 consolidating existing members. The planter,
-[`scripts/plant-lineage.rb`](scripts/plant-lineage.rb), is deliberately
-manual: dry-run by default, a real spawn needs `--apply --confirm <id>`; it
-drops `lineage/repo-template/`, writes the new seed into `lineage/seeds/`, and
-reuses `provision-org-sites.rb` for the Pages scaffold. (Known gap: it does
-not yet append the new member to `_data/hub.yml` — that's how 2012 briefly
-went missing from the dashboard.)
+[`scripts/plant-lineage.rb`](scripts/plant-lineage.rb), stays two-key gated:
+dry-run by default, a real spawn needs `--apply --confirm <id>`; it drops
+`lineage/repo-template/`, and reuses `provision-org-sites.rb` for the Pages
+scaffold. (Known gap: it does not yet append the new member to
+`_data/hub.yml` — that's how 2012 briefly went missing from the dashboard;
+auto-discovery re-registered it.)
+
+**Spawning is now also automatic — maturity-gated (ADR-0007).** The daily
+orchestrate run dispatches
+[`plant-lineage.yml`](.github/workflows/plant-lineage.yml) when
+`lineage/policy.yml` `spawn:` says so: `enabled`, **every** member's
+`ticks_logged >= frontier_ticks` (so the newest member has itself matured —
+stateless, self-regulating: each spawn adds a 0-tick member that blocks the
+next), and roster `< max_members`. The workflow re-verifies that gate from a
+fresh checkout (a stale/duplicate dispatch is a clean no-op), runs a DECIDE
+pass (the policy `distill` model) that authors ONE tangential seed, accepts
+the model output only if it is exactly one valid new `lineage/seeds/<id>.md`
+(slug, `subject:`, empty §8) with nothing else touched, plants via the
+idempotent planter, and commits the seed to hub main only **after** the repo
+exists (an orphan seed would fail every subsequent grow dispatch). The manual
+two-key path remains as override/recovery. The ai-world-view hub runs the
+identical machinery with a country-tangent DECIDE prompt (adjacent geography /
+strong ties, no-web rule).
 
 ---
 
@@ -454,6 +471,7 @@ is last-pass-only; `secret-expiry-watch`'s PAT probe is shallow.
 | [ADR-0004](lineage/decisions/ADR-0004-organizational-genome.md) | The organizational genome — replantable model DNA |
 | [ADR-0005](lineage/decisions/ADR-0005-docs-warden.md) | docs-warden — documentation coverage as a fleet agent |
 | [ADR-0006](lineage/decisions/ADR-0006-operational-hardening-and-cadence.md) | Operational hardening & growth cadence |
+| [ADR-0007](lineage/decisions/ADR-0007-maturity-gated-auto-spawning.md) | Maturity-gated automatic spawning |
 
 ## 11. Invariants
 

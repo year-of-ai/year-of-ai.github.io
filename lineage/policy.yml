@@ -38,6 +38,20 @@ cadence:
   repos_per_run: 4
   selection: stalest-first
 
+# Tangential spawning (ADR-0002; automation: ADR-0007). The lineage WIDENS on
+# its own: when every member's Evolution Log shows at least frontier_ticks
+# growth cycles (so the newest member has itself matured) and the roster is
+# below max_members, the daily orchestrate run dispatches plant-lineage.yml —
+# a DECIDE pass authors a new tangential seed and the deterministic planter
+# (scripts/plant-lineage.rb) creates the member repo. Stateless and
+# self-regulating: each spawn adds a 0-tick member that must mature before
+# the next spawn can fire. Set enabled: false to stop all automatic spawning
+# (the manual two-key path stays available).
+spawn:
+  enabled: true
+  frontier_ticks: 12     # growth cycles EVERY member (incl. the newest) must log
+  max_members: 16        # hard roster cap — auto-spawn never exceeds it
+
 # Preview banners — the grow tick's "Illustrate" step (grow-lineage.yml) runs
 # scripts/claude_svg_banner.py over each tick's new content: Claude AUTHORS a
 # content-aware SVG banner per article (~12 KB vector, no rasterizer), stamped

@@ -107,6 +107,7 @@ template:
   - ".github/workflows/orchestrate.yml"
   - ".github/workflows/grow-lineage.yml"
   - ".github/workflows/hub-sync.yml"
+  - ".github/workflows/plant-lineage.yml"
   - ".github/workflows/ai-content-review.yml"
   - ".github/workflows/deploy-chat-proxy.yml"
   - "scripts/provision-org-sites.rb"

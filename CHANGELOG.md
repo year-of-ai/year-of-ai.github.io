@@ -8,6 +8,24 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Added
+- **Maturity-gated automatic spawning (ADR-0007)** — the lineage now widens on
+  its own, closing ADR-0002's deferred automation: when every member's
+  Evolution Log shows at least `spawn.frontier_ticks` growth cycles (so the
+  newest member has itself matured — stateless and self-regulating) and the
+  roster is under `spawn.max_members`, the daily orchestrate run dispatches
+  the new `plant-lineage.yml`. Its DECIDE pass (policy `distill` model)
+  authors ONE tangential-era seed; the workflow accepts the model output only
+  if it is exactly one valid new `lineage/seeds/<id>.md` and nothing else;
+  the idempotent planter (`plant-lineage.rb`) creates the repo + Pages
+  scaffold; the seed is committed to hub main only after the repo exists.
+  Kill-switch honored; the gate is re-verified inside the workflow from a
+  fresh checkout; the ADR-0002 manual two-key path is unchanged. The
+  ai-world-view hub adopts the identical machinery with a country-tangent
+  DECIDE prompt (its next member country will be planted automatically once
+  `japan` and any siblings pass the gate). New `spawn:` block in
+  `lineage/policy.yml`.
+
 ### Fixed
 - **Adversarial-review fixes for illustrated growth** (confirmed with executed
   reproductions): `claude_svg_banner.py` now re-illustrates a NEW article whose
