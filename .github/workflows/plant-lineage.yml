@@ -124,6 +124,32 @@ jobs:
             exit 1
           fi
 
+      # A previously interrupted plant leaves an EMPTY org repo with no seed
+      # (repo created, later step failed, seed lost with the runner). Detect
+      # it so DECIDE re-authors the seed for exactly that id and the planter
+      # resumes into the empty vessel — instead of proposing a different
+      # tangent and stranding the orphan forever.
+      - name: Detect an interrupted plant (empty org repo without a seed)
+        if: steps.gate.outputs.due == 'true'
+        id: resume
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          rid=""
+          while IFS=$'\t' read -r name empty; do
+            [ "$empty" = "true" ] || continue
+            case "$name" in *.github.io|.github) continue ;; esac
+            printf '%s' "$name" | LC_ALL=C grep -qE '^[a-z0-9][a-z0-9-]*$' || continue
+            [ -f "lineage/seeds/${name}.md" ] && continue
+            rid="$name"; break
+          done < <(gh repo list year-of-ai --limit 100 --json name,isEmpty \
+                     --jq '.[] | [.name, (.isEmpty|tostring)] | @tsv' 2>/dev/null || true)
+          echo "id=$rid" >> "$GITHUB_OUTPUT"
+          if [ -n "$rid" ]; then
+            echo "::notice::interrupted plant detected: $rid — DECIDE will re-author its seed and the planter will resume into the empty repo."
+          fi
+
       - name: Resolve the DECIDE model from lineage/policy.yml
         if: steps.gate.outputs.due == 'true'
         id: model
@@ -163,6 +189,11 @@ jobs:
             any existing lineage/seeds/*.md. Write ONLY that one new file —
             change nothing else, do not commit, do not push. Finish by
             printing the single line: PROPOSED_ID=<id>
+
+            RESUME_ID='${{ steps.resume.outputs.id }}' — if RESUME_ID is
+            non-empty, do NOT choose a subject yourself: a previous plant of
+            exactly that id was interrupted (its empty repo already exists),
+            so author the seed FOR THAT id.
           claude_args: >-
             --model ${{ steps.model.outputs.decide }}
             --max-turns 30
@@ -197,6 +228,17 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.3"
+
+      # The planter and the provisioner push over plain https — GH_TOKEN only
+      # authenticates `gh` API calls, so without this step `git push` has no
+      # credential and dies with "could not read Username" (the first
+      # auto-spawn's failure mode). gh's credential helper resolves GH_TOKEN
+      # at push time.
+      - name: Wire git auth for the planter (gh credential helper)
+        if: steps.gate.outputs.due == 'true' || steps.gate.outputs.due == 'manual'
+        env:
+          GH_TOKEN: ${{ secrets.LIFECYCLE_PAT }}
+        run: gh auth setup-git
 
       - name: Plant the new member repo
         if: steps.gate.outputs.due == 'true' || steps.gate.outputs.due == 'manual'

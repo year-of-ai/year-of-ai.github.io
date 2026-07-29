@@ -68,13 +68,21 @@ die("repo template missing: lineage/repo-template/") unless Dir.exist?(TEMPLATE_
 
 subject = File.read(seed_path, encoding: 'utf-8')[SUBJECT_RE, 1] || id
 repo    = "#{ORG}/#{id}"
-die("#{repo} already exists — refusing to overwrite (idempotent, non-destructive)") if system("gh repo view #{repo} >/dev/null 2>&1")
+# Resume semantics: an EMPTY existing repo is a previously interrupted plant
+# (repo created, skeleton push failed) — fill the vessel instead of refusing.
+# A repo WITH content is still an absolute stop (idempotent, non-destructive).
+resume = false
+if system("gh repo view #{repo} >/dev/null 2>&1")
+  empty = `gh repo view #{repo} --json isEmpty -q .isEmpty 2>/dev/null`.strip
+  die("#{repo} already exists with content — refusing to overwrite (idempotent, non-destructive)") unless empty == 'true'
+  resume = true
+end
 
 template_files = Dir.glob(File.join(TEMPLATE_DIR, '**', '*'), File::FNM_DOTMATCH).select { |f| File.file?(f) }
 
 puts '── plant-lineage plan ───────────────────────────────────────'
 puts "  id        : #{id}"
-puts "  repo      : https://github.com/#{repo}   (will be created, PUBLIC)"
+puts "  repo      : https://github.com/#{repo}   #{resume ? '(EXISTS EMPTY — resuming an interrupted plant)' : '(will be created, PUBLIC)'}"
 puts "  subject   : #{subject}"
 puts "  seed      : lineage/seeds/#{id}.md   (#{File.size(seed_path)} bytes, already authored)"
 puts "  skeleton  : #{template_files.size} files from lineage/repo-template/"
@@ -90,8 +98,10 @@ end
 die("--apply requires --confirm #{id} (got #{options[:confirm].inspect}) — two-key guard") unless options[:confirm] == id
 die('gh is not authenticated (need repo + pages write) — run `gh auth login`') unless system('gh auth status >/dev/null 2>&1')
 
-Hub.log_info("Planting #{repo} …")
-run!("gh repo create #{repo} --public --description #{Shellwords.escape("self-growing knowledge base — #{subject}")}")
+Hub.log_info(resume ? "Resuming interrupted plant of #{repo} …" : "Planting #{repo} …")
+unless resume
+  run!("gh repo create #{repo} --public --description #{Shellwords.escape("self-growing knowledge base — #{subject}")}")
+end
 
 Dir.mktmpdir do |dir|
   clone = File.join(dir, id)
