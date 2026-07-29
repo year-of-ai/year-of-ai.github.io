@@ -6,7 +6,7 @@
 org: year-of-ai
 totals:
   repos: 11
-  ticks: 304
+  ticks: 307
 members:
 - name: '1776'
   repo: year-of-ai/1776
@@ -26,11 +26,11 @@ members:
   site_url: https://year-of-ai.github.io/1777/
   subject: the year 1777
   status: growing
-  ticks_logged: 33
-  log_entries: 37
+  ticks_logged: 34
+  log_entries: 38
   generations: 2
-  last_activity: '2026-07-25'
-  last_entry: 'G1-T33 — 2026-07-25 — Tick 33: verification and consistency pass (no
+  last_activity: '2026-07-28'
+  last_entry: 'G1-T34 — 2026-07-28 — Tick 34: verification and consistency pass (no
     new content)'
 - name: '1778'
   repo: year-of-ai/1778
@@ -74,24 +74,24 @@ members:
   site_url: https://year-of-ai.github.io/2007/
   subject: the year 2007
   status: growing
-  ticks_logged: 27
-  log_entries: 37
+  ticks_logged: 28
+  log_entries: 38
   generations: 2
-  last_activity: '2026-07-24'
-  last_entry: 'G3-T27 — 2026-07-24 — Tick 27: Enhance/QA pass — neutralized five editorializing
-    phrasings across three articles and advanced the seed §2 generation-status line'
+  last_activity: '2026-07-28'
+  last_entry: 'G3-T28 — 2026-07-28 — Tick 28: Enhance/QA pass — neutralized five editorializing
+    phrasings across four articles and advanced the seed §2 generation-status line'
 - name: '2008'
   repo: year-of-ai/2008
   url: https://github.com/year-of-ai/2008
   site_url: https://year-of-ai.github.io/2008/
   subject: the year 2008
   status: growing
-  ticks_logged: 25
-  log_entries: 35
+  ticks_logged: 26
+  log_entries: 36
   generations: 2
-  last_activity: '2026-07-24'
-  last_entry: 'G1-T25 — 2026-07-24 — Tick 25: John McCain 2008 Campaign + iPhone 3G
-    Launch + Amy Winehouse Grammy Sweep Deep-Dives'
+  last_activity: '2026-07-28'
+  last_entry: 'G1-T26 — 2026-07-28 — Tick 26: Serena Williams 2008 Season + Rhythm-Games
+    Peak + Subprime Mortgage Implosion Deep-Dives'
 - name: '2009'
   repo: year-of-ai/2009
   url: https://github.com/year-of-ai/2009
