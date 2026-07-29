@@ -140,3 +140,29 @@ jobs:
               echo "  ✗ $name (could not dispatch grow-lineage.yml; PAT needs actions:write on the hub)"
             fi
           done
+
+          # Maturity-gated tangential spawning (ADR-0002 automation, ADR-0007):
+          # when EVERY member has logged >= spawn.frontier_ticks growth cycles
+          # (the newest member has itself matured) and the roster is below
+          # spawn.max_members, dispatch ONE plant-lineage run — its DECIDE
+          # pass authors a tangential seed and the planter creates the repo.
+          # plant-lineage.yml RE-VERIFIES this gate from a fresh checkout, so
+          # a stale ledger or double dispatch is a clean no-op there.
+          spawn_due="$(ruby -ryaml -e '
+            sp      = (YAML.load_file("lineage/policy.yml")["spawn"] rescue nil) || {}
+            members = (YAML.load_file("_data/lineage.yml")["members"] rescue nil) || []
+            ok = sp["enabled"] == true &&
+                 !members.empty? &&
+                 members.size < sp.fetch("max_members", 0).to_i &&
+                 members.all? { |m| m["ticks_logged"].to_i >= sp.fetch("frontier_ticks", 1 << 30).to_i }
+            puts ok ? "true" : "false"
+          ')"
+          if [ "$spawn_due" = "true" ]; then
+            if gh workflow run plant-lineage.yml -R year-of-ai/year-of-ai.github.io -f auto=true >/dev/null 2>&1; then
+              echo "  🌱 lineage mature — dispatched plant-lineage (auto-spawn)"
+            else
+              echo "  ✗ could not dispatch plant-lineage.yml (PAT needs actions:write on the hub)"
+            fi
+          else
+            echo "  spawn gate: not due (spawn.enabled + every member >= frontier_ticks + roster < max_members)"
+          fi

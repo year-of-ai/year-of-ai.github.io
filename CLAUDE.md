@@ -75,7 +75,10 @@ read the architecture doc and fix the drift.
   The widget is `ai_chat.enabled: false` until this proxy is actually deployed.
 - `.github/workflows/` — content/site: `hub-sync.yml`, `ai-content-review.yml`,
   `deploy-chat-proxy.yml`; the **growth engine** `orchestrate.yml` (daily
-  scheduler) + `grow-lineage.yml` (grows one year repo per dispatch); and the
+  scheduler) + `grow-lineage.yml` (grows one year repo per dispatch) +
+  `plant-lineage.yml` (spawns ONE new tangential-era repo — auto mode is
+  maturity-gated by `lineage/policy.yml` `spawn:` and dispatched by
+  orchestrate, ADR-0007; manual mode keeps the ADR-0002 two-key confirm); and the
   **self-improvement fleet** (ADR-0003) `telemetry-ledger.yml` (evolution ledger),
   `framework-pr-reviewer.yml` (gates framework PRs), `docs-warden.yml` (doc
   coverage), `pages-deploy-sentinel.yml` (member site liveness),
@@ -99,9 +102,14 @@ that *grows* them lives here in the hub:
   (subject, taxonomy, sources, conventions) and its **Evolution Log** (§8, the
   tick clock). The year repos no longer carry a `seed.md`.
 - **Policy** is centralized — `lineage/policy.yml` sets the 3-tier model
-  escalation and the perpetual-growth rules. Every tick is a grow tick: repos are
-  **never** consolidated, archived, or deleted; new eras spawn tangentially from
-  the frontier.
+  escalation, the perpetual-growth rules, and the **spawn gate** (`spawn:` —
+  enabled/frontier_ticks/max_members). Every tick is a grow tick: repos are
+  **never** consolidated, archived, or deleted; new eras spawn tangentially
+  from the frontier — automatically, once every member has logged
+  `spawn.frontier_ticks` growth cycles and the roster is under
+  `spawn.max_members` (ADR-0007; orchestrate dispatches `plant-lineage.yml`,
+  whose DECIDE pass authors the tangential seed and whose planter creates the
+  repo).
 - **The framework** is centralized — `lineage/framework/` is the canonical agent
   toolkit (`prompts/`, `skills/`, `agents/`, `scripts/`, a reference
   `workflows/grow.yml`) staged into a cloned year repo at tick time, then

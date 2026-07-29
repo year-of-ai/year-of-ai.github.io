@@ -169,6 +169,6 @@ newest repo passing a tick/coverage threshold).
 1. [x] Owner approves this design (and the dry-run-first / two-key gating).
 2. [x] Build `lineage/repo-template/` (skeleton + adapters).
 3. [x] Build `scripts/plant-lineage.rb` (dry-run first).
-4. [ ] Build `.github/workflows/plant-lineage.yml` (decide → gated plant) — optional automation.
+4. [x] Build `.github/workflows/plant-lineage.yml` (decide → gated plant) — built with maturity-gated auto mode, [ADR-0007](ADR-0007-maturity-gated-auto-spawning.md).
 5. [x] Dry-run end-to-end; then one real spawn behind the two-key confirm (`2012`).
 6. [x] Document on the site (`/orchestration/` §5); mark this ADR Accepted.
