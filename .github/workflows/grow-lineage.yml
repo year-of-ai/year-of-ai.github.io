@@ -338,7 +338,9 @@ jobs:
             echo "preview.enabled is false in lineage/policy.yml — skipping banners."
             exit 0
           fi
-          if ! git status --porcelain | grep -vE "${HUB_OWNED_EXCLUDE_RE}" \
+          # -uall: without it a brand-new directory collapses to one `?? dir/`
+          # line and every article inside it is invisible to this gate.
+          if ! git status --porcelain -uall | grep -vE "${HUB_OWNED_EXCLUDE_RE}" \
                | grep -qE '\.(md|markdown)$'; then
             echo "No new content this tick — nothing to illustrate."
             exit 0
@@ -360,11 +362,11 @@ jobs:
             --output-dir "$OUT_DIR" || status=$?
           if [ "$status" = "3" ]; then
             echo "No Claude credential — deterministic local SVG banners instead."
-            git status --porcelain | grep -vE "${HUB_OWNED_EXCLUDE_RE}" \
+            git status --porcelain -uall | grep -vE "${HUB_OWNED_EXCLUDE_RE}" \
               | grep -E '\.(md|markdown)$' | sed -E 's/^.{3}//; s/^"(.*)"$/\1/' \
               | while IFS= read -r f; do
                   [ -f "$f" ] && python3 "$ENGINE" -f "$f" -p local --rasterizer none \
-                    ${STYLE:+--style "$STYLE"} || true
+                    --output-dir "$OUT_DIR" ${STYLE:+--style "$STYLE"} || true
                 done
           elif [ "$status" != "0" ]; then
             echo "::warning::banner generation reported failures (exit $status) — the tick publishes regardless."
@@ -483,6 +485,11 @@ jobs:
           EXP_OUTCOME: ${{ steps.tier2.outcome }}
           ENH_OUTCOME: ${{ steps.tier3.outcome }}
           FB_OUTCOME: ${{ steps.fallback.outcome }}
+          # claude-code-action exits 0 even when the agent result is an error
+          # (is_error:true — e.g. an expired OAuth token), so tier OUTCOMES are
+          # 'success' in the primary auth-failure mode. steps.check already
+          # parsed every tier's is_error; it is the authoritative auth signal.
+          CHECK_FAILED: ${{ steps.check.outputs.failed }}
         run: |
           set -uo pipefail
           if [ "$PUBLISHED" = "true" ]; then
@@ -490,9 +497,9 @@ jobs:
             exit 0
           fi
           echo "::error::Growth tick produced NO content for ${REPO} (nothing was published)."
-          echo "pass outcomes: generate=$GEN_OUTCOME expand=$EXP_OUTCOME enhance=$ENH_OUTCOME fallback=$FB_OUTCOME"
-          if [ "$GEN_OUTCOME" = "failure" ] && [ "$EXP_OUTCOME" = "failure" ] && [ "$ENH_OUTCOME" = "failure" ]; then
-            echo "::error::All OAuth model passes errored — this is an auth/setup failure (invalid CLAUDE_CODE_OAUTH_TOKEN, or claude-code-action could not authenticate). Check the per-pass logs above."
+          echo "pass outcomes: generate=$GEN_OUTCOME expand=$EXP_OUTCOME enhance=$ENH_OUTCOME fallback=$FB_OUTCOME is_error_seen=$CHECK_FAILED"
+          if [ "$CHECK_FAILED" = "true" ] || { [ "$GEN_OUTCOME" = "failure" ] && [ "$EXP_OUTCOME" = "failure" ] && [ "$ENH_OUTCOME" = "failure" ]; }; then
+            echo "::error::Model passes reported errors (is_error/outcome) — this is an auth/setup failure (expired or invalid CLAUDE_CODE_OAUTH_TOKEN, or claude-code-action could not authenticate). Re-mint the token; do not chase a content problem."
           else
             echo "::error::Model passes ran without error but wrote no new content — growth stalled (every topic may already be covered, or the prompt selected nothing)."
           fi

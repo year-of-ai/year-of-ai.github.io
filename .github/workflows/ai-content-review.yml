@@ -74,12 +74,27 @@ jobs:
           else
             echo "has_content=false" >> "$GITHUB_OUTPUT"
           fi
+          # Total issue count across files — gates whether a comment is worth
+          # a reader's attention at all.
+          issues=$(ruby -rjson -e 'puts (JSON.parse(File.read("/tmp/content-review.json"))["files"] || []).sum { |f| (f["issues"] || []).length }' 2>/dev/null || echo 0)
+          echo "issues=${issues:-0}" >> "$GITHUB_OUTPUT"
 
-      - name: Post / update PR comment
-        if: github.event_name == 'pull_request'
+      # Comment noise policy: an all-clean run never CREATES a comment (the
+      # green check is the signal) — it only flips an EXISTING sticky to the
+      # clean table so a previously-reported issue shows as resolved.
+      - name: Post / update PR comment (findings)
+        if: github.event_name == 'pull_request' && steps.review.outputs.issues != '0'
         uses: marocchino/sticky-pull-request-comment@v2
         with:
           header: ai-content-review
+          path: /tmp/content-review.md
+
+      - name: Resolve the sticky comment (clean run)
+        if: github.event_name == 'pull_request' && steps.review.outputs.issues == '0'
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: ai-content-review
+          only_update: true
           path: /tmp/content-review.md
 
       - name: Upload results
@@ -141,6 +156,24 @@ jobs:
       - name: Install Claude Code CLI
         run: npm install -g @anthropic-ai/claude-code
 
+      # Delta discipline: fetch the review this agent last posted so the new
+      # pass reports only what CHANGED — without this, every push produced a
+      # full fresh review that re-litigated settled files with new nit-level
+      # findings each round.
+      - name: Fetch the previous agent review (delta baseline)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api "repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments" \
+            --paginate \
+            --jq '.[] | select(.body | contains("<!-- Sticky Pull Request Commentai-content-review-agent -->")) | .body' \
+            > /tmp/previous-agent-review.md 2>/dev/null || true
+          if [ -s /tmp/previous-agent-review.md ]; then
+            echo "Previous agent review found ($(wc -c < /tmp/previous-agent-review.md) bytes) — running a DELTA review."
+          else
+            echo "No previous agent review — running a full first review."
+          fi
+
       - name: Run content-reviewer agent (headless)
         id: agent
         env:
@@ -157,9 +190,23 @@ jobs:
           .github/instructions/content-review.instructions.md and the
           per-collection thresholds in .github/config/content_review.yml. Focus
           on SEO, consistency, polish, accessibility, and technical accuracy.
+
+          DELTA RULES — /tmp/previous-agent-review.md holds the review you
+          already posted on this pull request (empty file = first review).
+          When it is non-empty: report ONLY (a) findings that are genuinely
+          NEW since that review and (b) previously-reported actionable
+          findings that remain unresolved. Do NOT restate resolved items
+          (one line acknowledging resolution is enough), do NOT re-review
+          files whose content is unchanged since the previous review, and do
+          NOT add new nice-to-have polish suggestions for files you already
+          reviewed once — "nothing new" is the expected steady state of a
+          well-tended pull request. If nothing is new and nothing actionable
+          remains, output exactly the single line:
+          NO_NEW_FINDINGS
+
           Output ONLY the final Markdown review (verdict + per-file findings +
-          summary) to stdout. Do not modify any files, and do not print anything
-          before or after the review itself.
+          summary) — or the NO_NEW_FINDINGS line — to stdout. Do not modify
+          any files, and do not print anything before or after the review.
           EOF
           # Read-only allowlist: the agent never writes — posting is done by the
           # sticky-comment step below, so no edit/comment tools are granted.
@@ -173,23 +220,44 @@ jobs:
           echo "claude exit status: $status"
           echo "----- stderr (tail) -----"
           tail -n 50 /tmp/agent-err.log || true
+          # Decide what (if anything) reaches the PR. Raw API/billing errors
+          # and empty output are job-log warnings, never PR comments.
           if [ ! -s /tmp/agent-review.md ]; then
+            echo "::warning::content-reviewer agent produced no output (exit $status) — not posting a PR comment."
+            echo "post=skip" >> "$GITHUB_OUTPUT"
+          elif [ "$(wc -l < /tmp/agent-review.md)" -lt 5 ] \
+               && grep -qiE 'credit balance|billing|invalid.*api.?key|authentication_error|not_found_error|overloaded_error' /tmp/agent-review.md; then
+            echo "::warning::content-reviewer agent returned an API error, not a review — not posting it: $(head -c 200 /tmp/agent-review.md)"
+            echo "post=skip" >> "$GITHUB_OUTPUT"
+          elif grep -qx 'NO_NEW_FINDINGS' /tmp/agent-review.md; then
             {
               echo "## 🤖 Claude Code Content Review"
               echo
-              echo "The content-reviewer agent did not produce output (exit \`$status\`). See the job logs for details."
+              echo "✅ No new findings since the previous review (checked at ${GITHUB_SHA:0:7})."
             } > /tmp/agent-review-final.md
+            echo "post=update-only" >> "$GITHUB_OUTPUT"
           else
             {
               echo "## 🤖 Claude Code Content Review"
               echo
               cat /tmp/agent-review.md
             } > /tmp/agent-review-final.md
+            echo "post=full" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Post agent review
-        if: always()
+        if: steps.agent.outputs.post == 'full'
         uses: marocchino/sticky-pull-request-comment@v2
         with:
           header: ai-content-review-agent
+          path: /tmp/agent-review-final.md
+
+      # "No new findings" only UPDATES an existing sticky (so a prior review
+      # shows as settled) — it never creates a comment just to say nothing.
+      - name: Mark previous review settled
+        if: steps.agent.outputs.post == 'update-only'
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: ai-content-review-agent
+          only_update: true
           path: /tmp/agent-review-final.md

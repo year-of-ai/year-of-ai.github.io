@@ -32,7 +32,9 @@ Everything you need is in the repo — read it, don't assume:
   the *effective* values for the file's collection as the source of truth for
   every numeric target you cite — don't apply post limits to a note.
 - **Required front matter per collection**: `.github/config/frontmatter_schema.yml`.
-- **SEO/AIEO reference**: `pages/_docs/seo/` (`meta-tags.md`, `aieo.md`).
+- **SEO/AIEO reference**: the SEO thresholds in `content_review.yml` are the
+  authority here (the theme repo's `pages/_docs/seo/` reference pages are not
+  vendored into this hub).
 
 ### Assigned resources (skills · instructions · prompts)
 
@@ -43,11 +45,12 @@ deterministic tier already tells you which instruction files apply per file
 | Type | Resource | Use it for |
 | --- | --- | --- |
 | Skill | [`content-review`](../../.github/skills/content-review/SKILL.md) | The end-to-end review pipeline (this agent's playbook) |
-| Skill | [`validate-build`](../../.github/skills/validate-build/SKILL.md) | Confirm content still builds when you suggest structural changes |
-| Prompt | [`/content-review`](../../.github/prompts/content-review.prompt.md) | Interactive twin of this agent |
-| Prompt | [`/frontmatter-maintainer`](../../.github/prompts/frontmatter-maintainer.prompt.md) | Hand off bulk front-matter normalization |
 | Instructions | `content-review.instructions.md` | Baseline rules for every content file |
-| Instructions | per-collection, e.g. `documentation.instructions.md` (docs/quickstart), `obsidian.instructions.md` (`pages/_docs/obsidian/**`) | Collection-specific authoring rules |
+
+(The theme repo's `validate-build` skill, `/content-review` +
+`/frontmatter-maintainer` prompts, and per-collection instruction files are
+NOT vendored into this hub — rely on the deterministic JSON's `instructions`
+array and never chase a path that does not exist here.)
 
 **Per-collection rule loading:** for each changed file, read every path listed
 in that file's `instructions` array (from the deterministic JSON) before

@@ -13,7 +13,7 @@
 # _config.yml; required FRONTMATTER fields are NOT duplicated here — they live
 # in .github/config/frontmatter_schema.yml (the canonical schema). Each
 # collection also names the governing `instructions:` file(s) so the reviewer
-# loads the right authoring rules (e.g. docs → documentation.instructions.md).
+# loads the right authoring rules for that collection.
 #
 # Effective rules for a file = deep-merge(defaults, collections[<collection>]).
 # =========================================================================
@@ -108,8 +108,9 @@ collections:
       min_word_count: 80          # reference pages can be concise
       max_word_count: 4000
     instructions:
+      # (documentation.instructions.md lives in the theme repo, not this hub —
+      # list only files that exist here so the reviewer never chases a dead path.)
       - .github/instructions/content-review.instructions.md
-      - .github/instructions/documentation.instructions.md
 
   quickstart:
     # Short, action-oriented getting-started guides.
@@ -119,8 +120,9 @@ collections:
     seo:
       keywords: { min: 3, max: 10, recommended: true }
     instructions:
+      # (documentation.instructions.md lives in the theme repo, not this hub —
+      # list only files that exist here so the reviewer never chases a dead path.)
       - .github/instructions/content-review.instructions.md
-      - .github/instructions/documentation.instructions.md
 
   quests:
     # Long-form tutorials / learning paths.
