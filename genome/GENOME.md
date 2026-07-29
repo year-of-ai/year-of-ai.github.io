@@ -48,7 +48,8 @@ Every concept-bearing asset of the model is classified in
   this).
 - **`template`** — carries concept literals, tokenized via the `tokens:`
   literal→`{{TOKEN}}` map at plant time: `_config.yml`, `_data/hub.yml`,
-  `policy.yml`, the orchestration/grow workflows, the provisioner + planter.
+  `policy.yml`, the orchestration/grow/plant workflows (including
+  `plant-lineage.yml`, the ADR-0007 auto-spawn), the provisioner + planter.
 - **`override`** — a templated copy that overlays an otherwise-agnostic file
   (e.g. the repo-template `CLAUDE.md`, and the four framework files that carry the
   bot email or hub name).

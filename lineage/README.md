@@ -22,7 +22,12 @@ hold only their *content* (plus a GitHub Pages `_config.yml`, `.claude/`, and
   Start with [`ADR-0001`](decisions/ADR-0001-centralized-growth-orchestration.md)
   (why growth is centralized in the hub, and the adapter+staging mechanism).
   See also [`ADR-0006`](decisions/ADR-0006-operational-hardening-and-cadence.md)
-  (the tick-hardening, the front-matter publish gate, and growth cadence).
+  (the tick-hardening, the front-matter publish gate, and growth cadence) and
+  [`ADR-0007`](decisions/ADR-0007-maturity-gated-auto-spawning.md) (automatic
+  tangential spawning: the maturity gate in `policy.yml` `spawn:` and the
+  DECIDE→PLANT workflow that widens the lineage — closing
+  [`ADR-0002`](decisions/ADR-0002-tangential-era-spawning.md)'s deferred
+  automation).
 
 Excluded from the Jekyll build (see `_config.yml`) — this is orchestration data,
 not site content. The published lineage view is `pages/lineage.md` (`/lineage/`).
