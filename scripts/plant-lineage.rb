@@ -16,8 +16,9 @@
 # Safety (ADR-0002 §E):
 #   - DRY-RUN by default. A real spawn needs BOTH `--apply` AND `--confirm <id>`
 #     where <id> equals --id (a two-key action).
-#   - Idempotent / non-destructive: refuses if year-of-ai/<id> already exists.
-#     Never deletes or overwrites a repo. One repo per run.
+#   - Idempotent / non-destructive: refuses any existing repo with content
+#     beyond the plant surface; RESUMES an interrupted plant (an empty or
+#     skeleton-only vessel). Never deletes or overwrites. One repo per run.
 #   - Creates only the vessel — no content is generated here.
 #
 # Usage:
@@ -68,21 +69,36 @@ die("repo template missing: lineage/repo-template/") unless Dir.exist?(TEMPLATE_
 
 subject = File.read(seed_path, encoding: 'utf-8')[SUBJECT_RE, 1] || id
 repo    = "#{ORG}/#{id}"
-# Resume semantics: an EMPTY existing repo is a previously interrupted plant
-# (repo created, skeleton push failed) — fill the vessel instead of refusing.
-# A repo WITH content is still an absolute stop (idempotent, non-destructive).
+template_files = Dir.glob(File.join(TEMPLATE_DIR, '**', '*'), File::FNM_DOTMATCH).select { |f| File.file?(f) }
+
+# Resume semantics: an existing repo is a previously interrupted plant — and
+# safe to fill — when it is EMPTY, or when every file in it belongs to the
+# PLANT SURFACE (the repo-template skeleton + the provisioner's rendered
+# scaffold; e.g. the skeleton pushed but provisioning died). Any file beyond
+# that surface means a grown member: absolute stop (idempotent,
+# non-destructive).
+PROVISION_SURFACE = ['_config.yml', '_data/navigation/main.yml'].freeze
 resume = false
 if system("gh repo view #{repo} >/dev/null 2>&1")
   empty = `gh repo view #{repo} --json isEmpty -q .isEmpty 2>/dev/null`.strip
-  die("#{repo} already exists with content — refusing to overwrite (idempotent, non-destructive)") unless empty == 'true'
-  resume = true
+  if empty == 'true'
+    resume = true
+  else
+    tree = `gh api repos/#{repo}/git/trees/HEAD?recursive=1 --jq '.tree[] | select(.type=="blob") | .path' 2>/dev/null`
+           .split("\n").map(&:strip).reject(&:empty?)
+    allowed = template_files.map { |f| f.sub("#{TEMPLATE_DIR}/", '') } + PROVISION_SURFACE
+    extra = tree - allowed
+    unless tree.any? && extra.empty?
+      die("#{repo} already exists with content beyond the plant surface " \
+          "(#{extra.first(5).join(', ')}#{extra.size > 5 ? ', …' : ''}) — refusing to overwrite (idempotent, non-destructive)")
+    end
+    resume = true
+  end
 end
-
-template_files = Dir.glob(File.join(TEMPLATE_DIR, '**', '*'), File::FNM_DOTMATCH).select { |f| File.file?(f) }
 
 puts '── plant-lineage plan ───────────────────────────────────────'
 puts "  id        : #{id}"
-puts "  repo      : https://github.com/#{repo}   #{resume ? '(EXISTS EMPTY — resuming an interrupted plant)' : '(will be created, PUBLIC)'}"
+puts "  repo      : https://github.com/#{repo}   #{resume ? '(EXISTS as a plant vessel — resuming an interrupted plant)' : '(will be created, PUBLIC)'}"
 puts "  subject   : #{subject}"
 puts "  seed      : lineage/seeds/#{id}.md   (#{File.size(seed_path)} bytes, already authored)"
 puts "  skeleton  : #{template_files.size} files from lineage/repo-template/"
@@ -116,8 +132,15 @@ Dir.mktmpdir do |dir|
   File.write(readme, File.read(readme, encoding: 'utf-8').gsub('__SUBJECT__', subject)) if File.exist?(readme)
   Dir.chdir(clone) do
     run!('git add -A')
-    run!("git -c user.name=claude-grow -c user.email=noreply@anthropic.com commit -q -m #{Shellwords.escape('chore: plant repo skeleton (.claude adapters + telemetry)')}")
-    run!('git push -q origin HEAD:main')
+    # Resuming past the skeleton (or re-copying identical files) stages
+    # nothing — committing then would fail the whole plant on 'nothing to
+    # commit'.
+    if system('git diff --cached --quiet')
+      Hub.log_info('  skeleton already present — nothing to commit')
+    else
+      run!("git -c user.name=claude-grow -c user.email=noreply@anthropic.com commit -q -m #{Shellwords.escape('chore: plant repo skeleton (.claude adapters + telemetry)')}")
+      run!('git push -q origin HEAD:main')
+    end
   end
 end
 

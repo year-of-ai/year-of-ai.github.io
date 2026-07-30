@@ -116,7 +116,7 @@ def open_pr(repo, cfg, clone, changed, direct:)
   Dir.chdir(clone) do
     if direct
       Hub.run_cmd('git', 'add', *changed)
-      Hub.run_cmd('git', 'commit', '-m', 'feat(pages): publish via GitHub Pages with the zer0-mistakes theme')
+      Hub.run_cmd('git', '-c', 'user.name=github-actions[bot]', '-c', 'user.email=41898282+github-actions[bot]@users.noreply.github.com', 'commit', '-m', 'feat(pages): publish via GitHub Pages with the zer0-mistakes theme')
       Hub.run_cmd('git', 'push', 'origin', repo['branch'])
       Hub.log_info "  pushed scaffold directly to #{slug}@#{repo['branch']}"
       return
@@ -124,7 +124,7 @@ def open_pr(repo, cfg, clone, changed, direct:)
 
     Hub.run_cmd('git', 'checkout', '-B', BRANCH_NAME)
     Hub.run_cmd('git', 'add', *changed)
-    Hub.run_cmd('git', 'commit', '-m', 'feat(pages): publish via GitHub Pages with the zer0-mistakes theme')
+    Hub.run_cmd('git', '-c', 'user.name=github-actions[bot]', '-c', 'user.email=41898282+github-actions[bot]@users.noreply.github.com', 'commit', '-m', 'feat(pages): publish via GitHub Pages with the zer0-mistakes theme')
     Hub.run_cmd('git', 'push', '--force', 'origin', BRANCH_NAME)
 
     existing = JSON.parse(Hub.run_cmd('gh', 'pr', 'list', '--repo', slug, '--head', BRANCH_NAME,
