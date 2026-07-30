@@ -23,7 +23,8 @@ name: Plant Lineage
 #            two-key confirm; dry-run by default.
 #
 # Safety (ADR-0002 §E + ADR-0007): fleet kill-switch honored; one repo per
-# run; the planter is idempotent and refuses existing repos/ids; the seed is
+# run; the planter is idempotent — it RESUMES an interrupted plant vessel
+# and refuses any repo with real content; the seed is
 # committed only AFTER the repo exists (an orphan seed would make every
 # subsequent grow dispatch fail on checkout); concurrency-serialized.
 #
@@ -137,12 +138,23 @@ jobs:
         run: |
           set -euo pipefail
           rid=""
+          # The plant surface: repo-template skeleton + the provisioner's
+          # rendered scaffold. A seedless repo whose every file is within it
+          # is an interrupted plant at ANY stage (empty, skeleton-only, or
+          # provisioned-but-seedless) — resumable.
+          ( cd lineage/repo-template && find . -type f | sed 's|^\./||' ) > /tmp/plant-surface
+          printf '%s\n' _config.yml _data/navigation/main.yml >> /tmp/plant-surface
           while IFS=$'\t' read -r name empty; do
-            [ "$empty" = "true" ] || continue
             case "$name" in *.github.io|.github) continue ;; esac
             printf '%s' "$name" | LC_ALL=C grep -qE '^[a-z0-9][a-z0-9-]*$' || continue
             [ -f "lineage/seeds/${name}.md" ] && continue
-            rid="$name"; break
+            if [ "$empty" = "true" ]; then rid="$name"; break; fi
+            if gh api "repos/year-of-ai/${name}/git/trees/HEAD?recursive=1" \
+                 --jq '.tree[] | select(.type=="blob") | .path' > /tmp/have 2>/dev/null \
+               && [ -s /tmp/have ] \
+               && [ -z "$(grep -Fxv -f /tmp/plant-surface /tmp/have)" ]; then
+              rid="$name"; break
+            fi
           done < <(gh repo list year-of-ai --limit 100 --json name,isEmpty \
                      --jq '.[] | [.name, (.isEmpty|tostring)] | @tsv' 2>/dev/null || true)
           echo "id=$rid" >> "$GITHUB_OUTPUT"
@@ -238,7 +250,13 @@ jobs:
         if: steps.gate.outputs.due == 'true' || steps.gate.outputs.due == 'manual'
         env:
           GH_TOKEN: ${{ secrets.LIFECYCLE_PAT }}
-        run: gh auth setup-git
+        run: |
+          gh auth setup-git
+          # The plant chain commits in temp clones (skeleton push, provisioner
+          # scaffold) — the runner needs a git identity too, or those commits
+          # die on 'empty ident name' (the second auto-spawn's failure mode).
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
       - name: Plant the new member repo
         if: steps.gate.outputs.due == 'true' || steps.gate.outputs.due == 'manual'
