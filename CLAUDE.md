@@ -40,10 +40,12 @@ read the architecture doc and fix the drift.
   `navigation/hub.yml`.
 - `scripts/` — hub tooling (`sync-hub-metadata.rb`, `provision-org-sites.rb`,
   `lib/hub.rb`), the lineage ledger refresher (`sync-lineage-state.rb`), the
-  new-era planter (`plant-lineage.rb` — resumes into an existing EMPTY repo
-  left by an interrupted plant, refuses one with content; run in CI after
-  `gh auth setup-git` so its git pushes authenticate), the PR reviewer
-  (`content-review.rb`),
+  new-era planter (`plant-lineage.rb` — resumes an interrupted plant at any
+  stage: an existing repo is refilled when its every file belongs to the
+  plant surface (repo-template skeleton + the provisioner's scaffold) and
+  refused when it has real content; run in CI after `gh auth setup-git` and
+  with a git identity configured so its pushes and the provisioner's
+  scaffold commit authenticate), the PR reviewer (`content-review.rb`),
   the docs-coverage engine (`docs-warden.rb`), the fleet-health digest
   (`fleet-health.rb`), the front-matter date normalizer
   (`normalize-front-matter-dates.rb` — the grow tick's publish gate and the
