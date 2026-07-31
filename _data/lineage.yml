@@ -6,7 +6,7 @@
 org: year-of-ai
 totals:
   repos: 11
-  ticks: 311
+  ticks: 315
 members:
 - name: '1776'
   repo: year-of-ai/1776
@@ -14,12 +14,12 @@ members:
   site_url: https://year-of-ai.github.io/1776/
   subject: the year 1776
   status: growing
-  ticks_logged: 32
-  log_entries: 38
+  ticks_logged: 33
+  log_entries: 39
   generations: 2
-  last_activity: '2026-07-27'
-  last_entry: 'G1-T34 — 2026-07-27 — Tick 32: Lavoisier''s combustion experiments,
-    the East India Company, and Spallanzani''s naturalist work'
+  last_activity: '2026-07-30'
+  last_entry: 'G1-T35 — 2026-07-30 — Tick 33: Dunmore''s Ethiopian Regiment, Smallpox
+    Inoculation in the Continental Army, and British opposition to the war'
 - name: '1777'
   repo: year-of-ai/1777
   url: https://github.com/year-of-ai/1777
@@ -38,36 +38,36 @@ members:
   site_url: https://year-of-ai.github.io/1778/
   subject: the year 1778
   status: growing
-  ticks_logged: 27
-  log_entries: 30
+  ticks_logged: 28
+  log_entries: 31
   generations: 1
-  last_activity: '2026-07-27'
-  last_entry: 'G1-T27 — 2026-07-27 — Tick 27: Three architects of the alliance — Comte
-    de Vergennes, Marquis de Lafayette, Henry Laurens'
+  last_activity: '2026-07-30'
+  last_entry: 'G1-T28 — 2026-07-30 — Tick 28: John Paul Jones and the Delaware treaty
+    added; fabricated Rochambeau draft removed; corpus-wide broken people-links fixed'
 - name: '2005'
   repo: year-of-ai/2005
   url: https://github.com/year-of-ai/2005
   site_url: https://year-of-ai.github.io/2005/
   subject: the year 2005
   status: growing
-  ticks_logged: 28
-  log_entries: 39
+  ticks_logged: 29
+  log_entries: 40
   generations: 2
-  last_activity: '2026-07-27'
-  last_entry: 'G1-T28 — 2026-07-27 — Tick 28: Deep-dive on the 31st G8 summit at Gleneagles
-    + structure refresh'
+  last_activity: '2026-07-30'
+  last_entry: 'G1-T29 — 2026-07-30 — Tick 29: Two dedicated topic files (Harry Potter
+    and the Half-Blood Prince, Kitzmiller v. Dover) + structure refresh'
 - name: '2006'
   repo: year-of-ai/2006
   url: https://github.com/year-of-ai/2006
   site_url: https://year-of-ai.github.io/2006/
   subject: the year 2006
   status: growing
-  ticks_logged: 26
-  log_entries: 36
+  ticks_logged: 27
+  log_entries: 37
   generations: 2
-  last_activity: '2026-07-27'
-  last_entry: 'G2-T23 — 2026-07-27 — Tick 23: Three deep-dives (Zidane''s final season,
-    2006 AI & robotics, the 2006 Web 2.0 investment wave) + structure refresh'
+  last_activity: '2026-07-30'
+  last_entry: 'G2-T24 — 2026-07-30 — Tick 24: Three deep-dives (World Baseball Classic,
+    2006 Champions League Final, East Timor crisis) + structure refresh'
 - name: '2007'
   repo: year-of-ai/2007
   url: https://github.com/year-of-ai/2007
