@@ -207,6 +207,11 @@ jobs:
             non-empty, do NOT choose a subject yourself: a previous plant of
             exactly that id was interrupted (its empty repo already exists),
             so author the seed FOR THAT id.
+
+            Do NOT run sync-lineage-state, sync-hub-metadata, or touch
+            anything under _data/ — the workflow and the daily orchestrate
+            handle all bookkeeping; any change you make outside the one new
+            seed file will be discarded.
           claude_args: >-
             --model ${{ steps.model.outputs.decide }}
             --max-turns 30
@@ -220,6 +225,12 @@ jobs:
         id: proposed
         run: |
           set -euo pipefail
+          # DECIDE sometimes incidentally refreshes GENERATED files while
+          # exploring (run 4 refused over a regenerated _data/lineage.yml).
+          # Only the new seed is the intended output: restore every other
+          # TRACKED file first, then judge what remains — an untracked
+          # non-seed file still refuses the plant.
+          git checkout -q -- . 2>/dev/null || true
           mapfile -t new_seeds < <(git status --porcelain -uall -- lineage/seeds | grep '^??' | sed -E 's/^.{3}//')
           other="$(git status --porcelain -uall | grep -v ' lineage/seeds/' | grep -c . || true)"
           if [ "${#new_seeds[@]}" -ne 1 ] || [ "${other:-0}" -ne 0 ]; then
