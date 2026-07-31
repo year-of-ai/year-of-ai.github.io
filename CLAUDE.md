@@ -82,8 +82,9 @@ read the architecture doc and fix the drift.
   `deploy-chat-proxy.yml`; the **growth engine** `orchestrate.yml` (daily
   scheduler) + `grow-lineage.yml` (grows one year repo per dispatch) +
   `plant-lineage.yml` (spawns ONE new tangential-era repo; the DECIDE output
-  is validated and its §8 heading normalized before planting — auto mode is
-  maturity-gated by `lineage/policy.yml` `spawn:` and dispatched by
+  is validated — incidental non-seed edits are discarded, the §8 heading
+  normalized — before planting; auto mode is maturity-gated by
+  `lineage/policy.yml` `spawn:` and dispatched by
   orchestrate, ADR-0007; manual mode keeps the ADR-0002 two-key confirm); and the
   **self-improvement fleet** (ADR-0003) `telemetry-ledger.yml` (evolution ledger),
   `framework-pr-reviewer.yml` (gates framework PRs), `docs-warden.yml` (doc
