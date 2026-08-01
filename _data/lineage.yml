@@ -5,8 +5,8 @@
 # =============================================================================
 org: year-of-ai
 totals:
-  repos: 11
-  ticks: 315
+  repos: 12
+  ticks: 319
 members:
 - name: '1776'
   repo: year-of-ai/1776
@@ -26,11 +26,11 @@ members:
   site_url: https://year-of-ai.github.io/1777/
   subject: the year 1777
   status: growing
-  ticks_logged: 34
-  log_entries: 38
+  ticks_logged: 35
+  log_entries: 39
   generations: 2
-  last_activity: '2026-07-28'
-  last_entry: 'G1-T34 — 2026-07-28 — Tick 34: verification and consistency pass (no
+  last_activity: '2026-07-31'
+  last_entry: 'G1-T35 — 2026-07-31 — Tick 35: verification and consistency pass (no
     new content)'
 - name: '1778'
   repo: year-of-ai/1778
@@ -74,36 +74,37 @@ members:
   site_url: https://year-of-ai.github.io/2007/
   subject: the year 2007
   status: growing
-  ticks_logged: 28
-  log_entries: 38
+  ticks_logged: 29
+  log_entries: 39
   generations: 2
-  last_activity: '2026-07-28'
-  last_entry: 'G3-T28 — 2026-07-28 — Tick 28: Enhance/QA pass — neutralized five editorializing
-    phrasings across four articles and advanced the seed §2 generation-status line'
+  last_activity: '2026-07-31'
+  last_entry: 'G3-T29 — 2026-07-31 — Tick 29: Added three topics (Greensburg EF5 tornado,
+    The Sopranos series finale, Northern Rock bank run), growing the base from 42
+    to 45 posts'
 - name: '2008'
   repo: year-of-ai/2008
   url: https://github.com/year-of-ai/2008
   site_url: https://year-of-ai.github.io/2008/
   subject: the year 2008
   status: growing
-  ticks_logged: 26
-  log_entries: 36
+  ticks_logged: 27
+  log_entries: 37
   generations: 2
-  last_activity: '2026-07-28'
-  last_entry: 'G1-T26 — 2026-07-28 — Tick 26: Serena Williams 2008 Season + Rhythm-Games
-    Peak + Subprime Mortgage Implosion Deep-Dives'
+  last_activity: '2026-07-31'
+  last_entry: 'G1-T27 — 2026-07-31 — Tick 27: Grand Theft Auto IV + Metal Gear Solid
+    4 + Sarah Palin VP Selection Deep-Dives'
 - name: '2009'
   repo: year-of-ai/2009
   url: https://github.com/year-of-ai/2009
   site_url: https://year-of-ai.github.io/2009/
   subject: the year 2009
   status: growing
-  ticks_logged: 27
-  log_entries: 39
+  ticks_logged: 28
+  log_entries: 40
   generations: 2
-  last_activity: '2026-07-29'
-  last_entry: 'G1-T29 — 2026-07-29 — Tick 29: Added the 2009 bank stress tests and
-    the death of Norman Borlaug (56→58 files)'
+  last_activity: '2026-07-31'
+  last_entry: 'G1-T30 — 2026-07-31 — Tick 30: Verification + Significance-section
+    compliance pass (no new topics)'
 - name: '2010'
   repo: year-of-ai/2010
   url: https://github.com/year-of-ai/2010
@@ -141,3 +142,14 @@ members:
   last_activity: '2026-07-29'
   last_entry: 'G1-T27 — 2026-07-29 — Tick 27: Spain''s 2012 banking and property crisis,
     Occupy Sandy mutual-aid disaster response, East London Olympic regeneration legacy'
+- name: '2013'
+  repo: year-of-ai/2013
+  url: https://github.com/year-of-ai/2013
+  site_url: https://year-of-ai.github.io/2013/
+  subject: the year 2013
+  status: seeded
+  ticks_logged: 0
+  log_entries: 1
+  generations: 0
+  last_activity: ''
+  last_entry: ''
