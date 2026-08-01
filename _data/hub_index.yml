@@ -6,7 +6,7 @@
 org: year-of-ai
 totals:
   repos: 12
-  pages: 693
+  pages: 699
 repos:
 - name: '1776'
   title: The Year 1776
@@ -135,14 +135,14 @@ repos:
   pages_enabled: true
   scaffolded: true
   branch: main
-  pushed_at: '2026-07-28T08:06:59Z'
-  page_count: 49
+  pushed_at: '2026-07-31T08:41:35Z'
+  page_count: 52
   sections:
   - name: _posts
     title: Posts
     url: https://year-of-ai.github.io/2007/_posts/
     source_url: https://github.com/year-of-ai/2007/tree/main/_posts
-    count: 47
+    count: 50
   root_pages:
   - title: Timeline
     url: https://year-of-ai.github.io/2007/TIMELINE/
@@ -158,14 +158,14 @@ repos:
   pages_enabled: true
   scaffolded: true
   branch: main
-  pushed_at: '2026-07-28T08:20:28Z'
-  page_count: 50
+  pushed_at: '2026-07-31T08:40:52Z'
+  page_count: 53
   sections:
   - name: _posts
     title: Posts
     url: https://year-of-ai.github.io/2008/_posts/
     source_url: https://github.com/year-of-ai/2008/tree/main/_posts
-    count: 48
+    count: 51
   root_pages:
   - title: Timeline
     url: https://year-of-ai.github.io/2008/TIMELINE/
@@ -181,7 +181,7 @@ repos:
   pages_enabled: true
   scaffolded: true
   branch: main
-  pushed_at: '2026-07-29T08:20:48Z'
+  pushed_at: '2026-07-31T08:23:55Z'
   page_count: 65
   sections:
   - name: _posts
@@ -270,10 +270,10 @@ repos:
   description: self-growing knowledge base — the year 2013
   url: https://github.com/year-of-ai/2013
   site_url: https://year-of-ai.github.io/2013/
-  pages_enabled: false
-  scaffolded: false
+  pages_enabled: true
+  scaffolded: true
   branch: main
-  pushed_at: '2026-07-30T07:54:48Z'
+  pushed_at: '2026-07-31T17:51:23Z'
   page_count: 0
   sections: []
   root_pages: []
