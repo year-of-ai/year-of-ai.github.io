@@ -6,7 +6,7 @@
 org: year-of-ai
 totals:
   repos: 12
-  pages: 699
+  pages: 713
 repos:
 - name: '1776'
   title: The Year 1776
@@ -204,14 +204,14 @@ repos:
   pages_enabled: true
   scaffolded: true
   branch: main
-  pushed_at: '2026-07-29T08:23:06Z'
-  page_count: 74
+  pushed_at: '2026-08-01T07:56:31Z'
+  page_count: 76
   sections:
   - name: _posts
     title: Posts
     url: https://year-of-ai.github.io/2010/_posts/
     source_url: https://github.com/year-of-ai/2010/tree/main/_posts
-    count: 72
+    count: 74
   root_pages:
   - title: Timeline
     url: https://year-of-ai.github.io/2010/TIMELINE/
@@ -227,14 +227,14 @@ repos:
   pages_enabled: true
   scaffolded: true
   branch: main
-  pushed_at: '2026-07-29T08:33:47Z'
-  page_count: 77
+  pushed_at: '2026-08-01T07:59:25Z'
+  page_count: 79
   sections:
   - name: _posts
     title: Posts
     url: https://year-of-ai.github.io/2011/_posts/
     source_url: https://github.com/year-of-ai/2011/tree/main/_posts
-    count: 75
+    count: 77
   root_pages:
   - title: Timeline
     url: https://year-of-ai.github.io/2011/TIMELINE/
@@ -250,14 +250,14 @@ repos:
   pages_enabled: true
   scaffolded: true
   branch: main
-  pushed_at: '2026-07-29T08:27:52Z'
-  page_count: 76
+  pushed_at: '2026-08-01T07:54:03Z'
+  page_count: 77
   sections:
   - name: _posts
     title: Posts
     url: https://year-of-ai.github.io/2012/_posts/
     source_url: https://github.com/year-of-ai/2012/tree/main/_posts
-    count: 74
+    count: 75
   root_pages:
   - title: Timeline
     url: https://year-of-ai.github.io/2012/TIMELINE/
@@ -273,7 +273,18 @@ repos:
   pages_enabled: true
   scaffolded: true
   branch: main
-  pushed_at: '2026-07-31T17:51:23Z'
-  page_count: 0
-  sections: []
-  root_pages: []
+  pushed_at: '2026-08-01T08:11:24Z'
+  page_count: 9
+  sections:
+  - name: _posts
+    title: Posts
+    url: https://year-of-ai.github.io/2013/_posts/
+    source_url: https://github.com/year-of-ai/2013/tree/main/_posts
+    count: 6
+  root_pages:
+  - title: Timeline
+    url: https://year-of-ai.github.io/2013/TIMELINE/
+    source_url: https://github.com/year-of-ai/2013/blob/main/TIMELINE.md
+  - title: News
+    url: https://year-of-ai.github.io/2013/news/
+    source_url: https://github.com/year-of-ai/2013/blob/main/news.md

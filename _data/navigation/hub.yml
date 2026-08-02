@@ -153,3 +153,9 @@
   children:
   - title: Site Home
     url: https://year-of-ai.github.io/2013/
+  - title: Timeline
+    url: https://year-of-ai.github.io/2013/TIMELINE/
+  - title: News
+    url: https://year-of-ai.github.io/2013/news/
+  - title: Posts
+    url: https://year-of-ai.github.io/2013/_posts/
