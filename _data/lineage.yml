@@ -6,7 +6,7 @@
 org: year-of-ai
 totals:
   repos: 12
-  ticks: 319
+  ticks: 323
 members:
 - name: '1776'
   repo: year-of-ai/1776
@@ -111,45 +111,44 @@ members:
   site_url: https://year-of-ai.github.io/2010/
   subject: the year 2010
   status: growing
-  ticks_logged: 29
-  log_entries: 39
+  ticks_logged: 30
+  log_entries: 40
   generations: 2
-  last_activity: '2026-07-29'
-  last_entry: 'G1-T29 — 2026-07-29 — Tick 29: Content (82nd Academy Awards, Sebastian
-    Vettel becomes F1''s youngest world champion, FCC 2010 Open Internet Order) +
-    structure refresh'
+  last_activity: '2026-08-01'
+  last_entry: 'G1-T30 — 2026-08-01 — Tick 30: Content (iOS 4 and the App Store ecosystem,
+    Windows Phone 7 launch) + structure refresh'
 - name: '2011'
   repo: year-of-ai/2011
   url: https://github.com/year-of-ai/2011
   site_url: https://year-of-ai.github.io/2011/
   subject: the year 2011
   status: growing
-  ticks_logged: 27
-  log_entries: 36
+  ticks_logged: 28
+  log_entries: 37
   generations: 1
-  last_activity: '2026-07-29'
-  last_entry: 'G1-T27 — 2026-07-29 — Tick 27: The Book of Mormon musical, the death
-    of R. Sargent Shriver, and the death of Joe Frazier'
+  last_activity: '2026-08-01'
+  last_entry: 'G1-T28 — 2026-08-01 — Tick 28: the launches of NASA''s Juno spacecraft
+    and China''s Tiangong-1'
 - name: '2012'
   repo: year-of-ai/2012
   url: https://github.com/year-of-ai/2012
   site_url: https://year-of-ai.github.io/2012/
   subject: the year 2012
   status: growing
-  ticks_logged: 27
-  log_entries: 36
+  ticks_logged: 28
+  log_entries: 37
   generations: 1
-  last_activity: '2026-07-29'
-  last_entry: 'G1-T27 — 2026-07-29 — Tick 27: Spain''s 2012 banking and property crisis,
-    Occupy Sandy mutual-aid disaster response, East London Olympic regeneration legacy'
+  last_activity: '2026-08-01'
+  last_entry: 'G1-T28 — 2026-08-01 — Tick 28: Costa Concordia disaster'
 - name: '2013'
   repo: year-of-ai/2013
   url: https://github.com/year-of-ai/2013
   site_url: https://year-of-ai.github.io/2013/
   subject: the year 2013
-  status: seeded
-  ticks_logged: 0
-  log_entries: 1
+  status: growing
+  ticks_logged: 1
+  log_entries: 2
   generations: 0
-  last_activity: ''
-  last_entry: ''
+  last_activity: '2026-08-01'
+  last_entry: 'G1-T1 — 2026-08-01 — Tick 1: First three 2013 articles + news-layout
+    structure'
