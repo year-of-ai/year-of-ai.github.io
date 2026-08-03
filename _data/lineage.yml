@@ -6,7 +6,7 @@
 org: year-of-ai
 totals:
   repos: 12
-  ticks: 323
+  ticks: 326
 members:
 - name: '1776'
   repo: year-of-ai/1776
@@ -38,36 +38,37 @@ members:
   site_url: https://year-of-ai.github.io/1778/
   subject: the year 1778
   status: growing
-  ticks_logged: 28
-  log_entries: 31
+  ticks_logged: 29
+  log_entries: 32
   generations: 1
-  last_activity: '2026-07-30'
-  last_entry: 'G1-T28 — 2026-07-30 — Tick 28: John Paul Jones and the Delaware treaty
-    added; fabricated Rochambeau draft removed; corpus-wide broken people-links fixed'
+  last_activity: '2026-08-02'
+  last_entry: 'G1-T29 — 2026-08-02 — Tick 29: Caribbean sugar economy, Haudenosaunee
+    strategic split, Edmund Burke''s parliamentary opposition'
 - name: '2005'
   repo: year-of-ai/2005
   url: https://github.com/year-of-ai/2005
   site_url: https://year-of-ai.github.io/2005/
   subject: the year 2005
   status: growing
-  ticks_logged: 29
-  log_entries: 40
+  ticks_logged: 30
+  log_entries: 41
   generations: 2
-  last_activity: '2026-07-30'
-  last_entry: 'G1-T29 — 2026-07-30 — Tick 29: Two dedicated topic files (Harry Potter
-    and the Half-Blood Prince, Kitzmiller v. Dover) + structure refresh'
+  last_activity: '2026-08-02'
+  last_entry: 'G1-T30 — 2026-08-02 — Tick 30: Three dedicated topic files (Mahmoud
+    Abbas elected PA President, MGM v. Grokster, Hurricane Rita) + fact-corrected
+    enhance pass'
 - name: '2006'
   repo: year-of-ai/2006
   url: https://github.com/year-of-ai/2006
   site_url: https://year-of-ai.github.io/2006/
   subject: the year 2006
   status: growing
-  ticks_logged: 27
-  log_entries: 37
+  ticks_logged: 28
+  log_entries: 38
   generations: 2
-  last_activity: '2026-07-30'
-  last_entry: 'G2-T24 — 2026-07-30 — Tick 24: Three deep-dives (World Baseball Classic,
-    2006 Champions League Final, East Timor crisis) + structure refresh'
+  last_activity: '2026-08-02'
+  last_entry: 'G2-T25 — 2026-08-02 — Tick 25: Two deep-dives (Poincaré conjecture/Perelman''s
+    Fields Medal, 2006 Mumbai train bombings) + structure refresh'
 - name: '2007'
   repo: year-of-ai/2007
   url: https://github.com/year-of-ai/2007
