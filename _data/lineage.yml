@@ -6,7 +6,7 @@
 org: year-of-ai
 totals:
   repos: 12
-  ticks: 334
+  ticks: 338
 members:
 - name: '1776'
   repo: year-of-ai/1776
@@ -38,37 +38,36 @@ members:
   site_url: https://year-of-ai.github.io/1778/
   subject: the year 1778
   status: growing
-  ticks_logged: 29
-  log_entries: 32
+  ticks_logged: 30
+  log_entries: 33
   generations: 1
-  last_activity: '2026-08-02'
-  last_entry: 'G1-T29 — 2026-08-02 — Tick 29: Caribbean sugar economy, Haudenosaunee
-    strategic split, Edmund Burke''s parliamentary opposition'
+  last_activity: '2026-08-05'
+  last_entry: 'G1-T30 — 2026-08-05 — Tick 30: Lafayette''s Barren Hill Escape, James
+    Edward Smith and the Linnean Society'
 - name: '2005'
   repo: year-of-ai/2005
   url: https://github.com/year-of-ai/2005
   site_url: https://year-of-ai.github.io/2005/
   subject: the year 2005
   status: growing
-  ticks_logged: 30
-  log_entries: 41
+  ticks_logged: 31
+  log_entries: 42
   generations: 2
-  last_activity: '2026-08-02'
-  last_entry: 'G1-T30 — 2026-08-02 — Tick 30: Three dedicated topic files (Mahmoud
-    Abbas elected PA President, MGM v. Grokster, Hurricane Rita) + fact-corrected
-    enhance pass'
+  last_activity: '2026-08-05'
+  last_entry: 'G1-T31 — 2026-08-05 — Tick 31: Dedicated topic file on Hurricane Wilma
+    (record 2005 Atlantic hurricane) + structure refresh'
 - name: '2006'
   repo: year-of-ai/2006
   url: https://github.com/year-of-ai/2006
   site_url: https://year-of-ai.github.io/2006/
   subject: the year 2006
   status: growing
-  ticks_logged: 28
-  log_entries: 38
+  ticks_logged: 29
+  log_entries: 39
   generations: 2
-  last_activity: '2026-08-02'
-  last_entry: 'G2-T25 — 2026-08-02 — Tick 25: Two deep-dives (Poincaré conjecture/Perelman''s
-    Fields Medal, 2006 Mumbai train bombings) + structure refresh'
+  last_activity: '2026-08-05'
+  last_entry: 'G2-T26 — 2026-08-05 — Tick 26: Warren Buffett''s 2006 philanthropy
+    pledge deep-dive (two upstream drafts rejected on verification, one rescued)'
 - name: '2007'
   repo: year-of-ai/2007
   url: https://github.com/year-of-ai/2007
@@ -147,9 +146,9 @@ members:
   site_url: https://year-of-ai.github.io/2013/
   subject: the year 2013
   status: growing
-  ticks_logged: 1
-  log_entries: 2
+  ticks_logged: 2
+  log_entries: 3
   generations: 0
-  last_activity: '2026-08-01'
-  last_entry: 'G1-T1 — 2026-08-01 — Tick 1: First three 2013 articles + news-layout
-    structure'
+  last_activity: '2026-08-05'
+  last_entry: 'G1-T2 — 2026-08-05 — Tick 2: Arts & Culture and People sections filled
+    out'
