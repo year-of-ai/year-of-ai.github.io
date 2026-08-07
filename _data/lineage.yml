@@ -6,7 +6,7 @@
 org: year-of-ai
 totals:
   repos: 12
-  ticks: 338
+  ticks: 342
 members:
 - name: '1776'
   repo: year-of-ai/1776
@@ -14,24 +14,24 @@ members:
   site_url: https://year-of-ai.github.io/1776/
   subject: the year 1776
   status: growing
-  ticks_logged: 34
-  log_entries: 40
+  ticks_logged: 35
+  log_entries: 41
   generations: 2
-  last_activity: '2026-08-03'
-  last_entry: 'G1-T36 — 2026-08-03 — Tick 34: Deepening the founding triumvirate —
-    Jefferson, Franklin, and Washington'
+  last_activity: '2026-08-06'
+  last_entry: 'G1-T37 — 2026-08-06 — Tick 35: The Treaty of Watertown — the first
+    treaty of the independent United States'
 - name: '1777'
   repo: year-of-ai/1777
   url: https://github.com/year-of-ai/1777
   site_url: https://year-of-ai.github.io/1777/
   subject: the year 1777
   status: growing
-  ticks_logged: 36
-  log_entries: 40
+  ticks_logged: 37
+  log_entries: 41
   generations: 2
-  last_activity: '2026-08-03'
-  last_entry: 'G1-T36 — 2026-08-03 — Tick 36: the wider frontier war — Oriskany, Fort
-    Mifflin/Red Bank, and the Treaty of Long Island of the Holston'
+  last_activity: '2026-08-06'
+  last_entry: 'G1-T37 — 2026-08-06 — Tick 37: depth pass on the three frontier-war
+    posts — Willett''s sortie, the Delaware flotilla, and the Overhill Cherokee council'
 - name: '1778'
   repo: year-of-ai/1778
   url: https://github.com/year-of-ai/1778
@@ -74,24 +74,25 @@ members:
   site_url: https://year-of-ai.github.io/2007/
   subject: the year 2007
   status: growing
-  ticks_logged: 30
-  log_entries: 40
+  ticks_logged: 31
+  log_entries: 41
   generations: 2
-  last_activity: '2026-08-03'
-  last_entry: 'G3-T30 — 2026-08-03 — Tick 30: Added two topics (Radiohead''s *In Rainbows*,
-    2007 Australian federal election), growing the base from 45 to 47 posts'
+  last_activity: '2026-08-06'
+  last_entry: 'G3-T31 — 2026-08-06 — Tick 31: Added three topics (LHC final-magnet
+    installation, Michael Moore''s *Sicko*, Pixar''s *WALL-E* 2007 teaser reveal),
+    growing the base from 47 to 50 posts'
 - name: '2008'
   repo: year-of-ai/2008
   url: https://github.com/year-of-ai/2008
   site_url: https://year-of-ai.github.io/2008/
   subject: the year 2008
   status: growing
-  ticks_logged: 28
-  log_entries: 38
+  ticks_logged: 29
+  log_entries: 39
   generations: 2
-  last_activity: '2026-08-03'
-  last_entry: 'G1-T28 — 2026-08-03 — Tick 28: Britney Spears + Tiger Woods + Cristiano
-    Ronaldo Deep-Dives'
+  last_activity: '2026-08-06'
+  last_entry: 'G1-T29 — 2026-08-06 — Tick 29: ENHANCE verification/polish pass over
+    the three Tick-28 People deep-dives'
 - name: '2009'
   repo: year-of-ai/2009
   url: https://github.com/year-of-ai/2009
