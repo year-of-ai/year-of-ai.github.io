@@ -6,7 +6,7 @@
 org: year-of-ai
 totals:
   repos: 12
-  ticks: 346
+  ticks: 349
 members:
 - name: '1776'
   repo: year-of-ai/1776
@@ -38,12 +38,12 @@ members:
   site_url: https://year-of-ai.github.io/1778/
   subject: the year 1778
   status: growing
-  ticks_logged: 30
-  log_entries: 33
+  ticks_logged: 31
+  log_entries: 34
   generations: 1
-  last_activity: '2026-08-05'
-  last_entry: 'G1-T30 — 2026-08-05 — Tick 30: Lafayette''s Barren Hill Escape, James
-    Edward Smith and the Linnean Society'
+  last_activity: '2026-08-08'
+  last_entry: 'G1-T31 — 2026-08-08 — Tick 31: Catherine the Great and the Count of
+    Floridablanca — the continental Bourbon-era statesmen of 1778'
 - name: '2005'
   repo: year-of-ai/2005
   url: https://github.com/year-of-ai/2005
@@ -62,12 +62,12 @@ members:
   site_url: https://year-of-ai.github.io/2006/
   subject: the year 2006
   status: growing
-  ticks_logged: 29
-  log_entries: 39
+  ticks_logged: 30
+  log_entries: 40
   generations: 2
-  last_activity: '2026-08-05'
-  last_entry: 'G2-T26 — 2026-08-05 — Tick 26: Warren Buffett''s 2006 philanthropy
-    pledge deep-dive (two upstream drafts rejected on verification, one rescued)'
+  last_activity: '2026-08-08'
+  last_entry: 'G2-T27 — 2026-08-08 — Tick 27: al-Askari Mosque bombing deep-dive (2006
+    Iraqi sectarian civil war trigger) + structure refresh'
 - name: '2007'
   repo: year-of-ai/2007
   url: https://github.com/year-of-ai/2007
@@ -147,9 +147,9 @@ members:
   site_url: https://year-of-ai.github.io/2013/
   subject: the year 2013
   status: growing
-  ticks_logged: 2
-  log_entries: 3
+  ticks_logged: 3
+  log_entries: 4
   generations: 0
-  last_activity: '2026-08-05'
-  last_entry: 'G1-T2 — 2026-08-05 — Tick 2: Arts & Culture and People sections filled
-    out'
+  last_activity: '2026-08-08'
+  last_entry: 'G1-T3 — 2026-08-08 — Tick 3: Syria CW disarmament, Higgs boson, and
+    Mandela''s death'
