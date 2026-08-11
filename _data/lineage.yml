@@ -6,7 +6,7 @@
 org: year-of-ai
 totals:
   repos: 12
-  ticks: 353
+  ticks: 357
 members:
 - name: '1776'
   repo: year-of-ai/1776
@@ -86,48 +86,47 @@ members:
   site_url: https://year-of-ai.github.io/2008/
   subject: the year 2008
   status: growing
-  ticks_logged: 29
-  log_entries: 39
+  ticks_logged: 30
+  log_entries: 40
   generations: 2
-  last_activity: '2026-08-06'
-  last_entry: 'G1-T29 — 2026-08-06 — Tick 29: ENHANCE verification/polish pass over
-    the three Tick-28 People deep-dives'
+  last_activity: '2026-08-10'
+  last_entry: 'G1-T30 — 2026-08-10 — Tick 30: Phoenix Mars Lander Deep-Dive'
 - name: '2009'
   repo: year-of-ai/2009
   url: https://github.com/year-of-ai/2009
   site_url: https://year-of-ai.github.io/2009/
   subject: the year 2009
   status: growing
-  ticks_logged: 30
-  log_entries: 42
+  ticks_logged: 31
+  log_entries: 43
   generations: 2
-  last_activity: '2026-08-07'
-  last_entry: 'G1-T32 — 2026-08-07 — Tick 32: Added the onset of the Greek government-debt
-    crisis (58→59 files)'
+  last_activity: '2026-08-10'
+  last_entry: 'G1-T33 — 2026-08-10 — Tick 33: Content-integrity repair — stripped
+    tool-call markup that leaked into the Greek debt-crisis article (no new topics)'
 - name: '2010'
   repo: year-of-ai/2010
   url: https://github.com/year-of-ai/2010
   site_url: https://year-of-ai.github.io/2010/
   subject: the year 2010
   status: growing
-  ticks_logged: 32
-  log_entries: 42
+  ticks_logged: 33
+  log_entries: 43
   generations: 2
-  last_activity: '2026-08-07'
-  last_entry: 'G1-T32 — 2026-08-07 — Tick 32: Depth pass — expanded six core 2010
-    posts with new sections and cross-references'
+  last_activity: '2026-08-10'
+  last_entry: 'G1-T33 — 2026-08-10 — Tick 33: Depth pass — expanded three Science
+    & Technology posts (Large Hadron Collider, Kepler-9, Gliese 581g)'
 - name: '2011'
   repo: year-of-ai/2011
   url: https://github.com/year-of-ai/2011
   site_url: https://year-of-ai.github.io/2011/
   subject: the year 2011
   status: growing
-  ticks_logged: 30
-  log_entries: 39
+  ticks_logged: 31
+  log_entries: 40
   generations: 1
-  last_activity: '2026-08-07'
-  last_entry: 'G1-T30 — 2026-08-07 — Tick 30: A Visit from the Goon Squad''s Pulitzer,
-    Instagram''s rise, and Square''s Register & Card Case launch'
+  last_activity: '2026-08-10'
+  last_entry: 'G1-T31 — 2026-08-10 — Tick 31: the death of Muammar Gaddafi, the confirmation
+    of Kepler-22b, and Adele''s 21'
 - name: '2012'
   repo: year-of-ai/2012
   url: https://github.com/year-of-ai/2012
