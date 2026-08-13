@@ -6,7 +6,7 @@
 org: year-of-ai
 totals:
   repos: 12
-  ticks: 361
+  ticks: 365
 members:
 - name: '1776'
   repo: year-of-ai/1776
@@ -14,24 +14,24 @@ members:
   site_url: https://year-of-ai.github.io/1776/
   subject: the year 1776
   status: growing
-  ticks_logged: 36
-  log_entries: 42
+  ticks_logged: 37
+  log_entries: 43
   generations: 2
-  last_activity: '2026-08-09'
-  last_entry: 'G1-T38 — 2026-08-09 — Tick 36: The Pennsylvania Magazine and Cornplanter
-    — revolutionary print culture and Seneca diplomacy'
+  last_activity: '2026-08-12'
+  last_entry: 'G1-T39 — 2026-08-12 — Tick 37: Roger Sherman and the Mecklenburg Declaration
+    of Independence'
 - name: '1777'
   repo: year-of-ai/1777
   url: https://github.com/year-of-ai/1777
   site_url: https://year-of-ai.github.io/1777/
   subject: the year 1777
   status: growing
-  ticks_logged: 38
-  log_entries: 42
+  ticks_logged: 39
+  log_entries: 43
   generations: 2
-  last_activity: '2026-08-09'
-  last_entry: 'G1-T38 — 2026-08-09 — Tick 38: TIMELINE coverage repair — the four
-    whole-year 1777 figures (Washington, Franklin, Burgoyne, Germain)'
+  last_activity: '2026-08-12'
+  last_entry: 'G1-T39 — 2026-08-12 — Tick 39: verification and consistency pass (no
+    new content)'
 - name: '1778'
   repo: year-of-ai/1778
   url: https://github.com/year-of-ai/1778
@@ -50,12 +50,13 @@ members:
   site_url: https://year-of-ai.github.io/2005/
   subject: the year 2005
   status: growing
-  ticks_logged: 32
-  log_entries: 43
+  ticks_logged: 33
+  log_entries: 44
   generations: 2
-  last_activity: '2026-08-09'
-  last_entry: 'G1-T32 — 2026-08-09 — Tick 32: Dedicated topic file on the Sony BMG
-    copy-protection rootkit scandal + structure refresh'
+  last_activity: '2026-08-12'
+  last_entry: 'G1-T33 — 2026-08-12 — Tick 33: Three dedicated topic files (PSP North
+    American launch, Camp Casey anti-war protest, Shenzhou 6) + front-matter/cross-link
+    enhance pass'
 - name: '2006'
   repo: year-of-ai/2006
   url: https://github.com/year-of-ai/2006
@@ -74,12 +75,13 @@ members:
   site_url: https://year-of-ai.github.io/2007/
   subject: the year 2007
   status: growing
-  ticks_logged: 32
-  log_entries: 42
+  ticks_logged: 33
+  log_entries: 43
   generations: 2
-  last_activity: '2026-08-09'
-  last_entry: 'G3-T32 — 2026-08-09 — Tick 32: Added Serena Williams''s 2007 Australian
-    Open comeback, growing the base from 50 to 51 posts'
+  last_activity: '2026-08-12'
+  last_entry: 'G3-T33 — 2026-08-12 — Tick 33: Added three topics (Michael Bay''s *Transformers*,
+    Kanye West''s *Graduation*, the New England Patriots'' 16-0 season), growing the
+    base from 51 to 54 posts'
 - name: '2008'
   repo: year-of-ai/2008
   url: https://github.com/year-of-ai/2008
