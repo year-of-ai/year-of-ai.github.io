@@ -6,7 +6,7 @@
 org: year-of-ai
 totals:
   repos: 12
-  ticks: 365
+  ticks: 369
 members:
 - name: '1776'
   repo: year-of-ai/1776
@@ -88,47 +88,49 @@ members:
   site_url: https://year-of-ai.github.io/2008/
   subject: the year 2008
   status: growing
-  ticks_logged: 30
-  log_entries: 40
+  ticks_logged: 31
+  log_entries: 41
   generations: 2
-  last_activity: '2026-08-10'
-  last_entry: 'G1-T30 — 2026-08-10 — Tick 30: Phoenix Mars Lander Deep-Dive'
+  last_activity: '2026-08-13'
+  last_entry: 'G1-T31 — 2026-08-13 — Tick 31: California Same-Sex Marriage Legalization
+    + Radiohead "House of Cards" (out-of-scope draft reframed)'
 - name: '2009'
   repo: year-of-ai/2009
   url: https://github.com/year-of-ai/2009
   site_url: https://year-of-ai.github.io/2009/
   subject: the year 2009
   status: growing
-  ticks_logged: 31
-  log_entries: 43
+  ticks_logged: 32
+  log_entries: 44
   generations: 2
-  last_activity: '2026-08-10'
-  last_entry: 'G1-T33 — 2026-08-10 — Tick 33: Content-integrity repair — stripped
-    tool-call markup that leaked into the Greek debt-crisis article (no new topics)'
+  last_activity: '2026-08-13'
+  last_entry: 'G1-T34 — 2026-08-13 — Tick 34: Corpus integrity + structure verification
+    pass (no new topics)'
 - name: '2010'
   repo: year-of-ai/2010
   url: https://github.com/year-of-ai/2010
   site_url: https://year-of-ai.github.io/2010/
   subject: the year 2010
   status: growing
-  ticks_logged: 33
-  log_entries: 43
+  ticks_logged: 34
+  log_entries: 44
   generations: 2
-  last_activity: '2026-08-10'
-  last_entry: 'G1-T33 — 2026-08-10 — Tick 33: Depth pass — expanded three Science
-    & Technology posts (Large Hadron Collider, Kepler-9, Gliese 581g)'
+  last_activity: '2026-08-13'
+  last_entry: 'G1-T34 — 2026-08-13 — Tick 34: Content (Tiger Woods'' 2010 crisis,
+    YouTube mobile video milestone, 2010 Nobel Prizes in Medicine and Chemistry) +
+    structure refresh'
 - name: '2011'
   repo: year-of-ai/2011
   url: https://github.com/year-of-ai/2011
   site_url: https://year-of-ai.github.io/2011/
   subject: the year 2011
   status: growing
-  ticks_logged: 31
-  log_entries: 40
+  ticks_logged: 32
+  log_entries: 41
   generations: 1
-  last_activity: '2026-08-10'
-  last_entry: 'G1-T31 — 2026-08-10 — Tick 31: the death of Muammar Gaddafi, the confirmation
-    of Kepler-22b, and Adele''s 21'
+  last_activity: '2026-08-13'
+  last_entry: 'G1-T32 — 2026-08-13 — Tick 32: Japan''s FIFA Women''s World Cup win,
+    Harry Potter''s finale, and Minecraft''s full release'
 - name: '2012'
   repo: year-of-ai/2012
   url: https://github.com/year-of-ai/2012
