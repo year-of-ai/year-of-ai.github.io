@@ -6,7 +6,7 @@
 org: year-of-ai
 totals:
   repos: 12
-  ticks: 369
+  ticks: 372
 members:
 - name: '1776'
   repo: year-of-ai/1776
@@ -63,12 +63,11 @@ members:
   site_url: https://year-of-ai.github.io/2006/
   subject: the year 2006
   status: growing
-  ticks_logged: 31
-  log_entries: 41
+  ticks_logged: 32
+  log_entries: 42
   generations: 2
-  last_activity: '2026-08-11'
-  last_entry: 'G2-T28 — 2026-08-11 — Tick 28: Two People deep-dives (Aaron Spelling''s
-    death, Robert Altman''s death) + structure refresh'
+  last_activity: '2026-08-14'
+  last_entry: 'G2-T29 — 2026-08-14 — Tick 32: growth tick (Haiku -> Sonnet -> Opus)'
 - name: '2007'
   repo: year-of-ai/2007
   url: https://github.com/year-of-ai/2007
@@ -137,21 +136,21 @@ members:
   site_url: https://year-of-ai.github.io/2012/
   subject: the year 2012
   status: growing
-  ticks_logged: 31
-  log_entries: 40
+  ticks_logged: 32
+  log_entries: 41
   generations: 1
-  last_activity: '2026-08-11'
-  last_entry: 'G1-T31 — 2026-08-11 — Tick 31: Jerry Sandusky and the Penn State scandal,
-    "Call Me Maybe" by Carly Rae Jepsen, John Carter (2012 film)'
+  last_activity: '2026-08-14'
+  last_entry: 'G1-T32 — 2026-08-14 — Tick 32: GoPro and the action-camera rise (2012),
+    2012 London Olympics technology & broadcasting'
 - name: '2013'
   repo: year-of-ai/2013
   url: https://github.com/year-of-ai/2013
   site_url: https://year-of-ai.github.io/2013/
   subject: the year 2013
   status: growing
-  ticks_logged: 4
-  log_entries: 5
+  ticks_logged: 5
+  log_entries: 6
   generations: 0
-  last_activity: '2026-08-11'
-  last_entry: 'G1-T4 — 2026-08-11 — Tick 4: Boston Marathon bombing and Hugo Chávez''s
-    death'
+  last_activity: '2026-08-14'
+  last_entry: 'G1-T5 — 2026-08-14 — Tick 5: Harlem Shake, the government shutdown,
+    and Typhoon Haiyan'
