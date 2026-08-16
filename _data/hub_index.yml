@@ -6,7 +6,7 @@
 org: year-of-ai
 totals:
   repos: 12
-  pages: 801
+  pages: 812
 repos:
 - name: '1776'
   title: The Year 1776
@@ -17,14 +17,14 @@ repos:
   pages_enabled: true
   scaffolded: true
   branch: main
-  pushed_at: '2026-08-12T07:08:49Z'
-  page_count: 88
+  pushed_at: '2026-08-15T06:08:02Z'
+  page_count: 91
   sections:
   - name: _posts
     title: Posts
     url: https://year-of-ai.github.io/1776/_posts/
     source_url: https://github.com/year-of-ai/1776/tree/main/_posts
-    count: 86
+    count: 89
   root_pages:
   - title: Timeline
     url: https://year-of-ai.github.io/1776/TIMELINE/
@@ -41,14 +41,14 @@ repos:
   pages_enabled: true
   scaffolded: true
   branch: main
-  pushed_at: '2026-08-09T06:16:19Z'
-  page_count: 55
+  pushed_at: '2026-08-15T06:12:40Z'
+  page_count: 58
   sections:
   - name: _posts
     title: Posts
     url: https://year-of-ai.github.io/1777/_posts/
     source_url: https://github.com/year-of-ai/1777/tree/main/_posts
-    count: 53
+    count: 56
   root_pages:
   - title: Timeline
     url: https://year-of-ai.github.io/1777/TIMELINE/
@@ -64,14 +64,14 @@ repos:
   pages_enabled: true
   scaffolded: true
   branch: main
-  pushed_at: '2026-08-11T06:32:26Z'
-  page_count: 69
+  pushed_at: '2026-08-15T06:06:51Z'
+  page_count: 71
   sections:
   - name: _posts
     title: Posts
     url: https://year-of-ai.github.io/1778/_posts/
     source_url: https://github.com/year-of-ai/1778/tree/main/_posts
-    count: 67
+    count: 69
   root_pages:
   - title: Timeline
     url: https://year-of-ai.github.io/1778/TIMELINE/
@@ -88,14 +88,14 @@ repos:
   pages_enabled: true
   scaffolded: true
   branch: main
-  pushed_at: '2026-08-12T07:12:18Z'
-  page_count: 60
+  pushed_at: '2026-08-15T06:12:58Z'
+  page_count: 63
   sections:
   - name: _posts
     title: Posts
     url: https://year-of-ai.github.io/2005/_posts/
     source_url: https://github.com/year-of-ai/2005/tree/main/_posts
-    count: 58
+    count: 61
   root_pages:
   - title: Timeline
     url: https://year-of-ai.github.io/2005/TIMELINE/
