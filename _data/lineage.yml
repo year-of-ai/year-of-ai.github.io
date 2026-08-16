@@ -6,7 +6,7 @@
 org: year-of-ai
 totals:
   repos: 12
-  ticks: 372
+  ticks: 376
 members:
 - name: '1776'
   repo: year-of-ai/1776
@@ -14,49 +14,49 @@ members:
   site_url: https://year-of-ai.github.io/1776/
   subject: the year 1776
   status: growing
-  ticks_logged: 37
-  log_entries: 43
+  ticks_logged: 38
+  log_entries: 44
   generations: 2
-  last_activity: '2026-08-12'
-  last_entry: 'G1-T39 — 2026-08-12 — Tick 37: Roger Sherman and the Mecklenburg Declaration
-    of Independence'
+  last_activity: '2026-08-15'
+  last_entry: 'G1-T40 — 2026-08-15 — Tick 38: Patrick Henry, the Spanish colonial
+    empire, and the pre-steam water-mill economy'
 - name: '1777'
   repo: year-of-ai/1777
   url: https://github.com/year-of-ai/1777
   site_url: https://year-of-ai.github.io/1777/
   subject: the year 1777
   status: growing
-  ticks_logged: 39
-  log_entries: 43
+  ticks_logged: 40
+  log_entries: 44
   generations: 2
-  last_activity: '2026-08-12'
-  last_entry: 'G1-T39 — 2026-08-12 — Tick 39: verification and consistency pass (no
-    new content)'
+  last_activity: '2026-08-15'
+  last_entry: 'G1-T40 — 2026-08-15 — Tick 40: Battle of Monmouth, General Nathanael
+    Greene, and the election of Pope Pius VI'
 - name: '1778'
   repo: year-of-ai/1778
   url: https://github.com/year-of-ai/1778
   site_url: https://year-of-ai.github.io/1778/
   subject: the year 1778
   status: growing
-  ticks_logged: 32
-  log_entries: 35
+  ticks_logged: 33
+  log_entries: 36
   generations: 1
-  last_activity: '2026-08-11'
-  last_entry: 'G1-T32 — 2026-08-11 — Tick 32: Naval privateering, Maria Carolina of
-    Naples, and religious developments in 1778'
+  last_activity: '2026-08-15'
+  last_entry: 'G1-T33 — 2026-08-15 — Tick 33: Lavoisier''s combustion chemistry and
+    David Rittenhouse — the quantitative science of 1778'
 - name: '2005'
   repo: year-of-ai/2005
   url: https://github.com/year-of-ai/2005
   site_url: https://year-of-ai.github.io/2005/
   subject: the year 2005
   status: growing
-  ticks_logged: 33
-  log_entries: 44
+  ticks_logged: 34
+  log_entries: 45
   generations: 2
-  last_activity: '2026-08-12'
-  last_entry: 'G1-T33 — 2026-08-12 — Tick 33: Three dedicated topic files (PSP North
-    American launch, Camp Casey anti-war protest, Shenzhou 6) + front-matter/cross-link
-    enhance pass'
+  last_activity: '2026-08-15'
+  last_entry: 'G1-T34 — 2026-08-15 — Tick 34: Three dedicated topic files (Google
+    Maps launch, English Wikipedia half-million milestone, Samuel Alito''s Supreme
+    Court nomination) + fact-corrected enhance pass'
 - name: '2006'
   repo: year-of-ai/2006
   url: https://github.com/year-of-ai/2006
