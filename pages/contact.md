@@ -1,6 +1,6 @@
 ---
 title: "Contact"
-description: "Get in touch with the Zer0-Mistakes team"
+description: "Get in touch with the Year of AI team — questions about the year knowledge bases, the growth engine behind them, or how to contribute to the project."
 layout: default
 permalink: /contact/
 categories:
