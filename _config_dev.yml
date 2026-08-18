@@ -2,11 +2,15 @@
 # This file overrides production settings for local development
 
 # Theme Configuration
-# Disable remote theme for local development - allows site to build with local theme files
 # Local dev fetches the theme over the network via remote_theme, same as
 # production (no theme files are vendored). Set JEKYLL_GITHUB_TOKEN to avoid
 # GitHub API rate limits on the theme download.
-remote_theme             : "bamr87/zer0-mistakes"
+# PINNED to the SAME tag as _config.yml (ADR-0006 theme pinning). Jekyll layers
+# this file last, so its value WINS: left floating, local previews and the
+# build-validation gate would render against upstream HEAD while production
+# renders v1.26.0 — a build gate that validates the wrong theme. Bump this tag
+# in the same change as _config.yml and _data/hub.yml pages.theme_repo.
+remote_theme             : "bamr87/zer0-mistakes@v1.26.0"
 
 # Development URL Configuration
 # Override production URLs for local development server
