@@ -9,6 +9,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### Added
+- **Pre-merge Jekyll build gate (`.github/workflows/build-validation.yml`)** —
+  the repo had no workflow that compiled the site at all. Production publishes
+  via native GitHub Pages "deploy from branch", so a broken Liquid template, an
+  unparseable front-matter `date:`, or a bad `remote_theme` reference reached
+  production with the hourly, after-the-fact `pages-deploy-sentinel` as the only
+  signal. On any PR touching `pages/`, `_data/`, `_config*.yml`, `Gemfile*`,
+  `assets/`, or the root content files, this runs
+  `normalize-front-matter-dates.rb --check pages` and then
+  `bundle exec jekyll build --config '_config.yml,_config_dev.yml'` with
+  `JEKYLL_GITHUB_TOKEN` set (the remote theme is fetched through the GitHub API).
+  Read-only: it compiles and discards, so it is exempt from the
+  `_data/fleet_pause.yml` kill-switch and has no deploy step.
 - **Maturity-gated automatic spawning (ADR-0007)** — the lineage now widens on
   its own, closing ADR-0002's deferred automation: when every member's
   Evolution Log shows at least `spawn.frontier_ticks` growth cycles (so the
@@ -43,6 +55,30 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   grow-lineage runs (member repos carry no workflows under the central
   model); dangling theme-repo references removed from
   `content_review.yml`/`content-reviewer.md`.
+- **The local/CI toolchain could not build the site at all.** `github-pages` was
+  unpinned, and the explicit `jekyll-remote-theme` / `jekyll-include-cache` lines
+  dragged resolution down to github-pages 222 (jekyll 3.9.0, liquid 4.0.3);
+  liquid 4.0.3 calls `tainted?`, removed in Ruby 3.2, so every build on the
+  documented Ruby 3.3 toolchain (`docker-compose.yml`) died with
+  `undefined method 'tainted?' for false`. The Gemfile now pins
+  `github-pages ~> 232` — the release GitHub Pages itself runs (jekyll 3.10.0,
+  liquid 4.0.4) — and the build passes on Ruby 3.3.
+- **`pages-deploy-sentinel.yml` never watched the hub's own site.** It iterated
+  `_data/lineage.yml` members, and the hub is not a member, so the one workflow
+  that answers "did the Pages build succeed and is the site live" was blind to
+  the site it runs in. It now checks the hub first, derived from
+  `$GITHUB_REPOSITORY` + `_config.yml` `url`/`baseurl` (never hard-coded), and
+  requests `pages: read` so `github.token` can read the hub's own build status
+  when `LIFECYCLE_PAT` is absent.
+- **`_config_dev.yml` floated the theme on `HEAD`** (`bamr87/zer0-mistakes`,
+  untagged) while `_config.yml` and `_data/hub.yml` pinned `@v1.26.0`. Jekyll
+  layers the dev config last, so local previews — and the new build gate —
+  rendered against a different theme than production serves. Now pinned to the
+  same tag. Also removed a dead, unpinned `# remote_theme` comment left under
+  `_config.yml`'s Style Settings, ~650 lines below the real declaration.
+- `pages/contact.md`'s `date:` was a full ISO-8601 timestamp, which convention
+  #6's gate (`normalize-front-matter-dates.rb`) reports as UNFIXABLE; normalized
+  to a plain ISO date so the new gate starts green.
 
 ### Changed (comment noise)
 - **PR review comments only speak when they have something to say**: the
