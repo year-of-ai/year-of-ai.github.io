@@ -10,7 +10,7 @@
 # build-validation gate would render against upstream HEAD while production
 # renders v1.26.0 — a build gate that validates the wrong theme. Bump this tag
 # in the same change as _config.yml and _data/hub.yml pages.theme_repo.
-remote_theme             : "bamr87/zer0-mistakes@v1.26.0"
+remote_theme             : "bamr87/zer0-mistakes"
 
 # Development URL Configuration
 # Override production URLs for local development server

@@ -39,7 +39,7 @@ pages:
   # upstream push change/break them all at once. Bump the tag here and in the
   # hub's _config.yml together, then re-roll member configs with
   # scripts/provision-org-sites.rb.
-  theme_repo: bamr87/zer0-mistakes@v1.26.0
+  theme_repo: bamr87/zer0-mistakes
   # Git ref to scaffold against / publish from. Empty = repo default branch.
   branch: ""
 

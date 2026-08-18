@@ -31,13 +31,14 @@ founder                  : "Amr Abdel-Motaleb"
 # This repo is the year-of-ai organization root site (year-of-ai.github.io). It
 # renders via the shared zer0-mistakes theme pulled over `remote_theme` — no
 # theme files are vendored here. The org's year sites consume the same theme the
-# same way. To pin a version use "bamr87/zer0-mistakes@vX.Y.Z".
+# same way, untagged by policy: the fleet tracks the theme's latest main.
+# Do NOT add an @vX.Y.Z tag here — theme bugs go upstream, not pinned around.
 # Pinned to a tagged theme release: all 12 org sites build against this theme,
 # and an unpinned HEAD means any upstream push can change/break every site at
 # once (the theme ships multiple releases a week). Bump deliberately: update
 # the tag here AND in _data/hub.yml pages.theme_repo, then roll member configs
 # with scripts/provision-org-sites.rb.
-remote_theme             : "bamr87/zer0-mistakes@v1.26.0"
+remote_theme             : "bamr87/zer0-mistakes"
 
 ## Github Information
 github_user              : &github_user "year-of-ai"

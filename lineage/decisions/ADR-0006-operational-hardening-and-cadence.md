@@ -1,6 +1,6 @@
 # ADR-0006 — Operational hardening & growth cadence
 
-- **Status**: Accepted
+- **Status**: Accepted (decision 5, theme pinning, SUPERSEDED 2026-08-18)
 - **Date**: 2026-07-06
 - **Context**: Full review of the hub and the 11-member fleet (three parallel
   audits: purpose surfaces, hub machinery, org-wide health), triggered by the
@@ -62,10 +62,18 @@
    stalest-first selection in `orchestrate.yml`. Every member still grows
    perpetually; each now ticks roughly every 3 days instead of daily, cutting
    model spend ~2/3. Set `repos_per_run: 0` to restore grow-everything-daily.
-5. **Theme pinning** — `remote_theme` is pinned to a tagged release in the
+5. **Theme pinning** — ~~`remote_theme` is pinned to a tagged release in the
    hub's `_config.yml` and in `_data/hub.yml` (`pages.theme_repo`, which the
    provisioner templates into member configs). Theme bumps become deliberate:
-   update both, then re-roll members with `provision-org-sites.rb`.
+   update both, then re-roll members with `provision-org-sites.rb`.~~
+   **SUPERSEDED 2026-08-18 — decision 5 only.** The fleet no longer pins the
+   theme: `remote_theme` is untagged everywhere and every site tracks the
+   theme's latest `main`. In practice the pin did not make bumps deliberate, it
+   made them not happen — the hub sat two minors behind for weeks, and the
+   floating dev config was the only thing in the org that ever built against a
+   current theme. Theme bugs now go upstream instead of being pinned around;
+   the safety net is the `build-validation` PR gate plus `pages-deploy-sentinel`
+   after deploy. The rest of this ADR stands.
 6. **Staging trim** — the dead peer-to-peer surfaces are no longer staged into
    ticks (excluded in the staging step). The files stay in
    `lineage/framework/` as reference until a future cleanup removes them.
@@ -77,8 +85,9 @@
 
 - Slower per-member growth by design (a policy knob, not a code change, to
   revert).
-- Theme fixes no longer arrive automatically — bumping the pin is a deliberate,
-  reviewable act.
+- ~~Theme fixes no longer arrive automatically — bumping the pin is a
+  deliberate, reviewable act.~~ **Superseded 2026-08-18** (see decision 5):
+  theme fixes arrive automatically again, and an upstream regression does too.
 - The old lifecycle surfaces remain on disk but out of ticks; removing them
   entirely (and pruning the matching member `.claude` adapter commands) is
   follow-up work.

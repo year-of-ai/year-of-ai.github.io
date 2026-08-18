@@ -76,19 +76,25 @@ vendors theme files; there are no `_layouts/`, `_includes/`, `_sass/`, or
 custom `_plugins/` anywhere in the org. Layout or style changes belong
 upstream in the theme.
 
-**The pin.** The theme ref is pinned to a tagged release
-(`bamr87/zer0-mistakes@v1.26.0`) because all 12 sites build against it and the
-theme ships several releases a week — a floating `HEAD` would let any upstream
-push change or break every site at once (ADR-0006). The pin lives in **two
-places that must move together**:
+**No pin.** The theme ref is deliberately **untagged**
+(`bamr87/zer0-mistakes`): all 12 sites track its latest `main`, so a theme fix
+reaches production without a bump PR in nine repos. This supersedes ADR-0006
+decision 5, which pinned it — in practice the pin did not make bumps
+deliberate, it made them not happen (the hub sat two minors behind for weeks).
+The trade is explicit: an upstream regression arrives just as fast, so theme
+bugs go upstream rather than getting pinned around. The untagged ref lives in
+**two places that must stay in step**:
 
 1. [`_config.yml`](_config.yml) `remote_theme:` — the hub site itself;
 2. [`_data/hub.yml`](_data/hub.yml) `pages.theme_repo` — templated into each
    member's `_config.yml` by the provisioner.
 
-Bump procedure: update both, verify with a local build, merge, then re-roll
-member configs with `ruby scripts/provision-org-sites.rb`. Code that builds
-URLs from `theme_repo` must strip the ref (`split('@').first`).
+There is no bump procedure any more — there is nothing to bump. What remains is
+propagation: members keep whatever ref they were last provisioned with, so run
+`ruby scripts/provision-org-sites.rb` to push the untagged value out to member
+configs. Code that builds URLs from `theme_repo` must still strip a ref
+(`split('@').first`) — the value is untagged today, but member repos may still
+carry a tag until they are re-rolled.
 
 **The `_data` contract.** `remote_theme` supplies layouts/includes/assets but
 **not** `_data`. The theme's templates read `site.data.*` at render time, so

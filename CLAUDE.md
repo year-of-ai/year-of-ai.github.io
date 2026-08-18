@@ -26,11 +26,12 @@ read the architecture doc and fix the drift.
 
 ## Repository map
 
-- `_config.yml` — production config. `remote_theme` is **pinned**
-  (`bamr87/zer0-mistakes@vX.Y.Z`) — all 12 org sites build on this theme, so
-  bumps are deliberate: change the tag here AND `_data/hub.yml
-  pages.theme_repo` together, then re-roll members with
-  `provision-org-sites.rb`.
+- `_config.yml` — production config. `remote_theme` is **untagged by policy**
+  (`bamr87/zer0-mistakes`) — all 12 org sites track the theme's latest `main`,
+  so a theme fix reaches production without a bump PR in nine repos. Keep it
+  tag-free here, in `_config_dev.yml`, and in `_data/hub.yml pages.theme_repo`
+  (the value `provision-org-sites.rb` stamps into every member). Supersedes
+  ADR-0006 decision 5.
 - `_config_dev.yml` — local-dev overrides (localhost, `unpublished: true`,
   analytics off, a slimmer `plugins:`/`collections:` set, `limit_posts`). It
   **also carries its own `remote_theme:` pin**, and Jekyll layers this file
@@ -252,18 +253,19 @@ ruby scripts/content-review.rb --help        # the PR content reviewer
 Standing drift a maintainer owns. Update or delete an entry when it is resolved
 — a stale gap list is worse than none.
 
-- **Theme pin is two minors behind.** `_config.yml`, `_config_dev.yml`, and
-  `_data/hub.yml` `pages.theme_repo` all pin
-  `bamr87/zer0-mistakes@v1.26.0`; upstream is at **1.28.0** (as of 2026-08-18).
-  This is deliberate, not forgotten: `_data/hub.yml pages.theme_repo` is the
-  value `provision-org-sites.rb` stamps into **every member repo's**
-  `_config.yml`, so a bump re-rolls the whole org and must be validated as a
-  fleet change, never smuggled into an unrelated PR. The procedure, in one
-  change: (1) bump the tag in `_config.yml`, (2) bump the identical tag in
-  `_data/hub.yml` `pages.theme_repo`, and keep `_config_dev.yml` matching, then
-  (3) `ruby scripts/provision-org-sites.rb` to re-roll member configs, and
-  (4) watch `pages-deploy-sentinel.yml` for the next hour — a theme regression
-  shows up as member Pages builds erroring, not as a red check here.
+- **Members keep the old pin until re-rolled.** The hub is tag-free now, but
+  `_data/hub.yml pages.theme_repo` is what `provision-org-sites.rb` stamps into
+  each member's `_config.yml`, so members carry whatever tag they were last
+  provisioned with until the provisioner runs. Run
+  `ruby scripts/provision-org-sites.rb`, then watch `pages-deploy-sentinel.yml`
+  for the next hour — a theme regression shows up as member Pages builds
+  erroring, not as a red check here.
+- **Nothing builds against the theme on a schedule.** With no pin, an upstream
+  regression reaches production on a member's next build, and the
+  `build-validation` gate only fires on PRs touching this repo — so a theme-only
+  break is invisible until it ships. lifehacker.dev's `nightly.yml` (daily
+  rebuild against a fresh, uncached theme clone) is the fleet's proven pattern
+  and is worth copying here.
 - **No CODEOWNERS anywhere.** The fleet's bots push straight to member repos
   and to this hub's `main`, and nothing routes review by path — an edit to
   `lineage/policy.yml`, `lineage/framework/`, or the workflows requests the

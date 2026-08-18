@@ -24,13 +24,15 @@ over [`remote_theme`](https://github.com/benbalter/jekyll-remote-theme):
 
 ```yaml
 # _config.yml
-remote_theme: "bamr87/zer0-mistakes@v1.26.0"   # pinned — all 12 org sites build on this
+remote_theme: "bamr87/zer0-mistakes"   # untagged — all 12 org sites track latest
 ```
 
-The pin is deliberate: every org site consumes the same theme the same way, so
-a floating ref would let any upstream theme push change (or break) all of them
-at once. Bump the tag here and in `_data/hub.yml` (`pages.theme_repo`)
-together, then re-roll member configs with `scripts/provision-org-sites.rb`.
+Leaving it untagged is deliberate: every org site tracks the theme's latest
+`main`, so a theme fix reaches production without a bump PR in nine repos. The
+trade is that an upstream regression arrives just as fast — so theme bugs go
+**upstream** rather than getting pinned around. `_data/hub.yml`
+(`pages.theme_repo`) carries the same untagged value; re-roll member configs
+with `scripts/provision-org-sites.rb` to propagate it.
 
 Production builds on **native GitHub Pages** ("deploy from branch" — `main`, `/`).
 
