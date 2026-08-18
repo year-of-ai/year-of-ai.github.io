@@ -22,7 +22,9 @@ hold only their *content* (plus a GitHub Pages `_config.yml`, `.claude/`, and
   Start with [`ADR-0001`](decisions/ADR-0001-centralized-growth-orchestration.md)
   (why growth is centralized in the hub, and the adapter+staging mechanism).
   See also [`ADR-0006`](decisions/ADR-0006-operational-hardening-and-cadence.md)
-  (the tick-hardening, the front-matter publish gate, and growth cadence) and
+  (the tick-hardening, the front-matter publish gate, and growth cadence — its
+  decision 5, theme pinning, was **superseded 2026-08-18**: the fleet no longer
+  pins `remote_theme` and every site tracks the theme's latest `main`) and
   [`ADR-0007`](decisions/ADR-0007-maturity-gated-auto-spawning.md) (automatic
   tangential spawning: the maturity gate in `policy.yml` `spawn:` and the
   DECIDE→PLANT workflow that widens the lineage — closing
