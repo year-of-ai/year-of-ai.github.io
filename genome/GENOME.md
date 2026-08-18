@@ -44,8 +44,12 @@ Every concept-bearing asset of the model is classified in
   pair `claude_svg_banner.py` + `generate-preview-images.sh` — the grow tick's
   Illustrate step and the `preview_images.provider: auto` ladder wrapper), the
   `.claude` adapter set, the theme-data files, the chat-proxy worker, the
-  legal pages. *Must contain no concept literal* (the verify gate enforces
-  this).
+  legal pages, and the read-only CI gates — including
+  `.github/workflows/build-validation.yml`, the pre-merge Jekyll build check,
+  which is deliberately **not** in `default_plant_exclude`: it needs nothing a
+  fresh plant lacks (a `_config.yml`, a `Gemfile`, some pages), so every new
+  org gets a build gate from its first commit. *Must contain no concept
+  literal* (the verify gate enforces this).
 - **`template`** — carries concept literals, tokenized via the `tokens:`
   literal→`{{TOKEN}}` map at plant time: `_config.yml`, `_data/hub.yml`,
   `policy.yml`, the orchestration/grow/plant workflows (including
