@@ -691,7 +691,6 @@ sass:
 ## Style Settings -------------------------------------------------------------
 
 # theme                  : "zer0-mistakes-jekyll"
-# remote_theme           : "bamr87/zer0-mistakes"
 theme_skin               : "air" # "air", "aqua", "dirt", "neon", "mint", "plum", "sunrise"
 
 # SVG background layers (fffuel.co style) — gradient, pattern, noise per skin

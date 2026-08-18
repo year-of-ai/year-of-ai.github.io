@@ -128,7 +128,7 @@ dies under a POSIX locale); sandboxed environments need
 | `templates/org-site/` | Scaffold the provisioner writes into member repos |
 | `templates/org-profile/` | Org profile README staged for the `year-of-ai/.github` repo |
 | `templates/deploy/chat-proxy/` | Cloudflare Worker for the (currently disabled) AI-chat widget |
-| `.github/workflows/` | 13 workflows: growth engine (2) + fleet (7) + content/site (4) — §5, §6 |
+| `.github/workflows/` | 14 workflows: growth engine (2) + fleet (7) + content/site (5) — §5, §6 |
 
 ### 3.2 A member repo
 
@@ -346,7 +346,7 @@ ledger.
 |---|---|---|---|
 | [`telemetry-ledger.yml`](.github/workflows/telemetry-ledger.yml) | `workflow_run` of Grow Lineage | The run's telemetry artifact | Appending one `evolution-telemetry/v1` record to `telemetry/evolution.jsonl` (idempotent by run_id, serialized, rebase-retry) |
 | [`fleet-health-watch.yml`](.github/workflows/fleet-health-watch.yml) | daily 07:23 | The ledger: stalls, error runs, unseen members (`scripts/fleet-health.rb`) | Sticky issue, auto-closed on recovery |
-| [`pages-deploy-sentinel.yml`](.github/workflows/pages-deploy-sentinel.yml) | hourly :13 | Every member's Pages **build status** (via `LIFECYCLE_PAT`) + live HTTP. `errored`, `stuck-building` (>90 min), `unreadable`, or non-200 ⇒ unhealthy | Sticky issue, auto-closed on recovery |
+| [`pages-deploy-sentinel.yml`](.github/workflows/pages-deploy-sentinel.yml) | hourly :13 | The hub's own site **and** every member's Pages **build status** (via `LIFECYCLE_PAT`) + live HTTP. `errored`, `stuck-building` (>90 min), `unreadable`, or non-200 ⇒ unhealthy | Sticky issue, auto-closed on recovery |
 | [`secret-expiry-watch.yml`](.github/workflows/secret-expiry-watch.yml) | daily 05:05 | OAuth token, API key, PAT validity | Sticky issue, auto-closed |
 | [`framework-pr-reviewer.yml`](.github/workflows/framework-pr-reviewer.yml) | PRs touching `lineage/framework/**`, `repo-template/.claude/**` | Self-modification of the agent toolkit | Read-only Sonnet review + red-flag regex |
 | [`docs-warden.yml`](.github/workflows/docs-warden.yml) | PRs + Tuesday sweep | Doc coverage vs `.github/config/docs_warden.yml` map (ADR-0005) | PR comments / sweep issue |
@@ -354,9 +354,18 @@ ledger.
 
 Plus baseline hygiene: [`codeql.yml`](.github/workflows/codeql.yml) and
 [`.github/dependabot.yml`](.github/dependabot.yml) (actions + bundler), and
-the content/site workflows: [`hub-sync.yml`](.github/workflows/hub-sync.yml)
+the content/site workflows:
+[`build-validation.yml`](.github/workflows/build-validation.yml) (the pre-merge
+Jekyll build gate — compiles the site on any PR touching content/data/config/
+assets, plus the front-matter date check; read-only, hence kill-switch-exempt,
+and it never deploys), [`hub-sync.yml`](.github/workflows/hub-sync.yml)
 (daily dashboard refresh), [`ai-content-review.yml`](.github/workflows/ai-content-review.yml)
 (two-tier review of `pages/**` PRs), [`deploy-chat-proxy.yml`](.github/workflows/deploy-chat-proxy.yml).
+
+Note the asymmetry the build gate closes: production publishes through native
+GitHub Pages "deploy from branch", so before this workflow existed **nothing
+compiled the site between a merge and a live deploy** — the sentinel above is
+an hourly *post-mortem*, not a gate.
 
 **The ledger** is the fleet's shared signal. One line per grow run:
 

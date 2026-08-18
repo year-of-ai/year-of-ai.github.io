@@ -83,6 +83,7 @@ transplant:
   - ".github/workflows/pages-deploy-sentinel.yml" # member-site liveness monitor — agnostic
   - ".github/workflows/secret-expiry-watch.yml" # auth-credential probe — agnostic
   - ".github/workflows/fleet-health-watch.yml" # daily ledger health digest — agnostic
+  - ".github/workflows/build-validation.yml" # pre-merge Jekyll build gate — agnostic, every plant wants it
   - ".github/config/docs_warden.yml"        # doc-coverage map — agnostic
   - ".github/instructions/docs-warden.instructions.md" # doc-warden contract — agnostic
   - "scripts/docs-warden.rb"                # doc-coverage engine — agnostic

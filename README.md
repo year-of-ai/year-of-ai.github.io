@@ -61,7 +61,7 @@ credentials, docs coverage, and the evolution ledger. Full explainer:
 | `scripts/` | Hub tooling — dashboards (`sync-hub-metadata.rb`, `sync-lineage-state.rb`), provisioning (`provision-org-sites.rb`), the planter (`plant-lineage.rb`), fleet health (`fleet-health.rb`), docs coverage (`docs-warden.rb`), content review (`content-review.rb`), front-matter repair (`normalize-front-matter-dates.rb`) |
 | `templates/org-site/` | Scaffold the provisioner writes into each org repo |
 | `templates/org-profile/` | The org profile README, staged for the `year-of-ai/.github` repo |
-| `.github/workflows/` | The growth engine (`orchestrate`, `grow-lineage`), the fleet (`telemetry-ledger`, `fleet-health-watch`, `pages-deploy-sentinel`, `secret-expiry-watch`, `framework-pr-reviewer`, `docs-warden`, `genome-sync`), and content/site automation (`hub-sync`, `ai-content-review`, `deploy-chat-proxy`, `codeql`) |
+| `.github/workflows/` | The growth engine (`orchestrate`, `grow-lineage`), the fleet (`telemetry-ledger`, `fleet-health-watch`, `pages-deploy-sentinel`, `secret-expiry-watch`, `framework-pr-reviewer`, `docs-warden`, `genome-sync`), and content/site automation (`build-validation`, `hub-sync`, `ai-content-review`, `deploy-chat-proxy`, `codeql`) |
 
 Everything the theme provides (`_layouts`, `_includes`, `_sass`, `assets/css`,
 JS, vendored Bootstrap, images) comes from `remote_theme` at build time and is

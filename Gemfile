@@ -10,7 +10,14 @@ source "https://rubygems.org"
 
 # GitHub Pages gem — bundles Jekyll and every GitHub Pages whitelisted plugin
 # (jekyll-seo-tag, jekyll-feed, jekyll-sitemap, jekyll-include-cache, …).
-gem "github-pages", group: :jekyll_plugins
+# PINNED to the release GitHub Pages actually runs (232 → jekyll 3.10.0,
+# liquid 4.0.4). Unpinned, the explicit jekyll-remote-theme / jekyll-include-cache
+# lines below drag the resolution back to github-pages 222 (jekyll 3.9.0,
+# liquid 4.0.3) — and liquid 4.0.3 calls `tainted?`, removed in Ruby 3.2, so
+# every local build on the documented Ruby 3.3 toolchain (docker-compose.yml,
+# build-validation.yml) died with `undefined method 'tainted?' for false`.
+# Dependabot (bundler ecosystem) proposes the bump when Pages ships the next one.
+gem "github-pages", "~> 232", group: :jekyll_plugins
 
 # Pull the shared theme from GitHub at build time.
 gem "jekyll-remote-theme"

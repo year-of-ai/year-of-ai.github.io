@@ -12,6 +12,12 @@ name: Pages Deploy Sentinel
 # and 2008/2012 (platform-side deploy failures). So the build status check is
 # authoritative, and an unreadable status is reported, never assumed healthy.
 # Reading another repo's Pages builds needs a PAT — pass LIFECYCLE_PAT.
+#
+# The scan covers the HUB'S OWN SITE as well as the lineage members. The hub is
+# not a lineage member (it has no seed), so for a long time the one workflow
+# whose job is "did the Pages build succeed and is the site live" was blind to
+# the site it runs in. It is derived from the runtime repo + _config.yml, not
+# hard-coded, so a replanted org inherits the same self-check.
 
 on:
   schedule:
@@ -21,6 +27,7 @@ on:
 permissions:
   contents: read
   issues: write
+  pages: read # the hub's own Pages build, readable by github.token without the PAT
 
 concurrency:
   group: pages-deploy-sentinel
@@ -56,6 +63,20 @@ jobs:
               site = m["site_url"] || "https://#{org.split("/").first}.github.io/#{m["name"]}/"
               puts "#{repo}\t#{site}"
             end' 2>/dev/null)"
+          # …plus the hub's own site, which is NOT a lineage member and was the
+          # one site this monitor never watched. Derived, never hard-coded:
+          # $GITHUB_REPOSITORY for the repo, _config.yml url+baseurl for the URL.
+          # `aliases: true` is required: _config.yml is full of YAML anchors
+          # (&github_user, &url, …) and Psych 4 refuses aliases by default.
+          hub_site="$(ruby -ryaml -e '
+            c = YAML.load_file("_config.yml", aliases: true)
+            u = "#{c["url"]}#{c["baseurl"]}"
+            puts(u.end_with?("/") ? u : "#{u}/")' 2>/dev/null)"
+          if [ -n "$hub_site" ]; then
+            members="${GITHUB_REPOSITORY}"$'\t'"${hub_site}"$'\n'"${members}"
+          else
+            echo "::warning::Could not derive the hub site URL from _config.yml — hub not checked."
+          fi
           fails=""
           total=0; bad=0
           now_epoch=$(date -u +%s)
@@ -82,14 +103,14 @@ jobs:
               fails="${fails}| \`${repo##*/}\` | ${st} | ${code} | ${site} |"$'\n'
             fi
           done <<< "$members"
-          echo "checked ${total} member(s), ${bad} unhealthy."
+          echo "checked ${total} site(s) (hub + members), ${bad} unhealthy."
           {
             echo "## 🌐 Pages Deploy Sentinel"
             echo
-            echo "_$(date -u '+%Y-%m-%d %H:%M UTC') · checked ${total} member site(s)._"
+            echo "_$(date -u '+%Y-%m-%d %H:%M UTC') · checked ${total} site(s) — the hub and every member._"
             echo
             if [ "$bad" -eq 0 ]; then
-              echo "✅ All member Pages sites are built and live."
+              echo "✅ The hub and all member Pages sites are built and live."
             else
               echo "**${bad} unhealthy site(s):**"
               echo

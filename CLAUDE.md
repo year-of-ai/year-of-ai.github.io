@@ -32,7 +32,11 @@ read the architecture doc and fix the drift.
   pages.theme_repo` together, then re-roll members with
   `provision-org-sites.rb`.
 - `_config_dev.yml` — local-dev overrides (localhost, `unpublished: true`,
-  analytics off). Also uses `remote_theme`.
+  analytics off, a slimmer `plugins:`/`collections:` set, `limit_posts`). It
+  **also carries its own `remote_theme:` pin**, and Jekyll layers this file
+  last, so *its* tag is the one local previews and the CI build gate actually
+  render against — keep it identical to `_config.yml`'s or you are validating a
+  different theme than production serves.
 - `pages/` — all content collections + standalone pages (`home.md`, `hub.md`, …).
 - `_data/` — data the theme reads (`navigation/`, `ui-text.yml`, `theme_skins.yml`,
   `theme_backgrounds.yml`, `authors.yml`, `landing.yml`, …) **plus** the hub:
@@ -78,7 +82,11 @@ read the architecture doc and fix the drift.
 - `templates/deploy/chat-proxy/` — Cloudflare Worker for the AI-chat widget
   (deploy secrets: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, `ANTHROPIC_API_KEY`).
   The widget is `ai_chat.enabled: false` until this proxy is actually deployed.
-- `.github/workflows/` — content/site: `hub-sync.yml`, `ai-content-review.yml`,
+- `.github/workflows/` — content/site: `build-validation.yml` (the **pre-merge
+  Jekyll build gate** — compiles the site with `'_config.yml,_config_dev.yml'`
+  on any PR touching content/data/config/assets, plus the front-matter date
+  check; read-only, so it is exempt from the kill-switch and has no deploy
+  step — Pages owns publishing), `hub-sync.yml`, `ai-content-review.yml`,
   `deploy-chat-proxy.yml`; the **growth engine** `orchestrate.yml` (daily
   scheduler) + `grow-lineage.yml` (grows one year repo per dispatch) +
   `plant-lineage.yml` (spawns ONE new tangential-era repo; the DECIDE output
@@ -88,7 +96,8 @@ read the architecture doc and fix the drift.
   orchestrate, ADR-0007; manual mode keeps the ADR-0002 two-key confirm); and the
   **self-improvement fleet** (ADR-0003) `telemetry-ledger.yml` (evolution ledger),
   `framework-pr-reviewer.yml` (gates framework PRs), `docs-warden.yml` (doc
-  coverage), `pages-deploy-sentinel.yml` (member site liveness),
+  coverage), `pages-deploy-sentinel.yml` (Pages build + liveness for the hub's
+  own site **and** every member),
   `secret-expiry-watch.yml` (daily auth-credential probe), `fleet-health-watch.yml`
   (daily ledger health digest), `genome-sync.yml` (genome drift gate),
   `codeql.yml` (security scan).
@@ -160,10 +169,14 @@ export JEKYLL_GITHUB_TOKEN=$(gh auth token)
 docker compose up                       # http://localhost:4000, live reload
 bundle exec jekyll serve --config '_config.yml,_config_dev.yml'   # non-Docker
 
-# Validate a build (theme is remote, so a network fetch happens)
+# Validate a build (theme is remote, so a network fetch happens).
+# This is exactly what .github/workflows/build-validation.yml runs on every PR.
 bundle exec jekyll build --config '_config.yml,_config_dev.yml'
 # Sandboxed / minimal shells: system-gem installs need BUNDLE_PATH=<scratch>/bundle,
-# and SassC needs a UTF-8 locale — export LC_ALL=en_US.UTF-8
+# and SassC needs a UTF-8 locale — export LC_ALL=en_US.UTF-8 (or C.UTF-8 where
+# en_US is not generated; without it SassC dies on the theme's UTF-8 SCSS).
+# The Gemfile pins github-pages to the release Pages runs; leaving it unpinned
+# resolves back to liquid 4.0.3, which crashes on Ruby >= 3.2 (`tainted?`).
 
 # Content hub
 ruby scripts/sync-hub-metadata.rb            # refresh dashboard data from _data/hub.yml
@@ -230,3 +243,31 @@ ruby scripts/content-review.rb --help        # the PR content reviewer
    `framework-mutation` / `policy-mutation` concurrency groups are the
    *convention* for any future workflow that mutates those surfaces via PR —
    no current workflow writes them, so the groups exist only as doctrine.
+   **Read-only workflows are exempt from the kill-switch** — `build-validation`
+   compiles and discards, mutating nothing, and a paused fleet still wants its
+   PRs checked. The exemption is "writes nothing anywhere", not "feels safe".
+
+## Known gaps (recorded, not fixed)
+
+Standing drift a maintainer owns. Update or delete an entry when it is resolved
+— a stale gap list is worse than none.
+
+- **Theme pin is two minors behind.** `_config.yml`, `_config_dev.yml`, and
+  `_data/hub.yml` `pages.theme_repo` all pin
+  `bamr87/zer0-mistakes@v1.26.0`; upstream is at **1.28.0** (as of 2026-08-18).
+  This is deliberate, not forgotten: `_data/hub.yml pages.theme_repo` is the
+  value `provision-org-sites.rb` stamps into **every member repo's**
+  `_config.yml`, so a bump re-rolls the whole org and must be validated as a
+  fleet change, never smuggled into an unrelated PR. The procedure, in one
+  change: (1) bump the tag in `_config.yml`, (2) bump the identical tag in
+  `_data/hub.yml` `pages.theme_repo`, and keep `_config_dev.yml` matching, then
+  (3) `ruby scripts/provision-org-sites.rb` to re-roll member configs, and
+  (4) watch `pages-deploy-sentinel.yml` for the next hour — a theme regression
+  shows up as member Pages builds erroring, not as a red check here.
+- **No CODEOWNERS anywhere.** The fleet's bots push straight to member repos
+  and to this hub's `main`, and nothing routes review by path — an edit to
+  `lineage/policy.yml`, `lineage/framework/`, or the workflows requests the
+  same (i.e. no) reviewers as a prose fix. Ownership is a maintainer decision,
+  so this file makes no claim about who should own what; adding
+  `.github/CODEOWNERS` would give the mutating surfaces a named human, and
+  branch protection would give it teeth.
