@@ -44,7 +44,8 @@ jobs:
     name: Jekyll build (remote theme)
     runs-on: ubuntu-latest
     # The remote theme is fetched over the network and SassC compiles the whole
-    # theme; a healthy run is ~2 min, so this only trips on a hang.
+    # theme, but it is quick: 52s end-to-end on the first, cache-cold run
+    # (~7s of that is the render). The generous cap only trips on a hang.
     timeout-minutes: 15
     steps:
       - name: Checkout
