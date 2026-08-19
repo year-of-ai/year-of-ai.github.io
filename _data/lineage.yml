@@ -6,7 +6,7 @@
 org: year-of-ai
 totals:
   repos: 12
-  ticks: 383
+  ticks: 386
 members:
 - name: '1776'
   repo: year-of-ai/1776
@@ -26,24 +26,24 @@ members:
   site_url: https://year-of-ai.github.io/1777/
   subject: the year 1777
   status: growing
-  ticks_logged: 40
-  log_entries: 44
+  ticks_logged: 41
+  log_entries: 45
   generations: 2
-  last_activity: '2026-08-15'
-  last_entry: 'G1-T40 — 2026-08-15 — Tick 40: Battle of Monmouth, General Nathanael
-    Greene, and the election of Pope Pius VI'
+  last_activity: '2026-08-18'
+  last_entry: 'G1-T41 — 2026-08-18 — Tick 41: Gibbon''s Decline and Fall, John Jay,
+    and Mercy Otis Warren'
 - name: '1778'
   repo: year-of-ai/1778
   url: https://github.com/year-of-ai/1778
   site_url: https://year-of-ai.github.io/1778/
   subject: the year 1778
   status: growing
-  ticks_logged: 33
-  log_entries: 36
+  ticks_logged: 34
+  log_entries: 37
   generations: 1
-  last_activity: '2026-08-15'
-  last_entry: 'G1-T33 — 2026-08-15 — Tick 33: Lavoisier''s combustion chemistry and
-    David Rittenhouse — the quantitative science of 1778'
+  last_activity: '2026-08-18'
+  last_entry: 'G1-T34 — 2026-08-18 — Tick 34: King George III, King Louis XVI, and
+    Women''s Agency and Influence in 1778'
 - name: '2005'
   repo: year-of-ai/2005
   url: https://github.com/year-of-ai/2005
@@ -148,9 +148,9 @@ members:
   site_url: https://year-of-ai.github.io/2013/
   subject: the year 2013
   status: growing
-  ticks_logged: 5
-  log_entries: 6
+  ticks_logged: 6
+  log_entries: 7
   generations: 0
-  last_activity: '2026-08-14'
-  last_entry: 'G1-T5 — 2026-08-14 — Tick 5: Harlem Shake, the government shutdown,
-    and Typhoon Haiyan'
+  last_activity: '2026-08-18'
+  last_entry: 'G1-T6 — 2026-08-18 — Tick 6: Pope Francis, The Great Gatsby, and quantum
+    teleportation'
