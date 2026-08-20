@@ -6,7 +6,7 @@
 org: year-of-ai
 totals:
   repos: 12
-  ticks: 386
+  ticks: 390
 members:
 - name: '1776'
   repo: year-of-ai/1776
@@ -14,12 +14,12 @@ members:
   site_url: https://year-of-ai.github.io/1776/
   subject: the year 1776
   status: growing
-  ticks_logged: 38
-  log_entries: 44
+  ticks_logged: 39
+  log_entries: 45
   generations: 2
-  last_activity: '2026-08-15'
-  last_entry: 'G1-T40 — 2026-08-15 — Tick 38: Patrick Henry, the Spanish colonial
-    empire, and the pre-steam water-mill economy'
+  last_activity: '2026-08-19'
+  last_entry: 'G1-T41 — 2026-08-19 — Tick 39: Women writers of 1776, Lord North, and
+    religion in the Revolution'
 - name: '1777'
   repo: year-of-ai/1777
   url: https://github.com/year-of-ai/1777
@@ -50,13 +50,12 @@ members:
   site_url: https://year-of-ai.github.io/2005/
   subject: the year 2005
   status: growing
-  ticks_logged: 34
-  log_entries: 45
+  ticks_logged: 35
+  log_entries: 46
   generations: 2
-  last_activity: '2026-08-15'
-  last_entry: 'G1-T34 — 2026-08-15 — Tick 34: Three dedicated topic files (Google
-    Maps launch, English Wikipedia half-million milestone, Samuel Alito''s Supreme
-    Court nomination) + fact-corrected enhance pass'
+  last_activity: '2026-08-19'
+  last_entry: 'G1-T35 — 2026-08-19 — Tick 35: Two dedicated topic files (Super Bowl
+    XXXIX, Blu-ray vs. HD-DVD format war) + fact-corrected enhance pass'
 - name: '2006'
   repo: year-of-ai/2006
   url: https://github.com/year-of-ai/2006
@@ -76,25 +75,25 @@ members:
   site_url: https://year-of-ai.github.io/2007/
   subject: the year 2007
   status: growing
-  ticks_logged: 34
-  log_entries: 44
+  ticks_logged: 35
+  log_entries: 45
   generations: 2
-  last_activity: '2026-08-16'
-  last_entry: 'G3-T34 — 2026-08-16 — Tick 34: Added three History & Politics topics
-    (Scooter Libby commutation, Alberto Gonzales resignation, Myanmar''s Saffron Uprising),
-    growing the base from 54 to 57 posts'
+  last_activity: '2026-08-19'
+  last_entry: 'G3-T35 — 2026-08-19 — Tick 35: Added three topics (Ledbetter v. Goodyear,
+    the 2007 Tour de France, Michelangelo Antonioni), growing the base from 57 to
+    60 posts'
 - name: '2008'
   repo: year-of-ai/2008
   url: https://github.com/year-of-ai/2008
   site_url: https://year-of-ai.github.io/2008/
   subject: the year 2008
   status: growing
-  ticks_logged: 32
-  log_entries: 42
+  ticks_logged: 33
+  log_entries: 43
   generations: 2
-  last_activity: '2026-08-16'
-  last_entry: 'G1-T32 — 2026-08-16 — Tick 32: Indiana Jones IV + Lil Wayne''s Tha
-    Carter III + Euro 2008 Deep-Dives'
+  last_activity: '2026-08-19'
+  last_entry: 'G1-T33 — 2026-08-19 — Tick 33: 2008 Nobel Prizes (Medicine, Physics,
+    Literature) Deep-Dives'
 - name: '2009'
   repo: year-of-ai/2009
   url: https://github.com/year-of-ai/2009
