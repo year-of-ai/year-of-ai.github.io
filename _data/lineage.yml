@@ -6,7 +6,7 @@
 org: year-of-ai
 totals:
   repos: 12
-  ticks: 390
+  ticks: 393
 members:
 - name: '1776'
   repo: year-of-ai/1776
@@ -62,13 +62,12 @@ members:
   site_url: https://year-of-ai.github.io/2006/
   subject: the year 2006
   status: growing
-  ticks_logged: 33
-  log_entries: 43
+  ticks_logged: 34
+  log_entries: 44
   generations: 2
-  last_activity: '2026-08-17'
-  last_entry: 'G2-T30 — 2026-08-17 — Tick 33: Three deep-dives (Jyllands-Posten Muhammad
-    cartoons, Orhan Pamuk''s Nobel, 2006 U.S. immigration-reform protests) + orphaned
-    Milton Friedman reconciliation + structure refresh'
+  last_activity: '2026-08-20'
+  last_entry: 'G2-T31 — 2026-08-20 — Tick 34: Nepal''s 2006 democracy movement deep-dive
+    (Loktantra Andolan / Jana Andolan II) + framework restore + structure refresh'
 - name: '2007'
   repo: year-of-ai/2007
   url: https://github.com/year-of-ai/2007
@@ -100,12 +99,12 @@ members:
   site_url: https://year-of-ai.github.io/2009/
   subject: the year 2009
   status: growing
-  ticks_logged: 33
-  log_entries: 45
+  ticks_logged: 34
+  log_entries: 46
   generations: 2
-  last_activity: '2026-08-16'
-  last_entry: 'G1-T35 — 2026-08-16 — Tick 35: Corpus + structure integrity verification
-    pass (no new topics)'
+  last_activity: '2026-08-20'
+  last_entry: 'G1-T36 — 2026-08-20 — Tick 36: Three new dedicated topics (*Transformers:
+    Revenge of the Fallen*, *Inglourious Basterds*, death of John Hughes)'
 - name: '2010'
   repo: year-of-ai/2010
   url: https://github.com/year-of-ai/2010
@@ -124,11 +123,12 @@ members:
   site_url: https://year-of-ai.github.io/2011/
   subject: the year 2011
   status: growing
-  ticks_logged: 33
-  log_entries: 42
+  ticks_logged: 34
+  log_entries: 43
   generations: 1
-  last_activity: '2026-08-17'
-  last_entry: 'G1-T33 — 2026-08-17 — Tick 33: growth tick (Haiku -> Sonnet -> Opus)'
+  last_activity: '2026-08-20'
+  last_entry: 'G1-T34 — 2026-08-20 — Tick 34: full biographies of Osama bin Laden,
+    Kim Jong Il, and Václav Havel'
 - name: '2012'
   repo: year-of-ai/2012
   url: https://github.com/year-of-ai/2012
