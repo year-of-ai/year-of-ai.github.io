@@ -261,32 +261,32 @@ ruby scripts/content-review.rb --help        # the PR content reviewer
 Standing drift a maintainer owns. Update or delete an entry when it is resolved
 — a stale gap list is worse than none.
 
-- **Members keep the old pin until re-rolled.** The hub is tag-free now, but
-  `_data/hub.yml pages.theme_repo` is what `provision-org-sites.rb` stamps into
-  each member's `_config.yml`, so members carry whatever tag they were last
-  provisioned with until the provisioner runs. Run
-  `ruby scripts/provision-org-sites.rb`, then watch `pages-deploy-sentinel.yml`
-  for the next hour — a theme regression shows up as member Pages builds
-  erroring, not as a red check here.
+- **A planted member can miss the registry entirely.** `2013` exists in the org,
+  publishes at `/2013/`, and has `lineage/seeds/2013.md` — but it is absent from
+  `_data/hub.yml members`, so the hub dashboards never list it and
+  `provision-org-sites.rb` never touches it. `_data/lineage.yml` *does* know it
+  (that file is generated from the seeds), which is why the growth engine keeps
+  feeding it while the hub stays blind. Adding the row and regenerating
+  (`ruby scripts/sync-hub-metadata.rb`) fixes this instance; nothing yet
+  *prevents* the next planted repo from drifting the same way — a check that
+  diffs the org's repo list against `members` would.
 - **Nothing builds against the theme on a schedule.** With no pin, an upstream
   regression reaches production on a member's next build, and the
   `build-validation` gate only fires on PRs touching this repo — so a theme-only
   break is invisible until it ships. lifehacker.dev's `nightly.yml` (daily
   rebuild against a fresh, uncached theme clone) is the fleet's proven pattern
   and is worth copying here.
-- **Ten members still ship broken site chrome.** The theme's article layout
-  renders its top-of-page hero from `page.preview` only for `featured`/
-  `breaking` posts unless a post opts in with `show_hero: true`, and its
-  `core/favicon.html` links a root `favicon.ico` that `remote_theme` never
-  supplies — so every member rendered articles with no banner, a 404 favicon,
-  and a broken masthead `<img>` (empty `site.logo` resolves to the baseurl).
-  1776 is fixed and the generators no longer reintroduce it, but the fix is
-  per-repo config plus two asset files, and `migrate-to-news-structure.rb` is
-  a one-time tool that already ran everywhere. Per member: run
-  `ruby scripts/generate-favicon.rb --repo <clone> --label <year>`, add
-  `logo:`/`favicon:` and `show_hero: true` to its `_config.yml` (copy 1776's),
-  and push. Verify with `curl -o /dev/null -w '%{http_code}'
-  https://year-of-ai.github.io/<year>/favicon.ico`.
+- **A member's preview art can reference files that do not exist.** The article
+  hero is guarded on `page.preview` being *set*, not on the file being *there*,
+  so a stale path renders a broken full-width image rather than nothing. Four
+  posts across 2006 and 2011 referenced article SVGs the Illustrate step never
+  produced, and 2013 had six section placeholders written to `images/previews/`
+  at the repo root instead of `assets/images/previews/` — front matter omits the
+  `/assets` prefix and the theme restores it, so those nine posts resolved to
+  nothing. All are repointed to their section placeholder, but nothing checks
+  this: a member-side gate that resolves every `preview:` against the filesystem
+  (the way `normalize-front-matter-dates.rb` gates dates) would catch it at the
+  tick that introduces it.
 - **Share cards still declare `summary`.** The theme's `content/seo.html`
   emits a landscape `twitter:image` from `page.preview`, but jekyll-seo-tag
   only reaches its `summary_large_image` branch when `page.image` is set, so
