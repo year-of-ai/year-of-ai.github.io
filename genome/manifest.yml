@@ -92,6 +92,7 @@ transplant:
   - "scripts/generate-preview-images.sh"    # preview-engine wrapper resolving the provider capability ladder — agnostic
   - "scripts/sync-member-metadata.rb"       # registry→GitHub metadata sync — agnostic (org from cfg)
   - "scripts/migrate-to-news-structure.rb"  # one-time flat→news-layout converter — agnostic
+  - "scripts/generate-favicon.rb"           # mints a member's favicon.ico + favicon.svg — agnostic (label is an arg)
   - "telemetry/README.md"                   # ledger schema doc — agnostic
   - "404.html"
   - "search.json"                           # Jekyll search-index page config — agnostic
