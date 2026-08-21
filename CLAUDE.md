@@ -64,7 +64,13 @@ read the architecture doc and fix the drift.
   `generate-preview-images.sh` — the fleet-standard wrapper that resolves the
   `preview_images.provider: auto` capability ladder. Both are vendored
   identically in lifehacker.dev and the ai-world-view hub — keep the copies
-  in sync).
+  in sync), and the **favicon minter** (`generate-favicon.rb` — writes a
+  member's `favicon.ico` + `assets/images/favicon.svg` from its label, in pure
+  stdlib Ruby because no runner in the fleet has a rasterizer. The theme's
+  `core/favicon.html` links `/<repo>/favicon.ico` on every page and
+  `remote_theme` ships only `_layouts`/`_includes`/`_sass`/`assets`, so a
+  member that carries no favicon of its own 404s on it. Called by
+  `provision-org-sites.rb` and `migrate-to-news-structure.rb`).
 - `lineage/` — the **centralized growth source of truth** (see below):
   `seeds/<year>.md` (each year's concept + Evolution Log), `seed-package/`
   (bootstrap kit), `repo-template/` (the year-repo skeleton the planter drops),
@@ -199,6 +205,8 @@ ruby scripts/normalize-front-matter-dates.rb --check <dir>  # find unparseable/b
 ruby scripts/normalize-front-matter-dates.rb --fix <dir>    # normalize to ISO (the grow tick's publish gate)
 ruby scripts/sync-member-metadata.rb                        # dry-run member GitHub metadata vs the registry
 ruby scripts/sync-member-metadata.rb --apply                # push description/homepage/topics to members
+ruby scripts/generate-favicon.rb --repo <year-repo> --label <year> --dry-run
+ruby scripts/generate-favicon.rb --repo <year-repo> --label <year>   # mint favicon.ico + favicon.svg
 
 # Lint
 yamllint -c .github/config/.yamllint.yml _config.yml _config_dev.yml _data
@@ -266,6 +274,27 @@ Standing drift a maintainer owns. Update or delete an entry when it is resolved
   break is invisible until it ships. lifehacker.dev's `nightly.yml` (daily
   rebuild against a fresh, uncached theme clone) is the fleet's proven pattern
   and is worth copying here.
+- **Ten members still ship broken site chrome.** The theme's article layout
+  renders its top-of-page hero from `page.preview` only for `featured`/
+  `breaking` posts unless a post opts in with `show_hero: true`, and its
+  `core/favicon.html` links a root `favicon.ico` that `remote_theme` never
+  supplies — so every member rendered articles with no banner, a 404 favicon,
+  and a broken masthead `<img>` (empty `site.logo` resolves to the baseurl).
+  1776 is fixed and the generators no longer reintroduce it, but the fix is
+  per-repo config plus two asset files, and `migrate-to-news-structure.rb` is
+  a one-time tool that already ran everywhere. Per member: run
+  `ruby scripts/generate-favicon.rb --repo <clone> --label <year>`, add
+  `logo:`/`favicon:` and `show_hero: true` to its `_config.yml` (copy 1776's),
+  and push. Verify with `curl -o /dev/null -w '%{http_code}'
+  https://year-of-ai.github.io/<year>/favicon.ico`.
+- **Share cards still declare `summary`.** The theme's `content/seo.html`
+  emits a landscape `twitter:image` from `page.preview`, but jekyll-seo-tag
+  only reaches its `summary_large_image` branch when `page.image` is set, so
+  it hardcodes `twitter:card: summary` and X/Twitter crops the 800×400 banner
+  to a square thumbnail. `site.twitter.card` is never consulted on that path —
+  setting it in a member config is inert. The fix belongs upstream in
+  `bamr87/zer0-mistakes` (`content/seo.html` should emit `twitter:card`
+  alongside the `twitter:image` it already writes), not here.
 - **No CODEOWNERS anywhere.** The fleet's bots push straight to member repos
   and to this hub's `main`, and nothing routes review by path — an edit to
   `lineage/policy.yml`, `lineage/framework/`, or the workflows requests the

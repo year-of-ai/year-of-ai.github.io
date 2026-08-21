@@ -31,6 +31,19 @@ kramdown:
   input: GFM
 permalink: pretty
 
+# Masthead brand mark. Unset, the theme's header renders an <img> with an empty
+# src, which resolves to the baseurl itself and shows as a broken image.
+logo: /assets/images/favicon.svg
+
+# Browser identity. The theme's _includes/core/favicon.html always emits the
+# `ico` link and assumes the consuming site carries a favicon at its root;
+# jekyll-remote-theme copies only _layouts/_includes/_sass/assets, so the
+# theme's own root favicon.ico never arrives. Both files are minted into this
+# repo by the hub's scripts/generate-favicon.rb (see provision-org-sites.rb).
+favicon:
+  ico: /favicon.ico
+  svg: /assets/images/favicon.svg
+
 # GitHub Pages enables all of these by default; listing them keeps local
 # builds (github-pages gem) identical to production.
 #

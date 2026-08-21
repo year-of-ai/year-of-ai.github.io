@@ -28,6 +28,7 @@
 #     (new) _data/navigation/posts.yml                     the section list
 #     (rewritten) _data/navigation/main.yml                a News dropdown
 #     (new) assets/images/previews/*.svg                   self-contained card art
+#     (new) favicon.ico + assets/images/favicon.svg        browser identity
 #
 # The old generated artifacts (category index.md files, INDEX.md) are removed
 # because the section pages + /news/ landing supersede them. README.md and
@@ -411,6 +412,21 @@ end
 write(File.join(REPO, "assets", "images", "previews", "default.svg"),
       preview_svg("The Year #{YEAR}", "default"), log, DRY)
 
+# Browser identity. The theme's _includes/core/favicon.html always emits the
+# `favicon.ico` link and assumes the consuming site carries one at its root;
+# jekyll-remote-theme copies only _layouts/_includes/_sass/assets, so the
+# theme's own root favicon.ico never reaches a member. Without this every
+# member 404s on /<year>/favicon.ico.
+favicon_script = File.join(__dir__, "generate-favicon.rb")
+if File.exist?(favicon_script)
+  cmd = ["ruby", favicon_script, "--repo", REPO, "--label", YEAR.to_s]
+  cmd << "--dry-run" if DRY
+  say(log, "  favicon favicon.ico + assets/images/favicon.svg")
+  system(*cmd, out: File::NULL) || say(log, "  WARN    generate-favicon.rb failed; favicon not written")
+else
+  say(log, "  WARN    scripts/generate-favicon.rb missing; favicon not written")
+end
+
 # =============================================================================
 # 6. Rewrite internal article links in README.md and TIMELINE.md
 # =============================================================================
@@ -452,8 +468,9 @@ prepend_front_matter(File.join(REPO, "TIMELINE.md"),
   log, DRY)
 
 # =============================================================================
-# 7. Patch _config.yml: article layout for posts, card/social fallback image,
-#    and (when the /news/ magazine is the homepage) drop jekyll-readme-index so
+# 7. Patch _config.yml: article layout for posts (with the hero opted in),
+#    card/social fallback image, browser identity (logo + favicon), and (when
+#    the /news/ magazine is the homepage) drop jekyll-readme-index so
 #    index.html owns "/". Idempotent string patches.
 # =============================================================================
 
@@ -469,13 +486,54 @@ if File.exist?(cfg_path)
     cfg = cfg.match?(/^permalink:.*\n/) ? cfg.sub(/^(permalink:.*\n)/) { "#{$1}#{line}" } : line + cfg
   end
 
-  unless cfg.include?("type: posts")
+  # Browser identity. Guarded on the key it writes, so this is also the repair
+  # path for a member migrated before these settings existed.
+  unless cfg.include?("favicon:")
+    identity =
+      "\n" \
+      "# Masthead brand mark. Unset, the theme's header renders an <img> with an\n" \
+      "# empty src, which resolves to the baseurl itself and shows as broken.\n" \
+      "logo: /assets/images/favicon.svg\n" \
+      "\n" \
+      "# Browser identity. The theme's core/favicon.html always emits the `ico`\n" \
+      "# link and assumes the site carries a favicon at its root; remote_theme\n" \
+      "# ships only _layouts/_includes/_sass/assets, so the theme's own never\n" \
+      "# arrives. Assets minted by the hub's scripts/generate-favicon.rb.\n" \
+      "favicon:\n" \
+      "  ico: /favicon.ico\n" \
+      "  svg: /assets/images/favicon.svg\n" \
+      "\n"
+    cfg = cfg.match?(/^og_image:.*\n/) ? cfg.sub(/^(og_image:.*\n)/) { "#{$1}#{identity}" } : cfg + identity
+  end
+
+  # The article layout renders its top-of-page hero from page.preview only for
+  # featured/breaking posts unless a post opts in (theme issue #303). Every
+  # article this script writes carries a preview, so opt the collection in.
+  hero_comment =
+    "# The article layout renders the top-of-page hero from page.preview only\n" \
+    "# for featured/breaking posts unless a post opts in. Every article here\n" \
+    "# carries a preview, so opt the collection in; the layout still guards on\n" \
+    "# page.preview, so a post without one simply renders no hero.\n"
+
+  if cfg.include?("type: posts")
+    # Already migrated — inject the opt-in into the existing posts default.
+    unless cfg.include?("show_hero")
+      cfg = cfg.sub(/^([ \t]*)layout: article[ \t]*\r?\n/) do
+        indent = Regexp.last_match(1)
+        "#{Regexp.last_match(0)}" +
+          hero_comment.each_line.map { |l| "#{indent}#{l}" }.join +
+          "#{indent}show_hero: true\n"
+      end
+    end
+  else
     posts_default =
       "  - scope:\n" \
       "      path: \"\"\n" \
       "      type: posts\n" \
       "    values:\n" \
-      "      layout: article\n" \
+      "      layout: article\n" +
+      hero_comment.each_line.map { |l| "      #{l}" }.join +
+      "      show_hero: true\n" \
       "      author_profile: false\n" \
       "      read_time: true\n" \
       "      share: true\n" \
@@ -489,7 +547,7 @@ if File.exist?(cfg_path)
   end
 
   if cfg != before
-    say(log, "  config  _config.yml (posts->article, teaser, homepage)")
+    say(log, "  config  _config.yml (posts->article+hero, teaser, favicon, homepage)")
     File.write(cfg_path, cfg) unless DRY
   end
 end

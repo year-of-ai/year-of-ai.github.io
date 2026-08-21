@@ -41,6 +41,7 @@ require_relative 'lib/hub'
 TEMPLATE_DIR    = File.join(Hub::ROOT, 'templates', 'org-site')
 CONFIG_TEMPLATE = File.join(TEMPLATE_DIR, '_config.yml.template')
 NAV_TEMPLATE    = File.join(TEMPLATE_DIR, 'navigation-main.yml.template')
+FAVICON_SCRIPT  = File.join(Hub::ROOT, 'scripts', 'generate-favicon.rb')
 SCAFFOLD_MARKER = 'zer0-mistakes org hub scaffold'
 BRANCH_NAME     = 'zer0/pages-scaffold'
 
@@ -109,6 +110,27 @@ def write_scaffold(base_dir, rendered)
   changed
 end
 
+# The theme's _includes/core/favicon.html emits `<link rel="icon"
+# href="/<repo>/favicon.ico">` on every page and assumes the consuming site
+# carries one at its root; jekyll-remote-theme copies only
+# _layouts/_includes/_sass/assets, so the theme's own never arrives and a
+# member without its own 404s. Minted by a script rather than rendered from a
+# template because the .ico is binary. Returns the relative paths it added.
+def mint_favicon(base_dir, label, dry_run:)
+  return [] unless File.exist?(FAVICON_SCRIPT)
+
+  wanted  = ['favicon.ico', 'assets/images/favicon.svg']
+  missing = wanted.reject { |rel| File.exist?(File.join(base_dir, rel)) }
+  return [] if missing.empty?
+  return missing if dry_run
+
+  unless system('ruby', FAVICON_SCRIPT, '--repo', base_dir, '--label', label, out: File::NULL)
+    Hub.log_warn '  generate-favicon.rb failed; favicon not written'
+    return []
+  end
+  missing
+end
+
 def open_pr(repo, cfg, clone, changed, direct:)
   org  = cfg['org']
   slug = "#{org}/#{repo['name']}"
@@ -136,6 +158,7 @@ def open_pr(repo, cfg, clone, changed, direct:)
 
         - `_config.yml` — publishes this repo at https://#{org}.github.io/#{repo['name']}/ using `remote_theme: #{cfg.dig('pages', 'theme_repo')}`. Content stays plain markdown; the GitHub Pages default plugins render it.
         - `_data/navigation/main.yml` — navbar/sidebar entries for the repo's sections.
+        - `favicon.ico` + `assets/images/favicon.svg` — browser identity. The theme links `/#{repo['name']}/favicon.ico` on every page and `remote_theme` does not ship one, so without these the site 404s on its own favicon.
 
         Once merged (with Pages enabled, "deploy from branch"), the site builds automatically on every push.
 
@@ -225,11 +248,13 @@ Dir.mktmpdir('hub-provision') do |tmp|
     if options[:stage]
       stage_dir = File.join(options[:stage], repo['name'])
       write_scaffold(stage_dir, rendered)
+      mint_favicon(stage_dir, repo['name'], dry_run: false)
       Hub.log_info "  staged scaffold in #{stage_dir}"
       next
     end
 
     changed = options[:dry_run] ? rendered.keys.reject { |rel| File.exist?(File.join(clone, rel)) && File.read(File.join(clone, rel), encoding: 'utf-8') == rendered[rel] } : write_scaffold(clone, rendered)
+    changed += mint_favicon(clone, repo['name'], dry_run: options[:dry_run])
 
     if changed.empty?
       Hub.log_info '  scaffold already up to date'
