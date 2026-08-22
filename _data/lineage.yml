@@ -6,7 +6,7 @@
 org: year-of-ai
 totals:
   repos: 12
-  ticks: 393
+  ticks: 397
 members:
 - name: '1776'
   repo: year-of-ai/1776
@@ -26,24 +26,23 @@ members:
   site_url: https://year-of-ai.github.io/1777/
   subject: the year 1777
   status: growing
-  ticks_logged: 41
-  log_entries: 45
+  ticks_logged: 42
+  log_entries: 46
   generations: 2
-  last_activity: '2026-08-18'
-  last_entry: 'G1-T41 — 2026-08-18 — Tick 41: Gibbon''s Decline and Fall, John Jay,
-    and Mercy Otis Warren'
+  last_activity: '2026-08-21'
+  last_entry: 'G1-T42 — 2026-08-21 — Tick 42: Joshua Reynolds''s Discourses and the
+    Grand Style; Albrecht von Haller and experimental physiology'
 - name: '1778'
   repo: year-of-ai/1778
   url: https://github.com/year-of-ai/1778
   site_url: https://year-of-ai.github.io/1778/
   subject: the year 1778
   status: growing
-  ticks_logged: 34
-  log_entries: 37
+  ticks_logged: 35
+  log_entries: 38
   generations: 1
-  last_activity: '2026-08-18'
-  last_entry: 'G1-T34 — 2026-08-18 — Tick 34: King George III, King Louis XVI, and
-    Women''s Agency and Influence in 1778'
+  last_activity: '2026-08-21'
+  last_entry: 'G1-T35 — 2026-08-21 — Tick 35: Martha Washington and Thomas Jefferson'
 - name: '2005'
   repo: year-of-ai/2005
   url: https://github.com/year-of-ai/2005
@@ -111,12 +110,12 @@ members:
   site_url: https://year-of-ai.github.io/2010/
   subject: the year 2010
   status: growing
-  ticks_logged: 35
-  log_entries: 45
+  ticks_logged: 36
+  log_entries: 46
   generations: 2
-  last_activity: '2026-08-16'
-  last_entry: 'G1-T35 — 2026-08-16 — Tick 35: Content (52nd Grammy Awards, Jersey
-    Shore Season 2 premiere, Netflix streaming transformation) + structure refresh'
+  last_activity: '2026-08-21'
+  last_entry: 'G1-T36 — 2026-08-21 — Tick 36: Content (Haitian cholera epidemic, Nobel
+    Prize in Literature 2010, Mount Merapi eruption) + structure refresh'
 - name: '2011'
   repo: year-of-ai/2011
   url: https://github.com/year-of-ai/2011
@@ -135,12 +134,12 @@ members:
   site_url: https://year-of-ai.github.io/2012/
   subject: the year 2012
   status: growing
-  ticks_logged: 33
-  log_entries: 42
+  ticks_logged: 34
+  log_entries: 43
   generations: 1
-  last_activity: '2026-08-17'
-  last_entry: 'G1-T33 — 2026-08-17 — Tick 33: The shooting of Trayvon Martin, SpaceX
-    Dragon''s first ISS berthing, the 2012 French presidential election'
+  last_activity: '2026-08-21'
+  last_entry: 'G1-T34 — 2026-08-21 — Tick 34: The Raspberry Pi launch (February 2012),
+    the LIBOR scandal and the Barclays fine (June 2012)'
 - name: '2013'
   repo: year-of-ai/2013
   url: https://github.com/year-of-ai/2013
