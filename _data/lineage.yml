@@ -6,7 +6,7 @@
 org: year-of-ai
 totals:
   repos: 12
-  ticks: 405
+  ticks: 409
 members:
 - name: '1776'
   repo: year-of-ai/1776
@@ -26,23 +26,24 @@ members:
   site_url: https://year-of-ai.github.io/1777/
   subject: the year 1777
   status: growing
-  ticks_logged: 42
-  log_entries: 46
+  ticks_logged: 43
+  log_entries: 47
   generations: 2
-  last_activity: '2026-08-21'
-  last_entry: 'G1-T42 — 2026-08-21 — Tick 42: Joshua Reynolds''s Discourses and the
-    Grand Style; Albrecht von Haller and experimental physiology'
+  last_activity: '2026-08-24'
+  last_entry: 'G1-T43 — 2026-08-24 — Tick 43: verification and consistency pass (no
+    new content)'
 - name: '1778'
   repo: year-of-ai/1778
   url: https://github.com/year-of-ai/1778
   site_url: https://year-of-ai.github.io/1778/
   subject: the year 1778
   status: growing
-  ticks_logged: 35
-  log_entries: 38
+  ticks_logged: 36
+  log_entries: 39
   generations: 1
-  last_activity: '2026-08-21'
-  last_entry: 'G1-T35 — 2026-08-21 — Tick 35: Martha Washington and Thomas Jefferson'
+  last_activity: '2026-08-24'
+  last_entry: 'G1-T36 — 2026-08-24 — Tick 36: Mesmer''s Animal Magnetism and *Raquel*
+    — the 1778 fringe-science and Spanish-theater additions'
 - name: '2005'
   repo: year-of-ai/2005
   url: https://github.com/year-of-ai/2005
@@ -109,12 +110,11 @@ members:
   site_url: https://year-of-ai.github.io/2010/
   subject: the year 2010
   status: growing
-  ticks_logged: 36
-  log_entries: 46
+  ticks_logged: 37
+  log_entries: 47
   generations: 2
-  last_activity: '2026-08-21'
-  last_entry: 'G1-T36 — 2026-08-21 — Tick 36: Content (Haitian cholera epidemic, Nobel
-    Prize in Literature 2010, Mount Merapi eruption) + structure refresh'
+  last_activity: '2026-08-24'
+  last_entry: 'G1-T37 — 2026-08-24 — Tick 37: growth tick (Haiku -> Sonnet -> Opus)'
 - name: '2011'
   repo: year-of-ai/2011
   url: https://github.com/year-of-ai/2011
@@ -133,12 +133,12 @@ members:
   site_url: https://year-of-ai.github.io/2012/
   subject: the year 2012
   status: growing
-  ticks_logged: 34
-  log_entries: 43
+  ticks_logged: 35
+  log_entries: 44
   generations: 1
-  last_activity: '2026-08-21'
-  last_entry: 'G1-T34 — 2026-08-21 — Tick 34: The Raspberry Pi launch (February 2012),
-    the LIBOR scandal and the Barclays fine (June 2012)'
+  last_activity: '2026-08-24'
+  last_entry: 'G1-T35 — 2026-08-24 — Tick 35: Aung San Suu Kyi''s 2012 entry into
+    Myanmar''s parliament, the July 2012 India blackouts'
 - name: '2013'
   repo: year-of-ai/2013
   url: https://github.com/year-of-ai/2013
