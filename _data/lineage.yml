@@ -6,7 +6,7 @@
 org: year-of-ai
 totals:
   repos: 12
-  ticks: 409
+  ticks: 413
 members:
 - name: '1776'
   repo: year-of-ai/1776
@@ -14,12 +14,12 @@ members:
   site_url: https://year-of-ai.github.io/1776/
   subject: the year 1776
   status: growing
-  ticks_logged: 40
-  log_entries: 46
+  ticks_logged: 41
+  log_entries: 47
   generations: 2
-  last_activity: '2026-08-22'
-  last_entry: 'G1-T42 — 2026-08-22 — Tick 40: The New York campaign of 1776 — a unified
-    overview of the July–November fighting'
+  last_activity: '2026-08-25'
+  last_entry: 'G1-T43 — 2026-08-25 — Tick 41: The Virginia Constitution of 1776 —
+    the first permanent republican state constitution'
 - name: '1777'
   repo: year-of-ai/1777
   url: https://github.com/year-of-ai/1777
@@ -50,12 +50,13 @@ members:
   site_url: https://year-of-ai.github.io/2005/
   subject: the year 2005
   status: growing
-  ticks_logged: 36
-  log_entries: 47
+  ticks_logged: 37
+  log_entries: 48
   generations: 2
-  last_activity: '2026-08-22'
-  last_entry: 'G1-T36 — 2026-08-22 — Tick 36: Two dedicated topic files (Watergate''s
-    "Deep Throat" revealed, the Hwang Woo-suk stem cell fraud) + structure refresh'
+  last_activity: '2026-08-25'
+  last_entry: 'G1-T37 — 2026-08-25 — Tick 37: Two dedicated topic files (Prince Charles
+    and Camilla Parker Bowles wedding, Lech Kaczyński elected President of Poland)
+    + fact-corrected enhance pass'
 - name: '2006'
   repo: year-of-ai/2006
   url: https://github.com/year-of-ai/2006
@@ -74,12 +75,12 @@ members:
   site_url: https://year-of-ai.github.io/2007/
   subject: the year 2007
   status: growing
-  ticks_logged: 36
-  log_entries: 46
+  ticks_logged: 37
+  log_entries: 47
   generations: 2
-  last_activity: '2026-08-22'
-  last_entry: 'G3-T36 — 2026-08-22 — Tick 36: Windows Vista launch, Super Bowl XLI,
-    and the 2007 Cricket World Cup'
+  last_activity: '2026-08-25'
+  last_entry: 'G3-T37 — 2026-08-25 — Tick 37: Built the curated master index (INDEX.md)
+    — all 63 entries by category and by time period'
 - name: '2008'
   repo: year-of-ai/2008
   url: https://github.com/year-of-ai/2008
@@ -145,9 +146,9 @@ members:
   site_url: https://year-of-ai.github.io/2013/
   subject: the year 2013
   status: growing
-  ticks_logged: 7
-  log_entries: 8
+  ticks_logged: 8
+  log_entries: 9
   generations: 0
-  last_activity: '2026-08-22'
-  last_entry: 'G1-T7 — 2026-08-22 — Tick 7: Silk Road shutdown, Comet ISON, and the
-    Thai political crisis'
+  last_activity: '2026-08-25'
+  last_entry: 'G1-T8 — 2026-08-25 — Tick 8: Lance Armstrong''s confession, Prince
+    George''s birth, and Beyoncé''s surprise album'
