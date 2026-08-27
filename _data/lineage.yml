@@ -6,7 +6,7 @@
 org: year-of-ai
 totals:
   repos: 12
-  ticks: 413
+  ticks: 417
 members:
 - name: '1776'
   repo: year-of-ai/1776
@@ -63,12 +63,12 @@ members:
   site_url: https://year-of-ai.github.io/2006/
   subject: the year 2006
   status: growing
-  ticks_logged: 35
-  log_entries: 45
+  ticks_logged: 36
+  log_entries: 46
   generations: 2
-  last_activity: '2026-08-23'
-  last_entry: 'G2-T32 — 2026-08-23 — Tick 35: Three deep-dives (iTunes'' one-billionth
-    download, *V for Vendetta*, *Nacho Libre*) + structure refresh'
+  last_activity: '2026-08-26'
+  last_entry: 'G2-T33 — 2026-08-26 — Tick 36: 2006 transatlantic aircraft plot deep-dive
+    (the liquid-bomb plot behind the worldwide airport liquids ban) + structure refresh'
 - name: '2007'
   repo: year-of-ai/2007
   url: https://github.com/year-of-ai/2007
@@ -87,24 +87,23 @@ members:
   site_url: https://year-of-ai.github.io/2008/
   subject: the year 2008
   status: growing
-  ticks_logged: 34
-  log_entries: 44
+  ticks_logged: 35
+  log_entries: 45
   generations: 2
-  last_activity: '2026-08-23'
-  last_entry: 'G1-T34 — 2026-08-23 — Tick 34: Hulu Launch + Madonna''s Hard Candy
-    + Metallica''s Death Magnetic Deep-Dives'
+  last_activity: '2026-08-26'
+  last_entry: 'G1-T35 — 2026-08-26 — Tick 35: Bear Stearns Collapse Deep-Dive'
 - name: '2009'
   repo: year-of-ai/2009
   url: https://github.com/year-of-ai/2009
   site_url: https://year-of-ai.github.io/2009/
   subject: the year 2009
   status: growing
-  ticks_logged: 35
-  log_entries: 47
+  ticks_logged: 36
+  log_entries: 48
   generations: 2
-  last_activity: '2026-08-23'
-  last_entry: 'G1-T37 — 2026-08-23 — Tick 37: Three new dedicated topics (death of
-    Robert McNamara, death of Walter Cronkite, 2009 Nobel Prize in Physiology or Medicine)'
+  last_activity: '2026-08-26'
+  last_entry: 'G1-T38 — 2026-08-26 — Tick 38: Three new dedicated topics (*X-Men Origins:
+    Wolverine*, the 2009 NBA Finals, the iPhone 3GS launch)'
 - name: '2010'
   repo: year-of-ai/2010
   url: https://github.com/year-of-ai/2010
@@ -122,12 +121,12 @@ members:
   site_url: https://year-of-ai.github.io/2011/
   subject: the year 2011
   status: growing
-  ticks_logged: 35
-  log_entries: 44
+  ticks_logged: 36
+  log_entries: 45
   generations: 1
-  last_activity: '2026-08-23'
-  last_entry: 'G1-T35 — 2026-08-23 — Tick 35: the 53rd Grammy Awards, the 2011 French
-    Open, and The Help'
+  last_activity: '2026-08-26'
+  last_entry: 'G1-T36 — 2026-08-26 — Tick 36: the LinkedIn IPO, Rory McIlroy''s U.S.
+    Open, and Cadel Evans'' Tour de France'
 - name: '2012'
   repo: year-of-ai/2012
   url: https://github.com/year-of-ai/2012
