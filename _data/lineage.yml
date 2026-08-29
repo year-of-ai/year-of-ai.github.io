@@ -6,7 +6,7 @@
 org: year-of-ai
 totals:
   repos: 12
-  ticks: 421
+  ticks: 425
 members:
 - name: '1776'
   repo: year-of-ai/1776
@@ -14,12 +14,12 @@ members:
   site_url: https://year-of-ai.github.io/1776/
   subject: the year 1776
   status: growing
-  ticks_logged: 41
-  log_entries: 47
+  ticks_logged: 42
+  log_entries: 48
   generations: 2
-  last_activity: '2026-08-25'
-  last_entry: 'G1-T43 — 2026-08-25 — Tick 41: The Virginia Constitution of 1776 —
-    the first permanent republican state constitution'
+  last_activity: '2026-08-28'
+  last_entry: 'G1-T44 — 2026-08-28 — Tick 42: Textile manufacturing and the wartime
+    medical crisis of 1776'
 - name: '1777'
   repo: year-of-ai/1777
   url: https://github.com/year-of-ai/1777
@@ -50,13 +50,13 @@ members:
   site_url: https://year-of-ai.github.io/2005/
   subject: the year 2005
   status: growing
-  ticks_logged: 37
-  log_entries: 48
+  ticks_logged: 38
+  log_entries: 49
   generations: 2
-  last_activity: '2026-08-25'
-  last_entry: 'G1-T37 — 2026-08-25 — Tick 37: Two dedicated topic files (Prince Charles
-    and Camilla Parker Bowles wedding, Lech Kaczyński elected President of Poland)
-    + fact-corrected enhance pass'
+  last_activity: '2026-08-28'
+  last_entry: 'G1-T38 — 2026-08-28 — Tick 38: Two dedicated topic files (Mahmoud Ahmadinejad
+    elected President of Iran, Batman Begins reboots the superhero film) + fact-verified
+    enhance pass'
 - name: '2006'
   repo: year-of-ai/2006
   url: https://github.com/year-of-ai/2006
@@ -75,12 +75,12 @@ members:
   site_url: https://year-of-ai.github.io/2007/
   subject: the year 2007
   status: growing
-  ticks_logged: 37
-  log_entries: 47
+  ticks_logged: 38
+  log_entries: 48
   generations: 2
-  last_activity: '2026-08-25'
-  last_entry: 'G3-T37 — 2026-08-25 — Tick 37: Built the curated master index (INDEX.md)
-    — all 63 entries by category and by time period'
+  last_activity: '2026-08-28'
+  last_entry: 'G3-T38 — 2026-08-28 — Tick 38: David Beckham to LA Galaxy, the Merck
+    Vioxx settlement, and the Treaty of Lisbon'
 - name: '2008'
   repo: year-of-ai/2008
   url: https://github.com/year-of-ai/2008
@@ -145,9 +145,9 @@ members:
   site_url: https://year-of-ai.github.io/2013/
   subject: the year 2013
   status: growing
-  ticks_logged: 8
-  log_entries: 9
+  ticks_logged: 9
+  log_entries: 10
   generations: 0
-  last_activity: '2026-08-25'
-  last_entry: 'G1-T8 — 2026-08-25 — Tick 8: Lance Armstrong''s confession, Prince
-    George''s birth, and Beyoncé''s surprise album'
+  last_activity: '2026-08-28'
+  last_entry: 'G1-T9 — 2026-08-28 — Tick 9: Zimmerman acquittal, Breaking Bad finale,
+    and Frozen'
