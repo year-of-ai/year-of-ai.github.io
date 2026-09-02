@@ -6,7 +6,7 @@
 org: year-of-ai
 totals:
   repos: 12
-  ticks: 436
+  ticks: 440
 members:
 - name: '1776'
   repo: year-of-ai/1776
@@ -62,13 +62,12 @@ members:
   site_url: https://year-of-ai.github.io/2006/
   subject: the year 2006
   status: growing
-  ticks_logged: 37
-  log_entries: 47
+  ticks_logged: 38
+  log_entries: 48
   generations: 2
-  last_activity: '2026-08-29'
-  last_entry: 'G2-T34 — 2026-08-29 — Tick 37: Three Arts & Culture film deep-dives
-    (*The Da Vinci Code*, *Superman Returns*, *Little Miss Sunshine*) + structure
-    refresh'
+  last_activity: '2026-09-01'
+  last_entry: 'G2-T35 — 2026-09-01 — Tick 38: Three deep-dives (Amazon S3 launch,
+    Mel Gibson DUI arrest, Fidel Castro steps down) + structure refresh'
 - name: '2007'
   repo: year-of-ai/2007
   url: https://github.com/year-of-ai/2007
@@ -86,24 +85,24 @@ members:
   site_url: https://year-of-ai.github.io/2008/
   subject: the year 2008
   status: growing
-  ticks_logged: 36
-  log_entries: 46
+  ticks_logged: 37
+  log_entries: 47
   generations: 2
-  last_activity: '2026-08-29'
-  last_entry: 'G1-T36 — 2026-08-29 — Tick 36: Fannie Mae and Freddie Mac Conservatorship
-    Deep-Dive'
+  last_activity: '2026-09-01'
+  last_entry: 'G1-T37 — 2026-09-01 — Tick 37: Lewis Hamilton 2008 F1 World Championship
+    Deep-Dive (out-of-scope Kindle draft removed)'
 - name: '2009'
   repo: year-of-ai/2009
   url: https://github.com/year-of-ai/2009
   site_url: https://year-of-ai.github.io/2009/
   subject: the year 2009
   status: growing
-  ticks_logged: 37
-  log_entries: 49
+  ticks_logged: 38
+  log_entries: 50
   generations: 2
-  last_activity: '2026-08-29'
-  last_entry: 'G1-T39 — 2026-08-29 — Tick 39: Two new dedicated topics (US housing
-    foreclosures accelerate, US unemployment rate peaks at 10%)'
+  last_activity: '2026-09-01'
+  last_entry: 'G1-T40 — 2026-09-01 — Tick 40: Three new dedicated topics (Super Bowl
+    XLIII, 2009 Tour de France, 2009 World Series)'
 - name: '2010'
   repo: year-of-ai/2010
   url: https://github.com/year-of-ai/2010
@@ -145,9 +144,9 @@ members:
   site_url: https://year-of-ai.github.io/2013/
   subject: the year 2013
   status: growing
-  ticks_logged: 9
-  log_entries: 10
+  ticks_logged: 10
+  log_entries: 11
   generations: 0
-  last_activity: '2026-08-28'
-  last_entry: 'G1-T9 — 2026-08-28 — Tick 9: Zimmerman acquittal, Breaking Bad finale,
-    and Frozen'
+  last_activity: '2026-09-01'
+  last_entry: 'G1-T10 — 2026-09-01 — Tick 10: Margaret Thatcher''s death, the iPhone
+    5S/5C launch, and the Rana Plaza collapse'
