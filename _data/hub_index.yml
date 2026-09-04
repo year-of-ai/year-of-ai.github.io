@@ -6,7 +6,7 @@
 org: year-of-ai
 totals:
   repos: 12
-  pages: 960
+  pages: 969
 repos:
 - name: '1776'
   title: The Year 1776
@@ -17,14 +17,14 @@ repos:
   pages_enabled: true
   scaffolded: true
   branch: main
-  pushed_at: '2026-08-31T12:05:21Z'
-  page_count: 101
+  pushed_at: '2026-09-03T10:23:03Z'
+  page_count: 104
   sections:
   - name: _posts
     title: Posts
     url: https://year-of-ai.github.io/1776/_posts/
     source_url: https://github.com/year-of-ai/1776/tree/main/_posts
-    count: 99
+    count: 102
   root_pages:
   - title: Timeline
     url: https://year-of-ai.github.io/1776/TIMELINE/
@@ -88,14 +88,14 @@ repos:
   pages_enabled: true
   scaffolded: true
   branch: main
-  pushed_at: '2026-08-31T11:53:34Z'
-  page_count: 72
+  pushed_at: '2026-09-03T10:09:28Z'
+  page_count: 73
   sections:
   - name: _posts
     title: Posts
     url: https://year-of-ai.github.io/2005/_posts/
     source_url: https://github.com/year-of-ai/2005/tree/main/_posts
-    count: 70
+    count: 71
   root_pages:
   - title: Timeline
     url: https://year-of-ai.github.io/2005/TIMELINE/
@@ -135,14 +135,14 @@ repos:
   pages_enabled: true
   scaffolded: true
   branch: main
-  pushed_at: '2026-08-31T11:54:41Z'
-  page_count: 75
+  pushed_at: '2026-09-03T10:14:28Z'
+  page_count: 77
   sections:
   - name: _posts
     title: Posts
     url: https://year-of-ai.github.io/2007/_posts/
     source_url: https://github.com/year-of-ai/2007/tree/main/_posts
-    count: 72
+    count: 74
   root_pages:
   - title: Timeline
     url: https://year-of-ai.github.io/2007/TIMELINE/
@@ -250,14 +250,14 @@ repos:
   pages_enabled: true
   scaffolded: true
   branch: main
-  pushed_at: '2026-08-31T11:51:53Z'
-  page_count: 96
+  pushed_at: '2026-09-03T10:20:53Z'
+  page_count: 99
   sections:
   - name: _posts
     title: Posts
     url: https://year-of-ai.github.io/2012/_posts/
     source_url: https://github.com/year-of-ai/2012/tree/main/_posts
-    count: 94
+    count: 97
   root_pages:
   - title: Timeline
     url: https://year-of-ai.github.io/2012/TIMELINE/
