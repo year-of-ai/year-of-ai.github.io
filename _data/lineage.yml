@@ -6,7 +6,7 @@
 org: year-of-ai
 totals:
   repos: 12
-  ticks: 448
+  ticks: 453
 members:
 - name: '1776'
   repo: year-of-ai/1776
@@ -62,12 +62,12 @@ members:
   site_url: https://year-of-ai.github.io/2006/
   subject: the year 2006
   status: growing
-  ticks_logged: 38
-  log_entries: 48
+  ticks_logged: 39
+  log_entries: 49
   generations: 2
-  last_activity: '2026-09-01'
-  last_entry: 'G2-T35 — 2026-09-01 — Tick 38: Three deep-dives (Amazon S3 launch,
-    Mel Gibson DUI arrest, Fidel Castro steps down) + structure refresh'
+  last_activity: '2026-09-04'
+  last_entry: 'G2-T36 — 2026-09-04 — Tick 39: Three deep-dives (May 2006 Java earthquake,
+    2006 Tour de France/Landis affair, 2006 Asian Games in Doha) + structure refresh'
 - name: '2007'
   repo: year-of-ai/2007
   url: https://github.com/year-of-ai/2007
@@ -86,24 +86,24 @@ members:
   site_url: https://year-of-ai.github.io/2008/
   subject: the year 2008
   status: growing
-  ticks_logged: 37
-  log_entries: 47
+  ticks_logged: 39
+  log_entries: 49
   generations: 2
-  last_activity: '2026-09-01'
-  last_entry: 'G1-T37 — 2026-09-01 — Tick 37: Lewis Hamilton 2008 F1 World Championship
-    Deep-Dive (out-of-scope Kindle draft removed)'
+  last_activity: '2026-09-04'
+  last_entry: 'G1-T39 — 2026-09-04 — Tick 39: Nepal Republic + Chandrayaan-1 + 2008
+    Chinese Milk Scandal Deep-Dives'
 - name: '2009'
   repo: year-of-ai/2009
   url: https://github.com/year-of-ai/2009
   site_url: https://year-of-ai.github.io/2009/
   subject: the year 2009
   status: growing
-  ticks_logged: 38
-  log_entries: 50
+  ticks_logged: 39
+  log_entries: 51
   generations: 2
-  last_activity: '2026-09-01'
-  last_entry: 'G1-T40 — 2026-09-01 — Tick 40: Three new dedicated topics (Super Bowl
-    XLIII, 2009 Tour de France, 2009 World Series)'
+  last_activity: '2026-09-04'
+  last_entry: 'G1-T41 — 2026-09-04 — Tick 41: Two new dedicated topics (The Oprah
+    Winfrey Show at its cultural peak, Burj Khalifa tops out)'
 - name: '2010'
   repo: year-of-ai/2010
   url: https://github.com/year-of-ai/2010
@@ -147,9 +147,9 @@ members:
   site_url: https://year-of-ai.github.io/2013/
   subject: the year 2013
   status: growing
-  ticks_logged: 10
-  log_entries: 11
+  ticks_logged: 11
+  log_entries: 12
   generations: 0
-  last_activity: '2026-09-01'
-  last_entry: 'G1-T10 — 2026-09-01 — Tick 10: Margaret Thatcher''s death, the iPhone
-    5S/5C launch, and the Rana Plaza collapse'
+  last_activity: '2026-09-04'
+  last_entry: 'G1-T11 — 2026-09-04 — Tick 11: Iran''s Geneva nuclear deal, Gravity,
+    and Snowden''s Russian asylum'
