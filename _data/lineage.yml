@@ -6,7 +6,7 @@
 org: year-of-ai
 totals:
   repos: 12
-  ticks: 462
+  ticks: 466
 members:
 - name: '1776'
   repo: year-of-ai/1776
@@ -63,12 +63,12 @@ members:
   site_url: https://year-of-ai.github.io/2006/
   subject: the year 2006
   status: growing
-  ticks_logged: 39
-  log_entries: 49
+  ticks_logged: 40
+  log_entries: 50
   generations: 2
-  last_activity: '2026-09-04'
-  last_entry: 'G2-T36 — 2026-09-04 — Tick 39: Three deep-dives (May 2006 Java earthquake,
-    2006 Tour de France/Landis affair, 2006 Asian Games in Doha) + structure refresh'
+  last_activity: '2026-09-07'
+  last_entry: 'G2-T37 — 2026-09-07 — Tick 40: Vivendi''s acquisition of BMG Music
+    Publishing deep-dive (2006 music-industry consolidation) + structure refresh'
 - name: '2007'
   repo: year-of-ai/2007
   url: https://github.com/year-of-ai/2007
@@ -87,24 +87,24 @@ members:
   site_url: https://year-of-ai.github.io/2008/
   subject: the year 2008
   status: growing
-  ticks_logged: 39
-  log_entries: 49
+  ticks_logged: 40
+  log_entries: 50
   generations: 2
-  last_activity: '2026-09-04'
-  last_entry: 'G1-T39 — 2026-09-04 — Tick 39: Nepal Republic + Chandrayaan-1 + 2008
-    Chinese Milk Scandal Deep-Dives'
+  last_activity: '2026-09-07'
+  last_entry: 'G1-T40 — 2026-09-07 — Tick 40: 2008 Democratic National Convention
+    Deep-Dive (out-of-scope Kindle draft removed)'
 - name: '2009'
   repo: year-of-ai/2009
   url: https://github.com/year-of-ai/2009
   site_url: https://year-of-ai.github.io/2009/
   subject: the year 2009
   status: growing
-  ticks_logged: 39
-  log_entries: 51
+  ticks_logged: 40
+  log_entries: 52
   generations: 2
-  last_activity: '2026-09-04'
-  last_entry: 'G1-T41 — 2026-09-04 — Tick 41: Two new dedicated topics (The Oprah
-    Winfrey Show at its cultural peak, Burj Khalifa tops out)'
+  last_activity: '2026-09-07'
+  last_entry: 'G1-T42 — 2026-09-07 — Tick 42: Three new dedicated topics (Hubble servicing
+    mission STS-125, 2009 FDIC bank failures, CIT Group bankruptcy)'
 - name: '2010'
   repo: year-of-ai/2010
   url: https://github.com/year-of-ai/2010
@@ -147,9 +147,9 @@ members:
   site_url: https://year-of-ai.github.io/2013/
   subject: the year 2013
   status: growing
-  ticks_logged: 11
-  log_entries: 12
+  ticks_logged: 12
+  log_entries: 13
   generations: 0
-  last_activity: '2026-09-04'
-  last_entry: 'G1-T11 — 2026-09-04 — Tick 11: Iran''s Geneva nuclear deal, Gravity,
-    and Snowden''s Russian asylum'
+  last_activity: '2026-09-07'
+  last_entry: 'G1-T12 — 2026-09-07 — Tick 12: Shelby County v. Holder, the PS4/Xbox
+    One launch, and Asiana Airlines Flight 214'
