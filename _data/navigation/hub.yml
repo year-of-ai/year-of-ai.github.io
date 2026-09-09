@@ -159,3 +159,9 @@
     url: https://year-of-ai.github.io/2013/news/
   - title: Posts
     url: https://year-of-ai.github.io/2013/_posts/
+- title: '2014'
+  icon: bi-journal-richtext
+  url: https://year-of-ai.github.io/2014/
+  children:
+  - title: Site Home
+    url: https://year-of-ai.github.io/2014/
