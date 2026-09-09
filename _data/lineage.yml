@@ -5,8 +5,8 @@
 # =============================================================================
 org: year-of-ai
 totals:
-  repos: 12
-  ticks: 466
+  repos: 13
+  ticks: 470
 members:
 - name: '1776'
   repo: year-of-ai/1776
@@ -26,24 +26,24 @@ members:
   site_url: https://year-of-ai.github.io/1777/
   subject: the year 1777
   status: growing
-  ticks_logged: 48
-  log_entries: 52
+  ticks_logged: 49
+  log_entries: 53
   generations: 2
-  last_activity: '2026-09-05'
-  last_entry: 'G1-T48 — 2026-09-05 — Tick 48: Battle of Princeton, Carl Wilhelm Scheele''s
-    Chemical Treatise on Air and Fire, and Casimir Pulaski'
+  last_activity: '2026-09-08'
+  last_entry: 'G1-T49 — 2026-09-08 — Tick 49: The Danbury Raid and Battle of Ridgefield,
+    Silas Deane, and Joseph Priestley'
 - name: '1778'
   repo: year-of-ai/1778
   url: https://github.com/year-of-ai/1778
   site_url: https://year-of-ai.github.io/1778/
   subject: the year 1778
   status: growing
-  ticks_logged: 40
-  log_entries: 43
+  ticks_logged: 41
+  log_entries: 44
   generations: 1
-  last_activity: '2026-09-05'
-  last_entry: 'G1-T40 — 2026-09-05 — Tick 40: Capture of Savannah — the opening of
-    the British southern strategy'
+  last_activity: '2026-09-08'
+  last_entry: 'G1-T41 — 2026-09-08 — Tick 41: Three Revolutionary War commanders and
+    leaders — Benedict Arnold, John Hancock, and William Howe'
 - name: '2005'
   repo: year-of-ai/2005
   url: https://github.com/year-of-ai/2005
@@ -111,24 +111,24 @@ members:
   site_url: https://year-of-ai.github.io/2010/
   subject: the year 2010
   status: growing
-  ticks_logged: 41
-  log_entries: 51
+  ticks_logged: 42
+  log_entries: 52
   generations: 2
-  last_activity: '2026-09-05'
-  last_entry: 'G1-T41 — 2026-09-05 — Tick 41: Content (Science & Technology — Tesla
-    IPO, Comet Elenin discovery) + structure refresh'
+  last_activity: '2026-09-08'
+  last_entry: 'G1-T42 — 2026-09-08 — Tick 42: Content (History & Politics — New START
+    Treaty; Society & Economics — China overtakes Japan) + structure refresh'
 - name: '2011'
   repo: year-of-ai/2011
   url: https://github.com/year-of-ai/2011
   site_url: https://year-of-ai.github.io/2011/
   subject: the year 2011
   status: growing
-  ticks_logged: 39
-  log_entries: 48
+  ticks_logged: 40
+  log_entries: 49
   generations: 1
-  last_activity: '2026-09-05'
-  last_entry: 'G1-T39 — 2026-09-05 — Tick 39: Bitcoin''s 2011 price surge and Mt.
-    Gox hack, and the founding of Snapchat'
+  last_activity: '2026-09-08'
+  last_entry: 'G1-T40 — 2026-09-08 — Tick 40: the 2011 renewable-energy expansion,
+    and the unsung heroes of 2011''s social movements'
 - name: '2012'
   repo: year-of-ai/2012
   url: https://github.com/year-of-ai/2012
@@ -153,3 +153,14 @@ members:
   last_activity: '2026-09-07'
   last_entry: 'G1-T12 — 2026-09-07 — Tick 12: Shelby County v. Holder, the PS4/Xbox
     One launch, and Asiana Airlines Flight 214'
+- name: '2014'
+  repo: year-of-ai/2014
+  url: https://github.com/year-of-ai/2014
+  site_url: https://year-of-ai.github.io/2014/
+  subject: the year 2014
+  status: seeded
+  ticks_logged: 0
+  log_entries: 1
+  generations: 0
+  last_activity: ''
+  last_entry: ''
