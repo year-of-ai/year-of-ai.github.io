@@ -6,7 +6,7 @@
 org: year-of-ai
 totals:
   repos: 13
-  ticks: 482
+  ticks: 486
 members:
 - name: '1776'
   repo: year-of-ai/1776
@@ -14,12 +14,12 @@ members:
   site_url: https://year-of-ai.github.io/1776/
   subject: the year 1776
   status: growing
-  ticks_logged: 46
-  log_entries: 52
+  ticks_logged: 47
+  log_entries: 53
   generations: 2
-  last_activity: '2026-09-09'
-  last_entry: 'G1-T48 — 2026-09-09 — Tick 46: The Marquis de Lafayette, the Gaspée
-    aftermath, and the Albany Plan legacy'
+  last_activity: '2026-09-12'
+  last_entry: 'G1-T49 — 2026-09-12 — Tick 47: Joshua Reynolds and William Cowper —
+    British portraiture and the poetry of crisis'
 - name: '1777'
   repo: year-of-ai/1777
   url: https://github.com/year-of-ai/1777
@@ -50,13 +50,13 @@ members:
   site_url: https://year-of-ai.github.io/2005/
   subject: the year 2005
   status: growing
-  ticks_logged: 42
-  log_entries: 53
+  ticks_logged: 43
+  log_entries: 54
   generations: 2
-  last_activity: '2026-09-09'
-  last_entry: 'G1-T42 — 2026-09-09 — Tick 42: Three dedicated technology/culture topic
-    files (Kanye West''s *Late Registration*, the Motorola RAZR V3, the iPod Nano)
-    + fact-correcting enhance pass'
+  last_activity: '2026-09-12'
+  last_entry: 'G1-T43 — 2026-09-12 — Tick 43: Three dedicated topic files (Hunter
+    S. Thompson dies, Darfur genocide escalation, Peter Jennings dies) + convention-fixing
+    enhance pass'
 - name: '2006'
   repo: year-of-ai/2006
   url: https://github.com/year-of-ai/2006
@@ -76,12 +76,12 @@ members:
   site_url: https://year-of-ai.github.io/2007/
   subject: the year 2007
   status: growing
-  ticks_logged: 42
-  log_entries: 52
+  ticks_logged: 43
+  log_entries: 53
   generations: 2
-  last_activity: '2026-09-09'
-  last_entry: 'G3-T42 — 2026-09-09 — Tick 42: The 2008 U.S. presidential campaign
-    begins'
+  last_activity: '2026-09-12'
+  last_entry: 'G3-T43 — 2026-09-12 — Tick 43: 2007 pet food recall, October 2007 California
+    wildfires, and Google''s Android announcement'
 - name: '2008'
   repo: year-of-ai/2008
   url: https://github.com/year-of-ai/2008
@@ -125,12 +125,13 @@ members:
   site_url: https://year-of-ai.github.io/2011/
   subject: the year 2011
   status: growing
-  ticks_logged: 40
-  log_entries: 49
+  ticks_logged: 41
+  log_entries: 50
   generations: 1
-  last_activity: '2026-09-08'
-  last_entry: 'G1-T40 — 2026-09-08 — Tick 40: the 2011 renewable-energy expansion,
-    and the unsung heroes of 2011''s social movements'
+  last_activity: '2026-09-12'
+  last_entry: 'G1-T41 — 2026-09-12 — Tick 41: Rupert Murdoch''s parliamentary testimony
+    and media-regulation overhaul, the 2012 U.S. presidential campaign''s early phase,
+    and the COP17 Durban climate conference'
 - name: '2012'
   repo: year-of-ai/2012
   url: https://github.com/year-of-ai/2012
