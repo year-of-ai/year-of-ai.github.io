@@ -6,7 +6,7 @@
 org: year-of-ai
 totals:
   repos: 13
-  pages: 1063
+  pages: 1073
 repos:
 - name: '1776'
   title: The Year 1776
@@ -112,14 +112,14 @@ repos:
   pages_enabled: true
   scaffolded: true
   branch: main
-  pushed_at: '2026-09-10T10:25:30Z'
-  page_count: 84
+  pushed_at: '2026-09-14T11:03:28Z'
+  page_count: 85
   sections:
   - name: _posts
     title: Posts
     url: https://year-of-ai.github.io/2006/_posts/
     source_url: https://github.com/year-of-ai/2006/tree/main/_posts
-    count: 82
+    count: 83
   root_pages:
   - title: Timeline
     url: https://year-of-ai.github.io/2006/TIMELINE/
@@ -158,14 +158,14 @@ repos:
   pages_enabled: true
   scaffolded: true
   branch: main
-  pushed_at: '2026-09-10T10:17:58Z'
-  page_count: 78
+  pushed_at: '2026-09-14T11:15:12Z'
+  page_count: 81
   sections:
   - name: _posts
     title: Posts
     url: https://year-of-ai.github.io/2008/_posts/
     source_url: https://github.com/year-of-ai/2008/tree/main/_posts
-    count: 76
+    count: 79
   root_pages:
   - title: Timeline
     url: https://year-of-ai.github.io/2008/TIMELINE/
@@ -181,14 +181,14 @@ repos:
   pages_enabled: true
   scaffolded: true
   branch: main
-  pushed_at: '2026-09-10T10:20:59Z'
-  page_count: 88
+  pushed_at: '2026-09-14T11:06:54Z'
+  page_count: 91
   sections:
   - name: _posts
     title: Posts
     url: https://year-of-ai.github.io/2009/_posts/
     source_url: https://github.com/year-of-ai/2009/tree/main/_posts
-    count: 86
+    count: 89
   root_pages:
   - title: Timeline
     url: https://year-of-ai.github.io/2009/TIMELINE/
@@ -296,14 +296,14 @@ repos:
   pages_enabled: true
   scaffolded: true
   branch: main
-  pushed_at: '2026-09-09T10:20:37Z'
-  page_count: 10
+  pushed_at: '2026-09-14T11:06:15Z'
+  page_count: 13
   sections:
   - name: _posts
     title: Posts
     url: https://year-of-ai.github.io/2014/_posts/
     source_url: https://github.com/year-of-ai/2014/tree/main/_posts
-    count: 8
+    count: 11
   root_pages:
   - title: Timeline
     url: https://year-of-ai.github.io/2014/TIMELINE/
