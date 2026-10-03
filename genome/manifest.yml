@@ -182,6 +182,7 @@ ignore:
   - "vendor/**"
   - "node_modules/**"
   - ".claude/**"
+  - ".vscode/**"                             # editor tasks/launch/settings stamped per repo by the bamr87 fleet-vscode/v1 fan-out (owned there, not genome DNA)
   - "genome/**"                              # the genome doesn't transplant itself
   - "_data/hub_index.yml"                    # generated
   - "_data/lineage.yml"                      # generated
