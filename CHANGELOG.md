@@ -14,9 +14,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   live URL from `_data/lineage.yml` with the bamr87 hub's reusable
   `site-quality.yml@v1` in `mode: url` (Lighthouse CI, axe-core at 390 and
   1366 px, pa11y contrast). The config, `.github/site-quality.yml`, is
-  report-only, so no scan fails. The workflow keeps exactly one issue per site,
-  fingerprinted by a hidden marker and found with the same jq title/marker
-  lookup the Pages sentinel uses since its duplicate-issue fix. It updates or
+  report-only (`schema: site-quality/v1`), so no finding fails a scan. The
+  workflow keeps exactly one issue per site, fingerprinted by a hidden marker
+  and found with the same jq title/marker lookup the Pages sentinel uses since
+  its duplicate-issue fix, over a paginated listing of every issue. It updates or
   reopens the issue while findings remain and closes it when the scan is
   clean. It honours the `_data/fleet_pause.yml` kill-switch. Both files are
   genome `transplant` (the workflow is in `default_plant_exclude`).

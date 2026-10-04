@@ -18,6 +18,9 @@ name: Site Quality Scan
 # match the exact title or the marker in jq (never `gh issue list --search`,
 # whose index lags), `set -euo pipefail` so a failed lookup fails the step
 # instead of filing a copy, the label ensured with `gh label create --force`.
+# The listing pages through every issue (`gh api --paginate`, no `--limit`
+# cap), and the title and marker reach jq as `--arg` values, never spliced
+# into the filter.
 # Per site:
 #   findings (status warn|fail)  edit the open issue, else reopen the newest
 #                                closed one, else create it; extra open copies
@@ -47,7 +50,7 @@ jobs:
       count: ${{ steps.list.outputs.count }}
       skip: ${{ steps.pause.outputs.skip }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Kill-switch
         id: pause
         run: |
@@ -113,7 +116,7 @@ jobs:
       issues: write
     steps:
       - name: Download the reports
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         continue-on-error: true
         with:
           path: reports
@@ -129,11 +132,25 @@ jobs:
           gh label create "$label" --repo "$GITHUB_REPOSITORY" --force \
             --color "C5DEF5" --description "Weekly site quality scan (Lighthouse, axe, contrast)" \
             || echo "::warning::Could not ensure the '${label}' label; issues are filed without it."
-          has_label="$(gh label list --repo "$GITHUB_REPOSITORY" --limit 200 --json name --jq "[.[] | select(.name == \"${label}\")] | length")"
+          has_label=0
+          if gh api "repos/${GITHUB_REPOSITORY}/labels/${label}" --silent 2>/dev/null; then has_label=1; fi
           # One listing per state for the whole run; every lookup below is jq
-          # over these files, so the search index is never involved.
-          gh issue list --repo "$GITHUB_REPOSITORY" --state open --limit 1000 --json number,title,body > /tmp/open.json
-          gh issue list --repo "$GITHUB_REPOSITORY" --state closed --limit 1000 --json number,title,body,stateReason > /tmp/closed.json
+          # over these files, so the search index is never involved. Paginated
+          # over ALL issues (not just the label: a copy filed without it, or
+          # with the label removed, must still match), pull requests dropped,
+          # kept only if the title or body could belong to this scan.
+          list_issues() {
+            gh api --paginate "repos/${GITHUB_REPOSITORY}/issues?state=$1&per_page=100" \
+              --jq '[.[] | select(.pull_request | not)
+                     | select((.title | startswith("Site quality scan: ")) or ((.body // "") | contains("<!-- site-quality-scan:site=")))
+                     | {number, title, body: (.body // ""), state_reason}]' \
+              | jq -s 'add // []'
+          }
+          list_issues open > /tmp/open.json
+          list_issues closed > /tmp/closed.json
+          # The issues of one listing that belong to the current site (by its
+          # exact title or its marker), as a JSON array.
+          matching() { jq -c --arg t "$title" --arg m "$marker" '[.[] | select(.title == $t or (.body | contains($m)))]' "$1"; }
           {
             echo "## 🚦 Site quality scan"
             echo
@@ -144,8 +161,10 @@ jobs:
           while IFS=$'\t' read -r repo slug url; do
             title="Site quality scan: ${repo}"
             marker="<!-- site-quality-scan:site=${repo} -->"
-            match=".[] | select(.title == \"${title}\" or (.body // \"\" | contains(\"${marker}\"))) | .number"
-            mapfile -t open_nums < <(jq -r "[${match}] | sort | .[]" /tmp/open.json)
+            # Command substitution, not < <(...), so a failed jq fails the step.
+            open_list="$(matching /tmp/open.json | jq -r 'map(.number) | sort | .[]')"
+            open_nums=()
+            [ -z "$open_list" ] || mapfile -t open_nums <<< "$open_list"
             report="reports/site-quality-${slug}/report.json"
             if [ ! -f "$report" ]; then
               echo "::warning title=site-quality ${repo}::no report (the scan job failed before uploading); issues left as they are"
@@ -183,7 +202,7 @@ jobs:
               action="updated #${num}"
             else
               # Newest closed match, preferring one not closed as a duplicate.
-              num="$(jq -r "[.[] | select(.title == \"${title}\" or (.body // \"\" | contains(\"${marker}\")))] | sort_by(.number) | ((map(select(.stateReason != \"NOT_PLANNED\")) | last) // last) | .number // empty" /tmp/closed.json)"
+              num="$(matching /tmp/closed.json | jq -r 'sort_by(.number) | ((map(select(.state_reason != "not_planned")) | last) // last) | .number // empty')"
               if [ -n "$num" ]; then
                 gh issue reopen "$num" --repo "$GITHUB_REPOSITORY"
                 gh issue edit "$num" --repo "$GITHUB_REPOSITORY" --title "$title" --body-file /tmp/body.md
@@ -196,7 +215,7 @@ jobs:
                 action="opened #${num}"
               fi
               # Record it so a later row in this same run can never file a copy.
-              jq --argjson n "$num" --arg t "$title" --rawfile b /tmp/body.md '. + [{number: $n, title: $t, body: $b}]' /tmp/open.json > /tmp/open.tmp && mv /tmp/open.tmp /tmp/open.json
+              jq --argjson n "$num" --arg t "$title" --rawfile b /tmp/body.md '. + [{number: $n, title: $t, body: $b, state_reason: null}]' /tmp/open.json > /tmp/open.tmp && mv /tmp/open.tmp /tmp/open.json
             fi
             icon="⚠️ warn"; [ "$status" = "fail" ] && icon="❌ fail"
             echo "| [${repo}](${url}) | ${icon} | ${errors} | ${warnings} | ${action} |" >> /tmp/scan-summary.md

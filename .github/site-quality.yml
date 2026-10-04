@@ -7,14 +7,15 @@
 # (bamr87/bamr87 templates/site-quality/site-quality.schema.json) before
 # every scan.
 #
-# REPORT-ONLY on purpose: no budgets, no axe fail_on, no contrast max, so a
-# scan never "fails"; it publishes Lighthouse scores, axe findings and contrast
-# counts, and the workflow keeps one issue per site up to date with them.
+# REPORT-ONLY on purpose: no budgets, no axe fail_on, no contrast max, so no
+# finding fails a scan (an invalid config or a site that can't be scanned
+# still shows up as a failed job); it publishes Lighthouse scores, axe findings
+# and contrast counts, and the workflow keeps one issue per site up to date.
 # Tighten a gate (level: error, fail_on, max) only once every site passes it.
 # Known issues go in the allowlist: rule, selector and/or page, reason, issue
 # link and a QUOTED until date ("YYYY-MM-DD").
 # =============================================================================
-version: 1
+schema: site-quality/v1
 
 # Relative to each site's base URL.
 pages:
