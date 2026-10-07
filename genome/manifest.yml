@@ -84,6 +84,8 @@ transplant:
   - ".github/workflows/secret-expiry-watch.yml" # auth-credential probe — agnostic
   - ".github/workflows/fleet-health-watch.yml" # daily ledger health digest — agnostic
   - ".github/workflows/build-validation.yml" # pre-merge Jekyll build gate — agnostic, every plant wants it
+  - ".github/workflows/site-quality-scan.yml" # weekly live-site quality scan (bamr87/bamr87 site-quality@v1, mode: url) — agnostic
+  - ".github/site-quality.yml"              # its report-only scan config — agnostic
   - ".github/config/docs_warden.yml"        # doc-coverage map — agnostic
   - ".github/instructions/docs-warden.instructions.md" # doc-warden contract — agnostic
   - "scripts/docs-warden.rb"                # doc-coverage engine — agnostic
@@ -173,6 +175,7 @@ default_plant_exclude:
   - ".github/workflows/fleet-health-watch.yml"
   - ".github/workflows/ai-content-review.yml"
   - ".github/workflows/deploy-chat-proxy.yml"
+  - ".github/workflows/site-quality-scan.yml"
 
 # ---- ignore: never travels in the genome (verify skips these) ---------------
 ignore:

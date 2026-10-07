@@ -107,7 +107,11 @@ read the architecture doc and fix the drift.
   own site **and** every member),
   `secret-expiry-watch.yml` (daily auth-credential probe), `fleet-health-watch.yml`
   (daily ledger health digest), `genome-sync.yml` (genome drift gate),
-  `codeql.yml` (security scan).
+  `codeql.yml` (security scan), `site-quality-scan.yml` (weekly live-site
+  quality scan of the hub **and** every member: calls the bamr87 hub's
+  reusable `site-quality.yml@v1` in `mode: url` per site, graded by the
+  report-only `.github/site-quality.yml`, and keeps exactly one fingerprinted
+  issue per site, using the sentinel's jq title/marker lookup).
 - `.github/config/` — reviewer configs: `content_review.yml`, `content_rules.yml`,
   `frontmatter_schema.yml`, `environment.yml`, `docs_warden.yml` (doc-coverage map).
 - `_data/fleet_pause.yml` — the global growth **kill-switch** (ADR-0003).
