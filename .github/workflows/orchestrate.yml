@@ -105,6 +105,12 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.LIFECYCLE_PAT }}
           TARGETS: ${{ inputs.targets }}
+          # Paused Oct 14 (Actions waste reduction): grow-lineage.yml failed 116
+          # runs in a row at "Fail loudly if the growth tick produced no content"
+          # (grow-lineage.yml:480). Scheduled grow dispatch now runs only when the
+          # repo variable GROW_LINEAGE_ENABLED is 'true' (unset = off). A manual
+          # dispatch with trigger_growth=true still grows, so a fix can be tested.
+          GROW_ENABLED: ${{ github.event_name == 'workflow_dispatch' || vars.GROW_LINEAGE_ENABLED == 'true' }}
         run: |
           # Global kill-switch (ADR-0003): halt all growth dispatch when paused.
           if ruby -ryaml -e 'exit(YAML.load_file("_data/fleet_pause.yml")["paused"] == true ? 0 : 1)' 2>/dev/null; then
@@ -131,7 +137,11 @@ jobs:
               puts members.map { |m| m["repo"] }.join(" ")
             ')"
           fi
-          echo "Dispatching central grow ticks (grow-lineage.yml) for: $repos"
+          if [ "$GROW_ENABLED" != "true" ]; then
+            echo "::notice::grow-lineage dispatch paused (GROW_LINEAGE_ENABLED is not 'true'); would have grown: $repos"
+            repos=""
+          fi
+          echo "Dispatching central grow ticks (grow-lineage.yml) for: ${repos:-<none>}"
           for r in $repos; do
             name="${r##*/}"   # year-of-ai/1776 -> 1776
             if gh workflow run grow-lineage.yml -R year-of-ai/year-of-ai.github.io -f repo="$name" >/dev/null 2>&1; then
