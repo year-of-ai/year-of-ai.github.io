@@ -21,7 +21,7 @@ name: Pages Deploy Sentinel
 
 on:
   schedule:
-    - cron: "13 * * * *" # hourly (off the :00 mark), decoupled from the growth cron
+    - cron: "13 */6 * * *"  # every 6h (was hourly; 299 all-green runs in 30d)
   workflow_dispatch: {}
 
 permissions:
