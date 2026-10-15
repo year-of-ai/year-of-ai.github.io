@@ -1,7 +1,7 @@
 # =============================================================================
 # .github/site-quality.yml: config for the weekly Site Quality Scan
 # =============================================================================
-# Read by bamr87/bamr87/.github/workflows/site-quality.yml (@v1), which
+# Read by bamr87/bamr87/.github/workflows/site-quality.yml (@v2), which
 # .github/workflows/site-quality-scan.yml calls once per site in `mode: url`
 # with that site's live URL as the base. Validated against the fleet schema
 # (bamr87/bamr87 templates/site-quality/site-quality.schema.json) before
