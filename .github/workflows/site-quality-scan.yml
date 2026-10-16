@@ -3,7 +3,7 @@ name: Site Quality Scan
 # Weekly live-site quality scan of the hub's own site and every lineage member
 # (read-only on the sites; writes only its own issues). Each site is scanned by
 # the fleet's reusable workflow, bamr87/bamr87/.github/workflows/site-quality.yml
-# pinned @v1, in `mode: url`: Lighthouse CI, axe-core at 390 px and 1366 px and
+# pinned @v2, in `mode: url`: Lighthouse CI, axe-core at 390 px and 1366 px and
 # pa11y contrast against the LIVE URL, graded by .github/site-quality.yml (this
 # repo's config, report-only: nothing in it fails a scan).
 #
@@ -94,7 +94,7 @@ jobs:
       max-parallel: 4
       matrix:
         site: ${{ fromJSON(needs.sites.outputs.matrix) }}
-    uses: bamr87/bamr87/.github/workflows/site-quality.yml@v1
+    uses: bamr87/bamr87/.github/workflows/site-quality.yml@v2
     permissions:
       contents: read
     with:
@@ -104,6 +104,7 @@ jobs:
       gate: false
       artifact-name: site-quality-${{ matrix.site.slug }}
       retention-days: 30
+      hub-ref: v2
 
   issues:
     name: One issue per site
@@ -176,7 +177,7 @@ jobs:
             warnings="$(jq -r '.counts.warn + .counts.allowed' "$report")"
             summary="reports/site-quality-${slug}/summary.md"
             {
-              echo "Weekly scan of **${url}** by [Site Quality Scan](${RUN_URL}) (bamr87/bamr87 \`site-quality.yml@v1\`, \`mode: url\`, config \`.github/site-quality.yml\`). This issue is kept up to date by the workflow: one issue per site, updated every week, closed automatically when the scan comes back clean."
+              echo "Weekly scan of **${url}** by [Site Quality Scan](${RUN_URL}) (bamr87/bamr87 \`site-quality.yml@v2\`, \`mode: url\`, config \`.github/site-quality.yml\`). This issue is kept up to date by the workflow: one issue per site, updated every week, closed automatically when the scan comes back clean."
               echo
               head -c 60000 "$summary" 2>/dev/null || echo "_summary.md missing from the report artifact._"
               echo
