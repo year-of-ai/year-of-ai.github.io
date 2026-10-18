@@ -2,9 +2,9 @@
 #
 # A tick is a 3-TIER content escalation (the model for each tier is read from
 # lifecycle.yml -> policy.models):
-#   1. generate (claude-haiku-4-5)  — plan + research + DRAFT new topic files
-#   2. expand   (claude-sonnet-4-6) — deepen every draft (detail, sources, links)
-#   3. enhance  (claude-opus-4-8)   — polish, build indices, sync/encode seed, publish
+#   1. generate (claude-haiku-5-5)  — plan + research + DRAFT new topic files
+#   2. expand   (claude-sonnet-5-5) — deepen every draft (detail, sources, links)
+#   3. enhance  (claude-opus-5-5)   — polish, build indices, sync/encode seed, publish
 # The three passes share the runner's working tree, so drafts persist between them.
 # A mature repo's tick shepherds the newest growing member (the passes operate on
 # the cloned member). `distill` (the one-time lineage meta-review) stays a single
@@ -153,12 +153,12 @@ jobs:
           fi
           {
             echo "phase=$phase"
-            echo "generate_model=${generate_model:-claude-haiku-4-5}"
-            echo "expand_model=${expand_model:-claude-sonnet-4-6}"
-            echo "enhance_model=${enhance_model:-claude-opus-4-8}"
-            echo "distill_model=${distill_model:-claude-opus-4-8}"
+            echo "generate_model=${generate_model:-claude-haiku-5-5}"
+            echo "expand_model=${expand_model:-claude-sonnet-5-5}"
+            echo "enhance_model=${enhance_model:-claude-opus-5-5}"
+            echo "distill_model=${distill_model:-claude-opus-5-5}"
           } >> "$GITHUB_OUTPUT"
-          echo "Phase: $phase — generate=${generate_model:-claude-haiku-4-5} expand=${expand_model:-claude-sonnet-4-6} enhance=${enhance_model:-claude-opus-4-8} (members=${members:-0}, driver=${driver_repo:-unset}, is_driver=$is_driver)"
+          echo "Phase: $phase — generate=${generate_model:-claude-haiku-5-5} expand=${expand_model:-claude-sonnet-5-5} enhance=${enhance_model:-claude-opus-5-5} (members=${members:-0}, driver=${driver_repo:-unset}, is_driver=$is_driver)"
 
       # Deterministic lineage maintenance — forward-pollinate the canonical framework
       # into drifted members and reconcile the registry, BEFORE the model passes, so
