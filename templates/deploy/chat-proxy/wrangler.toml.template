@@ -51,5 +51,5 @@ BASE_BRANCH = "main"
 PR_BRANCH_PREFIX = "chat/"
 
 # --- Model controls --------------------------------------------------------
-CHAT_MODEL = "claude-opus-4-8"
+CHAT_MODEL = "claude-opus-5-5"
 MAX_TOKENS_CAP = "4096"

@@ -25,10 +25,10 @@ lifecycle:
       deepen_granularity: "{{finer unit /expand deepens to, e.g. month}}"
 
     models:
-      tick: "claude-sonnet-4-6"     # per-tick growth (plan/curate/structure)
-      learn: "claude-sonnet-4-6"    # per-generation telemetry → prompt-edit flywheel
-      expand: "claude-sonnet-4-6"   # post-consolidation deepening
-      distill: "claude-opus-4-8"    # once-per-lineage meta-review (frontier model)
+      tick: "claude-sonnet-5-5"     # per-tick growth (plan/curate/structure)
+      learn: "claude-sonnet-5-5"    # per-generation telemetry → prompt-edit flywheel
+      expand: "claude-sonnet-5-5"   # post-consolidation deepening
+      distill: "claude-opus-5-5"    # once-per-lineage meta-review (frontier model)
 
     distill_at_members: 3           # lineage size that triggers the one-time /distill meta-review
 

@@ -282,8 +282,8 @@ Key mechanics, in file order in
 ### 5.3 The model escalation
 
 Three passes per tick, models resolved from policy (never hardcoded):
-**generate** (`claude-haiku-4-5`, cheap breadth) → **expand**
-(`claude-sonnet-4-6`, depth and sourcing) → **enhance** (`claude-opus-4-8`,
+**generate** (`claude-haiku-5-5`, cheap breadth) → **expand**
+(`claude-sonnet-5-5`, depth and sourcing) → **enhance** (`claude-opus-5-5`,
 polish + structure + seed bookkeeping). Primary auth is
 `CLAUDE_CODE_OAUTH_TOKEN` (subscription); the **API-key fallback** runs one
 complete tick on `ANTHROPIC_API_KEY` with the enhance-tier model when the

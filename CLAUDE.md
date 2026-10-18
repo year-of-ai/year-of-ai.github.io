@@ -152,8 +152,8 @@ How a tick runs:
    validation), then checks out the target year repo, stages
    `lineage/framework/*` (minus the dead peer-to-peer surfaces) +
    `lineage/seeds/<repo>.md`, and runs the **3-tier escalation**
-   (`claude-haiku-4-5` draft → `claude-sonnet-4-6` expand →
-   `claude-opus-4-8` enhance). An **API-key fallback** pass fires if the OAuth
+   (`claude-haiku-5-5` draft → `claude-sonnet-5-5` expand →
+   `claude-opus-5-5` enhance). An **API-key fallback** pass fires if the OAuth
    passes produce no content changes or report `is_error`.
 3. The **Illustrate** step banners each new article with a Claude-authored
    SVG preview (`scripts/claude_svg_banner.py`; art direction + model from
@@ -169,8 +169,8 @@ How a tick runs:
 **Auth (org secrets):** `CLAUDE_CODE_OAUTH_TOKEN` (primary model auth),
 `ANTHROPIC_API_KEY` (fallback), `LIFECYCLE_PAT` (cross-repo push + workflow
 dispatch). The model values come from `lineage/policy.yml`, not the workflow —
-change tiers there. Use authoritative model IDs (`claude-haiku-4-5`,
-`claude-sonnet-4-6`, `claude-opus-4-8`).
+change tiers there. Use authoritative model IDs (`claude-haiku-5-5`,
+`claude-sonnet-5-5`, `claude-opus-5-5`).
 
 ## Common commands
 
