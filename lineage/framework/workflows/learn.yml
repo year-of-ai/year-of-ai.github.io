@@ -7,7 +7,7 @@
 # friction, embeds the minimal fixes into the .github/ prompt layer, records each in
 # telemetry/learnings.jsonl, and opens an auto-merged PR; pollinate fans them lineage-wide.
 #
-# Model: lifecycle.yml -> policy.models.learn (default claude-sonnet-5-5).
+# Model: lifecycle.yml -> policy.models.learn (default claude-sonnet-4-6).
 #
 # Auth (mirrors grow.yml): the Claude subscription OAuth token is the PRIMARY auth
 # — ANTHROPIC_API_KEY proved invalid across this lineage, so it is only the
@@ -47,7 +47,7 @@ jobs:
         id: gate
         run: |
           model=$(grep -E '^[[:space:]]*learn:' lifecycle.yml | head -1 | sed -E 's/.*learn:[[:space:]]*"?([^"#]+)"?.*/\1/' | xargs)
-          echo "model=${model:-claude-sonnet-5-5}" >> "$GITHUB_OUTPUT"
+          echo "model=${model:-claude-sonnet-4-6}" >> "$GITHUB_OUTPUT"
           boundary=false
           if [ -f telemetry/evolution.jsonl.gz ]; then
             rec=$(gunzip -c telemetry/evolution.jsonl.gz | tail -1)
@@ -56,7 +56,7 @@ jobs:
             fi
           fi
           echo "boundary=$boundary" >> "$GITHUB_OUTPUT"
-          echo "Generation boundary: $boundary — learn model: ${model:-claude-sonnet-5-5}"
+          echo "Generation boundary: $boundary — learn model: ${model:-claude-sonnet-4-6}"
 
       - name: Run the learning flywheel (Claude subscription)
         id: primary
