@@ -12,10 +12,10 @@
 
 # 3-tier content escalation — the model used for each pass of a growth tick.
 models:
-  generate: "claude-haiku-4-5"    # tier 1: plan + research + draft new topic files
-  expand:   "claude-sonnet-4-6"   # tier 2: deepen each draft (detail, sources, links)
-  enhance:  "claude-opus-4-8"     # tier 3: polish, build indices, sync seed, publish
-  distill:  "claude-opus-4-8"     # rare: lineage meta-review on the frontier model
+  generate: "claude-haiku-5-5"    # tier 1: plan + research + draft new topic files
+  expand:   "claude-sonnet-5-5"   # tier 2: deepen each draft (detail, sources, links)
+  enhance:  "claude-opus-5-5"     # tier 3: polish, build indices, sync seed, publish
+  distill:  "claude-opus-5-5"     # rare: lineage meta-review on the frontier model
 
 # Perpetual growth — every repo grows forever and is never consolidated,
 # archived, or deleted. New eras spawn tangentially from the frontier; the hub
@@ -61,7 +61,7 @@ spawn:
 # (not in the workflow) — same policy-over-workflow rule as the model tiers.
 preview:
   enabled: true
-  model: "claude-sonnet-4-6"      # authoring model for the SVG banner
+  model: "claude-sonnet-5-5"      # authoring model for the SVG banner
   style: "retro pixel art, 8-bit video game aesthetic, vibrant colors, nostalgic, clean pixel graphics"
   style_modifiers: "pixelated, retro gaming style, CRT screen glow effect, limited color palette"
   output_dir: "assets/images/previews"

@@ -213,21 +213,21 @@ so tiers can be retuned in one place.
   <text x="46" y="262" fill="#000" font-size="14" font-weight="700">Tier 1 · Haiku</text>
   <text x="46" y="284" fill="#000" font-size="13" font-weight="600">GENERATE</text>
   <text x="46" y="304" fill="#000" font-size="11.5">plan · research · draft new files</text>
-  <text x="46" y="320" fill="#000" font-size="11.5">claude-haiku-4-5</text>
+  <text x="46" y="320" fill="#000" font-size="11.5">claude-haiku-5-5</text>
 
   <!-- Tier 2 -->
   <rect x="245" y="150" width="230" height="96" rx="10" fill="var(--bs-primary,#0d6efd)"/>
   <text x="261" y="178" fill="#fff" font-size="14" font-weight="700">Tier 2 · Sonnet</text>
   <text x="261" y="200" fill="#fff" font-size="13" font-weight="600">EXPAND</text>
   <text x="261" y="220" fill="#fff" font-size="11.5">detail · sources · cross-links</text>
-  <text x="261" y="236" fill="#fff" font-size="11.5">claude-sonnet-4-6</text>
+  <text x="261" y="236" fill="#fff" font-size="11.5">claude-sonnet-5-5</text>
 
   <!-- Tier 3 -->
   <rect x="460" y="66" width="234" height="96" rx="10" fill="var(--bs-warning,#ffc107)"/>
   <text x="476" y="94" fill="#000" font-size="14" font-weight="700">Tier 3 · Opus</text>
   <text x="476" y="116" fill="#000" font-size="13" font-weight="600">ENHANCE</text>
   <text x="476" y="136" fill="#000" font-size="11.5">polish · index · seed · finalize</text>
-  <text x="476" y="152" fill="#000" font-size="11.5">claude-opus-4-8</text>
+  <text x="476" y="152" fill="#000" font-size="11.5">claude-opus-5-5</text>
 
   <!-- escalation arrow -->
   <line x1="60" y1="222" x2="150" y2="160" stroke="var(--bs-secondary-color,#6c757d)" stroke-width="2" marker-end="url(#ar3)"/>
@@ -246,10 +246,10 @@ spent on judgment, not first drafts.</figcaption>
 
 | Tier | Model | Job | Leaves behind |
 |---|---|---|---|
-| 1 · Generate | `claude-haiku-4-5` | Plan the roadmap, research, write first drafts | Uncommitted draft files |
-| 2 · Expand | `claude-sonnet-4-6` | Deepen each draft — detail, dates, sources, cross-links | Richer drafts |
-| 3 · Enhance | `claude-opus-4-8` | Polish, verify, rebuild indices, update the seed | Finished content + a new Tick entry |
-| Fallback | `claude-opus-4-8` | One complete pass if the OAuth tiers produced nothing | Same finished output |
+| 1 · Generate | `claude-haiku-5-5` | Plan the roadmap, research, write first drafts | Uncommitted draft files |
+| 2 · Expand | `claude-sonnet-5-5` | Deepen each draft — detail, dates, sources, cross-links | Richer drafts |
+| 3 · Enhance | `claude-opus-5-5` | Polish, verify, rebuild indices, update the seed | Finished content + a new Tick entry |
+| Fallback | `claude-opus-5-5` | One complete pass if the OAuth tiers produced nothing | Same finished output |
 
 ## 4 · How the toolkit reaches each repo (adapter + staging)
 

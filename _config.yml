@@ -242,7 +242,7 @@ ai_chat:
   provider               : 'anthropic'        # AI provider (Claude Messages API)
   auth_mode              : 'proxy'            # 'proxy' (recommended) or 'direct'
   proxy_ready            : false              # Set true only when your proxy endpoint is deployed
-  model                  : 'claude-opus-4-8'  # Claude model to use
+  model                  : 'claude-opus-5-5'  # Claude model to use
   api_key                : ''                  # Direct mode only. Leave empty in source. Inject at build time:
                                                # 1. Store as GitHub secret: ANTHROPIC_API_KEY
                                                # 2. In CI, create _config_secrets.yml with the key

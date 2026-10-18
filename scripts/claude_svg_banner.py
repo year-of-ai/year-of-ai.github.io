@@ -55,7 +55,7 @@ EXIT_FAILED = 1
 EXIT_NO_CREDENTIAL = 3
 EXIT_NO_ENGINE = 4
 
-DEFAULT_MODEL = "claude-sonnet-4-6"
+DEFAULT_MODEL = "claude-sonnet-5-5"
 DEFAULT_OUTPUT_DIR = "assets/images/previews"
 DEFAULT_FRONT_MATTER_KEY = "preview"
 DEFAULT_STYLE = (

@@ -48,7 +48,7 @@ const env = {
   GITHUB_REPOSITORY: process.env.GITHUB_REPOSITORY || process.env.PAGES_REPO_NWO,
   BASE_BRANCH: process.env.BASE_BRANCH || 'main',
   PR_BRANCH_PREFIX: process.env.PR_BRANCH_PREFIX || 'chat/',
-  CHAT_MODEL: process.env.CHAT_MODEL || 'claude-opus-4-8',
+  CHAT_MODEL: process.env.CHAT_MODEL || 'claude-opus-5-5',
   MAX_TOKENS_CAP: process.env.MAX_TOKENS_CAP || '4096',
   // Allow the local Jekyll dev server origins by default.
   ALLOWED_ORIGINS:
