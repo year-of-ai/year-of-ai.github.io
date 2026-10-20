@@ -228,7 +228,7 @@ sequenceDiagram
         GR->>Y: Fallback — full tick on ANTHROPIC_API_KEY (≤150 turns)
     end
     GR->>GR: upload telemetry artifact (last pass)
-    GR->>Y: Illustrate — Claude-authored SVG banner per new article (policy `preview:`)
+    GR->>Y: Illustrate — engine illustration loop per new article (policy `preview:`, ADR-0008)
     GR->>H: persist seed §8 (safety-net entry if missing; rebase-retry ×5)
     GR->>Y: strip staged files → date gate (normalize-front-matter-dates --fix) → publish content+telemetry (rebase-retry ×3)
     GR->>GR: fail loudly if nothing was published (auth failure vs stalled growth)
@@ -255,15 +255,25 @@ Key mechanics, in file order in
 - **Fallback gate**: "the tick produced nothing" counts only changes *outside*
   the staged hub files; `is_error` is checked on **every** tier's snapshot
   (`/tmp/grow-tier{1,2,3}.json`), not just the last pass.
-- **Illustrate step**: a deterministic (non-model-pass) step banners every
-  new/changed markdown file before publish — Claude **authors** a
-  content-aware SVG preview (`scripts/claude_svg_banner.py`, a companion that
-  imports the `zer0-image-generator` engine as a library and reuses its
-  sanitizer + front-matter writers), stamped as `preview:` so member pages
-  ship cover art and `og:image`s. Art direction + authoring model come from
-  `lineage/policy.yml` `preview:` (policy-over-workflow, like the tiers);
-  with no Claude credential it degrades to the engine's deterministic `local`
-  SVG; any failure is `continue-on-error` — banners never block a publish.
+- **Illustrate step** (ADR-0008): a deterministic (non-model-pass) step banners
+  every new/changed markdown file before publish with ONE engine call
+  (`zer0-image-generator`, `--changed --provider auto`). With a Claude
+  credential the engine's `claude` provider runs its **illustration loop** —
+  plan a JSON scene graph, author the SVG from the style card with the
+  headline as `<text>` pre-broken at word boundaries, shape it (text → paths
+  with a bundled font, sanitize, strict lint; one fix round), LOOK at it at
+  1536px and 120px through resvg, and let a vision critic drive up to
+  `rounds` targeted edits — then commits the best draft as `preview:` front
+  matter, so member pages ship cover art and `og:image`s. A banner that
+  cannot be made strict-clean ships the engine's `local` art instead. Art
+  direction, rounds, era palette (`palettes:` by year range) and the per-tick
+  cost cap come from `lineage/policy.yml` `preview:` via
+  `scripts/lib/banners.rb` (policy-over-workflow, like the tiers);
+  `rounds: 0` is the one-shot rollback. The step appends each banner's
+  banner/v1 record to the member's `telemetry/banners.jsonl` and uploads the
+  tick's records for the hub ledger. Engines before 0.10 (no loop flags) run
+  one-shot per file. Any failure is `continue-on-error` — banners never block
+  a publish.
 - **Seed persistence**: if content was published but the model forgot
   `encode-seed`, the workflow appends a deterministic §8 entry so the tick
   clock never lags reality, then pushes the seed back to the hub with

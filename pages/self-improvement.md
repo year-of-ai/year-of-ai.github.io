@@ -99,7 +99,7 @@ back into the canonical framework, so the next tick across all repos improves.</
   serialized so no two agents race the same branch.</div>
 </div>
 
-## The fleet (25 agents)
+## The fleet (27 agents)
 
 Each agent is tagged by **origin** — <span class="badge text-bg-success">net-new</span>
 (build it), <span class="badge text-bg-info">rewire</span> (wire up a dormant
@@ -117,6 +117,7 @@ framework mechanism), or <span class="badge text-bg-secondary">upgrade</span>
 | `fleet-health-watch` | P1 | net-new | **Built** — daily read-only digest over the evolution ledger: error rate, cost trend, per-member last-grow, stalls; one auto-closing issue (the DETECT half of the loop) |
 | `fleet-cost-governor` | P2 | net-new | Cost rail on the orchestrator — pre-flight ceiling + budget writer |
 | `lineage-state-report` | P2 | net-new | Single human pane of glass; a pure aggregator over the other signals |
+| `banner-quality-watch` | P1 | net-new | **Built** — weekly read-only grade of the week's committed banners from the banner ledger (mean critic score, committed-clean %, fallback rate) against `preview.watch`; a 600px/120px contact-sheet artifact and one auto-closing issue ([ADR-0008](https://github.com/{{ site.repository | join: '' }}/blob/main/lineage/decisions/ADR-0008-looped-engine-native-illustration.md)) |
 
 #### Review
 
@@ -151,6 +152,7 @@ framework mechanism), or <span class="badge text-bg-secondary">upgrade</span>
 | `docs-warden` | P1 | net-new | **Built** — gates every PR + sweeps `main` so every change is matched by a doc update on the hub's own doc surface ([ADR-0005](https://github.com/{{ site.repository | join: '' }}/blob/main/lineage/decisions/ADR-0005-docs-warden.md)) |
 | `claude-md-canon-warden` | P1 | rewire | Re-syncs each repo's drifted (stale old-model) CLAUDE.md back to canon |
 | `adapter-canon-aligner` | P2 | rewire | The backward `.claude/`-to-canon diff — keeps the framework converging, not fragmenting |
+| `banner-backfill` | P2 | net-new | **Built** — re-illustrates the worst banners (baseline audit + ledger) a few per day through the engine's loop, serialized on `repo-write-<repo>`, outside the grow tick's budget; stops itself when the backlog is empty (`REILLUSTRATE_ENABLED`, ADR-0008) |
 
 #### Learn
 

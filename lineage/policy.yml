@@ -52,19 +52,63 @@ spawn:
   frontier_ticks: 12     # growth cycles EVERY member (incl. the newest) must log
   max_members: 16        # hard roster cap — auto-spawn never exceeds it
 
-# Preview banners — the grow tick's "Illustrate" step (grow-lineage.yml) runs
-# scripts/claude_svg_banner.py over each tick's new content: Claude AUTHORS a
-# content-aware SVG banner per article (~12 KB vector, no rasterizer), stamped
-# into `preview:` front matter so member pages ship cover art + og:images.
-# Falls back to the zer0-image-generator engine's deterministic `local` SVG
-# when no Claude credential is available. Org-wide art direction lives HERE
-# (not in the workflow) — same policy-over-workflow rule as the model tiers.
+# Preview banners — the grow tick's "Illustrate" step (grow-lineage.yml). Since
+# ADR-0008 it is ONE zer0-image-generator engine call over the tick's new
+# content (`--changed --provider auto`): with a Claude credential the engine's
+# `claude` provider runs its illustration LOOP — plan a scene graph, author the
+# SVG from the style card (headline as <text>), shape it (text→paths with a
+# bundled font, sanitize, strict lint), LOOK at it at 1536px and 120px, and let
+# a vision critic drive up to `rounds` targeted edits before committing the
+# best draft. A banner that cannot be made strict-clean ships the engine's
+# deterministic `local` art instead; nothing here ever blocks a publish. Every
+# banner appends one banner/v1 record to the member's telemetry/banners.jsonl.
+# Org-wide art direction lives HERE (not in the workflow) — the same
+# policy-over-workflow rule as the model tiers. scripts/lib/banners.rb maps
+# these keys onto engine flags.
+#
+# ROLLBACK: `rounds: 0` returns to one-shot (no render, no review) without a
+# code change; `enabled: false` turns banners off.
 preview:
   enabled: true
-  model: "claude-sonnet-5-5"      # authoring model for the SVG banner
+  model: "claude-sonnet-5-5"      # plan/author/critique model for the loop
+  # Prose direction — the fallback when no card resolves, and free-text
+  # modifiers on top of the card.
   style: "retro pixel art, 8-bit video game aesthetic, vibrant colors, nostalgic, clean pixel graphics"
   style_modifiers: "pixelated, retro gaming style, CRT screen glow effect, limited color palette"
   output_dir: "assets/images/previews"
+  # ---- the illustration loop (zer0-image-generator >= 0.10) ----
+  style_card: retro-pixel        # tools/svg/library/styles/<card>.md in the gem
+  rounds: 1                      # critique-driven edit rounds per banner
+  min_score: 7                   # critic `overall` (0-10) that ends the loop
+  require_thumbnail: true        # ...and only if it also reads at 120px
+  text: paths                    # headline <text> → outlines with a bundled font
+  look_rasterizer: resvg         # what the loop LOOKS through (the runner installs
+                                 # @resvg/resvg-js-cli); output stays SVG-only
+  cost_cap_usd_per_tick: 1.50    # list-price cap on the loop per tick
+  # Era palettes (ADR-0008 D4): six tokens [bg, shadow, low-mid, mid, accent,
+  # highlight] per year range (or explicit `members:`). The highlight belongs
+  # to the protagonist only (retro-pixel card); unmatched members fall back to
+  # the card's own palette guidance.
+  palettes:
+    - name: parchment            # the founding era: parchment, iron-gall ink, vermilion
+      years: "1776-1778"
+      tokens: ["#f2e6c9", "#d8c39a", "#a68a5b", "#5b4636", "#c0392b", "#1f1a17"]
+    - name: crt-neon             # the early-web era: the banners' existing CRT neon
+      years: "2005-2014"
+      tokens: ["#1a1a2e", "#16213e", "#0f3460", "#533483", "#e94560", "#f9ed69"]
+  # Weekly watcher (site-quality-scan.yml `banners` job): one fingerprinted
+  # "Banner quality" issue while the trailing window is below either floor.
+  watch:
+    window_days: 7
+    min_mean_overall: 6.5
+    min_committed_clean_pct: 95
+  # Backfill (scripts/reillustrate.rb via orchestrate.yml → reillustrate.yml,
+  # gated by the repo variable REILLUSTRATE_ENABLED): re-run the loop on the
+  # worst banners from _reports/banners-baseline.json + the ledger, a few per
+  # day, never in the grow tick's budget. Stops itself when the backlog is empty.
+  backfill:
+    per_run: 6
+    max_score: 6                 # critic score at or below which a banner is redone
 
 # Auth (org secrets the hub grow workflow needs):
 #   CLAUDE_CODE_OAUTH_TOKEN  — primary auth for every model pass (subscription)

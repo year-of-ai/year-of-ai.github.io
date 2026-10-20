@@ -104,17 +104,14 @@ favicon:
   ico                    : /favicon.ico
 
 ## Preview Image Generation (AI-powered) #####################################
-# Settings for automatic preview image generation using AI
-# Used by: scripts/generate-preview-images.sh
-
-# Fleet-aligned preview contract (same shape as lifehacker.dev and the
-# ai-world-view hub). `auto` is a capability ladder resolved by
-# scripts/generate-preview-images.sh — the published engine (<= 0.6.x)
-# doesn't know it, so always go through the wrapper:
+# Read by the zer0-image-generator engine (`jekyll preview-images`, or
+# scripts/generate-preview-images.sh). `auto` is the engine's own capability
+# ladder:
 #   raster image API key wired   — that renderer (Claude writes the art brief);
-#   Claude credential alone      — Claude authors the banner as SVG
-#                                  (scripts/claude_svg_banner.py);
-#   nothing wired                — deterministic local SVG.
+#   Claude credential alone      — the `claude` provider's illustration LOOP
+#                                  (plan → author → shape → look → critique;
+#                                  ADR-0008, engine >= 0.10);
+#   nothing wired                — one shared banner per section.
 # MEMBER repos are illustrated by the grow tick itself (grow-lineage.yml
 # "Illustrate" step, art direction from lineage/policy.yml `preview:`) —
 # this block only covers the hub site's own pages.

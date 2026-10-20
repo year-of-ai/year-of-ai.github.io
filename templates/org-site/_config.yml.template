@@ -112,3 +112,20 @@ exclude:
   - Gemfile.lock
   - vendor/
   - node_modules/
+
+# Preview banners (ADR-0008). The hub's grow tick illustrates this repo itself
+# (lineage/policy.yml `preview:` → engine flags, incl. this era's palette);
+# this block makes a local `jekyll preview-images` / engine run here behave the
+# same way. Needs zer0-image-generator >= 0.10 for the claude illustration
+# loop; older engines ignore the loop keys.
+preview_images:
+  enabled: true
+  provider: auto                  # a Claude credential alone → the illustration loop
+  rasterizer: none                # commit SVG…
+  look_rasterizer: auto           # …but LOOK through resvg/rsvg before committing
+  output_dir: assets/images/previews
+  style_card: retro-pixel
+  claude_rounds: 1
+  claude_min_score: 7
+  claude_require_thumbnail: true
+  svg_text: paths

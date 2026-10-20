@@ -33,8 +33,9 @@ gem "webrick"
 # ignores it (safe mode) and serves the committed images. The grow tick
 # (grow-lineage.yml "Illustrate" step) installs it on the runner to banner the
 # member repos; scripts/generate-preview-images.sh resolves the engine from
-# this gem for the hub's own pages.
-gem "zer0-image-generator", "~> 0.4", group: :jekyll_plugins
+# this gem for the hub's own pages. The illustration loop (ADR-0008) needs
+# >= 0.10; older engines still work, one-shot.
+gem "zer0-image-generator", ">= 0.4", group: :jekyll_plugins
 
 platforms :windows, :jruby do
   gem "tzinfo"

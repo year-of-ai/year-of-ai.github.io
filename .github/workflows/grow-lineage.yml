@@ -307,14 +307,18 @@ jobs:
           if-no-files-found: ignore
           retention-days: 14
 
-      # ---- Illustrate: Claude-authored SVG banners for the tick's content ----
-      # Deterministic step, not a model pass: every new/changed markdown file
-      # this tick gets a content-aware SVG preview banner (cover art + og:image
-      # on the member site). Claude AUTHORS the vector via the hub's
-      # scripts/claude_svg_banner.py (art direction + model from
-      # lineage/policy.yml `preview:`); with no Claude credential it falls back
-      # to the zer0-image-generator engine's deterministic `local` SVG. A
-      # banner failure never blocks the tick's publish.
+      # ---- Illustrate: the engine's illustration loop over the tick's content ----
+      # Deterministic step, not a model pass of the tick (ADR-0008): ONE
+      # zer0-image-generator engine call over this tick's new/changed markdown
+      # (`--changed`, hub-staged files excluded). With a Claude credential the
+      # engine's `claude` provider runs its loop — plan, author (style card +
+      # era palette from lineage/policy.yml `preview:`), shape (text→paths,
+      # sanitize, strict lint), LOOK at 1536px + 120px through resvg, critique,
+      # edit — and commits the best draft, or its deterministic `local` art when
+      # nothing it drew is strict-clean. Every banner appends a banner/v1
+      # record to telemetry/banners.jsonl (published with the tick; the same
+      # records ride an artifact to the hub ledger). A banner failure never
+      # blocks the tick's publish. Policy → flags: scripts/lib/banners.rb.
       - name: Illustrate — SVG preview banners for new content
         if: always()
         continue-on-error: true
@@ -323,18 +327,8 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
           set -uo pipefail
-          # Art direction + on/off come from policy, not the workflow.
-          readarray -t P < <(ruby -ryaml -e '
-            p = (YAML.load_file("/tmp/hub/lineage/policy.yml")["preview"] rescue nil) || {}
-            puts p.fetch("enabled", false) ? "true" : "false"
-            puts (p["model"] || "").to_s.tr("\n", " ")
-            puts (p["style"] || "").to_s.tr("\n", " ")
-            puts (p["style_modifiers"] || "").to_s.tr("\n", " ")
-            puts (p["output_dir"] || "assets/images/previews").to_s
-          ')
-          ENABLED="${P[0]:-false}"; MODEL="${P[1]:-}"; STYLE="${P[2]:-}"
-          MODIFIERS="${P[3]:-}"; OUT_DIR="${P[4]:-assets/images/previews}"
-          if [ "$ENABLED" != "true" ]; then
+          enabled="$(ruby -ryaml -e 'p = (YAML.load_file("/tmp/hub/lineage/policy.yml")["preview"] rescue nil) || {}; puts p.fetch("enabled", false) ? "true" : "false"')"
+          if [ "$enabled" != "true" ]; then
             echo "preview.enabled is false in lineage/policy.yml — skipping banners."
             exit 0
           fi
@@ -345,8 +339,8 @@ jobs:
             echo "No new content this tick — nothing to illustrate."
             exit 0
           fi
-          # The engine ships inside the zer0-image-generator gem (a single
-          # python file); the companion imports it as a library.
+          # The engine ships inside the zer0-image-generator gem (one Python
+          # file + fonts + style cards); resvg is what the loop LOOKS through.
           gem install --user-install --no-document zer0-image-generator >/dev/null 2>&1 || true
           ENGINE="$(gem contents zer0-image-generator 2>/dev/null | grep -m1 'preview_generator\.py$' || true)"
           if [ -z "$ENGINE" ]; then
@@ -354,26 +348,62 @@ jobs:
             exit 0
           fi
           python3 -c 'import yaml' 2>/dev/null || pip3 install --quiet PyYAML || true
+          npm install -g @resvg/resvg-js-cli >/dev/null 2>&1 \
+            || echo "::warning::resvg-js unavailable — the loop will commit banners unreviewed."
+          # Engines before the loop release (<= 0.9) reject the loop flags, so
+          # the policy is projected onto the subset they accept (one-shot
+          # authoring) until the gem the runner installs has --style-card.
+          if python3 "$ENGINE" --help 2>/dev/null | grep -q -- '--style-card'; then loop=true; else
+            loop=false
+            echo "::notice::installed zer0-image-generator predates the illustration loop (ADR-0008) — one-shot banners this tick."
+          fi
+          readarray -t ARGS < <(ruby -r/tmp/hub/scripts/lib/banners -ryaml -e '
+            p = (YAML.load_file("/tmp/hub/lineage/policy.yml")["preview"] rescue nil) || {}
+            puts Banners.engine_args(p, member: ENV.fetch("REPO"), loop: ARGV[0] == "true")' "$loop")
+          IMAGE_STYLE_MODIFIERS="$(ruby -ryaml -e 'puts (YAML.load_file("/tmp/hub/lineage/policy.yml")["preview"] || {})["style_modifiers"].to_s')"
+          export IMAGE_STYLE_MODIFIERS
+          mkdir -p telemetry
+          tick_log="$RUNNER_TEMP/banners-tick.jsonl"
+          : > "$tick_log"
           status=0
-          python3 /tmp/hub/scripts/claude_svg_banner.py --engine "$ENGINE" --changed \
-            ${MODEL:+--model "$MODEL"} \
-            ${STYLE:+--style "$STYLE"} \
-            ${MODIFIERS:+--style-modifiers "$MODIFIERS"} \
-            --output-dir "$OUT_DIR" || status=$?
-          if [ "$status" = "3" ]; then
-            echo "No Claude credential — deterministic local SVG banners instead."
+          if [ "$loop" = "true" ]; then
+            python3 "$ENGINE" --changed --exclude-re "${HUB_OWNED_EXCLUDE_RE}" \
+              --provider auto --rasterizer none --parallel 2 \
+              --telemetry "$tick_log" "${ARGS[@]}" || status=$?
+          else
+            # Pre-loop engine: no --changed either, so enumerate the tick's
+            # articles here and illustrate each one.
             git status --porcelain -uall | grep -vE "${HUB_OWNED_EXCLUDE_RE}" \
               | grep -E '\.(md|markdown)$' | sed -E 's/^.{3}//; s/^"(.*)"$/\1/' \
               | while IFS= read -r f; do
-                  [ -f "$f" ] && python3 "$ENGINE" -f "$f" -p local --rasterizer none \
-                    --output-dir "$OUT_DIR" ${STYLE:+--style "$STYLE"} || true
+                  [ -f "$f" ] || continue
+                  python3 "$ENGINE" -f "$f" --provider auto --rasterizer none "${ARGS[@]}" \
+                    || echo "::warning::banner failed for $f"
                 done
-          elif [ "$status" != "0" ]; then
+          fi
+          if [ "$status" != "0" ]; then
             echo "::warning::banner generation reported failures (exit $status) — the tick publishes regardless."
+          fi
+          # The member keeps its own banner ledger, published with the tick.
+          if [ -s "$tick_log" ]; then
+            cat "$tick_log" >> telemetry/banners.jsonl
+            echo "illustrated $(wc -l < "$tick_log") banner(s); records → telemetry/banners.jsonl"
           fi
           # A failed front-matter stamp can leave a .bak next to the article;
           # never let one ride into the publish commit.
           find . -name '*.md.bak' -not -path './.git/*' -delete 2>/dev/null || true
+
+      # The tick's banner records for the hub ledger (telemetry-ledger.yml
+      # appends them to telemetry/banners.jsonl, which feeds _data/lineage.yml
+      # banner_quality and the weekly banner watcher).
+      - name: Upload banner telemetry artifact
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: grow-lineage-banners-${{ inputs.repo }}-${{ github.run_id }}
+          path: ${{ runner.temp }}/banners-tick.jsonl
+          if-no-files-found: ignore
+          retention-days: 14
 
       - name: Persist the seed Evolution Log back to the hub
         if: always()

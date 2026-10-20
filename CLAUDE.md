@@ -58,13 +58,14 @@ read the architecture doc and fix the drift.
   (`migrate-to-news-structure.rb` — one-time conversion of a flat year repo to
   the theme's `news`/`section`/`article` layout: taxonomy categories become
   `/news/<slug>/` sections, topic files become posts, and post `tags` become
-  each section's sub-topics; see `--help`), and the **preview-banner pair**
-  (`claude_svg_banner.py` — Claude authors a content-aware SVG banner per
-  article, reusing the `zer0-image-generator` engine's sanitizer/writers; and
-  `generate-preview-images.sh` — the fleet-standard wrapper that resolves the
-  `preview_images.provider: auto` capability ladder. Both are vendored
-  identically in lifehacker.dev and the ai-world-view hub — keep the copies
-  in sync), and the **favicon minter** (`generate-favicon.rb` — writes a
+  each section's sub-topics; see `--help`), the **banner set** (ADR-0008 — the
+  illustration loop itself lives in the `zer0-image-generator` gem, released
+  from bamr87/zer0-CMS; the hub only calls it: `lib/banners.rb` maps
+  `lineage/policy.yml` `preview:` onto engine flags, resolves each member's era
+  palette and reads banner/v1 telemetry; `banner-quality.rb` is the weekly
+  watcher; `reillustrate.rb` plans and runs the worst-first backfill;
+  `generate-preview-images.sh` is a 10-line engine locator for the hub's own
+  pages), and the **favicon minter** (`generate-favicon.rb` — writes a
   member's `favicon.ico` + `assets/images/favicon.svg` from its label, in pure
   stdlib Ruby because no runner in the fleet has a rasterizer. The theme's
   `core/favicon.html` links `/<repo>/favicon.ico` on every page and
@@ -87,7 +88,8 @@ read the architecture doc and fix the drift.
   (`render.rb`/`plant.rb`/`verify.rb`) + `GENOME.md`. Replant the whole model in a
   new org for a new concept. Excluded from the Jekyll build.
 - `telemetry/` — the hub **evolution ledger** (`evolution.jsonl`, one record per
-  grow run) + its `README.md`. Excluded from the Jekyll build.
+  grow run), the **banner ledger** (`banners.jsonl`, one banner/v1 record per
+  committed banner, ADR-0008) + its `README.md`. Excluded from the Jekyll build.
 - `templates/org-site/` — scaffold the provisioner writes into org repos.
 - `templates/org-profile/` — the org profile README, staged for the
   `year-of-ai/.github` repo (publish commands in its header comment).
@@ -106,7 +108,11 @@ read the architecture doc and fix the drift.
   normalized — before planting; auto mode is maturity-gated by
   `lineage/policy.yml` `spawn:` and dispatched by
   orchestrate, ADR-0007; manual mode keeps the ADR-0002 two-key confirm); and the
-  **self-improvement fleet** (ADR-0003) `telemetry-ledger.yml` (evolution ledger),
+  **banner backfill** `reillustrate.yml` (ADR-0008: re-illustrates one member's
+  worst banners per dispatch, serialized on `repo-write-<repo>`; dispatched by
+  orchestrate's `backfill` job, off until `REILLUSTRATE_ENABLED` is `true`); and the
+  **self-improvement fleet** (ADR-0003) `telemetry-ledger.yml` (evolution +
+  banner ledgers),
   `framework-pr-reviewer.yml` (gates framework PRs), `docs-warden.yml` (doc
   coverage), `pages-deploy-sentinel.yml` (Pages build + liveness for the hub's
   own site **and** every member),
@@ -160,10 +166,14 @@ How a tick runs:
    (`claude-haiku-5-5` draft → `claude-sonnet-5-5` expand →
    `claude-opus-5-5` enhance). An **API-key fallback** pass fires if the OAuth
    passes produce no content changes or report `is_error`.
-3. The **Illustrate** step banners each new article with a Claude-authored
-   SVG preview (`scripts/claude_svg_banner.py`; art direction + model from
-   `lineage/policy.yml` `preview:`; degrades to the engine's deterministic
-   `local` SVG without a credential, never blocks a publish). The updated
+3. The **Illustrate** step banners each new article through the
+   `zer0-image-generator` engine's illustration loop (ADR-0008: plan →
+   author → shape → look at 1536px + 120px → critique → edit; style card,
+   rounds, era palette and cost cap from `lineage/policy.yml` `preview:`).
+   A banner the loop cannot make strict-clean ships the engine's
+   deterministic `local` art; it never blocks a publish, and each banner
+   appends a banner/v1 record to the member's `telemetry/banners.jsonl`.
+   Engines before 0.10 run one-shot until the gem is upgraded. The updated
    seed §8 is persisted back to `lineage/seeds/<repo>.md`; the staged
    framework/seed are stripped, front-matter dates are normalized to ISO
    (`scripts/normalize-front-matter-dates.rb` — an unparseable `date:` fails a
@@ -220,6 +230,8 @@ ruby scripts/generate-favicon.rb --repo <year-repo> --label <year>   # mint favi
 # Banner quality (ADR-0008) — needs zer0-image-generator >= 0.10 (--inspect)
 ruby scripts/audit-banners.rb --engine <path>/preview_generator.py              # baseline: lint + renders + 20-banner critic
 ruby scripts/audit-banners.rb --engine <path>/preview_generator.py --members 2008 --critic 0 --no-render   # quick lint-only pass
+ruby scripts/banner-quality.rb                 # the weekly watcher's digest over telemetry/banners.jsonl
+ruby scripts/reillustrate.rb --plan            # next backfill batch (worst first) + backlog size
 
 # Lint
 yamllint -c .github/config/.yamllint.yml _config.yml _config_dev.yml _data
