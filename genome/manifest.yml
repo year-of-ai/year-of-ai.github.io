@@ -95,6 +95,7 @@ transplant:
   - "scripts/sync-member-metadata.rb"       # registry→GitHub metadata sync — agnostic (org from cfg)
   - "scripts/migrate-to-news-structure.rb"  # one-time flat→news-layout converter — agnostic
   - "scripts/generate-favicon.rb"           # mints a member's favicon.ico + favicon.svg — agnostic (label is an arg)
+  - "scripts/audit-banners.rb"              # ADR-0008 banner-quality baseline (lint + renders + critic sample) — agnostic (org from cfg)
   - "telemetry/README.md"                   # ledger schema doc — agnostic
   - "404.html"
   - "search.json"                           # Jekyll search-index page config — agnostic
@@ -193,6 +194,7 @@ ignore:
   - "_data/navigation/hub.yml"               # generated
   - "lineage/decisions/**"                   # universal ADRs; worked-example prose is whitelisted, not transplanted as concept
   - "lineage/news-migration/*.yml"           # one-time per-member news-layout migration inputs (tags/sections) — not DNA
+  - "_reports/**"                            # generated audit reports (banners-baseline.md/.json) — instance measurements
   - "assets/**"                              # images/binaries + site-owned data
   - "README.md"                              # repo readme, not site content
   - "CLAUDE.md"                              # hub's own dev guide (regenerated narrative; not member-facing)

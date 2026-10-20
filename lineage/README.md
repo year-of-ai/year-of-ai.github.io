@@ -29,7 +29,11 @@ hold only their *content* (plus a GitHub Pages `_config.yml`, `.claude/`, and
   tangential spawning: the maturity gate in `policy.yml` `spawn:` and the
   DECIDE→PLANT workflow that widens the lineage — closing
   [`ADR-0002`](decisions/ADR-0002-tangential-era-spawning.md)'s deferred
-  automation).
+  automation) and
+  [`ADR-0008`](decisions/ADR-0008-looped-engine-native-illustration.md)
+  (*Proposed*: the Illustrate step's banners move into the engine's
+  plan → author → shape → look → critique loop; its plan and the baseline
+  audit it is measured against are linked from the ADR).
 
 Excluded from the Jekyll build (see `_config.yml`) — this is orchestration data,
 not site content. The published lineage view is `pages/lineage.md` (`/lineage/`).
