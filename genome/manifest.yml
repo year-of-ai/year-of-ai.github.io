@@ -90,8 +90,11 @@ transplant:
   - ".github/instructions/docs-warden.instructions.md" # doc-warden contract — agnostic
   - "scripts/docs-warden.rb"                # doc-coverage engine — agnostic
   - "scripts/normalize-front-matter-dates.rb" # grow publish gate + member repair tool — agnostic
-  - "scripts/claude_svg_banner.py"          # Claude-authored SVG banner companion (grow tick Illustrate step) — agnostic
-  - "scripts/generate-preview-images.sh"    # preview-engine wrapper resolving the provider capability ladder — agnostic
+  - "scripts/generate-preview-images.sh"    # 10-line locator that runs the preview engine on the hub's own pages — agnostic
+  - "scripts/lib/banners.rb"                # ADR-0008: policy→engine flags, era palettes, banner/v1 telemetry stats — agnostic
+  - "scripts/reillustrate.rb"               # ADR-0008 backfill planner/runner (worst banners first) — agnostic (org from cfg)
+  - "scripts/banner-quality.rb"             # ADR-0008 weekly banner watcher (telemetry window → digest + flag) — agnostic
+  - ".github/workflows/reillustrate.yml"    # ADR-0008 backfill worker (one member per run, repo-write serialized) — agnostic
   - "scripts/sync-member-metadata.rb"       # registry→GitHub metadata sync — agnostic (org from cfg)
   - "scripts/migrate-to-news-structure.rb"  # one-time flat→news-layout converter — agnostic
   - "scripts/generate-favicon.rb"           # mints a member's favicon.ico + favicon.svg — agnostic (label is an arg)
@@ -177,6 +180,7 @@ default_plant_exclude:
   - ".github/workflows/ai-content-review.yml"
   - ".github/workflows/deploy-chat-proxy.yml"
   - ".github/workflows/site-quality-scan.yml"
+  - ".github/workflows/reillustrate.yml"     # the backfill needs a baseline audit + a populated banner ledger
 
 # ---- ignore: never travels in the genome (verify skips these) ---------------
 ignore:

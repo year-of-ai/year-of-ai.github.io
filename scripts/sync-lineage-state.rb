@@ -32,6 +32,7 @@ require 'optparse'
 require 'fileutils'
 require 'base64'
 require_relative 'lib/hub'
+require_relative 'lib/banners'
 
 LINEAGE_FILE = File.join(Hub::ROOT, '_data', 'lineage.yml')
 
@@ -113,8 +114,19 @@ def inspect_lineage(org, name)
   }
 end
 
+# Banner quality per member (ADR-0008): each member's last 20 banner/v1 records
+# in the hub ledger telemetry/banners.jsonl (appended by telemetry-ledger.yml).
+# A count window, not a clock window, so an unchanged ledger yields an
+# unchanged _data/lineage.yml. Members with no records carry no key.
+BANNER_LEDGER = File.join(Hub::ROOT, 'telemetry', 'banners.jsonl')
+
 def build_ledger(org, repos)
   members = repos.map { |r| inspect_lineage(org, r) }.compact
+  quality = Banners.member_quality(Banners.load_records(BANNER_LEDGER), last: 20)
+  members.each do |m|
+    q = quality[m['name']]
+    m['banner_quality'] = q if q
+  end
   {
     'org'        => org,
     'totals'     => {

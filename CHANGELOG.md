@@ -9,6 +9,36 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### Added
+- **Looped, engine-native banners (ADR-0008, Phases 2–4)**: the grow tick's
+  Illustrate step is now ONE `zer0-image-generator` engine call over the
+  tick's new content. From engine 0.10 the `claude` provider plans a scene
+  graph, authors from the `retro-pixel` style card in the member's era
+  palette (`lineage/policy.yml` `preview.palettes` — parchment for 1776–1778,
+  CRT neon for 2005–2014), outlines the headline with a bundled font,
+  strict-lints, looks at the banner at 1536px and 120px through resvg, and
+  lets a vision critic drive up to `preview.rounds` edits; a banner that cannot
+  be made clean ships the engine's `local` art. Older engines run one-shot.
+  Every banner appends a banner/v1 record to the member's
+  `telemetry/banners.jsonl`; `telemetry-ledger.yml` collects them into the
+  hub's `telemetry/banners.jsonl`, `_data/lineage.yml` gains `banner_quality`
+  per member, `site-quality-scan.yml` grows a weekly `banners` job (contact
+  sheet + one auto-closing "Banner quality" issue against `preview.watch`), and
+  `reillustrate.yml` + `scripts/reillustrate.rb` backfill the worst banners a
+  few per day (orchestrate's `backfill` job, off until `REILLUSTRATE_ENABLED`).
+  `scripts/lib/banners.rb` is the shared policy→engine map.
+- **Banner baseline audit (ADR-0008 Phase 0)**: `scripts/audit-banners.rb`
+  strict-lints every member's banners through the engine's `--inspect`,
+  renders 600px/120px contact sheets, vision-critiques a seeded sample, and
+  writes `_reports/banners-baseline.md` + JSON — the before picture every later
+  phase is measured against.
+
+### Removed
+- `scripts/claude_svg_banner.py` (the hub-vendored banner companion) and the
+  provider ladder in `scripts/generate-preview-images.sh` (now a 10-line engine
+  locator): the engine carries both natively, as the zer0 stack contract
+  requires. lifehacker.dev and the ai-world-view hub vendor the same copies and
+  follow once engine 0.10 is published.
+
 - **Weekly live-site quality scan (`.github/workflows/site-quality-scan.yml`)**:
   every Monday (and on demand) it scans the hub's own site and every member's
   live URL from `_data/lineage.yml` with the bamr87 hub's reusable

@@ -12,6 +12,12 @@ name: Lineage Orchestrator
 #      the hub's grow-lineage.yml (-f repo=<year>) — which stages the framework
 #      + seed and runs the 3-tier Haiku->Sonnet->Opus escalation.
 #
+#   3. BACKFILLS banners (ADR-0008 Phase 4, the `backfill` job): plans the next
+#      worst-first batch with scripts/reillustrate.rb and dispatches ONE
+#      reillustrate.yml run per member — a separate job and workflow, so it never
+#      competes with growth for the tick's budget. Off until the repo variable
+#      REILLUSTRATE_ENABLED is 'true' (a dispatch with backfill=true bypasses it).
+#
 # Each repo grows perpetually and is never consolidated, archived, or deleted.
 #
 # Secrets (org- or repo-level):
@@ -39,6 +45,10 @@ on:
         description: 'Optional space-separated repo list (owner/name); blank = all in the ledger'
         required: false
         default: ''
+      backfill:
+        description: 'Dispatch the banner backfill now (bypasses REILLUSTRATE_ENABLED)'
+        type: boolean
+        default: false
   push:
     branches: [main]
     paths:
@@ -176,3 +186,49 @@ jobs:
           else
             echo "  spawn gate: not due (spawn.enabled + every member >= frontier_ticks + roster < max_members)"
           fi
+
+  # ---- Banner backfill (ADR-0008 Phase 4) ------------------------------------
+  backfill:
+    needs: orchestrate
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+
+      - name: Plan and dispatch the next batch
+        env:
+          GH_TOKEN: ${{ secrets.LIFECYCLE_PAT }}
+          # New agent loop → default OFF (fleet rule: a kill switch a manual
+          # dispatch bypasses). Turn on once zer0-image-generator >= 0.10 is
+          # published; scripts/reillustrate.rb says when the backlog is empty.
+          ENABLED: ${{ vars.REILLUSTRATE_ENABLED == 'true' || (github.event_name == 'workflow_dispatch' && inputs.backfill) }}
+        run: |
+          set -uo pipefail
+          if ruby -ryaml -e 'exit(YAML.load_file("_data/fleet_pause.yml")["paused"] == true ? 0 : 1)' 2>/dev/null; then
+            echo "::notice::Fleet is PAUSED — no banner backfill."; exit 0
+          fi
+          if [ "$ENABLED" != "true" ]; then
+            echo "::notice::banner backfill off (REILLUSTRATE_ENABLED is not 'true')."
+            ruby scripts/reillustrate.rb --plan >/dev/null || true   # still log the backlog size
+            exit 0
+          fi
+          if [ -z "$GH_TOKEN" ]; then
+            echo "::notice::LIFECYCLE_PAT not set — cannot dispatch the backfill."; exit 0
+          fi
+          plan="$(ruby scripts/reillustrate.rb --plan)"
+          echo "plan: ${plan}"
+          jq -c '.[]' <<< "$plan" | while IFS= read -r row; do
+            repo="$(jq -r '.repo' <<< "$row")"
+            articles="$(jq -r '.articles | join(",")' <<< "$row")"
+            if gh workflow run reillustrate.yml -R "$GITHUB_REPOSITORY" -f repo="$repo" -f articles="$articles" >/dev/null 2>&1; then
+              echo "  ✓ ${repo}: ${articles}"
+            else
+              echo "  ✗ ${repo} (could not dispatch reillustrate.yml; PAT needs actions:write on the hub)"
+            fi
+          done

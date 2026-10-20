@@ -40,9 +40,11 @@ Every concept-bearing asset of the model is classified in
   framework (`lineage/framework/**` skills/prompts/agents), the hub scripts
   (`lib/hub.rb`, `sync-*`, `content-review`, `docs-warden`, the fleet's
   `normalize-front-matter-dates` publish-gate/repair tool,
-  `sync-member-metadata` registry→GitHub-metadata sync, and the preview-banner
-  pair `claude_svg_banner.py` + `generate-preview-images.sh` — the grow tick's
-  Illustrate step and the `preview_images.provider: auto` ladder wrapper), the
+  `sync-member-metadata` registry→GitHub-metadata sync, and the banner set of
+  ADR-0008 — `lib/banners.rb` (policy→engine flags, era palettes, telemetry
+  stats), `audit-banners.rb`, `banner-quality.rb`, `reillustrate.rb` and the
+  10-line `generate-preview-images.sh` engine locator; the illustration loop
+  itself lives in the zer0-image-generator gem, never in the genome), the
   `.claude` adapter set, the theme-data files, the chat-proxy worker, the
   legal pages, and the read-only CI gates — including
   `.github/workflows/build-validation.yml`, the pre-merge Jekyll build check,

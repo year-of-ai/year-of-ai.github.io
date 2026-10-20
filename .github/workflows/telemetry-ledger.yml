@@ -10,13 +10,20 @@ name: Telemetry Ledger
 #
 # Append-only + idempotent on run_id. Records ALSO the framework SHA the tick ran
 # under (workflow_run.head_sha) so a future learn agent can quarantine windows by
-# framework version. The CORRECTED trigger ("Grow Lineage") + artifact pattern
+# framework version.
+#
+# Banner ledger (ADR-0008): the Illustrate step (and the re-illustrate backfill)
+# upload the run's banner/v1 records as `*-banners-<repo>-<run_id>`; this job
+# appends them, tagged with repo + run_id, to telemetry/banners.jsonl — the
+# source of _data/lineage.yml `banner_quality` and the weekly banner watcher.
+# A backfill run is not a growth tick: it gets banner records, no evolution
+# record. The CORRECTED trigger ("Grow Lineage") + artifact pattern
 # (grow-lineage-telemetry-*) — the dormant lineage/framework/workflows/telemetry.yml
 # had both wrong.
 
 on:
   workflow_run:
-    workflows: ["Grow Lineage"]
+    workflows: ["Grow Lineage", "Re-illustrate Banners"]
     types: [completed]
   workflow_dispatch: {}
 
@@ -32,7 +39,7 @@ jobs:
   collect:
     runs-on: ubuntu-latest
     # Only for real Grow Lineage runs (workflow_dispatch has no workflow_run).
-    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.name == 'Grow Lineage' }}
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.name == 'Grow Lineage' || github.event.workflow_run.name == 'Re-illustrate Banners' }}
     steps:
       - name: Checkout the hub
         uses: actions/checkout@v7
@@ -41,7 +48,7 @@ jobs:
           token: ${{ secrets.LIFECYCLE_PAT || github.token }}
 
       - name: Download the triggering run's telemetry artifact
-        if: github.event_name == 'workflow_run'
+        if: github.event_name == 'workflow_run' && github.event.workflow_run.name == 'Grow Lineage'
         continue-on-error: true   # a tick that produced no output uploads no artifact
         uses: actions/download-artifact@v4
         with:
@@ -50,8 +57,43 @@ jobs:
           pattern: grow-lineage-telemetry-*
           path: /tmp/tel
 
-      - name: Append the evolution record
+      - name: Download the triggering run's banner records
         if: github.event_name == 'workflow_run'
+        continue-on-error: true   # a tick that illustrated nothing uploads nothing
+        uses: actions/download-artifact@v4
+        with:
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          pattern: '*-banners-*'
+          path: /tmp/banners
+
+      - name: Append the banner records
+        if: github.event_name == 'workflow_run'
+        env:
+          RUN_ID: ${{ github.event.workflow_run.id }}
+        run: |
+          set -uo pipefail
+          mkdir -p telemetry
+          touch telemetry/banners.jsonl
+          if grep -q "\"run_id\":\"${RUN_ID}\"" telemetry/banners.jsonl; then
+            echo "run ${RUN_ID} banners already in the ledger."
+            exit 0
+          fi
+          added=0
+          # <prefix>-banners-<repo>-<run_id>/banners-tick.jsonl
+          for dir in /tmp/banners/*-banners-*; do
+            [ -d "$dir" ] || continue
+            base="$(basename "$dir")"; name="${base#*-banners-}"; repo="${name%-*}"
+            for f in "$dir"/*.jsonl; do
+              [ -s "$f" ] || continue
+              jq -c --arg run "$RUN_ID" --arg repo "$repo" '. + {run_id: $run, repo: $repo}' "$f" >> telemetry/banners.jsonl
+              added=$((added + $(wc -l < "$f")))
+            done
+          done
+          echo "appended ${added} banner record(s) from run ${RUN_ID}"
+
+      - name: Append the evolution record
+        if: github.event_name == 'workflow_run' && github.event.workflow_run.name == 'Grow Lineage'
         env:
           RUN_ID: ${{ github.event.workflow_run.id }}
           CONCLUSION: ${{ github.event.workflow_run.conclusion }}
@@ -98,12 +140,24 @@ jobs:
           if [ -z "$rec" ]; then echo "::warning::could not build telemetry record"; exit 0; fi
           printf '%s\n' "$rec" >> telemetry/evolution.jsonl
           echo "appended: $rec"
+          echo "SUBJECT=chore(telemetry): record grow run ${RUN_ID} (${repo:-?}, ${CONCLUSION})" >> "$GITHUB_ENV"
 
+      - name: Commit the ledgers
+        if: github.event_name == 'workflow_run'
+        env:
+          RUN_ID: ${{ github.event.workflow_run.id }}
+          GH_TOKEN: ${{ secrets.LIFECYCLE_PAT || github.token }}
+        run: |
+          set -uo pipefail
+          if [ -z "$(git status --porcelain -- telemetry/evolution.jsonl telemetry/banners.jsonl)" ]; then
+            echo "ledgers unchanged — nothing to commit."
+            exit 0
+          fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-          git add telemetry/evolution.jsonl
-          git commit -q -m "chore(telemetry): record grow run ${RUN_ID} (${repo:-?}, ${CONCLUSION})"
+          git add telemetry/evolution.jsonl telemetry/banners.jsonl
+          git commit -q -m "${SUBJECT:-chore(telemetry): record grow run ${RUN_ID}}"
           for _ in 1 2 3 4 5; do
             git push origin HEAD:main && exit 0
             git pull --rebase origin main || true

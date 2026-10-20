@@ -186,9 +186,17 @@ Step by step, the engine (`grow-lineage.yml`) does this for a single repo:
    the seed's Evolution Log.
 6. **Fallback** — if the OAuth passes produced nothing (empty tree, or an
    authentication error), one complete pass runs on the API key instead.
-7. **Record** — persist the updated seed Evolution Log back to the hub (the tick
+7. **Illustrate** — every new article gets a preview banner from the
+   `zer0-image-generator` engine's illustration loop (ADR-0008): Claude plans the
+   scene, draws it as SVG from the org's style card and the era's palette
+   (`lineage/policy.yml` `preview:`), the engine outlines the headline and
+   strict-lints the file, then renders it at full and card-thumbnail size so a
+   vision critic can request targeted edits before the best draft is committed.
+   A banner that cannot be made clean ships simple generated art instead — the
+   tick never waits on its pictures.
+8. **Record** — persist the updated seed Evolution Log back to the hub (the tick
    clock advances), then **strip** every hub-owned file from the checkout.
-8. **Publish** — commit and push **only** the new content + telemetry to the
+9. **Publish** — commit and push **only** the new content + telemetry to the
    year repo, which rebuilds its own Pages site.
 
 ## 3 · The three-model escalation
