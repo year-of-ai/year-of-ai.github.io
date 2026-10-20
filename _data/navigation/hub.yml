@@ -51,18 +51,6 @@
     url: https://year-of-ai.github.io/1778/news/
   - title: Posts
     url: https://year-of-ai.github.io/1778/_posts/
-- title: The Year 2005
-  icon: bi-journal-richtext
-  url: https://year-of-ai.github.io/2005/
-  children:
-  - title: Site Home
-    url: https://year-of-ai.github.io/2005/
-  - title: Timeline
-    url: https://year-of-ai.github.io/2005/TIMELINE/
-  - title: News
-    url: https://year-of-ai.github.io/2005/news/
-  - title: Posts
-    url: https://year-of-ai.github.io/2005/_posts/
 - title: The Year 2006
   icon: bi-journal-richtext
   url: https://year-of-ai.github.io/2006/
