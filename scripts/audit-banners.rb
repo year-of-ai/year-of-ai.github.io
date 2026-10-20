@@ -322,6 +322,9 @@ File.write(opts[:json], JSON.pretty_generate(data) + "\n")
 
 # ---- report ------------------------------------------------------------------
 fmt = ->(v) { v.nil? ? '—' : v.to_s }
+# A Markdown table cell: backslashes first, then pipes, so an escaped pipe in
+# model text can never close the cell early; newlines collapse to spaces.
+cell = ->(v) { v.to_s.gsub(/\s+/, ' ').gsub('\\') { '\\\\' }.gsub('|') { '\\|' } }
 md = []
 md << '# Banner quality baseline'
 md << ''
@@ -357,7 +360,7 @@ md << '## Lint findings'
 md << ''
 md << '| Count | Finding (numbers normalized) |'
 md << '| ---: | --- |'
-findings.sort_by { |f, c| [-c, f] }.first(15).each { |f, c| md << "| #{c} | #{f.gsub('|', '\\|')} |" }
+findings.sort_by { |f, c| [-c, f] }.first(15).each { |f, c| md << "| #{c} | #{cell.call(f)} |" }
 md << ''
 md << "## Critic sample (#{critic_summary['critiqued']}/#{critic_summary['sampled']}, model `#{opts[:critic_model]}`, seed `#{opts[:seed]}`)"
 md << ''
@@ -369,9 +372,9 @@ else
   sample.sort_by { |r| r['critic'] ? r['critic']['overall'].to_f : 99 }.each do |r|
     c = r['critic']
     if c
-      md << "| #{r['repo']}/#{r['name']} | #{c['overall']} | #{c['thumbnail_holds'] ? 'holds' : 'fails'} | #{c['next_change'].to_s.gsub(/\s+/, ' ').gsub('|', '\\|')[0, 180]} |"
+      md << "| #{r['repo']}/#{r['name']} | #{c['overall']} | #{c['thumbnail_holds'] ? 'holds' : 'fails'} | #{cell.call(c['next_change'].to_s[0, 180])} |"
     else
-      md << "| #{r['repo']}/#{r['name']} | — | — | critic unavailable: #{r['critic_error'].to_s.gsub(/\s+/, ' ')[0, 120]} |"
+      md << "| #{r['repo']}/#{r['name']} | — | — | critic unavailable: #{cell.call(r['critic_error'].to_s[0, 120])} |"
     end
   end
 end
