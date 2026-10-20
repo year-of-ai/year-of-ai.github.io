@@ -70,12 +70,17 @@ read the architecture doc and fix the drift.
   `core/favicon.html` links `/<repo>/favicon.ico` on every page and
   `remote_theme` ships only `_layouts`/`_includes`/`_sass`/`assets`, so a
   member that carries no favicon of its own 404s on it. Called by
-  `provision-org-sites.rb` and `migrate-to-news-structure.rb`).
+  `provision-org-sites.rb` and `migrate-to-news-structure.rb`), and the
+  **banner audit** (`audit-banners.rb` — ADR-0008 Phase 0: shallow-clones
+  every member, strict-lints each preview banner through the engine's
+  `--inspect`, renders 600px/120px contact sheets, vision-critiques a seeded
+  sample, and writes `_reports/banners-baseline.md` + its JSON twin; needs
+  zer0-image-generator ≥ 0.10 via `--engine`).
 - `lineage/` — the **centralized growth source of truth** (see below):
   `seeds/<year>.md` (each year's concept + Evolution Log), `seed-package/`
   (bootstrap kit), `repo-template/` (the year-repo skeleton the planter drops),
   `policy.yml` (model tiers + cadence), `framework/` (the canonical agent toolkit
-  staged into a year repo per tick), and `decisions/` (ADR-0001…0006).
+  staged into a year repo per tick), and `decisions/` (ADR-0001…0008).
   Excluded from the Jekyll build.
 - `genome/` — the **abstracted org-model DNA** (ADR-0004): `genome.yml` (concept
   manifest) + `schema.json` + `manifest.yml` (transplant inventory) + `bin/`
@@ -211,6 +216,10 @@ ruby scripts/sync-member-metadata.rb                        # dry-run member Git
 ruby scripts/sync-member-metadata.rb --apply                # push description/homepage/topics to members
 ruby scripts/generate-favicon.rb --repo <year-repo> --label <year> --dry-run
 ruby scripts/generate-favicon.rb --repo <year-repo> --label <year>   # mint favicon.ico + favicon.svg
+
+# Banner quality (ADR-0008) — needs zer0-image-generator >= 0.10 (--inspect)
+ruby scripts/audit-banners.rb --engine <path>/preview_generator.py              # baseline: lint + renders + 20-banner critic
+ruby scripts/audit-banners.rb --engine <path>/preview_generator.py --members 2008 --critic 0 --no-render   # quick lint-only pass
 
 # Lint
 yamllint -c .github/config/.yamllint.yml _config.yml _config_dev.yml _data

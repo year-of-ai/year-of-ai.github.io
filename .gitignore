@@ -92,3 +92,6 @@ Gemfile.lock
 
 # genome planter dry-run build output (never committed)
 _planted/
+
+# scripts/audit-banners.rb scratch (clones, renders, contact sheets)
+.audit-banners/
