@@ -50,7 +50,7 @@ jobs:
       - name: Download the triggering run's telemetry artifact
         if: github.event_name == 'workflow_run' && github.event.workflow_run.name == 'Grow Lineage'
         continue-on-error: true   # a tick that produced no output uploads no artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           run-id: ${{ github.event.workflow_run.id }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -60,7 +60,7 @@ jobs:
       - name: Download the triggering run's banner records
         if: github.event_name == 'workflow_run'
         continue-on-error: true   # a tick that illustrated nothing uploads nothing
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           run-id: ${{ github.event.workflow_run.id }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
