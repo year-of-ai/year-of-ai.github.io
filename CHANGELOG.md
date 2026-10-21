@@ -81,6 +81,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   `lineage/policy.yml`.
 
 ### Fixed
+- **Deploy chat proxy no longer fails main when Cloudflare isn't set up**:
+  `deploy-chat-proxy.yml` now checks for `CLOUDFLARE_API_TOKEN` and
+  `CLOUDFLARE_ACCOUNT_ID` first and skips the Worker deploy with a notice when
+  either is missing. Every run so far failed for that reason (only
+  `ANTHROPIC_API_KEY` is set), while the AI-chat widget is disabled anyway.
 - **Adversarial-review fixes for illustrated growth** (confirmed with executed
   reproductions): `claude_svg_banner.py` now re-illustrates a NEW article whose
   stamp is the shared section placeholder (previously the placeholder's

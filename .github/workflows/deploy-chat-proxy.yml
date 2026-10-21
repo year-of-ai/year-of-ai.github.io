@@ -22,6 +22,22 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
+      # The AI-chat widget is disabled by default (see _config.yml), so most
+      # plantings never add the Cloudflare secrets. Skip with a notice instead
+      # of failing main when they are missing.
+      - name: Check Cloudflare secrets
+        id: cf
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          if [ -n "$CLOUDFLARE_API_TOKEN" ] && [ -n "$CLOUDFLARE_ACCOUNT_ID" ]; then
+            echo "configured=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+            echo "::notice title=Chat proxy not deployed::CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID are not both set, so the Worker deploy was skipped. Add them as repo secrets to deploy."
+          fi
+
       # Deploys the AI chat proxy Worker to Cloudflare and sets its secret.
       # Required GitHub Actions secrets:
       #   CLOUDFLARE_API_TOKEN   - token with "Edit Cloudflare Workers" permission
@@ -30,6 +46,7 @@ jobs:
       # Optional (proxy-mode issue/PR creation): add GITHUB_TOKEN to the
       # `secrets:` list below and a CHAT_GITHUB_TOKEN repo secret mapped in env.
       - name: Deploy Worker to Cloudflare
+        if: steps.cf.outputs.configured == 'true'
         uses: cloudflare/wrangler-action@v4
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
