@@ -101,6 +101,7 @@ exclude:
   # pages/home.md). It has no front matter, so this exclude is what keeps it
   # from rendering and colliding with home.md at "/" (dev sets unpublished:true).
   - README.md
+  - PRD.md
   # Maintainer/agent docs read on GitHub, not published as site pages.
   - ARCHITECTURE.md
   - CLAUDE.md
