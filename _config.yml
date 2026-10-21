@@ -596,6 +596,7 @@ exclude:
   # pages/home.md). This exclude IS the guard against a "/" collision — README
   # has no front matter, so keep it listed here (don't rely on published:false).
   - README.md
+  - PRD.md
   # Maintainer/agent docs read on GitHub, not published as site pages.
   - ARCHITECTURE.md
   - CLAUDE.md

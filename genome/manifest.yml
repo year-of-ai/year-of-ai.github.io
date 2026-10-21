@@ -201,6 +201,7 @@ ignore:
   - "_reports/**"                            # generated audit reports (banners-baseline.md/.json) — instance measurements
   - "assets/**"                              # images/binaries + site-owned data
   - "README.md"                              # repo readme, not site content
+  - "PRD.md"                                 # product requirements doc (repo doc, not site content)
   - "CLAUDE.md"                              # hub's own dev guide (regenerated narrative; not member-facing)
   - "ARCHITECTURE.md"                        # hub's own architecture reference (regenerated narrative)
   - "CHANGELOG.md"                           # hub's own changelog (instance history)
