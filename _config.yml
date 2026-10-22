@@ -601,6 +601,7 @@ exclude:
   - ARCHITECTURE.md
   - CLAUDE.md
   - CHANGELOG.md
+  - features/
 
   # ── Orchestration source data (not site content) ─────────────────────────
   # lineage/ holds the centralized seeds + bootstrap kit for the self-growing
