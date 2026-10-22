@@ -205,6 +205,13 @@ ignore:
   - "ARCHITECTURE.md"                        # hub's own architecture reference (regenerated narrative)
   - "CHANGELOG.md"                           # hub's own changelog (instance history)
   - "lineage/README.md"                      # lineage-dir dev doc (regenerated narrative)
+  - "AGENTS.md"                              # hub's own agent guide (fleet agent-context kit; instance narrative)
+  - "CODE_OF_CONDUCT.md"                     # repo community-health file (fleet standard kit), not site content
+  - "SECURITY.md"                            # repo security policy (fleet standard kit), not site content
+  - "docs/README.md"                         # repo docs index (fleet standard kit), not site content
+  - "docs/adr/**"                            # the hub's own ADR log (instance history)
+  - "features/**"                            # the hub's own feature catalog (instance inventory)
+  - "verify/**"                              # the hub's own verify kit config + scenarios (fleet verify kit)
   - "Gemfile.lock"
   - "**/*.png"
   - "**/*.jpg"
