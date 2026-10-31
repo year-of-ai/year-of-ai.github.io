@@ -202,6 +202,9 @@ ignore:
   - "assets/**"                              # images/binaries + site-owned data
   - "README.md"                              # repo readme, not site content
   - "PRD.md"                                 # product requirements doc (repo doc, not site content)
+  - "features/**"                            # the hub's own feature catalog (instance inventory; linked from PRD.md)
+  - "docs/constitution.md"                   # the hub's own constitution (governance kit; instance rules, not DNA)
+  - "docs/amendments/**"                     # the hub's constitution amendment log (instance history)
   - "CLAUDE.md"                              # hub's own dev guide (regenerated narrative; not member-facing)
   - "ARCHITECTURE.md"                        # hub's own architecture reference (regenerated narrative)
   - "CHANGELOG.md"                           # hub's own changelog (instance history)
