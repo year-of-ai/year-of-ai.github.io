@@ -6,6 +6,33 @@ documented here. The zer0-mistakes theme keeps its own changelog upstream at
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [0.2.0](https://github.com/year-of-ai/year-of-ai.github.io/compare/v0.1.0...v0.2.0) (2026-10-31)
+
+
+### Added
+
+* **banners:** baseline audit + ADR-0008 (proposed) — looped, engine-native illustration ([#162](https://github.com/year-of-ai/year-of-ai.github.io/issues/162)) ([4663bee](https://github.com/year-of-ai/year-of-ai.github.io/commit/4663beea0f61bf91dd780b18a6b20633e9d2efd9))
+* **banners:** engine-native illustration loop cutover, banner telemetry + watcher, backfill (ADR-0008 Phases 2–4) ([#163](https://github.com/year-of-ai/year-of-ai.github.io/issues/163)) ([27207ce](https://github.com/year-of-ai/year-of-ai.github.io/commit/27207ceef81ef036888403adfaed10adf1e94ca7))
+* **lineage:** spawn tangential era 2014 — plant seed (ADR-0007 auto-spawn) ([c05c40a](https://github.com/year-of-ai/year-of-ai.github.io/commit/c05c40a27c679fce2eba9009a361d21d7d9b687a))
+* **scripts:** mint member favicons and stop shipping heroless articles ([92c4cbd](https://github.com/year-of-ai/year-of-ai.github.io/commit/92c4cbd08a2fe4762e15534dea3f81e0f0155167))
+
+
+### Fixed
+
+* **config:** pin the dev remote_theme and drop the dead declaration ([deb9192](https://github.com/year-of-ai/year-of-ai.github.io/commit/deb9192a088b11c9d63ca24b847fc905e8487c09))
+* **config:** untag remote_theme across all three config surfaces ([#30](https://github.com/year-of-ai/year-of-ai.github.io/issues/30)) ([c9049df](https://github.com/year-of-ai/year-of-ai.github.io/commit/c9049df4df6216adb8e9884ad63e205095323304))
+* **sentinel:** reuse the open liveness issue instead of filing duplicates ([#134](https://github.com/year-of-ai/year-of-ai.github.io/issues/134)) ([527252b](https://github.com/year-of-ai/year-of-ai.github.io/commit/527252bbe6cebb153c954ce6b958a8414542eb50))
+* **sentinel:** watch the hub's own Pages build and liveness ([1198b6d](https://github.com/year-of-ai/year-of-ai.github.io/commit/1198b6d7dcc260804db0a492cb82c6fb5f4330d2))
+
+
+### Documentation
+
+* add feature catalog, constitution and amendments; link PRD ([#166](https://github.com/year-of-ai/year-of-ai.github.io/issues/166)) ([83504f5](https://github.com/year-of-ai/year-of-ai.github.io/commit/83504f5f994bf59d2c059722a51c35f9868aa83f))
+* add PRD.md ([#165](https://github.com/year-of-ai/year-of-ai.github.io/issues/165)) ([6c5e3e2](https://github.com/year-of-ai/year-of-ai.github.io/commit/6c5e3e265d41de5e5461ff812e6c9aad31f9f02d))
+* record the build gate, the theme-pin drift, and the CODEOWNERS gap ([8ad4176](https://github.com/year-of-ai/year-of-ai.github.io/commit/8ad4176be9b74f5ec7522b061811478c7513dfbe))
+* replace two closed known gaps with what the rollout actually found ([efcf080](https://github.com/year-of-ai/year-of-ai.github.io/commit/efcf0800203306203bfe3f09651e18c6ce02fd0c))
+* replace two closed known gaps with what the rollout actually found ([d155c0e](https://github.com/year-of-ai/year-of-ai.github.io/commit/d155c0eea9cd49553409dfabd66aa8ae58987994))
+
 ## [Unreleased]
 
 ### Added
