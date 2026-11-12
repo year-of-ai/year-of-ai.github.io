@@ -17,7 +17,7 @@ source "https://rubygems.org"
 # every local build on the documented Ruby 3.3 toolchain (docker-compose.yml,
 # build-validation.yml) died with `undefined method 'tainted?' for false`.
 # Dependabot (bundler ecosystem) proposes the bump when Pages ships the next one.
-gem "github-pages", "~> 232", group: :jekyll_plugins
+gem "github-pages", "~> 233", group: :jekyll_plugins
 
 # Pull the shared theme from GitHub at build time.
 gem "jekyll-remote-theme"
