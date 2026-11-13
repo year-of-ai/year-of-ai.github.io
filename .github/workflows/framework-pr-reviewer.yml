@@ -158,11 +158,14 @@ jobs:
                 (no hardcoded subject)?
             Output ONLY a short Markdown review: a verdict line (APPROVE / REQUEST-CHANGES /
             BLOCK), then the specific concerns. Do not modify any files.
-          # The allowlist grants no edit tool. claude-run runs the CLI with
-          # `--permission-mode acceptEdits`, so the allowlist alone no longer
-          # blocks a file edit inside this checkout; nothing in this job commits
-          # or pushes, and the checkout is discarded with the runner.
+          # Read-only allowlist: no edit tool is granted. `permission-mode:
+          # default` makes that allowlist the whole grant: in a headless run a
+          # tool outside it is refused, as under the bare CLI. claude-run's own
+          # default, acceptEdits, would let the agent edit files. The input
+          # comes with bamr87/bamr87#840; a claude-run without it ignores the
+          # input (with a warning) and runs in acceptEdits.
           tools: "Read,Grep,Glob,Bash(git diff:*),Bash(git merge-base:*),Bash(git log:*)"
+          permission-mode: default
           model: claude-sonnet-5-5
           max-turns: "25"
           max-budget-usd: "10"

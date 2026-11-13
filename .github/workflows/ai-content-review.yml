@@ -248,12 +248,15 @@ jobs:
             "<!-- Sticky Pull Request Comment… -->" marker (the workflow adds
             those). Do not modify any files, and do not print anything before
             or after the review.
-          # The allowlist grants no edit or comment tool: posting is done by the
-          # sticky-comment steps below. claude-run runs the CLI with
-          # `--permission-mode acceptEdits`, so the allowlist alone no longer
-          # blocks a file edit inside this checkout; nothing in this job commits
-          # or pushes, and the checkout is discarded with the runner.
+          # Read-only allowlist: the agent never writes — posting is done by the
+          # sticky-comment steps below, so no edit/comment tools are granted.
+          # `permission-mode: default` makes that allowlist the whole grant: in
+          # a headless run a tool outside it is refused, as under the bare CLI.
+          # claude-run's own default, acceptEdits, would let the agent edit
+          # files. The input comes with bamr87/bamr87#840; a claude-run without
+          # it ignores the input (with a warning) and runs in acceptEdits.
           tools: "Task,Read,Grep,Glob,Bash(ruby scripts/content-review.rb:*),Bash(git diff:*),Bash(git merge-base:*),Bash(cat /tmp/content-review.json)"
+          permission-mode: default
           model: claude-sonnet-5-5
           max-turns: "30"
           max-budget-usd: "10"
