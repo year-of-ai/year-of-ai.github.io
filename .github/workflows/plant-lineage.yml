@@ -30,6 +30,12 @@ name: Plant Lineage
 #
 # Secrets: CLAUDE_CODE_OAUTH_TOKEN (DECIDE pass), ANTHROPIC_API_KEY
 # (fallback), LIFECYCLE_PAT (repo creation + Pages + hub seed commit).
+#
+# Fleet harness standard (2026-11-13; bamr87/bamr87 _data/fleet.yml
+# `harnesses.standard`): the DECIDE pass takes its credential in the order of
+# this repo's CLAUDE_AUTH_ORDER variable (unset = oauth, then api_key, the
+# order the Secrets line above describes), carries a dollar cap
+# (--max-budget-usd) beside its turn cap, and the job has a timeout.
 
 on:
   workflow_dispatch:
@@ -61,6 +67,10 @@ concurrency:
 jobs:
   spawn:
     runs-on: ubuntu-latest
+    # Wall-clock bound for one DECIDE pass (30 turns) plus the planter. No run
+    # so far has taken 3 minutes, but none of them carried a full DECIDE and
+    # plant, so this is sized by rule (the fleet lane default), not by data.
+    timeout-minutes: 30
     steps:
       - name: Checkout the hub
         uses: actions/checkout@v7
@@ -174,12 +184,25 @@ jobs:
             *) echo "::error::could not resolve a DECIDE model from lineage/policy.yml"; exit 1 ;;
           esac
 
+      # The credential comes from this repo's CLAUDE_AUTH_ORDER (ai_auth: in
+      # bamr87/bamr87 _data/fleet.yml; unset = oauth, then api_key). The step
+      # outputs a method NAME, never a secret; DECIDE gates each secret on it.
+      - name: Choose the Claude credential (ai_auth order)
+        if: steps.gate.outputs.due == 'true'
+        id: claude-auth
+        uses: bamr87/bamr87/.github/actions/claude-auth@main
+        with:
+          order: ${{ vars.CLAUDE_AUTH_ORDER }}
+          has-oauth: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN != '' }}
+          api-key: ${{ secrets.ANTHROPIC_API_KEY }}
+
       # ---- DECIDE: author ONE tangential seed (auto mode only) --------------
       - name: DECIDE — author a tangential era seed
         if: steps.gate.outputs.due == 'true'
         uses: anthropics/claude-code-action@v1
         with:
-          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          claude_code_oauth_token: ${{ steps.claude-auth.outputs.method == 'oauth' && secrets.CLAUDE_CODE_OAUTH_TOKEN || '' }}
+          anthropic_api_key: ${{ steps.claude-auth.outputs.method == 'api_key' && secrets.ANTHROPIC_API_KEY || '' }}
           github_token: ${{ github.token }}
           prompt: |
             You are the DECIDE pass of tangential era spawning (ADR-0002).
@@ -212,9 +235,12 @@ jobs:
             anything under _data/ — the workflow and the daily orchestrate
             handle all bookkeeping; any change you make outside the one new
             seed file will be discarded.
+          # --max-budget-usd: the fleet floor (10 USD); 30 turns at 0.15 USD a
+          # turn would size it lower.
           claude_args: >-
             --model ${{ steps.model.outputs.decide }}
             --max-turns 30
+            --max-budget-usd 10
             --allowedTools "Bash,Edit,Write,Read,Glob,Grep"
           show_full_output: true
 

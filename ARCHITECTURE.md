@@ -335,6 +335,8 @@ write` for the claude-code-action OIDC exchange); writes happen via the PAT at
 explicit push points only. `secret-expiry-watch.yml` probes credential
 validity daily (note: its PAT probe currently proves hub *read* only).
 
+Since 2026-11-13 the table above describes the **default** order. The order in which the two model credentials are tried is the `CLAUDE_AUTH_ORDER` repository variable (unset = `oauth,api_key`), every model call carries a dollar cap beside its turn cap, and every model job a timeout: the fleet harness standard, summarized in [CLAUDE.md](CLAUDE.md) under "Fleet harness standard".
+
 ### 5.6 Write serialization (ADR-0003 repo-write-serializer)
 
 - Any writer of a **member's `main`** must join `concurrency.group:
