@@ -28,8 +28,9 @@ name: Plant Lineage
 # committed only AFTER the repo exists (an orphan seed would make every
 # subsequent grow dispatch fail on checkout); concurrency-serialized.
 #
-# Secrets: CLAUDE_CODE_OAUTH_TOKEN (DECIDE pass), ANTHROPIC_API_KEY
-# (fallback), LIFECYCLE_PAT (repo creation + Pages + hub seed commit).
+# Secrets: CLAUDE_CODE_OAUTH_TOKEN (DECIDE pass — Claude auth is OAuth only;
+# the ANTHROPIC_API_KEY fallback is disabled for now, 2026-11-15),
+# LIFECYCLE_PAT (repo creation + Pages + hub seed commit).
 
 on:
   workflow_dispatch:
