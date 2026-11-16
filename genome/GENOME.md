@@ -75,7 +75,7 @@ self-improvement fleet (monitors, reviewers, `genome-sync`, …) is listed in
 once the org has the context those workflows need (a populated ledger, members,
 PRs). That includes the weekly `site-quality-scan.yml` (with its report-only
 `.github/site-quality.yml`, which always travels): it scans every member's live
-URL through the bamr87 hub's reusable `site-quality.yml@v1`, so it needs
+URL through the bamr87 hub's reusable `site-quality.yml@v2`, so it needs
 members. plant.rb also **authors a starter `pages/home.md`** from the manifest so
 every plant has a live homepage, and honors `growth.web_sources: false` for a
 no-web org.
