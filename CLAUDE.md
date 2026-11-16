@@ -114,7 +114,8 @@ read the architecture doc and fix the drift.
   **self-improvement fleet** (ADR-0003) `telemetry-ledger.yml` (evolution +
   banner ledgers),
   `framework-pr-reviewer.yml` (gates framework PRs), `docs-warden.yml` (doc
-  coverage), `pages-deploy-sentinel.yml` (Pages build + liveness for the hub's
+  coverage; the weekly sweep files one drift issue and closes it once the
+  census is clean), `pages-deploy-sentinel.yml` (Pages build + liveness for the hub's
   own site **and** every member),
   `secret-expiry-watch.yml` (daily auth-credential probe), `fleet-health-watch.yml`
   (daily ledger health digest), `genome-sync.yml` (genome drift gate),

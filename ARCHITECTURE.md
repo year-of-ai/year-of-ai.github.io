@@ -366,7 +366,7 @@ ledger.
 | [`site-quality-scan.yml`](.github/workflows/site-quality-scan.yml) | weekly Mon 06:41 UTC | The hub's own site **and** every member's live URL: Lighthouse CI, axe-core (390 + 1366 px), pa11y contrast, via bamr87/bamr87 `site-quality.yml@v2` (`mode: url`), graded by the report-only [`.github/site-quality.yml`](.github/site-quality.yml) | One fingerprinted issue per site (`<!-- site-quality-scan:site=<repo> -->`): updated or reopened while findings remain, closed when clean, duplicates closed |
 | [`secret-expiry-watch.yml`](.github/workflows/secret-expiry-watch.yml) | daily 05:05 | OAuth token, API key, PAT validity | Sticky issue, auto-closed |
 | [`framework-pr-reviewer.yml`](.github/workflows/framework-pr-reviewer.yml) | PRs touching `lineage/framework/**`, `repo-template/.claude/**` | Self-modification of the agent toolkit | Read-only Sonnet review + red-flag regex |
-| [`docs-warden.yml`](.github/workflows/docs-warden.yml) | PRs + Tuesday sweep | Doc coverage vs `.github/config/docs_warden.yml` map (ADR-0005) | PR comments / sweep issue |
+| [`docs-warden.yml`](.github/workflows/docs-warden.yml) | PRs + Tuesday sweep | Doc coverage vs `.github/config/docs_warden.yml` map (ADR-0005) | PR comments / sweep issue, auto-closed when the census is clean |
 | [`genome-sync.yml`](.github/workflows/genome-sync.yml) | push/PR/weekly | Genome drift: unclassified concept-bearing files, leaks in the transplant tier (`genome/bin/verify.rb`) | Failing CI |
 
 Plus baseline hygiene: [`codeql.yml`](.github/workflows/codeql.yml) and
