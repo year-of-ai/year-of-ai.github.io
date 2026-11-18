@@ -19,6 +19,13 @@ name: Grow Lineage
 #
 # Secrets: CLAUDE_CODE_OAUTH_TOKEN (primary), ANTHROPIC_API_KEY (fallback),
 # LIFECYCLE_PAT (push to the target year repo + the hub's seed log).
+#
+# Fleet harness standard (2026-11-13; bamr87/bamr87 _data/fleet.yml
+# `harnesses.standard`): the credential order is this repo's CLAUDE_AUTH_ORDER
+# variable. Unset means oauth, then api_key, which is the "primary" and
+# "fallback" named above: the three tiers take the first usable method and the
+# fallback pass takes the next one the order names. Every pass carries a dollar
+# cap (--max-budget-usd) beside its turn cap, and the grow job has a timeout.
 
 on:
   workflow_dispatch:
@@ -149,6 +156,10 @@ jobs:
   grow:
     needs: gate
     runs-on: ubuntu-latest
+    # Wall-clock bound. The longest tick in telemetry/evolution.jsonl took 35
+    # minutes (503 runs, 2026-06-18 to 2026-10-14; median 13), all of them
+    # before the Illustrate loop of ADR-0008; GitHub's own default is 360.
+    timeout-minutes: 120
     permissions:
       id-token: write # claude-code-action exchanges an OIDC token
     steps:
@@ -202,16 +213,36 @@ jobs:
           done
           echo "models: generate=$(m generate) expand=$(m expand) enhance=$(m enhance)"
 
+      # The credential comes from this repo's CLAUDE_AUTH_ORDER (ai_auth: in
+      # bamr87/bamr87 _data/fleet.yml; unset = oauth, then api_key). The step
+      # outputs a method NAME, never a secret: the tiers take that method, and
+      # the fallback pass below takes the next one the order names.
+      - name: Choose the Claude credential (ai_auth order)
+        id: claude-auth
+        uses: bamr87/bamr87/.github/actions/claude-auth@main
+        with:
+          order: ${{ vars.CLAUDE_AUTH_ORDER }}
+          has-oauth: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN != '' }}
+          api-key: ${{ secrets.ANTHROPIC_API_KEY }}
+
+      # Dollar caps (--max-budget-usd) are sized by the fleet rule, 0.15 USD a
+      # turn rounded up to the next 5: 15 for 80 turns, 20 for 120, 25 for 150.
+      # The costliest final pass in telemetry/evolution.jsonl was 8.22 USD. A
+      # pass that reaches its cap stops there, as one that reaches its turn cap
+      # does: what it wrote stays in the tree for the next pass, and the steps
+      # are continue-on-error.
       - name: Tier 1 — generate drafts (Haiku)
         id: tier1
         continue-on-error: true
         uses: anthropics/claude-code-action@v1
         with:
-          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          claude_code_oauth_token: ${{ steps.claude-auth.outputs.method == 'oauth' && secrets.CLAUDE_CODE_OAUTH_TOKEN || '' }}
+          anthropic_api_key: ${{ steps.claude-auth.outputs.method == 'api_key' && secrets.ANTHROPIC_API_KEY || '' }}
           prompt: ${{ env.GENERATE_PROMPT }}
           claude_args: >-
             --model ${{ steps.model.outputs.generate }}
             --max-turns 80
+            --max-budget-usd 15
             --allowedTools "Bash,Edit,Write,Read,Glob,Grep,WebFetch,WebSearch,TodoWrite,Task,Skill"
           show_full_output: true
 
@@ -224,11 +255,13 @@ jobs:
         continue-on-error: true
         uses: anthropics/claude-code-action@v1
         with:
-          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          claude_code_oauth_token: ${{ steps.claude-auth.outputs.method == 'oauth' && secrets.CLAUDE_CODE_OAUTH_TOKEN || '' }}
+          anthropic_api_key: ${{ steps.claude-auth.outputs.method == 'api_key' && secrets.ANTHROPIC_API_KEY || '' }}
           prompt: ${{ env.EXPAND_PROMPT }}
           claude_args: >-
             --model ${{ steps.model.outputs.expand }}
             --max-turns 80
+            --max-budget-usd 15
             --allowedTools "Bash,Edit,Write,Read,Glob,Grep,WebFetch,WebSearch,TodoWrite,Task,Skill"
           show_full_output: true
 
@@ -241,11 +274,13 @@ jobs:
         continue-on-error: true
         uses: anthropics/claude-code-action@v1
         with:
-          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          claude_code_oauth_token: ${{ steps.claude-auth.outputs.method == 'oauth' && secrets.CLAUDE_CODE_OAUTH_TOKEN || '' }}
+          anthropic_api_key: ${{ steps.claude-auth.outputs.method == 'api_key' && secrets.ANTHROPIC_API_KEY || '' }}
           prompt: ${{ env.ENHANCE_PROMPT }}
           claude_args: >-
             --model ${{ steps.model.outputs.enhance }}
             --max-turns 120
+            --max-budget-usd 20
             --allowedTools "Bash,Edit,Write,Read,Glob,Grep,WebFetch,WebSearch,TodoWrite,Task,Skill"
           show_full_output: true
 
@@ -287,11 +322,18 @@ jobs:
         continue-on-error: true
         uses: anthropics/claude-code-action@v1
         with:
-          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          # The NEXT method in the order, never the one the tiers just used:
+          # the API key when the tiers ran on OAuth (the default order, so this
+          # is the same pass as before), the OAuth token when they ran on the
+          # key. A method the order does not name is never spent, so an order of
+          # `oauth` alone leaves this pass without a credential and it fails fast.
+          claude_code_oauth_token: ${{ steps.claude-auth.outputs.method == 'api_key' && contains(steps.claude-auth.outputs.order, 'oauth') && secrets.CLAUDE_CODE_OAUTH_TOKEN || '' }}
+          anthropic_api_key: ${{ steps.claude-auth.outputs.method != 'api_key' && contains(steps.claude-auth.outputs.order, 'api_key') && secrets.ANTHROPIC_API_KEY || '' }}
           prompt: ${{ env.FALLBACK_PROMPT }}
           claude_args: >-
             --model ${{ steps.model.outputs.enhance }}
             --max-turns 150
+            --max-budget-usd 25
             --allowedTools "Bash,Edit,Write,Read,Glob,Grep,WebFetch,WebSearch,TodoWrite,Task,Skill"
           show_full_output: true
 

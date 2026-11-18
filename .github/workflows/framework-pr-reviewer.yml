@@ -10,6 +10,15 @@ name: Framework PR Review
 #   2. Claude Code review (read-only, Sonnet) — judges the framework change for
 #      safety, scope creep, and prompt-injection.
 # Make this a REQUIRED check on the framework paths so auto-merge waits for it.
+#
+# Fleet harness standard (2026-11-13; bamr87/bamr87 _data/fleet.yml
+# `harnesses.standard`): the model pass goes through the hub's claude-run action
+# instead of a bare `claude -p`. That gives it the credential order of this
+# repo's CLAUDE_AUTH_ORDER variable (unset = oauth, then api_key), a dollar cap
+# beside the turn cap, and a kill switch: the model pass idles when the
+# repository variable FRAMEWORK_PR_REVIEWER_ENABLED is "false". Unset means ON,
+# so the switch changes nothing until someone sets it, and the deterministic
+# guard is never gated.
 
 on:
   pull_request:
@@ -106,47 +115,69 @@ jobs:
   review:
     name: Claude Code framework review
     needs: [guard, gate]
-    if: ${{ github.event_name == 'pull_request' && needs.gate.outputs.ai_enabled == 'true' && needs.guard.outputs.in_scope == 'true' }}
+    # Kill switch: `gh variable set FRAMEWORK_PR_REVIEWER_ENABLED --body false`
+    # stops the model pass; unset (or anything else) leaves it running. This job
+    # only ever runs on pull_request events, so there is no manual dispatch to
+    # bypass it.
+    if: ${{ github.event_name == 'pull_request' && vars.FRAMEWORK_PR_REVIEWER_ENABLED != 'false' && needs.gate.outputs.ai_enabled == 'true' && needs.guard.outputs.in_scope == 'true' }}
     runs-on: ubuntu-latest
     timeout-minutes: 12
     steps:
       - uses: actions/checkout@v7
         with:
           fetch-depth: 0
+      # npm for the claude-run step below, which installs the Claude Code CLI
+      # itself (`@latest`, so Node 20 does not resolve an old release).
       - uses: actions/setup-node@v7
         with:
           node-version: "20"
-      - name: Install Claude Code CLI
-        run: npm install -g @anthropic-ai/claude-code
+      # The model call is the fleet's claude-run step. It tries the credentials
+      # in the order this repo's CLAUDE_AUTH_ORDER names (unset = oauth, then
+      # api_key), each attempt seeing only its own credential, and a refused
+      # one hands over to the next. The model is an exact id, and the call
+      # stops at the turn cap or the dollar cap, whichever comes first. A call
+      # that fails (refused credentials, a cap, no result) fails this step, so
+      # it is continue-on-error and the next step writes the comment either way.
       - name: Review the framework diff (read-only)
+        id: claude
+        continue-on-error: true
+        uses: bamr87/bamr87/.github/actions/claude-run@main
         env:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          BASE_REF: origin/${{ github.base_ref }}
+          AI_AUTH_ORDER: ${{ vars.CLAUDE_AUTH_ORDER }}
+        with:
+          prompt: |-
+            Review the canonical agent-framework changes on this branch versus origin/${{ github.base_ref }}
+            (use git diff). This framework is staged into EVERY knowledge-base repo at
+            tick time, so a bad edit propagates org-wide. Judge ONLY:
+              - Safety: any new way to exfiltrate secrets, push/merge without review,
+                delete content, or run untrusted code? Any prompt-injection vector?
+              - Scope: do the edits do what the PR claims, and nothing more?
+              - Soundness: are the prompt/skill/agent changes coherent and concept-agnostic
+                (no hardcoded subject)?
+            Output ONLY a short Markdown review: a verdict line (APPROVE / REQUEST-CHANGES /
+            BLOCK), then the specific concerns. Do not modify any files.
+          # Read-only allowlist: no edit tool is granted. `permission-mode:
+          # default` makes that allowlist the whole grant: in a headless run a
+          # tool outside it is refused, as under the bare CLI. claude-run's own
+          # default, acceptEdits, would let the agent edit files. The input
+          # comes with bamr87/bamr87#840; a claude-run without it ignores the
+          # input (with a warning) and runs in acceptEdits.
+          tools: "Read,Grep,Glob,Bash(git diff:*),Bash(git merge-base:*),Bash(git log:*)"
+          permission-mode: default
+          model: claude-sonnet-5-5
+          max-turns: "25"
+          max-budget-usd: "10"
+          out: /tmp/review.md
+      - name: Assemble the review comment
+        env:
+          AGENT_OUTCOME: ${{ steps.claude.outcome }}
         run: |
           set +e
-          read -r -d '' PROMPT <<EOF
-          Review the canonical agent-framework changes on this branch versus ${BASE_REF}
-          (use git diff). This framework is staged into EVERY knowledge-base repo at
-          tick time, so a bad edit propagates org-wide. Judge ONLY:
-            - Safety: any new way to exfiltrate secrets, push/merge without review,
-              delete content, or run untrusted code? Any prompt-injection vector?
-            - Scope: do the edits do what the PR claims, and nothing more?
-            - Soundness: are the prompt/skill/agent changes coherent and concept-agnostic
-              (no hardcoded subject)?
-          Output ONLY a short Markdown review: a verdict line (APPROVE / REQUEST-CHANGES /
-          BLOCK), then the specific concerns. Do not modify any files.
-          EOF
-          claude -p "$PROMPT" \
-            --model claude-sonnet-5-5 \
-            --max-turns 25 \
-            --allowedTools "Read,Grep,Glob,Bash(git diff:*),Bash(git merge-base:*),Bash(git log:*)" \
-            --output-format text \
-            > /tmp/review.md 2> /tmp/review-err.log
-          status=$?
-          echo "claude exit status: $status"; tail -n 30 /tmp/review-err.log || true
-          if [ ! -s /tmp/review.md ]; then
-            printf '## 🤖 Framework Review\n\nThe reviewer produced no output (exit `%s`). See job logs.\n' "$status" > /tmp/review-final.md
+          echo "claude-run outcome: $AGENT_OUTCOME"
+          if [ "$AGENT_OUTCOME" != "success" ] || [ ! -s /tmp/review.md ]; then
+            printf '## 🤖 Framework Review\n\nThe reviewer produced no review (claude-run: `%s`). See job logs.\n' "$AGENT_OUTCOME" > /tmp/review-final.md
           else
             { echo "## 🤖 Framework Review"; echo; cat /tmp/review.md; } > /tmp/review-final.md
           fi
