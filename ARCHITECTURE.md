@@ -365,10 +365,10 @@ ledger.
 | [`telemetry-ledger.yml`](.github/workflows/telemetry-ledger.yml) | `workflow_run` of Grow Lineage | The run's telemetry artifact | Appending one `evolution-telemetry/v1` record to `telemetry/evolution.jsonl` (idempotent by run_id, serialized, rebase-retry) |
 | [`fleet-health-watch.yml`](.github/workflows/fleet-health-watch.yml) | daily 07:23 | The ledger: stalls, error runs, unseen members (`scripts/fleet-health.rb`) | Sticky issue, auto-closed on recovery |
 | [`pages-deploy-sentinel.yml`](.github/workflows/pages-deploy-sentinel.yml) | hourly :13 | The hub's own site **and** every member's Pages **build status** (via `LIFECYCLE_PAT`) + live HTTP. `errored`, `stuck-building` (>90 min), `unreadable`, or non-200 ⇒ unhealthy | Sticky issue, auto-closed on recovery |
-| [`site-quality-scan.yml`](.github/workflows/site-quality-scan.yml) | weekly Mon 06:41 UTC | The hub's own site **and** every member's live URL: Lighthouse CI, axe-core (390 + 1366 px), pa11y contrast, via bamr87/bamr87 `site-quality.yml@v1` (`mode: url`), graded by the report-only [`.github/site-quality.yml`](.github/site-quality.yml) | One fingerprinted issue per site (`<!-- site-quality-scan:site=<repo> -->`): updated or reopened while findings remain, closed when clean, duplicates closed |
+| [`site-quality-scan.yml`](.github/workflows/site-quality-scan.yml) | weekly Mon 06:41 UTC | The hub's own site **and** every member's live URL: Lighthouse CI, axe-core (390 + 1366 px), pa11y contrast, via bamr87/bamr87 `site-quality.yml@v2` (`mode: url`), graded by the report-only [`.github/site-quality.yml`](.github/site-quality.yml) | One fingerprinted issue per site (`<!-- site-quality-scan:site=<repo> -->`): updated or reopened while findings remain, closed when clean, duplicates closed |
 | [`secret-expiry-watch.yml`](.github/workflows/secret-expiry-watch.yml) | daily 05:05 | OAuth token, API key, PAT validity | Sticky issue, auto-closed |
 | [`framework-pr-reviewer.yml`](.github/workflows/framework-pr-reviewer.yml) | PRs touching `lineage/framework/**`, `repo-template/.claude/**` | Self-modification of the agent toolkit | Read-only Sonnet review + red-flag regex |
-| [`docs-warden.yml`](.github/workflows/docs-warden.yml) | PRs + Tuesday sweep | Doc coverage vs `.github/config/docs_warden.yml` map (ADR-0005) | PR comments / sweep issue |
+| [`docs-warden.yml`](.github/workflows/docs-warden.yml) | PRs + Tuesday sweep | Doc coverage vs `.github/config/docs_warden.yml` map (ADR-0005) | PR comments / sweep issue, auto-closed when the census is clean |
 | [`genome-sync.yml`](.github/workflows/genome-sync.yml) | push/PR/weekly | Genome drift: unclassified concept-bearing files, leaks in the transplant tier (`genome/bin/verify.rb`) | Failing CI |
 
 Plus baseline hygiene: [`codeql.yml`](.github/workflows/codeql.yml) and
@@ -380,6 +380,16 @@ assets, plus the front-matter date check; read-only, hence kill-switch-exempt,
 and it never deploys), [`hub-sync.yml`](.github/workflows/hub-sync.yml)
 (daily dashboard refresh), [`ai-content-review.yml`](.github/workflows/ai-content-review.yml)
 (two-tier review of `pages/**` PRs), [`deploy-chat-proxy.yml`](.github/workflows/deploy-chat-proxy.yml).
+
+And the fleet-kit thin callers, seeded and owned by the bamr87 hub's kits (a
+change goes in the kit, not the copy): [`ci.yml`](.github/workflows/ci.yml)
+(the hub's `standard-ci.yml@v2`), [`claude.yml`](.github/workflows/claude.yml)
+(the `@claude` mention handler, agent-context kit),
+[`conformance.yml`](.github/workflows/conformance.yml) (the Universal Project
+Standard check, advisory), [`release.yml`](.github/workflows/release.yml)
+(release-please via the hub's `release-please.yml@v2`, which writes
+`CHANGELOG.md`) and [`verify.yml`](.github/workflows/verify.yml) (fleet-verify
+scenarios and evidence, advisory).
 
 Note the asymmetry the build gate closes: production publishes through native
 GitHub Pages "deploy from branch", so before this workflow existed **nothing

@@ -84,7 +84,7 @@ transplant:
   - ".github/workflows/secret-expiry-watch.yml" # auth-credential probe — agnostic
   - ".github/workflows/fleet-health-watch.yml" # daily ledger health digest — agnostic
   - ".github/workflows/build-validation.yml" # pre-merge Jekyll build gate — agnostic, every plant wants it
-  - ".github/workflows/site-quality-scan.yml" # weekly live-site quality scan (bamr87/bamr87 site-quality@v1, mode: url) — agnostic
+  - ".github/workflows/site-quality-scan.yml" # weekly live-site quality scan (bamr87/bamr87 site-quality@v2, mode: url) — agnostic
   - ".github/site-quality.yml"              # its report-only scan config — agnostic
   - ".github/config/docs_warden.yml"        # doc-coverage map — agnostic
   - ".github/instructions/docs-warden.instructions.md" # doc-warden contract — agnostic
