@@ -114,15 +114,26 @@ read the architecture doc and fix the drift.
   **self-improvement fleet** (ADR-0003) `telemetry-ledger.yml` (evolution +
   banner ledgers),
   `framework-pr-reviewer.yml` (gates framework PRs), `docs-warden.yml` (doc
-  coverage), `pages-deploy-sentinel.yml` (Pages build + liveness for the hub's
+  coverage; the weekly sweep files one drift issue and closes it once the
+  census is clean), `pages-deploy-sentinel.yml` (Pages build + liveness for the hub's
   own site **and** every member),
   `secret-expiry-watch.yml` (daily auth-credential probe), `fleet-health-watch.yml`
   (daily ledger health digest), `genome-sync.yml` (genome drift gate),
   `codeql.yml` (security scan), `site-quality-scan.yml` (weekly live-site
   quality scan of the hub **and** every member: calls the bamr87 hub's
-  reusable `site-quality.yml@v1` in `mode: url` per site, graded by the
+  reusable `site-quality.yml@v2` in `mode: url` per site, graded by the
   report-only `.github/site-quality.yml`, and keeps exactly one fingerprinted
-  issue per site, using the sentinel's jq title/marker lookup).
+  issue per site, using the sentinel's jq title/marker lookup); and the
+  **fleet-kit thin callers**, seeded by the bamr87 hub's kits and owned there —
+  change them in the kit, not here, or the next kit upgrade skips or
+  overwrites the copy: `ci.yml` (the hub's `standard-ci.yml@v2` on every PR and
+  push to `main`), `claude.yml` (the `@claude` mention handler, agent-context
+  kit), `conformance.yml` (the hub's Universal Project Standard check,
+  advisory with `gate: false`), `release.yml` (release-please through the
+  hub's `release-please.yml@v2`; it is what writes `CHANGELOG.md`), and
+  `verify.yml` (fleet-verify, verify kit: validates `features/features.yml`,
+  runs `verify/scenarios/*.yml` per `verify/verify.yml` and uploads the
+  evidence; advisory with `gate: false`).
 - `.github/config/` — reviewer configs: `content_review.yml`, `content_rules.yml`,
   `frontmatter_schema.yml`, `environment.yml`, `docs_warden.yml` (doc-coverage map).
 - `_data/fleet_pause.yml` — the global growth **kill-switch** (ADR-0003).
@@ -186,6 +197,8 @@ How a tick runs:
 dispatch). The model values come from `lineage/policy.yml`, not the workflow —
 change tiers there. Use authoritative model IDs (`claude-haiku-5-5`,
 `claude-sonnet-5-5`, `claude-opus-5-5`).
+
+**Fleet harness standard (2026-11-13):** the five workflows that reach a model (`grow-lineage`, `plant-lineage`, `secret-expiry-watch`, `ai-content-review`, `framework-pr-reviewer`) are built to the bamr87 fleet's harness standard (`harnesses.standard` in bamr87/bamr87 `_data/fleet.yml`). The credential order is the `CLAUDE_AUTH_ORDER` repository variable; unset means `oauth,api_key`, the primary and fallback named above. The three `claude-code-action` workflows choose the credential with the hub's `claude-auth` step, and the two PR reviewers call the hub's `claude-run` action, which also retries a refused credential on the next method. The grow tick's fallback pass takes the next method the order names, so a method the order leaves out is never spent, and `secret-expiry-watch` probes the credential the order selects and names it in its report. Every model call has a dollar cap (`--max-budget-usd`) beside its turn cap: 15, 15 and 20 for the three tiers, 25 for the fallback pass, 10 for the DECIDE pass, the probe and each reviewer. Every model job has `timeout-minutes`: 120 for the grow job, 30 for the planter, 10 for the probe, and the 15 and 12 the reviewers already had. Three repository variables are off switches, on while unset: `AI_CONTENT_REVIEW_ENABLED` and `FRAMEWORK_PR_REVIEWER_ENABLED` stop the model pass of their PR check when set to `false` (the deterministic checks keep running), and `SECRET_EXPIRY_WATCH_ENABLED` stops the scheduled probe (a manual dispatch still runs).
 
 ## Common commands
 

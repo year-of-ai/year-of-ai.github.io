@@ -124,8 +124,15 @@ jobs:
         run: |
           ruby scripts/docs-warden.rb --census --summary /tmp/sweep.md --json /tmp/sweep.json || true
           cat /tmp/sweep.md
-          n=$(ruby -rjson -e 'puts (JSON.parse(File.read("/tmp/sweep.json"))["findings"] || []).length' 2>/dev/null || echo 0)
-          echo "findings=${n:-0}" >> "$GITHUB_OUTPUT"
+          # `ok` marks a census that produced its JSON report: only a real clean
+          # result may close the drift issue, never a crashed run read as 0.
+          if n=$(ruby -rjson -e 'puts (JSON.parse(File.read("/tmp/sweep.json"))["findings"] || []).length' 2>/dev/null); then
+            echo "findings=${n:-0}" >> "$GITHUB_OUTPUT"
+            echo "ok=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::warning::docs-warden census wrote no readable JSON report; the drift issue is left as it is."
+            echo "findings=0" >> "$GITHUB_OUTPUT"
+          fi
       - name: File / update the drift issue
         if: steps.pause.outputs.skip != 'true' && steps.census.outputs.findings != '0'
         env:
@@ -139,4 +146,19 @@ jobs:
           else
             gh issue create --title "$title" --body "$body" --label documentation 2>/dev/null \
               || gh issue create --title "$title" --body "$body"
+          fi
+      # A clean census resolves the drift: close the open issue, as the other
+      # fleet watchers close their sticky issue on recovery.
+      - name: Close the drift issue (clean census)
+        if: steps.pause.outputs.skip != 'true' && steps.census.outputs.ok == 'true' && steps.census.outputs.findings == '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TITLE: "Docs Warden — documentation drift"
+        run: |
+          num=$(gh issue list --search "$TITLE in:title" --state open --json number,title \
+            --jq 'map(select(.title == env.TITLE)) | .[0].number // empty')
+          if [ -n "$num" ]; then
+            gh issue close "$num" --comment "✅ Documentation coverage complete as of $(date -u '+%Y-%m-%d %H:%M UTC'): every script and workflow is named in the docs. Auto-closed by the docs-warden sweep."
+          else
+            echo "No open drift issue to close."
           fi

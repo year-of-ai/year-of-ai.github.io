@@ -19,15 +19,17 @@ safety), or `genome-sync` (genome drift).
   sticky `docs-warden` comment.
 - **Sweep** (weekly + `workflow_dispatch`): census — every `scripts/**`,
   `genome/bin/*`, and `.github/workflows/*` must be named somewhere in the doc
-  corpus. Files/updates a "Docs Warden — documentation drift" issue. This is how
-  the no-PR automated commits (grow ticks, ledger appends) are covered.
+  corpus. Files/updates a "Docs Warden — documentation drift" issue, and closes
+  it with a comment once a census comes back clean (a census that writes no
+  readable report never closes it). This is how the no-PR automated commits
+  (grow ticks, ledger appends) are covered.
 - **Manual** (`workflow_dispatch`): re-run either against a chosen base.
 
 ## Doctrine
 
 - **Read-only / PR-not-direct** (ADR-0003): the gate only comments, the sweep only
-  files an issue. No commit/push/merge. The sole direct committer remains the
-  telemetry ledger.
+  files (and, when clean, closes) its own issue. No commit/push/merge. The sole
+  direct committer remains the telemetry ledger.
 - **Kill-switch first**: every job reads `_data/fleet_pause.yml` and skips when
   paused.
 - **No alert-fatigue**: `enforcement: warn` (rollout default) always advises but
